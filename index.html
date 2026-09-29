@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>سَمْت | SAMT - روتينك اليومي الذكي</title>
+  <title>سَمْت | SAMT</title>
   
-  <!-- Apple & PWA Meta -->
+  <!-- Apple Web App Meta -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="سَمْت">
@@ -14,1003 +14,964 @@
   <link rel="apple-touch-icon" href="icons/icon.svg">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
 
-  <!-- Typography: Tajawal (Google Font) -->
+  <!-- Apple SF Pro + Readex Pro & IBM Plex Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ==========================================================================
+       APPLE SYSTEM DESIGN TOKENS (iOS 18 Cupertino Guidelines)
+       ========================================================================== */
     :root {
-      --bg-primary: #000000;
-      --bg-card: rgba(28, 28, 30, 0.78);
-      --bg-card-hover: rgba(44, 44, 46, 0.88);
-      --border-card: rgba(255, 255, 255, 0.12);
-      --text-primary: #ffffff;
-      --text-secondary: #98989d;
-      --text-tertiary: #636366;
-      --apple-blue: #0a84ff;
-      --apple-green: #30d158;
-      --apple-orange: #ff9f0a;
-      --apple-purple: #bf5af2;
-      --apple-teal: #64d2ff;
-      --apple-red: #ff453a;
-      --apple-yellow: #ffd60a;
-      --nav-bg: rgba(22, 22, 24, 0.88);
-      --spring-easing: cubic-bezier(0.16, 1, 0.3, 1);
+      --system-bg: #000000;
+      --system-grouped-bg: #000000;
+      --card-material: rgba(28, 28, 30, 0.68);
+      --card-material-opaque: #1c1c1e;
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+      --label-primary: #ffffff;
+      --label-secondary: rgba(235, 235, 245, 0.6);
+      --label-tertiary: rgba(235, 235, 245, 0.35);
+      --label-quaternary: rgba(235, 235, 245, 0.18);
+      
+      /* Apple iOS Vibrant Accent Palette */
+      --ios-blue: #0a84ff;
+      --ios-green: #30d158;
+      --ios-indigo: #5e5ce6;
+      --ios-orange: #ff9f0a;
+      --ios-pink: #ff375f;
+      --ios-purple: #bf5af2;
+      --ios-red: #fa114f;
+      --ios-teal: #64d2ff;
+      --ios-yellow: #ffd60a;
+      
+      /* Cupertino Physics */
+      --ios-spring: cubic-bezier(0.32, 0.72, 0, 1);
+      --ios-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Readex Pro", "IBM Plex Sans Arabic", system-ui, sans-serif;
     }
 
     body {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      background-color: var(--system-bg);
+      color: var(--label-primary);
       min-height: 100vh;
       overflow-x: hidden;
-      padding-bottom: 95px;
+      padding-bottom: 110px;
       position: relative;
     }
 
-    /* Ambient Subtle Background Lighting */
-    .ambient-glow {
+    /* Ambient Subtle iOS Vibrancy Backdrops */
+    .ios-aurora-glow-1 {
       position: fixed;
-      top: -120px;
-      right: -80px;
+      top: -80px;
+      right: -60px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(10, 132, 255, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(60px);
+    }
+
+    .ios-aurora-glow-2 {
+      position: fixed;
+      bottom: 120px;
+      left: -80px;
       width: 340px;
       height: 340px;
-      background: radial-gradient(circle, rgba(10, 132, 255, 0.24) 0%, rgba(0,0,0,0) 70%);
+      background: radial-gradient(circle, rgba(94, 92, 230, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
       pointer-events: none;
       z-index: 0;
-      filter: blur(55px);
+      filter: blur(70px);
     }
 
-    .ambient-glow-2 {
-      position: fixed;
-      bottom: 80px;
-      left: -90px;
-      width: 360px;
-      height: 360px;
-      background: radial-gradient(circle, rgba(191, 90, 242, 0.2) 0%, rgba(0,0,0,0) 70%);
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(65px);
-    }
-
-    /* Top App Header */
-    .app-header {
+    /* ==========================================================================
+       TOP NAVIGATION BAR (Apple Translucent Header)
+       ========================================================================== */
+    .ios-navbar {
       position: sticky;
       top: 0;
-      z-index: 40;
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      background: rgba(10, 10, 12, 0.75);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 12px 20px;
+      z-index: 60;
+      background: rgba(18, 18, 20, 0.75);
+      backdrop-filter: blur(30px) saturate(190%);
+      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+      padding: 12px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: all 0.3s ease;
     }
 
-    .brand-wrap {
+    .ios-brand {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 10px;
       cursor: pointer;
     }
 
-    .brand-logo-img {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      transition: transform 0.2s ease;
+    .ios-app-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8.5px;
+      box-shadow: 0 4px 12px rgba(10, 132, 255, 0.3);
+      border: 0.5px solid rgba(255, 255, 255, 0.2);
     }
 
-    .brand-logo-img:active {
-      transform: scale(0.92);
+    .ios-brand-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: #ffffff;
     }
 
-    .brand-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #ffffff 40%, var(--apple-blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .header-user-badge {
-      display: flex;
+    .ios-user-pill {
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: rgba(255, 255, 255, 0.08);
-      padding: 6px 14px;
+      border: 0.5px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 12px;
       border-radius: 999px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
       cursor: pointer;
+      transition: background 0.2s;
     }
 
-    .header-user-badge .status-dot {
-      width: 7px;
-      height: 7px;
-      background-color: var(--apple-green);
+    .ios-user-pill:active {
+      background: rgba(255, 255, 255, 0.14);
+      transform: scale(0.96);
+    }
+
+    .ios-online-dot {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--apple-green);
+      background: var(--ios-green);
+      box-shadow: 0 0 6px var(--ios-green);
     }
 
-    /* Container for tab screens */
-    .main-view {
+    /* Container */
+    .ios-viewport {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 16px 16px 24px;
       position: relative;
       z-index: 10;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 16px;
     }
 
-    .tab-content {
+    .tab-pane {
       display: none;
-      animation: fadeIn 0.32s var(--spring-easing);
+      animation: iosFade 0.28s var(--ios-spring);
     }
 
-    .tab-content.active {
+    .tab-pane.active {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes iosFade {
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Personalized Hero Banner */
-    .hero-greeting-box {
-      margin-bottom: 16px;
-      padding: 14px 18px;
-      background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(191, 90, 242, 0.1));
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .greeting-text-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .greeting-text-sub {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-
-    .streak-badge {
-      background: rgba(255, 159, 10, 0.15);
-      border: 1px solid rgba(255, 159, 10, 0.3);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--apple-orange);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    /* Dynamic Island Card (Apple Live Activity) */
+    /* ==========================================================================
+       DYNAMIC ISLAND (Apple Live Activity Widget)
+       ========================================================================== */
     .dynamic-island {
-      background: linear-gradient(150deg, rgba(28, 28, 32, 0.95), rgba(14, 14, 16, 0.95));
-      border: 1px solid var(--border-card);
-      border-radius: 28px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-radius: 34px;
+      padding: 20px 22px;
+      margin-bottom: 22px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.2s var(--ios-spring);
     }
 
-    .island-badge-row {
+    .island-status-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
     }
 
-    .live-pulse {
-      display: inline-flex;
+    .island-badge {
+      display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(48, 209, 88, 0.15);
-      color: var(--apple-green);
-      padding: 4px 10px;
+      background: rgba(48, 209, 88, 0.12);
+      border: 0.5px solid rgba(48, 209, 88, 0.3);
+      padding: 3px 10px;
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 700;
-      border: 1px solid rgba(48, 209, 88, 0.3);
+      color: var(--ios-green);
     }
 
-    .live-pulse-dot {
-      width: 6px;
-      height: 6px;
+    .island-badge-pulse {
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background-color: var(--apple-green);
-      animation: pulse 1.8s infinite;
+      background: var(--ios-green);
+      animation: islandPulse 1.8s infinite;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(0.95); opacity: 0.8; }
+    @keyframes islandPulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
       50% { transform: scale(1.4); opacity: 1; }
-      100% { transform: scale(0.95); opacity: 0.8; }
+      100% { transform: scale(0.9); opacity: 0.7; }
     }
 
-    .island-clock {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
+    .island-time-ticker {
+      font-size: 0.82rem;
+      color: var(--label-secondary);
       font-variant-numeric: tabular-nums;
       direction: ltr;
+      font-weight: 600;
     }
 
-    .current-activity-title {
-      font-size: 1.45rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-      line-height: 1.3;
+    .island-activity-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
       color: #ffffff;
+      margin-bottom: 4px;
+      line-height: 1.3;
     }
 
-    .current-activity-desc {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
+    .island-activity-desc {
+      font-size: 0.88rem;
+      color: var(--label-secondary);
       margin-bottom: 16px;
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
-    .island-progress-bar {
-      height: 6px;
+    .island-track {
+      height: 5px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 999px;
       overflow: hidden;
       margin-bottom: 14px;
     }
 
-    .island-progress-fill {
+    .island-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--apple-blue), var(--apple-teal));
+      background: linear-gradient(90deg, var(--ios-blue), var(--ios-teal));
       border-radius: 999px;
-      transition: width 0.4s ease;
+      transition: width 0.4s var(--ios-spring);
     }
 
-    .island-footer {
+    .island-bottom-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 18px;
       padding: 10px 14px;
     }
 
-    .next-activity-preview {
+    .island-next-info {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .next-label {
-      font-size: 0.74rem;
-      color: var(--text-tertiary);
+    .island-next-caption {
+      font-size: 0.7rem;
+      color: var(--label-tertiary);
       text-transform: uppercase;
+      font-weight: 600;
     }
 
-    .next-value {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #e5e5ea;
+    .island-next-title {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
     }
 
-    .btn-quick-done {
-      background: var(--apple-green);
+    .btn-island-action {
+      background: var(--ios-green);
       color: #000000;
       border: none;
-      padding: 8px 16px;
+      padding: 7px 15px;
       border-radius: 999px;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: transform 0.15s ease;
     }
 
-    .btn-quick-done:active {
+    .btn-island-action:active {
       transform: scale(0.93);
     }
 
-    /* Prayer Times Offline Widget */
-    .prayer-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
-      padding: 18px;
+    /* ==========================================================================
+       APPLE FITNESS 3-RING WIDGET
+       ========================================================================== */
+    .apple-fitness-widget {
+      background: var(--card-material);
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-highlight), 0 10px 30px rgba(0, 0, 0, 0.4);
+      border-radius: 26px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .fitness-rings-svg {
+      width: 110px;
+      height: 110px;
+      flex-shrink: 0;
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke-width: 10;
+      opacity: 0.2;
+    }
+
+    .ring-fg {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.6s var(--ios-spring);
+    }
+
+    .fitness-metrics {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .metric-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .metric-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .metric-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ==========================================================================
+       PRAYER TIMES MODULE (Mosque Focus)
+       ========================================================================== */
+    .ios-prayer-card {
+      background: var(--card-material);
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-highlight), 0 8px 24px rgba(0, 0, 0, 0.35);
+      border-radius: 26px;
+      padding: 18px 20px;
       margin-bottom: 20px;
     }
 
-    .section-header {
+    .card-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 14px;
     }
 
-    .section-title {
-      font-size: 1.15rem;
-      font-weight: 800;
+    .card-header-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .section-tag {
-      font-size: 0.78rem;
-      color: var(--apple-blue);
-      background: rgba(10, 132, 255, 0.12);
+    .ios-badge-blue {
+      background: rgba(10, 132, 255, 0.14);
+      color: var(--ios-blue);
+      border: 0.5px solid rgba(10, 132, 255, 0.3);
       padding: 3px 10px;
       border-radius: 999px;
+      font-size: 0.76rem;
       font-weight: 600;
     }
 
-    .prayers-grid {
+    .prayers-row {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      text-align: center;
+      gap: 6px;
     }
 
-    .prayer-slot {
+    .prayer-item {
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 14px;
+      border: 0.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
       padding: 10px 4px;
-      transition: all 0.2s ease;
+      text-align: center;
+      transition: all 0.25s ease;
     }
 
-    .prayer-slot.active {
+    .prayer-item.active {
       background: linear-gradient(180deg, rgba(10, 132, 255, 0.25), rgba(10, 132, 255, 0.08));
-      border-color: var(--apple-blue);
-      box-shadow: 0 0 14px rgba(10, 132, 255, 0.35);
+      border-color: var(--ios-blue);
+      box-shadow: 0 0 16px rgba(10, 132, 255, 0.3);
     }
 
-    .prayer-name {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+    .prayer-label {
+      font-size: 0.74rem;
+      color: var(--label-secondary);
       margin-bottom: 4px;
+      font-weight: 500;
     }
 
-    .prayer-slot.active .prayer-name {
-      color: var(--apple-blue);
+    .prayer-item.active .prayer-label {
+      color: var(--ios-blue);
       font-weight: 700;
     }
 
-    .prayer-time {
-      font-size: 0.95rem;
-      font-weight: 800;
+    .prayer-time-val {
+      font-size: 0.92rem;
+      font-weight: 700;
       font-variant-numeric: tabular-nums;
     }
 
-    .prayer-status-note {
-      margin-top: 12px;
-      font-size: 0.82rem;
-      color: var(--apple-orange);
+    .prayer-footer-note {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 6px;
-      background: rgba(255, 159, 10, 0.1);
-      padding: 8px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 159, 10, 0.2);
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.78rem;
+      color: var(--label-secondary);
     }
 
-    .city-select {
-      background: rgba(0, 0, 0, 0.4);
+    .ios-select {
+      background: rgba(255, 255, 255, 0.08);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 0.5px solid rgba(255, 255, 255, 0.16);
       border-radius: 8px;
-      padding: 2px 6px;
+      padding: 3px 8px;
       font-size: 0.78rem;
       outline: none;
     }
 
-    /* Quick Stats Highlights */
-    .quick-stats-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .stat-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 20px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .stat-box-title {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
+    /* ==========================================================================
+       SCHEDULE TIMELINE (Apple Reminders & Calendar)
+       ========================================================================== */
+    .ios-section-header {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin: 18px 4px 12px;
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .stat-box-value {
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-    }
-
-    .stat-sub {
-      font-size: 0.78rem;
-      color: var(--text-tertiary);
-    }
-
-    /* Schedule Blocks */
-    .schedule-block {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
-      padding: 18px;
+    .ios-card {
+      background: var(--card-material);
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-highlight), 0 8px 24px rgba(0, 0, 0, 0.35);
+      border-radius: 26px;
+      padding: 16px;
       margin-bottom: 16px;
     }
 
-    .block-top {
+    .block-header-line {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
     }
 
-    .block-name {
-      font-size: 1.05rem;
+    .block-title-text {
+      font-size: 0.95rem;
       font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: #ffffff;
     }
 
-    .block-time-range {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+    .block-hours {
+      font-size: 0.76rem;
+      color: var(--label-secondary);
       direction: ltr;
       background: rgba(255, 255, 255, 0.06);
-      padding: 3px 8px;
-      border-radius: 8px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-weight: 600;
     }
 
-    .task-row {
+    .task-item-row {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      padding: 10px 12px;
-      margin-bottom: 6px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid transparent;
+      padding: 10px 8px;
       border-radius: 14px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: background 0.15s, transform 0.15s;
     }
 
-    .task-row:active {
+    .task-item-row:active {
       transform: scale(0.98);
+      background: rgba(255, 255, 255, 0.04);
     }
 
-    .task-row.checked {
-      background: rgba(48, 209, 88, 0.1);
-      border-color: rgba(48, 209, 88, 0.3);
-    }
-
-    .task-checkbox-custom {
+    .ios-checkbox {
       width: 22px;
       height: 22px;
-      border-radius: 7px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
       margin-top: 2px;
       flex-shrink: 0;
-      transition: all 0.2s ease;
+      transition: all 0.2s var(--ios-spring);
     }
 
-    .task-row.checked .task-checkbox-custom {
-      background-color: var(--apple-green);
-      border-color: var(--apple-green);
+    .task-item-row.done .ios-checkbox {
+      background: var(--ios-green);
+      border-color: var(--ios-green);
     }
 
-    .task-row.checked .task-checkbox-custom::after {
+    .task-item-row.done .ios-checkbox::after {
       content: '✓';
-      color: #000000;
+      color: #000;
+      font-size: 0.8rem;
       font-weight: 900;
-      font-size: 0.85rem;
     }
 
-    .task-info {
+    .task-text-wrap {
       flex: 1;
     }
 
-    .task-headline {
-      font-size: 0.95rem;
+    .task-main-text {
+      font-size: 0.92rem;
       font-weight: 600;
-      color: #f2f2f7;
+      color: #ffffff;
+      line-height: 1.35;
       margin-bottom: 2px;
     }
 
-    .task-row.checked .task-headline {
+    .task-item-row.done .task-main-text {
       text-decoration: line-through;
-      color: #8e8e93;
+      color: var(--label-tertiary);
     }
 
-    .task-meta {
-      font-size: 0.78rem;
-      color: var(--text-tertiary);
+    .task-sub-meta {
+      font-size: 0.76rem;
+      color: var(--label-secondary);
     }
 
-    /* Calorie Rings & Water Section */
-    .apple-ring-container {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
-      padding: 22px;
-      margin-bottom: 20px;
-    }
-
-    .ring-svg-wrap {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      flex-shrink: 0;
-    }
-
-    .ring-svg-wrap svg {
-      transform: rotate(-90deg);
-    }
-
-    .ring-center-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-
-    .ring-center-num {
-      font-size: 1.15rem;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .ring-center-label {
-      font-size: 0.65rem;
-      color: var(--text-secondary);
-    }
-
-    .ring-details {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .water-tracker-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
+    /* ==========================================================================
+       HEALTH & CALORIES (Apple Health Style)
+       ========================================================================== */
+    .water-fluid-card {
+      background: var(--card-material);
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-highlight), 0 8px 24px rgba(0, 0, 0, 0.35);
+      border-radius: 26px;
       padding: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .water-visual-wrap {
+    .water-row-display {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 16px;
     }
 
-    .water-bottle {
-      width: 50px;
-      height: 90px;
-      border: 2px solid var(--apple-teal);
-      border-radius: 12px;
+    .water-tank {
+      width: 52px;
+      height: 94px;
+      border: 2px solid var(--ios-teal);
+      border-radius: 14px;
       position: relative;
       overflow: hidden;
       background: rgba(100, 210, 255, 0.05);
     }
 
-    .water-level {
+    .water-tank-level {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       background: linear-gradient(180deg, #64d2ff, #0a84ff);
-      transition: height 0.4s ease;
+      transition: height 0.5s var(--ios-spring);
     }
 
-    .water-stats-text {
+    .water-data-col {
       flex: 1;
       margin-right: 18px;
     }
 
-    .water-val {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--apple-teal);
+    .water-title-lbl {
+      font-size: 0.82rem;
+      color: var(--label-secondary);
+      margin-bottom: 4px;
     }
 
-    .water-buttons-row {
-      display: flex;
-      gap: 10px;
+    .water-big-num {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--ios-teal);
+      font-variant-numeric: tabular-nums;
     }
 
-    .btn-water {
-      flex: 1;
-      background: rgba(100, 210, 255, 0.12);
-      color: var(--apple-teal);
-      border: 1px solid rgba(100, 210, 255, 0.25);
+    .water-btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .ios-btn-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 0.5px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 11px 6px;
       border-radius: 14px;
-      padding: 12px 8px;
-      font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.84rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.15s ease;
+      text-align: center;
+      transition: background 0.15s, transform 0.15s;
     }
 
-    .btn-water:active {
-      transform: scale(0.94);
+    .ios-btn-pill:active {
+      background: rgba(255, 255, 255, 0.16);
+      transform: scale(0.95);
     }
 
-    /* Food Logger */
-    .food-log-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
-      padding: 20px;
-      margin-bottom: 20px;
+    .ios-btn-pill.teal {
+      background: rgba(100, 210, 255, 0.12);
+      border-color: rgba(100, 210, 255, 0.28);
+      color: var(--ios-teal);
     }
 
-    .food-input-group {
+    .quick-preset-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .preset-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 0.5px solid rgba(255, 255, 255, 0.1);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      color: var(--label-secondary);
+      cursor: pointer;
+    }
+
+    .preset-pill:active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+    }
+
+    .food-input-row {
       display: flex;
       gap: 8px;
       margin-bottom: 12px;
     }
 
-    .input-apple {
+    .ios-input {
       background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 0.5px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
       padding: 10px 14px;
       color: #fff;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       outline: none;
     }
 
-    .input-apple:focus {
-      border-color: var(--apple-blue);
+    .ios-input:focus {
+      border-color: var(--ios-blue);
     }
 
-    .btn-apple-add {
-      background: var(--apple-blue);
+    .btn-add-food {
+      background: var(--ios-blue);
       color: #fff;
       border: none;
       border-radius: 12px;
-      padding: 10px 18px;
+      padding: 10px 16px;
       font-weight: 700;
+      font-size: 0.88rem;
       cursor: pointer;
       transition: transform 0.15s;
     }
 
-    .btn-apple-add:active {
+    .btn-add-food:active {
       transform: scale(0.95);
     }
 
-    .preset-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 14px;
-    }
-
-    .chip {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      cursor: pointer;
-    }
-
-    .chip:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-    }
-
-    .food-history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .food-history-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 0.88rem;
-    }
-
-    .food-delete-btn {
-      color: var(--apple-red);
-      cursor: pointer;
-      font-size: 0.8rem;
-      padding: 2px 6px;
-    }
-
-    /* Knowledge & Video Cards */
-    .knowledge-card {
-      background: linear-gradient(170deg, rgba(38, 38, 42, 0.8), rgba(20, 20, 22, 0.8));
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
+    /* ==========================================================================
+       WISDOM & EDITORIAL (Apple News / App Store Stories)
+       ========================================================================== */
+    .editorial-story-card {
+      background: linear-gradient(160deg, rgba(34, 34, 38, 0.9), rgba(18, 18, 20, 0.9));
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-highlight), 0 12px 30px rgba(0, 0, 0, 0.5);
+      border-radius: 28px;
       padding: 22px;
       margin-bottom: 18px;
       position: relative;
       overflow: hidden;
-      transition: transform 0.2s ease;
     }
 
-    .knowledge-card:hover {
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .knowledge-tag {
-      font-size: 0.74rem;
+    .editorial-kicker {
+      font-size: 0.72rem;
       font-weight: 800;
-      color: var(--apple-purple);
+      color: var(--ios-purple);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
       margin-bottom: 8px;
-      display: inline-block;
+      display: block;
     }
 
-    .knowledge-title {
+    .editorial-headline {
       font-size: 1.25rem;
       font-weight: 800;
+      line-height: 1.35;
       color: #ffffff;
       margin-bottom: 10px;
-      line-height: 1.35;
     }
 
-    .knowledge-body {
-      font-size: 0.94rem;
-      color: #d1d1d6;
+    .editorial-copy {
+      font-size: 0.92rem;
+      color: rgba(235, 235, 245, 0.85);
       line-height: 1.6;
       margin-bottom: 14px;
     }
 
-    .knowledge-highlight-box {
+    .editorial-quote {
       background: rgba(191, 90, 242, 0.1);
-      border-right: 3px solid var(--apple-purple);
+      border-right: 3px solid var(--ios-purple);
       padding: 10px 14px;
       border-radius: 8px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: #f5d0fe;
       margin-top: 10px;
+      line-height: 1.45;
     }
 
-    .video-container {
+    .ios-video-wrap {
       position: relative;
       width: 100%;
       padding-bottom: 56.25%;
-      height: 0;
       border-radius: 16px;
       overflow: hidden;
       margin-top: 14px;
       background: #000;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 0.5px solid rgba(255, 255, 255, 0.12);
     }
 
-    .video-container iframe {
+    .ios-video-wrap iframe {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       border: 0;
     }
 
-    /* Ambient Zen Focus Player */
-    .zen-audio-bar {
+    /* Ambient Sound Bar */
+    .zen-audio-card {
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: rgba(10, 132, 255, 0.12);
-      border: 1px solid rgba(10, 132, 255, 0.25);
-      border-radius: 16px;
+      border: 1px solid rgba(10, 132, 255, 0.28);
+      border-radius: 18px;
       padding: 12px 16px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
-    .zen-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-zen-play {
-      background: var(--apple-blue);
-      color: #fff;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.84rem;
-      cursor: pointer;
-    }
-
-    /* Settings Screen */
-    .settings-group {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
+    /* ==========================================================================
+       SETTINGS & PREFERENCES (iOS Grouped Tables)
+       ========================================================================== */
+    .ios-grouped-list {
+      background: var(--card-material);
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      border: 1px solid var(--card-border);
       border-radius: 24px;
       margin-bottom: 20px;
       overflow: hidden;
     }
 
-    .settings-row {
+    .ios-cell {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 14px 18px;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
     }
 
-    .settings-row:last-child {
+    .ios-cell:last-child {
       border-bottom: none;
     }
 
-    .settings-label {
-      font-size: 0.98rem;
+    .cell-title {
+      font-size: 0.95rem;
       font-weight: 600;
     }
 
-    .settings-sublabel {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      display: block;
+    .cell-sub {
+      font-size: 0.78rem;
+      color: var(--label-secondary);
       margin-top: 2px;
     }
 
     /* iOS Toggle Switch */
-    .switch {
+    .ios-switch {
       position: relative;
       display: inline-block;
-      width: 50px;
-      height: 30px;
+      width: 48px;
+      height: 28px;
     }
 
-    .switch input {
+    .ios-switch input {
       opacity: 0;
       width: 0;
       height: 0;
     }
 
-    .slider {
+    .switch-track {
       position: absolute;
       cursor: pointer;
       top: 0; left: 0; right: 0; bottom: 0;
       background-color: #39393d;
-      transition: .3s;
+      transition: .25s var(--ios-spring);
       border-radius: 34px;
     }
 
-    .slider:before {
+    .switch-track:before {
       position: absolute;
       content: "";
-      height: 24px;
-      width: 24px;
+      height: 22px;
+      width: 22px;
       left: 3px;
       bottom: 3px;
       background-color: white;
-      transition: .3s;
+      transition: .25s var(--ios-spring);
       border-radius: 50%;
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
-    input:checked + .slider {
-      background-color: var(--apple-green);
+    input:checked + .switch-track {
+      background-color: var(--ios-green);
     }
 
-    input:checked + .slider:before {
+    input:checked + .switch-track:before {
       transform: translateX(20px);
     }
 
-    /* Bottom Apple Tab Navigation */
-    .bottom-nav {
+    /* ==========================================================================
+       BOTTOM TAB BAR (Apple Cupertino Floating Dock)
+       ========================================================================== */
+    .ios-tabbar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 50;
-      height: 80px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 70;
+      height: 76px;
+      background: rgba(18, 18, 20, 0.82);
+      backdrop-filter: blur(35px) saturate(190%);
+      -webkit-backdrop-filter: blur(35px) saturate(190%);
+      border-top: 0.5px solid rgba(255, 255, 255, 0.12);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding-bottom: env(safe-area-inset-bottom, 12px);
-      max-width: 600px;
+      padding-bottom: env(safe-area-inset-bottom, 8px);
+      max-width: 520px;
       margin: 0 auto;
     }
 
-    .nav-tab-btn {
+    .tab-btn {
       background: none;
       border: none;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      color: var(--text-tertiary);
+      gap: 3px;
+      color: var(--label-tertiary);
       cursor: pointer;
-      width: 64px;
-      transition: all 0.2s ease;
+      width: 60px;
+      transition: all 0.2s var(--ios-spring);
     }
 
-    .nav-tab-btn.active {
-      color: var(--apple-blue);
+    .tab-btn.active {
+      color: var(--ios-blue);
       transform: translateY(-2px);
     }
 
-    .nav-tab-btn svg {
-      width: 24px;
-      height: 24px;
-      transition: stroke 0.2s ease;
+    .tab-icon-svg {
+      width: 23px;
+      height: 23px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .nav-tab-label {
-      font-size: 0.74rem;
-      font-weight: 700;
+    .tab-caption {
+      font-size: 0.72rem;
+      font-weight: 600;
     }
 
-    /* First-time Onboarding Modal */
-    .modal-overlay {
+    /* ==========================================================================
+       APPLE MODAL ONBOARDING SHEET
+       ========================================================================== */
+    .ios-modal-backdrop {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
       z-index: 100;
@@ -1023,750 +984,616 @@
       transition: opacity 0.3s ease;
     }
 
-    .modal-overlay.show {
+    .ios-modal-backdrop.show {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .onboarding-sheet {
+    .ios-sheet {
       background: #1c1c1e;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
       border-radius: 32px;
-      max-width: 440px;
+      max-width: 400px;
       width: 100%;
-      padding: 32px 24px;
+      padding: 30px 24px;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
       transform: translateY(20px);
-      transition: transform 0.3s var(--spring-easing);
+      transition: transform 0.3s var(--ios-spring);
     }
 
-    .modal-overlay.show .onboarding-sheet {
+    .ios-modal-backdrop.show .ios-sheet {
       transform: translateY(0);
     }
 
-    .onboarding-logo {
-      width: 84px;
-      height: 84px;
-      border-radius: 22px;
-      margin: 0 auto 18px;
+    .sheet-logo {
+      width: 74px;
+      height: 74px;
+      border-radius: 18px;
+      margin: 0 auto 16px;
       display: block;
-      box-shadow: 0 10px 28px rgba(10, 132, 255, 0.45);
+      box-shadow: 0 8px 24px rgba(10, 132, 255, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .onboarding-title {
-      font-size: 1.7rem;
-      font-weight: 900;
-      margin-bottom: 8px;
+    .sheet-h1 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin-bottom: 6px;
     }
 
-    .onboarding-sub {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
+    .sheet-desc {
+      color: var(--label-secondary);
+      font-size: 0.9rem;
       line-height: 1.5;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
-    .input-onboarding {
+    .btn-sheet-submit {
       width: 100%;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 14px 18px;
-      color: #fff;
-      font-size: 1.05rem;
-      text-align: center;
-      margin-bottom: 20px;
-      outline: none;
-    }
-
-    .btn-onboarding-submit {
-      width: 100%;
-      background: linear-gradient(135deg, var(--apple-blue), #5856d6);
+      background: linear-gradient(135deg, var(--ios-blue), var(--ios-indigo));
       color: #fff;
       border: none;
       border-radius: 16px;
-      padding: 14px;
-      font-size: 1.05rem;
-      font-weight: 800;
+      padding: 13px;
+      font-size: 1rem;
+      font-weight: 700;
       cursor: pointer;
       transition: transform 0.15s ease;
     }
 
-    .btn-onboarding-submit:active {
+    .btn-sheet-submit:active {
       transform: scale(0.97);
     }
 
-    /* Notification banner */
-    .toast-banner {
+    /* Toast */
+    .ios-toast {
       position: fixed;
-      top: 20px;
+      top: 18px;
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
-      background: rgba(44, 44, 46, 0.95);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(36, 36, 38, 0.92);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 999px;
-      padding: 10px 22px;
-      font-size: 0.88rem;
+      padding: 9px 20px;
+      font-size: 0.85rem;
       font-weight: 600;
       color: #fff;
       z-index: 120;
-      transition: transform 0.4s var(--spring-easing);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: transform 0.35s var(--ios-spring);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .toast-banner.show {
+    .ios-toast.show {
       transform: translateX(-50%) translateY(0);
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient light gradients -->
-  <div class="ambient-glow"></div>
-  <div class="ambient-glow-2"></div>
+  <!-- Background Lighting -->
+  <div class="ios-aurora-glow-1"></div>
+  <div class="ios-aurora-glow-2"></div>
 
-  <!-- Header -->
-  <header class="app-header">
-    <div class="brand-wrap" onclick="switchTab('now')">
-      <img src="icons/icon.svg" alt="سَمْت" class="brand-logo-img">
-      <span class="brand-title">سَمْت | SAMT</span>
+  <!-- Apple Navigation Bar -->
+  <header class="ios-navbar">
+    <div class="ios-brand" onclick="switchTab('now')">
+      <img src="icons/icon.svg" alt="سَمْت" class="ios-app-icon">
+      <span class="ios-brand-text">سَمْت</span>
     </div>
-    <div class="header-user-badge" onclick="openOnboarding(true)">
-      <span class="status-dot"></span>
-      <span id="headerUserName">أهلاً بك</span>
+    <div class="ios-user-pill" onclick="openOnboarding(true)">
+      <span class="ios-online-dot"></span>
+      <span id="navUserName">أهلاً بك</span>
     </div>
   </header>
 
-  <!-- Notification Toast -->
-  <div id="toastBanner" class="toast-banner">
-    <span id="toastIcon">✨</span>
+  <!-- iOS Toast Banner -->
+  <div id="iosToast" class="ios-toast">
+    <span id="toastIcon">✓</span>
     <span id="toastMsg">تم الإجراء بنجاح</span>
   </div>
 
-  <!-- Main View -->
-  <main class="main-view">
+  <main class="ios-viewport">
 
     <!-- ================= TAB 1: NOW / اليوم ================= -->
-    <section id="tab-now" class="tab-content active">
+    <section id="tab-now" class="tab-pane active">
 
-      <!-- Hero Personalized Banner -->
-      <div class="hero-greeting-box">
-        <div>
-          <div class="greeting-text-title" id="heroGreetingTitle">صباح الهمة والبركة ✨</div>
-          <div class="greeting-text-sub">استثمر يومك لبناء مستقبلك الجامعي</div>
-        </div>
-        <div class="streak-badge">
-          <span>🔥</span>
-          <span id="streakCountText">1 يوم</span>
-        </div>
-      </div>
-
-      <!-- Dynamic Island / Live Activity -->
+      <!-- Dynamic Island (Live Activity) -->
       <div class="dynamic-island">
-        <div class="island-badge-row">
-          <div class="live-pulse">
-            <span class="live-pulse-dot"></span>
-            <span>النشاط الحالي الآن</span>
+        <div class="island-status-bar">
+          <div class="island-badge">
+            <span class="island-badge-pulse"></span>
+            <span>النشاط الجاري الآن</span>
           </div>
-          <div class="island-clock" id="liveDigitalClock">00:00:00</div>
+          <div class="island-time-ticker" id="liveTickerClock">00:00:00</div>
         </div>
 
-        <div class="current-activity-title" id="nowTitle">فترة التحميل...</div>
-        <div class="current-activity-desc" id="nowDesc">جاري قراءة الوقت وتحديث الجدول بدقة...</div>
+        <div class="island-activity-name" id="islandCurrentTitle">تحميل النشاط...</div>
+        <div class="island-activity-desc" id="islandCurrentDesc">مزامنة الوقت الحالي بدقة...</div>
 
-        <div class="island-progress-bar">
-          <div class="island-progress-fill" id="nowProgressFill" style="width: 45%;"></div>
+        <div class="island-track">
+          <div class="island-fill" id="islandProgressBar" style="width: 30%;"></div>
         </div>
 
-        <div class="island-footer">
-          <div class="next-activity-preview">
-            <span class="next-label">النشاط القادم</span>
-            <span class="next-value" id="nextActivityText">صلاة الظهر في المسجد</span>
+        <div class="island-bottom-bar">
+          <div class="island-next-info">
+            <span class="island-next-caption">النشاط التالي</span>
+            <span class="island-next-title" id="islandNextTitle">صلاة الظهر في المسجد</span>
           </div>
-          <button class="btn-quick-done" onclick="triggerTaskDoneEffect()">
+          <button class="btn-island-action" onclick="markTaskDone()">
             <span>✓</span> أنجزت
           </button>
         </div>
       </div>
 
-      <!-- Prayer Times Offline Widget -->
-      <div class="prayer-card">
-        <div class="section-header">
-          <div class="section-title">
-            <span>🕌</span> أوقات الصلاة في المسجد
+      <!-- Apple Fitness 3-Rings Activity Widget -->
+      <div class="apple-fitness-widget">
+        <svg class="fitness-rings-svg" viewBox="0 0 120 120">
+          <!-- Ring 1: Red (Calories) -->
+          <circle cx="60" cy="60" r="50" class="ring-bg" stroke="var(--ios-red)" />
+          <circle id="ringRed" cx="60" cy="60" r="50" class="ring-fg" stroke="var(--ios-red)"
+                  stroke-dasharray="314.15" stroke-dashoffset="314.15" />
+
+          <!-- Ring 2: Green (Habits/Schedule) -->
+          <circle cx="60" cy="60" r="38" class="ring-bg" stroke="var(--ios-green)" />
+          <circle id="ringGreen" cx="60" cy="60" r="38" class="ring-fg" stroke="var(--ios-green)"
+                  stroke-dasharray="238.76" stroke-dashoffset="238.76" />
+
+          <!-- Ring 3: Teal (Water Hydration) -->
+          <circle cx="60" cy="60" r="26" class="ring-bg" stroke="var(--ios-teal)" />
+          <circle id="ringTeal" cx="60" cy="60" r="26" class="ring-fg" stroke="var(--ios-teal)"
+                  stroke-dasharray="163.36" stroke-dashoffset="163.36" />
+        </svg>
+
+        <div class="fitness-metrics">
+          <div class="metric-row">
+            <span class="metric-title"><span class="metric-dot" style="background: var(--ios-red);"></span> السعرات</span>
+            <span class="metric-value" id="valCaloriesMetric">0 / 2200</span>
           </div>
-          <span class="section-tag" id="nextPrayerCountdown">باقي 45 دقيقة</span>
+          <div class="metric-row">
+            <span class="metric-title"><span class="metric-dot" style="background: var(--ios-green);"></span> المهام</span>
+            <span class="metric-value" id="valTasksMetric">0%</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-title"><span class="metric-dot" style="background: var(--ios-teal);"></span> الماء</span>
+            <span class="metric-value" id="valWaterMetric">0.0 / 3.0L</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prayer Times Widget -->
+      <div class="ios-prayer-card">
+        <div class="card-header-row">
+          <div class="card-header-title">
+            <svg class="tab-icon-svg" style="width:19px;height:19px;" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>
+            <span>أوقات الصلاة في المسجد</span>
+          </div>
+          <span class="ios-badge-blue" id="nextPrayerCountdown">باقي 35 دقيقة</span>
         </div>
 
-        <div class="prayers-grid">
-          <div class="prayer-slot" id="prayer-fajr">
-            <div class="prayer-name">الفجر</div>
-            <div class="prayer-time" id="time-fajr">05:12</div>
+        <div class="prayers-row">
+          <div class="prayer-item" id="p-fajr">
+            <div class="prayer-label">الفجر</div>
+            <div class="prayer-time-val" id="t-fajr">05:12</div>
           </div>
-          <div class="prayer-slot" id="prayer-dhuhr">
-            <div class="prayer-name">الظهر</div>
-            <div class="prayer-time" id="time-dhuhr">12:35</div>
+          <div class="prayer-item" id="p-dhuhr">
+            <div class="prayer-label">الظهر</div>
+            <div class="prayer-time-val" id="t-dhuhr">12:35</div>
           </div>
-          <div class="prayer-slot" id="prayer-asr">
-            <div class="prayer-name">العصر</div>
-            <div class="prayer-time" id="time-asr">15:58</div>
+          <div class="prayer-item" id="p-asr">
+            <div class="prayer-label">العصر</div>
+            <div class="prayer-time-val" id="t-asr">15:58</div>
           </div>
-          <div class="prayer-slot" id="prayer-maghrib">
-            <div class="prayer-name">المغرب</div>
-            <div class="prayer-time" id="time-maghrib">18:25</div>
+          <div class="prayer-item" id="p-maghrib">
+            <div class="prayer-label">المغرب</div>
+            <div class="prayer-time-val" id="t-maghrib">18:25</div>
           </div>
-          <div class="prayer-slot" id="prayer-isha">
-            <div class="prayer-name">العشاء</div>
-            <div class="prayer-time" id="time-isha">19:45</div>
+          <div class="prayer-item" id="p-isha">
+            <div class="prayer-label">العشاء</div>
+            <div class="prayer-time-val" id="t-isha">19:45</div>
           </div>
         </div>
 
-        <div class="prayer-status-note">
-          <span>المدينة المعتمدة:</span>
-          <select id="citySelect" class="city-select" onchange="changeCity(this.value)">
-            <option value="amman">عَمّان (الأردن)</option>
-            <option value="jerusalem">القدس (فلسطين)</option>
-            <option value="riyadh" selected>الرياض (السعودية)</option>
+        <div class="prayer-footer-note">
+          <span>المدينة:</span>
+          <select id="citySelect" class="ios-select" onchange="changeCity(this.value)">
+            <option value="amman">عَمّان</option>
+            <option value="jerusalem">القدس</option>
+            <option value="riyadh" selected>الرياض</option>
             <option value="makkah">مكة المكرمة</option>
-            <option value="cairo">القاهرة (مصر)</option>
-            <option value="dubai">دبي (الإمارات)</option>
+            <option value="cairo">القاهرة</option>
+            <option value="dubai">دبي</option>
           </select>
         </div>
-      </div>
-
-      <!-- Quick Stats -->
-      <div class="quick-stats-row">
-        <div class="stat-box">
-          <div class="stat-box-title">
-            <span>إنجاز المهام</span>
-            <span style="color: var(--apple-green);">✓</span>
-          </div>
-          <div class="stat-box-value" id="statsTasksPercent">0%</div>
-          <div class="stat-sub" id="statsTasksSub">0 من 13 مهمة مكتملة</div>
-        </div>
-
-        <div class="stat-box">
-          <div class="stat-box-title">
-            <span>ترطيب اليوم</span>
-            <span style="color: var(--apple-teal);">💧</span>
-          </div>
-          <div class="stat-box-value" id="statsWaterValue">0 لتر</div>
-          <div class="stat-sub">الهدف: 3.0 لتر</div>
-        </div>
-      </div>
-
-      <!-- Wisdom Nugget of the Day -->
-      <div class="knowledge-card" style="margin-bottom: 24px; cursor: pointer;" onclick="switchTab('knowledge')">
-        <span class="knowledge-tag">💡 معلومة اليوم السرية الذهبية</span>
-        <div class="knowledge-title">قاعدة الـ 90 دقيقة (Ultradian Rhythm)</div>
-        <div class="knowledge-body">
-          دماغك لا يستطيع العمل بتركيز مطلق لأكثر من 90 دقيقة متواصلة. استثمار 3.5 ساعات عمل في الصباح مع استراحة قصيرة بعد كل 90 دقيقة يمنحك إنتاجية تعادل 8 ساعات عمل مجهدة في المساء.
-        </div>
-        <div style="font-size: 0.82rem; color: var(--apple-blue); font-weight: 700;">انقر لتصفح المزيد من المعارف والفيديوهات ←</div>
       </div>
 
     </section>
 
     <!-- ================= TAB 2: SCHEDULE / الجدول الكامل ================= -->
-    <section id="tab-schedule" class="tab-content">
-      <div class="section-header" style="margin-bottom: 18px;">
-        <div class="section-title">
-          <span>🗓️</span> مسار يومك المتكامل
-        </div>
-        <span class="section-tag" id="scheduleDateStr">اليوم</span>
+    <section id="tab-schedule" class="tab-pane">
+      <div class="ios-section-header">
+        <span>مسار اليوم</span>
+        <span style="font-size: 0.8rem; color: var(--label-secondary);" id="scheduleDateStr">اليوم</span>
       </div>
 
       <!-- 1. البكور والروحانية -->
-      <div class="schedule-block">
-        <div class="block-top">
-          <span class="block-name">🌅 1. البكور والروحانية وتطوير الذات</span>
-          <span class="block-time-range">05:00 - 07:30</span>
+      <div class="ios-card">
+        <div class="block-header-line">
+          <span class="block-title-text">1. البكور وتطوير الذات</span>
+          <span class="block-hours">05:00 - 07:30</span>
         </div>
-        <div class="task-row" onclick="toggleTask(0)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">الاستيقاظ وصلاة الفجر في المسجد + أذكار الصباح</div>
-            <div class="task-meta">05:00 ص – كوب ماء، وضوء، والذهاب للمسجد</div>
+        <div class="task-item-row" onclick="toggleTask(0)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">صلاة الفجر في المسجد + أذكار الصباح</div>
+            <div class="task-sub-meta">05:00 ص – كوب ماء وانطلاقة اليوم</div>
           </div>
         </div>
-        <div class="task-row" onclick="toggleTask(1)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">تطوير اللغة الإنجليزية (45 دقيقة)</div>
-            <div class="task-meta">06:00 ص – استماع، بودكاست، محادثة</div>
+        <div class="task-item-row" onclick="toggleTask(1)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">تطوير اللغة الإنجليزية (45 دقيقة)</div>
+            <div class="task-sub-meta">06:00 ص – استماع وبودكاست وتقنية Shadowing</div>
           </div>
         </div>
-        <div class="task-row" onclick="toggleTask(2)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">كورسات تحضير الجامعة وشهادات الخبرة (45 دقيقة)</div>
-            <div class="task-meta">06:45 ص – منصات Coursera أو قراءة تخصصية</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. الفطور والعمل الخاص -->
-      <div class="schedule-block">
-        <div class="block-top">
-          <span class="block-name">💻 2. الفطور والعمل الخاص العميق</span>
-          <span class="block-time-range">07:30 - 12:00</span>
-        </div>
-        <div class="task-row" onclick="toggleTask(3)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">فطور صحي متوازن وقهوة الصباح</div>
-            <div class="task-meta">07:30 ص – بيض، شوفان، فاكهة + تصفح هادئ للمهام</div>
-          </div>
-        </div>
-        <div class="task-row" onclick="toggleTask(4)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
-            <div class="task-meta">08:30 ص – إنهاء المهام الكبرى للمشروع دون مقاطعات</div>
+        <div class="task-item-row" onclick="toggleTask(2)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">دورات تحضير الجامعة وشهادات الخبرة</div>
+            <div class="task-sub-meta">06:45 ص – كورسات Coursera ومهارات تخصصك</div>
           </div>
         </div>
       </div>
 
-      <!-- 3. الظهيرة والغداء -->
-      <div class="schedule-block">
-        <div class="block-top">
-          <span class="block-name">☀️ 3. منتصف اليوم والاستراحة</span>
-          <span class="block-time-range">12:00 - 14:00</span>
+      <!-- 2. العمل الخاص -->
+      <div class="ios-card">
+        <div class="block-header-line">
+          <span class="block-title-text">2. الفطور والعمل الخاص</span>
+          <span class="block-hours">07:30 - 12:00</span>
         </div>
-        <div class="task-row" onclick="toggleTask(5)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">صلاة الظهر في المسجد</div>
-            <div class="task-meta">12:00 م – فصل العقل عن الشاشات والتقاط الأنفاس</div>
+        <div class="task-item-row" onclick="toggleTask(3)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">فطور صحي متوازن وقهوة الصباح</div>
+            <div class="task-sub-meta">07:30 ص – تهيئة بيئة العمل والمهام</div>
           </div>
         </div>
-        <div class="task-row" onclick="toggleTask(6)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">وجبة الغداء + قيلولة الطاقة (20 دقيقة)</div>
-            <div class="task-meta">01:00 م – بروتين وخضار وكارب + شحن سريع للنشاط</div>
+        <div class="task-item-row" onclick="toggleTask(4)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
+            <div class="task-sub-meta">08:30 ص – إنجاز مهام المشروع بدون مشتتات</div>
           </div>
         </div>
       </div>
 
-      <!-- 4. المتابعات والتمرين -->
-      <div class="schedule-block">
-        <div class="block-top">
-          <span class="block-name">🏋️‍♂️ 4. الاجتماعات والتمرين الرياضي</span>
-          <span class="block-time-range">14:00 - 18:00</span>
+      <!-- 3. منتصف اليوم -->
+      <div class="ios-card">
+        <div class="block-header-line">
+          <span class="block-title-text">3. منتصف اليوم والاستراحة</span>
+          <span class="block-hours">12:00 - 14:00</span>
         </div>
-        <div class="task-row" onclick="toggleTask(7)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">اجتماعات العمل والمتابعات والردود</div>
-            <div class="task-meta">02:00 م – المكالمات وتنسيق العمل الخارجي</div>
+        <div class="task-item-row" onclick="toggleTask(5)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">صلاة الظهر في المسجد</div>
+            <div class="task-sub-meta">12:00 م – فصل العقل عن الشاشات</div>
           </div>
         </div>
-        <div class="task-row" onclick="toggleTask(8)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">صلاة العصر في المسجد وسناك التمرين</div>
-            <div class="task-meta">03:30 م – سناك خفيف (موزة + قهوة)</div>
+        <div class="task-item-row" onclick="toggleTask(6)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">وجبة الغداء + قيلولة 20 دقيقة</div>
+            <div class="task-sub-meta">01:00 م – وجبة متوازنة وشحن النشاط</div>
           </div>
         </div>
-        <div class="task-row" onclick="toggleTask(9)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">التمرين البدني في النادي الرياضي</div>
-            <div class="task-meta">04:30 م – حديد / لياقة وتفريغ طاقة اليوم</div>
+      </div>
+
+      <!-- 4. الاجتماعات والتمرين -->
+      <div class="ios-card">
+        <div class="block-header-line">
+          <span class="block-title-text">4. المتابعات والتمرين البدني</span>
+          <span class="block-hours">14:00 - 18:00</span>
+        </div>
+        <div class="task-item-row" onclick="toggleTask(7)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">متابعات العمل والاجتماعات والمكالمات</div>
+            <div class="task-sub-meta">02:00 م – الردود والتنسيق</div>
+          </div>
+        </div>
+        <div class="task-item-row" onclick="toggleTask(8)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">صلاة العصر في المسجد وسناك التمرين</div>
+            <div class="task-sub-meta">03:30 م – موزة وقهوة لطاقة النادي</div>
+          </div>
+        </div>
+        <div class="task-item-row" onclick="toggleTask(9)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">التمرين الرياضي في النادي (حديد / لياقة)</div>
+            <div class="task-sub-meta">04:30 م – تفريغ طاقة اليوم وبناء الصحة</div>
           </div>
         </div>
       </div>
 
       <!-- 5. المساء والراحة -->
-      <div class="schedule-block">
-        <div class="block-top">
-          <span class="block-name">🌙 5. المساء والراحة والنوم الهانئ</span>
-          <span class="block-time-range">18:00 - 22:15</span>
+      <div class="ios-card">
+        <div class="block-header-line">
+          <span class="block-title-text">5. المساء والنوم الهانئ</span>
+          <span class="block-hours">18:00 - 22:30</span>
         </div>
-        <div class="task-row" onclick="toggleTask(10)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">صلاة المغرب في المسجد وحمام منعش</div>
-            <div class="task-meta">06:00 م – استرخاء بعد النادي والانتعاش</div>
+        <div class="task-item-row" onclick="toggleTask(10)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">صلاة المغرب في المسجد وحمام منعش</div>
+            <div class="task-sub-meta">06:00 م – استرخاء بعد النادي</div>
           </div>
         </div>
-        <div class="task-row" onclick="toggleTask(11)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">وجبة العشاء وصلاة العشاء في المسجد</div>
-            <div class="task-meta">07:00 م – عشاء خفيف وصحي ومجلس هادئ</div>
+        <div class="task-item-row" onclick="toggleTask(11)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">وجبة العشاء وصلاة العشاء في المسجد</div>
+            <div class="task-sub-meta">07:00 م – عشاء خفيف ووقت حر عائلي</div>
           </div>
         </div>
-        <div class="task-row" onclick="toggleTask(12)">
-          <div class="task-checkbox-custom"></div>
-          <div class="task-info">
-            <div class="task-headline">إغلاق الشاشات والاستعداد للنوم المبكر</div>
-            <div class="task-meta">10:00 م – وضع الهاتف بعيداً ونوم عميق 7.5 ساعات</div>
+        <div class="task-item-row" onclick="toggleTask(12)">
+          <div class="ios-checkbox"></div>
+          <div class="task-text-wrap">
+            <div class="task-main-text">إغلاق الشاشات ونوم باكر هانئ</div>
+            <div class="task-sub-meta">10:00 م – هاتف بعيد عن السرير لـ 7.5 ساعات نوم</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ================= TAB 3: HEALTH / صحتي والسعرات ================= -->
-    <section id="tab-health" class="tab-content">
-      <div class="section-header" style="margin-bottom: 18px;">
-        <div class="section-title">
-          <span>🍎</span> حاسبة السعرات والماء
-        </div>
-        <span class="section-tag">نمط أبل الصحي</span>
+    <section id="tab-health" class="tab-pane">
+      <div class="ios-section-header">
+        <span>الصحة والنشاط</span>
       </div>
 
-      <!-- Calorie Rings Card -->
-      <div class="apple-ring-container">
-        <div class="ring-svg-wrap">
-          <svg width="100" height="100">
-            <circle cx="50" cy="50" r="40" stroke="rgba(255, 69, 58, 0.2)" stroke-width="10" fill="none" />
-            <circle id="calorieRingProgress" cx="50" cy="50" r="40" stroke="var(--apple-red)" stroke-width="10" fill="none"
-              stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke-linecap="round" style="transition: stroke-dashoffset 0.5s ease;" />
-          </svg>
-          <div class="ring-center-text">
-            <div class="ring-center-num" id="ringCaloriesLeft">2200</div>
-            <div class="ring-center-label">متبقي</div>
+      <!-- Water Hydration Card -->
+      <div class="water-fluid-card">
+        <div class="water-row-display">
+          <div class="water-tank">
+            <div class="water-tank-level" id="waterLevelBar" style="height: 0%;"></div>
+          </div>
+          <div class="water-data-col">
+            <div class="water-title-lbl">شرب الماء اليوم:</div>
+            <div class="water-big-num" id="waterNumDisplay">0 <span style="font-size: 1rem; color: var(--label-secondary);">/ 3000 مل</span></div>
+            <div style="font-size: 0.78rem; color: var(--label-tertiary);" id="waterCupSub">0 من 12 كوب اليوم</div>
           </div>
         </div>
 
-        <div class="ring-details">
-          <div style="font-weight: 800; font-size: 1.1rem; color: var(--apple-red);">حركة السعرات اليومية</div>
-          <div style="font-size: 0.88rem; color: var(--text-secondary);">
-            تم استهلاك: <strong id="caloriesConsumedText" style="color: #fff;">0</strong> / <span id="calorieGoalDisplay">2200</span> سعرة
-          </div>
-          <div style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden;">
-            <div id="calorieBarFill" style="height:100%; width: 0%; background: var(--apple-red); transition: width 0.3s;"></div>
-          </div>
+        <div class="water-btn-group">
+          <button class="ios-btn-pill teal" onclick="addWater(250)">+ 250 مل</button>
+          <button class="ios-btn-pill teal" onclick="addWater(500)">+ 500 مل</button>
+          <button class="ios-btn-pill" onclick="addWater(-250)">- 250 مل</button>
         </div>
       </div>
 
-      <!-- Water Tracker -->
-      <div class="water-tracker-card">
-        <div class="water-visual-wrap">
-          <div class="water-bottle">
-            <div class="water-level" id="waterLevelFill" style="height: 0%;"></div>
-          </div>
-          <div class="water-stats-text">
-            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 4px;">كمية الماء المستهلكة:</div>
-            <div class="water-val" id="waterAmountText">0 <span style="font-size: 1rem; color: var(--text-secondary);">/ 3000 مل</span></div>
-            <div style="font-size: 0.78rem; color: var(--text-tertiary);" id="waterCupsCount">0 من 12 كوب اليوم</div>
-          </div>
+      <!-- Calorie Logging -->
+      <div class="ios-card">
+        <div class="block-header-line">
+          <span class="block-title-text">تسجيل وجبات اليوم</span>
+          <span class="block-hours" id="calBalanceHeader">متبقي: 2200</span>
         </div>
 
-        <div class="water-buttons-row">
-          <button class="btn-water" onclick="addWater(250)">+ 250 مل (كوب)</button>
-          <button class="btn-water" onclick="addWater(500)">+ 500 مل (علبة)</button>
-          <button class="btn-water" style="background: rgba(255,255,255,0.06); color: var(--text-secondary); border-color: transparent;" onclick="addWater(-250)">- 250 مل</button>
-        </div>
-      </div>
-
-      <!-- Food Logger Form -->
-      <div class="food-log-card">
-        <div style="font-weight: 800; margin-bottom: 12px; font-size: 1.05rem;">تسجيل وجبة أو سناك</div>
-        
-        <div class="preset-chips">
-          <span class="chip" onclick="quickAddFood('فطور بيض وتوست', 280)">🥚 بيضتين وتوست (280)</span>
-          <span class="chip" onclick="quickAddFood('غداء دجاج وأرز', 550)">🍗 دجاج وأرز (550)</span>
-          <span class="chip" onclick="quickAddFood('سكوب بروتين', 130)">🥤 بروتين شيك (130)</span>
-          <span class="chip" onclick="quickAddFood('موزة وتمر', 140)">🍌 موزة وتمر (140)</span>
+        <div class="quick-preset-wrap">
+          <span class="preset-pill" onclick="quickAddFood('فطور بيض وتوست', 280)">🥚 بيض وتوست (280)</span>
+          <span class="preset-pill" onclick="quickAddFood('صدر دجاج وأرز', 550)">🍗 دجاج وأرز (550)</span>
+          <span class="preset-pill" onclick="quickAddFood('بروتين شيك', 130)">🥤 بروتين (130)</span>
+          <span class="preset-pill" onclick="quickAddFood('موزة وتمر', 140)">🍌 موزة وتمر (140)</span>
         </div>
 
-        <div class="food-input-group">
-          <input type="text" id="foodNameInput" class="input-apple" style="flex: 2;" placeholder="اسم الوجبة (مثلاً: سلطة تونة)">
-          <input type="number" id="foodCalInput" class="input-apple" style="flex: 1;" placeholder="السعرات">
-          <button class="btn-apple-add" onclick="addCustomFood()">+ إضافة</button>
+        <div class="food-input-row">
+          <input type="text" id="foodNameInp" class="ios-input" style="flex: 2;" placeholder="اسم الوجبة...">
+          <input type="number" id="foodCalInp" class="ios-input" style="flex: 1;" placeholder="سعرات">
+          <button class="btn-add-food" onclick="submitCustomFood()">إضافة</button>
         </div>
 
-        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; margin-top: 14px;">سجل وجبات اليوم:</div>
-        <div class="food-history-list" id="foodHistoryList">
-          <div style="font-size: 0.82rem; color: var(--text-tertiary); text-align: center; padding: 10px;">لم يتم تسجيل وجبات اليوم بعد.</div>
+        <div id="foodLogHistory" style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
+          <div style="font-size: 0.8rem; color: var(--label-tertiary); text-align: center; padding: 8px;">لا توجد وجبات مسجلة اليوم</div>
         </div>
       </div>
     </section>
 
-    <!-- ================= TAB 4: WISDOM / معلومات نادرة وقيمة ================= -->
-    <section id="tab-knowledge" class="tab-content">
-      <div class="section-header" style="margin-bottom: 18px;">
-        <div class="section-title">
-          <span>🧠</span> معلومات نادرة للتحضير والنجاح
-        </div>
-        <span class="section-tag">وعي عالي</span>
+    <!-- ================= TAB 4: WISDOM / الوعي والمعرفة ================= -->
+    <section id="tab-knowledge" class="tab-pane">
+      <div class="ios-section-header">
+        <span>الوعي والتحضير</span>
       </div>
 
-      <!-- Focus Ambience Synthesizer -->
-      <div class="zen-audio-bar">
-        <div class="zen-info">
-          <span style="font-size: 1.3rem;">🎧</span>
-          <div>
-            <div style="font-weight: 700; font-size: 0.92rem;">موجات التركيز العالي (Zen Ambience)</div>
-            <div style="font-size: 0.75rem; color: var(--text-secondary);">ترددات صوتية مهدئة لعزل التشتت أثناء العمل والمذاكرة</div>
-          </div>
+      <!-- Zen Focus Frequency -->
+      <div class="zen-audio-card">
+        <div>
+          <div style="font-weight: 700; font-size: 0.92rem; color: #fff;">موجات التركيز العالي (432 Hz)</div>
+          <div style="font-size: 0.74rem; color: var(--label-secondary);">عزل الضوضاء أثناء العمل والمذاكرة</div>
         </div>
-        <button id="zenAudioBtn" class="btn-zen-play" onclick="toggleZenAudio()">تشغيل</button>
+        <button id="zenBtn" class="ios-btn-pill" style="background: var(--ios-blue); color: #fff; padding: 6px 14px;" onclick="toggleZenSound()">تشغيل</button>
       </div>
 
-      <!-- Card 1: University Hack + Video -->
-      <div class="knowledge-card">
-        <span class="knowledge-tag">🎓 سر التحضير الجامعي الخارق</span>
-        <div class="knowledge-title">تقنية "Active Recall" بدلاً من قراءة المذكرات</div>
-        <div class="knowledge-body">
-          95% من طلاب الجامعات يقعون في فخ "إعادة قراءة الكتب" وتظليل السطور (Highlighting)، وهو ما يسميه علماء الأعصاب **"وهم الفهم" (Illusion of Competence)**. 
-          <br><br>
-          الطلاب المتفوقون في أرقى الجامعات العالمية يستخدمون طريقة الاستدعاء النشط: إغلاق الكتاب ومحاولة شرح الفكرة بورقة بيضاء أو لشخص وهمي. هذا يرفع نسبة ثبات المعلومة في الذاكرة طويلة المدى بنسبة 400% بأقل من نصف وقت الدراسة!
+      <!-- Story 1: University Prep + Video -->
+      <div class="editorial-story-card">
+        <span class="editorial-kicker">سر التفوق الجامعي</span>
+        <div class="editorial-headline">تقنية "Active Recall": كيف تدرس بذكاء وتتفوق بنصف الوقت؟</div>
+        <div class="editorial-copy">
+          أغلب الطلاب يضيعون مئات الساعات في قراءة الكتب وإعادة تظليلها، وهو ما يثبت علمياً أنه يمنح الدماغ وهماً زائفاً بالمعرفة. الطلاب المتميزون يتبعون أسلوب الاستدعاء النشط: قراءة الفكرة لمرة واحدة، ثم إغلاق المرجع وشرحها بكلماتك بورقة فارغة.
         </div>
-        <div class="knowledge-highlight-box">
-          📌 <strong>تطبيق عملي:</strong> ابدأ الآن مع أي كورس تشاهده بكتابة سطرين ملخص من ذاكرتك فقط بعد إيقاف الفيديو.
+        <div class="editorial-quote">
+          📌 <strong>تطبيق فوري:</strong> في أي مهارة أو كورس تشاهده قبل الجامعة، لخص الفكرة في 3 نقاط من ذاكرتك فور انتهاء المقطع.
         </div>
-        
-        <!-- Video walkthrough -->
-        <div class="video-container">
-          <iframe src="https://www.youtube-nocookie.com/embed/ukLnPbI9phY" title="Active Recall Technique" allowfullscreen loading="lazy"></iframe>
+
+        <div class="ios-video-wrap">
+          <iframe src="https://www.youtube-nocookie.com/embed/ukLnPbI9phY" title="Active Recall Method" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
-      <!-- Card 2: English Shadowing + Video -->
-      <div class="knowledge-card">
-        <span class="knowledge-tag">🗣️ طلاقة اللغة الإنجليزية</span>
-        <div class="knowledge-title">سر الـ "Shadowing": تحدث كالمواطن الأصلي في 90 يوماً</div>
-        <div class="knowledge-body">
-          مشكلة أغلب الناس في اللغة ليست نقص المفردات، بل **"تأتأة العضلات وتأخر الترجمة العقلية"**. تقنية Shadowing (الظل) التي يستخدمها المترجمون الفوريون تعتمد على الاستماع لمقطع صوتي إنجليزي مدته دقيقة واحدة وتكرار الكلام وراء المتحدث **في نفس اللحظة بفاصل نصف ثانية فقط**.
+      <!-- Story 2: English Shadowing + Video -->
+      <div class="editorial-story-card">
+        <span class="editorial-kicker">طلاقة الإنجليزية في 90 يوماً</span>
+        <div class="editorial-headline">طريقة الـ "Shadowing": كسر حاجز التأتأة والترجمة العقلية</div>
+        <div class="editorial-copy">
+          المشكلة الحقيقية في التحدث بالإنجليزية ليست قلة القواعد، بل تأخر الترجمة في دماغك وضعف مرونة عضلات الفم على النطق السريع. في تقنية Shadowing، تستمع لمتحدث أصلي وتكرر كلامه وراءه مباشرة بفارق نصف ثانية فقط.
         </div>
-        <div class="knowledge-highlight-box">
-          📌 <strong>النتيجة:</strong> يتجاوز دماغك مرحلة الترجمة من العربية إلى الإنجليزية، وتكتسب النبرة الطبيعية ومخارج الحروف السليمة بـ 15 دقيقة يومياً.
+        <div class="editorial-quote">
+          📌 <strong>النتيجة:</strong> 15 دقيقة يومياً تعيد برمجة نطقك وتمنحك طلاقة وتلقائية تامة بدون تفكير في القواعد.
         </div>
 
-        <!-- Video walkthrough -->
-        <div class="video-container">
+        <div class="ios-video-wrap">
           <iframe src="https://www.youtube-nocookie.com/embed/13m3dFpms14" title="English Shadowing Technique" allowfullscreen loading="lazy"></iframe>
-        </div>
-      </div>
-
-      <!-- Card 3: Neuroscience of Morning Focus -->
-      <div class="knowledge-card">
-        <span class="knowledge-tag">⚡ علم الأعصاب والطاقة</span>
-        <div class="knowledge-title">لماذا ساعات الصباح (البكور) تسحق ساعات الليل؟</div>
-        <div class="knowledge-body">
-          هرمون الكورتيزول الطبيعي الصحي يصل إلى قمته (Cortisol Awakening Response) بعد الاستيقاظ بـ 45 دقيقة، بالتزامن مع توفر مخزون الجليكوجين الكامل في الدماغ. إنجازك للعمل الخاص أو المذاكرة بين 6:00 ص و 11:00 ص يكون فيه تركيزك يعادل 3 أضعاف التركيز في المساء لأن الفص الجبهي لم يتعرض بعد لما يُعرف بـ **"إرهاق اتخاذ القرار" (Decision Fatigue)**.
-        </div>
-        <div class="knowledge-highlight-box">
-          📌 <strong>نصيحة ذهبية:</strong> احمِ أول 4 ساعات من يومك من الشاشات التافهة، فهذه الساعات هي مصنع مستقبلك الحقيقي.
-        </div>
-      </div>
-
-      <!-- Card 4: Hidden Fat Burn NEAT -->
-      <div class="knowledge-card">
-        <span class="knowledge-tag">🏃‍♂️ أسرار اللياقة والصحة</span>
-        <div class="knowledge-title">تأثير الـ NEAT: حرق سعرات أكثر من الجيم بمقدار الضعف</div>
-        <div class="knowledge-body">
-          ساعة التمرين في الجيم تحرق قرابة 300 إلى 400 سعرة حرارية فقط، وتمثل 5% من يومك. أما الـ **NEAT** (حرق الطاقة عبر الأنشطة غير الرياضية: المشي للمسجد، صعود الدرج، الوقوف أثناء المكالمات، تنظيف الغرفة) فيحرق ما بين 600 إلى 900 سعرة يومياً دون أن تشعر!
-        </div>
-        <div class="knowledge-highlight-box">
-          📌 <strong>السر:</strong> المشي للصلوات الخمس في المسجد يضمن لك قطع 3,000 إلى 5,000 خطوة يومياً تلقائياً، ما يحميك من خمول العمل المكتبي.
         </div>
       </div>
     </section>
 
     <!-- ================= TAB 5: SETTINGS / الإعدادات ================= -->
-    <section id="tab-settings" class="tab-content">
-      <div class="section-header" style="margin-bottom: 18px;">
-        <div class="section-title">
-          <span>⚙️</span> إعدادات النظام وحسابي
-        </div>
-        <span class="section-tag">تخصيص كامل</span>
+    <section id="tab-settings" class="tab-pane">
+      <div class="ios-section-header">
+        <span>الإعدادات والتفضيلات</span>
       </div>
 
-      <div class="settings-group">
-        <div class="settings-row">
+      <div class="ios-grouped-list">
+        <div class="ios-cell">
           <div>
-            <div class="settings-label">اسم المستخدم</div>
-            <div class="settings-sublabel" id="settingsUserNameDisplay">المستخدم</div>
+            <div class="cell-title">الاسم الشخصي</div>
+            <div class="cell-sub" id="settingsNameLbl">المستخدم</div>
           </div>
-          <button class="btn-quick-done" style="background: rgba(255,255,255,0.1); color: #fff;" onclick="openOnboarding(true)">تعديل</button>
+          <button class="ios-btn-pill" onclick="openOnboarding(true)">تعديل</button>
         </div>
-
-        <div class="settings-row">
+        <div class="ios-cell">
           <div>
-            <div class="settings-label">هدف السعرات اليومي</div>
-            <div class="settings-sublabel">السعرات المستهدفة للاستهلاك</div>
+            <div class="cell-title">هدف السعرات اليومي</div>
+            <div class="cell-sub">السعرات المستهدفة</div>
           </div>
-          <input type="number" id="settingCalGoalInput" class="input-apple" style="width: 90px; text-align: center;" value="2200" onchange="updateCalorieGoal(this.value)">
+          <input type="number" id="cfgCalGoal" class="ios-input" style="width: 85px; text-align: center;" value="2200" onchange="updateCalGoal(this.value)">
         </div>
-
-        <div class="settings-row">
+        <div class="ios-cell">
           <div>
-            <div class="settings-label">هدف شرب الماء اليومي (مل)</div>
-            <div class="settings-sublabel">موصى به: 3000 مل يومياً</div>
+            <div class="cell-title">هدف شرب الماء (مل)</div>
+            <div class="cell-sub">الكمية اليومية</div>
           </div>
-          <input type="number" id="settingWaterGoalInput" class="input-apple" style="width: 90px; text-align: center;" value="3000" onchange="updateWaterGoal(this.value)">
+          <input type="number" id="cfgWaterGoal" class="ios-input" style="width: 85px; text-align: center;" value="3000" onchange="updateWaterGoal(this.value)">
         </div>
       </div>
 
-      <div class="settings-group">
-        <div class="settings-row">
+      <div class="ios-grouped-list">
+        <div class="ios-cell">
           <div>
-            <div class="settings-label">إشعارات التذكير وتنبيه المهام</div>
-            <div class="settings-sublabel">تنبيه عند بداية كل صلاة ومرحلة عمل</div>
+            <div class="cell-title">المؤثرات الصوتية واللمسية</div>
+            <div class="cell-sub">أصوات لطيفة عند التفاعل والإنجاز</div>
           </div>
-          <label class="switch">
-            <input type="checkbox" id="settingNotificationToggle" onchange="toggleNotifications(this.checked)">
-            <span class="slider"></span>
+          <label class="ios-switch">
+            <input type="checkbox" id="cfgSoundToggle" checked onchange="toggleSound(this.checked)">
+            <span class="switch-track"></span>
           </label>
         </div>
-
-        <div class="settings-row">
+        <div class="ios-cell">
           <div>
-            <div class="settings-label">المؤثرات الصوتية (Apple Chimes)</div>
-            <div class="settings-sublabel">أصوات لطيفة عند الإنجاز وحساب الماء</div>
+            <div class="cell-title">تنبيهات الإشعارات</div>
+            <div class="cell-sub">إشعارات التذكير بالمهام والصلوات</div>
           </div>
-          <label class="switch">
-            <input type="checkbox" id="settingSoundToggle" checked onchange="toggleSound(this.checked)">
-            <span class="slider"></span>
+          <label class="ios-switch">
+            <input type="checkbox" id="cfgNotifToggle" onchange="toggleNotif(this.checked)">
+            <span class="switch-track"></span>
           </label>
         </div>
+      </div>
 
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">تجربة نغمة الإنجاز فوراً</div>
-            <div class="settings-sublabel">استمع لصوت الرنة التوليفية اللطيفة</div>
-          </div>
-          <button class="btn-quick-done" style="background: rgba(10, 132, 255, 0.2); color: var(--apple-blue);" onclick="playAppleChime()">🎵 استماع</button>
+      <div class="ios-grouped-list">
+        <div class="ios-cell" style="cursor: pointer;" onclick="resetDayData()">
+          <div class="cell-title" style="color: var(--ios-orange);">تصفير إنجاز وسعرات اليوم</div>
+          <span style="color: var(--ios-orange);">🔄</span>
+        </div>
+        <div class="ios-cell" style="cursor: pointer;" onclick="clearAllData()">
+          <div class="cell-title" style="color: var(--ios-red);">مسح البيانات والبدء من جديد</div>
+          <span style="color: var(--ios-red);">⚠️</span>
         </div>
       </div>
 
-      <div class="settings-group">
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">العمل دون اتصال (Offline PWA)</div>
-            <div class="settings-sublabel">التطبيق مجهز ومخزن في متصفحك للعمل 100% بدون نت</div>
-          </div>
-          <span style="color: var(--apple-green); font-weight: 700; font-size: 0.85rem;">مفعل كلياً ✓</span>
-        </div>
-
-        <div class="settings-row" style="cursor: pointer;" onclick="resetDayData()">
-          <div>
-            <div class="settings-label" style="color: var(--apple-orange);">إعادة تصفير مهام وسعرات اليوم</div>
-            <div class="settings-sublabel">يبدأ يوماً جديداً دون مسح اسمك وإعداداتك</div>
-          </div>
-          <span style="color: var(--apple-orange); font-size: 1.1rem;">🔄</span>
-        </div>
-
-        <div class="settings-row" style="cursor: pointer;" onclick="clearAllData()">
-          <div>
-            <div class="settings-label" style="color: var(--apple-red);">مسح كل البيانات والبدء من الصفر</div>
-            <div class="settings-sublabel">يعيد التطبيق إلى شاشة الإعداد الأولى</div>
-          </div>
-          <span style="color: var(--apple-red); font-size: 1.1rem;">⚠️</span>
-        </div>
-      </div>
-
-      <!-- About App Card -->
-      <div style="text-align: center; color: var(--text-tertiary); font-size: 0.8rem; margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-        <img src="icons/icon.svg" style="width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 4px 12px rgba(10,132,255,0.3);" alt="سَمْت">
-        <div><strong>سَمْت | SAMT</strong> • نظام الحياة المتوازن • الإصدار 2.5</div>
-        <div>تصميم وهندسة مخصصة للأجهزة الذكية بنمط Apple HIG</div>
+      <div style="text-align: center; color: var(--label-tertiary); font-size: 0.78rem; padding: 12px 0 24px;">
+        سَمْت • SAMT • الإصدار 3.0 • هندسة واجهات أبل
       </div>
     </section>
 
   </main>
 
-  <!-- Bottom Navigation Bar (Apple Cupertino Tab Bar) -->
-  <nav class="bottom-nav">
-    <button class="nav-tab-btn active" onclick="switchTab('now')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <polyline points="12 6 12 12 16 14"></polyline>
-      </svg>
-      <span class="nav-tab-label">اليوم</span>
+  <!-- Cupertino Bottom Navigation Bar -->
+  <nav class="ios-tabbar">
+    <button class="tab-btn active" onclick="switchTab('now')">
+      <svg class="tab-icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span class="tab-caption">اليوم</span>
     </button>
-
-    <button class="nav-tab-btn" onclick="switchTab('schedule')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-        <line x1="16" y1="2" x2="16" y2="6"></line>
-        <line x1="8" y1="2" x2="8" y2="6"></line>
-        <line x1="3" y1="10" x2="21" y2="10"></line>
-      </svg>
-      <span class="nav-tab-label">الجدول</span>
+    <button class="tab-btn" onclick="switchTab('schedule')">
+      <svg class="tab-icon-svg" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="tab-caption">الجدول</span>
     </button>
-
-    <button class="nav-tab-btn" onclick="switchTab('health')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-      </svg>
-      <span class="nav-tab-label">صحتي</span>
+    <button class="tab-btn" onclick="switchTab('health')">
+      <svg class="tab-icon-svg" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="tab-caption">صحتي</span>
     </button>
-
-    <button class="nav-tab-btn" onclick="switchTab('knowledge')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-      </svg>
-      <span class="nav-tab-label">الوعي</span>
+    <button class="tab-btn" onclick="switchTab('knowledge')">
+      <svg class="tab-icon-svg" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span class="tab-caption">الوعي</span>
     </button>
-
-    <button class="nav-tab-btn" onclick="switchTab('settings')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"></circle>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-      </svg>
-      <span class="nav-tab-label">إعداداتي</span>
+    <button class="tab-btn" onclick="switchTab('settings')">
+      <svg class="tab-icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span class="tab-caption">الإعدادات</span>
     </button>
   </nav>
 
   <!-- First-time Onboarding Sheet -->
-  <div id="onboardingModal" class="modal-overlay">
-    <div class="onboarding-sheet">
-      <img src="icons/icon.svg" class="onboarding-logo" alt="سَمْت">
-      <div class="onboarding-title">مرحباً بك في سَمْت</div>
-      <div class="onboarding-sub">
-        نظامك اليومي المتكامل بنمط أبل: صلاة في المسجد، إنجاز في عملك، تمرين، وتطوير الذات قبل الجامعة.
+  <div id="onboardingModal" class="ios-modal-backdrop">
+    <div class="ios-sheet">
+      <img src="icons/icon.svg" class="sheet-logo" alt="سَمْت">
+      <div class="sheet-h1">مرحباً بك في سَمْت</div>
+      <div class="sheet-desc">
+        نظامك اليومي المتوازن بنمط أبل: صلاة في المسجد، إنجاز في عملك، تمرين، وتطوير الذات قبل الجامعة.
       </div>
-      <input type="text" id="onboardingNameInput" class="input-onboarding" placeholder="اكتب اسمك الكريم هنا..." maxlength="25">
-      <button class="btn-onboarding-submit" onclick="submitOnboarding()">ابدأ أسلوب حياتك الجديد ✨</button>
+      <input type="text" id="nameInputBox" class="ios-input" style="width: 100%; text-align: center; margin-bottom: 18px; font-size: 1.05rem;" placeholder="اكتب اسمك الكريم...">
+      <button class="btn-sheet-submit" onclick="submitName()">ابدأ أسلوب حياتك الجديد</button>
     </div>
   </div>
 
   <script>
     /* ========================================================
-       STATE MANAGEMENT & LOCAL STORAGE
+       STATE MANAGEMENT
        ======================================================== */
-    const STORAGE_KEY = 'samt_app_state_v3';
-    
-    const DEFAULT_SCHEDULE = [
-      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", block: "البكور", start: "05:00", end: "06:00", desc: "شرب كوب ماء كبير والذهاب للمسجد لانطلاقة يوم مليئة بالبركة" },
-      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", block: "تطوير الذات", start: "06:00", end: "06:45", desc: "ممارسة الاستماع أو تقنية Shadowing وبودكاست إنجليزي" },
-      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", block: "تطوير الذات", start: "06:45", end: "07:30", desc: "التعلم الذاتي من Coursera أو مهارات تخصصك الجامعي المستقبلي" },
-      { id: 3, title: "الفطور الصحي والقهوة الصباحية", block: "التغذية", start: "07:30", end: "08:30", desc: "فطور متوازن وإعداد قائمة مهام العمل بدون توتر" },
-      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", block: "العمل", start: "08:30", end: "12:00", desc: "إنجاز المهام الكبرى للمشروع ومتابعة العمل بأعلى كفاءة" },
-      { id: 5, title: "صلاة الظهر في المسجد", block: "الروحانية", start: "12:00", end: "13:00", desc: "الذهاب للمسجد وأخذ استراحة كاملة من الشاشات والأجهزة" },
-      { id: 6, title: "وجبة الغداء + قيلولة الطاقة الخفيفة", block: "التغذية والراحة", start: "13:00", end: "14:00", desc: "غداء متوازن وقيلولة 20 دقيقة لاستعادة النشاط الذهني" },
-      { id: 7, title: "متابعات العمل والاجتماعات", block: "العمل التكميلي", start: "14:00", end: "15:30", desc: "الرد على المراسلات والمكالمات ومتابعة مجريات العمل" },
-      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", block: "الروحانية والرياضة", start: "15:30", end: "16:30", desc: "صلاة العصر في المسجد وموزة + قهوة لتجهيز طاقة الجيم" },
-      { id: 9, title: "التمرين الرياضي (النادي / الحديد / اللياقة)", block: "اللياقة", start: "16:30", end: "18:00", desc: "تفريغ طاقة اليوم وبناء القوة البدنية وكسر روتين الخمول" },
-      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", block: "الروحانية والانتعاش", start: "18:00", end: "19:00", desc: "صلاة المغرب وشاور دافئ بعد التمرين وتبديل الملابس" },
-      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", block: "المساء", start: "19:00", end: "21:30", desc: "عشاء صحي خفيف، صلاة العشاء، ووقت حر مع العائلة والأصدقاء" },
-      { id: 12, title: "إغلاق الشاشات والاستعداد للنوم الباكر", block: "النوم الهانئ", start: "21:30", end: "22:30", desc: "إبعاد الهاتف عن السرير ونوم عميق للحصول على 7.5 ساعات راحة" }
+    const STORAGE_KEY = 'samt_apple_v4';
+
+    const SCHEDULE_DATA = [
+      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", start: "05:00", end: "06:00", desc: "كوب ماء والذهاب للمسجد لانطلاقة يوم مليئة بالبركة" },
+      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", start: "06:00", end: "06:45", desc: "ممارسة الاستماع وتقنية Shadowing وبودكاست إنجليزي" },
+      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", start: "06:45", end: "07:30", desc: "التعلم الذاتي من Coursera ومهارات تخصصك الجامعي" },
+      { id: 3, title: "الفطور الصحي والقهوة الصباحية", start: "07:30", end: "08:30", desc: "فطور متوازن وإعداد قائمة مهام العمل بدون توتر" },
+      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", start: "08:30", end: "12:00", desc: "إنجاز المهام الكبرى للمشروع ومتابعة العمل بأعلى كفاءة" },
+      { id: 5, title: "صلاة الظهر في المسجد", start: "12:00", end: "13:00", desc: "فصل العقل عن الشاشات والتقاط الأنفاس في المسجد" },
+      { id: 6, title: "وجبة الغداء + قيلولة 20 دقيقة", start: "13:00", end: "14:00", desc: "غداء متوازن وشحن سريع للنشاط الذهني" },
+      { id: 7, title: "متابعات العمل والاجتماعات", start: "14:00", end: "15:30", desc: "الرد على المراسلات والمكالمات وتنسيق العمل الخارجي" },
+      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", start: "15:30", end: "16:30", desc: "صلاة العصر وموزة + قهوة لتجهيز طاقة الجيم" },
+      { id: 9, title: "التمرين الرياضي في النادي (حديد / لياقة)", start: "16:30", end: "18:00", desc: "تفريغ طاقة اليوم وبناء القوة البدنية وكسر الخمول" },
+      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", start: "18:00", end: "19:00", desc: "صلاة المغرب وشاور دافئ بعد التمرين والانتعاش" },
+      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", start: "19:00", end: "21:30", desc: "عشاء خفيف وصلاة العشاء ووقت حر عائلي" },
+      { id: 12, title: "إغلاق الشاشات ونوم باكر هانئ", start: "21:30", end: "22:30", desc: "هاتف بعيد عن السرير لـ 7.5 ساعات نوم عميق ومريح" }
     ];
 
     const CITY_PRAYERS = {
-      riyadh: { fajr: "04:35", sunrise: "05:52", dhuhr: "11:52", asr: "15:15", maghrib: "17:51", isha: "19:21" },
-      makkah: { fajr: "04:55", sunrise: "06:12", dhuhr: "12:12", asr: "15:35", maghrib: "18:11", isha: "19:41" },
-      amman: { fajr: "05:12", sunrise: "06:30", dhuhr: "12:35", asr: "15:58", maghrib: "18:25", isha: "19:45" },
-      jerusalem: { fajr: "05:14", sunrise: "06:32", dhuhr: "12:37", asr: "16:00", maghrib: "18:27", isha: "19:47" },
-      cairo: { fajr: "04:22", sunrise: "05:48", dhuhr: "11:47", asr: "15:12", maghrib: "17:45", isha: "19:02" },
-      dubai: { fajr: "04:50", sunrise: "06:06", dhuhr: "12:15", asr: "15:38", maghrib: "18:22", isha: "19:38" }
+      riyadh: { fajr: "04:35", dhuhr: "11:52", asr: "15:15", maghrib: "17:51", isha: "19:21" },
+      makkah: { fajr: "04:55", dhuhr: "12:12", asr: "15:35", maghrib: "18:11", isha: "19:41" },
+      amman: { fajr: "05:12", dhuhr: "12:35", asr: "15:58", maghrib: "18:25", isha: "19:45" },
+      jerusalem: { fajr: "05:14", dhuhr: "12:37", asr: "16:00", maghrib: "18:27", isha: "19:47" },
+      cairo: { fajr: "04:22", dhuhr: "11:47", asr: "15:12", maghrib: "17:45", isha: "19:02" },
+      dubai: { fajr: "04:50", dhuhr: "12:15", asr: "15:38", maghrib: "18:22", isha: "19:38" }
     };
 
     let state = {
-      user: { name: "", joinedDate: new Date().toISOString() },
+      user: { name: "" },
       completedTasks: {},
       waterMl: 0,
       waterGoal: 3000,
@@ -1775,7 +1602,6 @@
       soundEnabled: true,
       notificationsEnabled: false,
       selectedCity: 'riyadh',
-      streakDays: 1,
       lastDate: new Date().toDateString()
     };
 
@@ -1791,7 +1617,6 @@
             state.completedTasks = {};
             state.waterMl = 0;
             state.meals = [];
-            state.streakDays = (state.streakDays || 1) + 1;
             state.lastDate = today;
             saveState();
           }
@@ -1806,440 +1631,396 @@
     }
 
     /* ========================================================
-       APPLE SOUND & ZEN SYNTHESIZER (Web Audio API)
+       APPLE SOUND & HAPTIC ENGINE (Web Audio API)
        ======================================================== */
     let audioCtx = null;
-    let zenOscillator = null;
+    let zenOsc = null;
     let zenGain = null;
-    let isZenPlaying = false;
+    let isZenOn = false;
 
-    function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
+    function getAudioCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
       return audioCtx;
     }
 
-    // Unlock audio on iOS Safari upon first user interaction
     window.addEventListener('click', () => {
-      try { getAudioContext(); } catch(e){}
+      try { getAudioCtx(); } catch (e) {}
     }, { once: true });
 
-    function playAppleChime() {
+    function playAppleClick() {
       if (!state.soundEnabled) return;
       try {
-        const ctx = getAudioContext();
+        const ctx = getAudioCtx();
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
 
         const now = ctx.currentTime;
-        osc.frequency.setValueAtTime(784, now); // G5
-        osc.frequency.exponentialRampToValueAtTime(1046.5, now + 0.08); // C6
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(1100, now + 0.06);
 
-        gain.gain.setValueAtTime(0.22, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
 
         osc.start(now);
-        osc.stop(now + 0.45);
+        osc.stop(now + 0.35);
 
-        // Haptic feedback if supported
-        if (navigator.vibrate) navigator.vibrate([15]);
-      } catch (err) {
-        console.warn("Audio Context not available", err);
-      }
+        if (navigator.vibrate) navigator.vibrate([12]);
+      } catch (err) {}
     }
 
-    function toggleZenAudio() {
-      const btn = document.getElementById('zenAudioBtn');
-      const ctx = getAudioContext();
+    function toggleZenSound() {
+      const btn = document.getElementById('zenBtn');
+      const ctx = getAudioCtx();
 
-      if (isZenPlaying) {
+      if (isZenOn) {
         if (zenGain) {
-          zenGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
+          zenGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
           setTimeout(() => {
-            if (zenOscillator) zenOscillator.stop();
-            isZenPlaying = false;
+            if (zenOsc) zenOsc.stop();
+            isZenOn = false;
             btn.innerText = 'تشغيل';
-            btn.style.background = 'var(--apple-blue)';
-          }, 500);
+            btn.style.background = 'var(--ios-blue)';
+          }, 400);
         }
       } else {
-        zenOscillator = ctx.createOscillator();
+        zenOsc = ctx.createOscillator();
         zenGain = ctx.createGain();
-
-        // 432 Hz Calm Alpha Focus Frequency
-        zenOscillator.type = 'triangle';
-        zenOscillator.frequency.setValueAtTime(432, ctx.currentTime);
+        zenOsc.type = 'triangle';
+        zenOsc.frequency.setValueAtTime(432, ctx.currentTime);
 
         zenGain.gain.setValueAtTime(0.0001, ctx.currentTime);
-        zenGain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 1.2);
+        zenGain.gain.exponentialRampToValueAtTime(0.035, ctx.currentTime + 0.8);
 
-        zenOscillator.connect(zenGain);
+        zenOsc.connect(zenGain);
         zenGain.connect(ctx.destination);
 
-        zenOscillator.start();
-        isZenPlaying = true;
+        zenOsc.start();
+        isZenOn = true;
         btn.innerText = 'إيقاف ⏸';
-        btn.style.background = 'var(--apple-green)';
-        showToast("🎧 تم تفعيل موجات التركيز والهدوء الذهني");
+        btn.style.background = 'var(--ios-green)';
+        showToast("🎧 تم تفعيل موجات التركيز والهدوء");
       }
     }
 
     /* ========================================================
-       PRAYER TIMES ENGINE
+       DYNAMIC ISLAND & LIVE TICKER
        ======================================================== */
-    function getSelectedPrayerTimes() {
-      const city = state.selectedCity || 'riyadh';
-      return CITY_PRAYERS[city] || CITY_PRAYERS.riyadh;
-    }
-
-    function changeCity(city) {
-      state.selectedCity = city;
-      saveState();
-      updatePrayersWidget();
-      showToast(`تم ضبط مواقيت الصلاة على: ${document.querySelector('#citySelect option:checked').text}`);
-    }
-
-    function updatePrayersWidget() {
-      const times = getSelectedPrayerTimes();
-      document.getElementById('time-fajr').innerText = times.fajr;
-      document.getElementById('time-dhuhr').innerText = times.dhuhr;
-      document.getElementById('time-asr').innerText = times.asr;
-      document.getElementById('time-maghrib').innerText = times.maghrib;
-      document.getElementById('time-isha').innerText = times.isha;
-
-      const now = new Date();
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-      function toMin(timeStr) {
-        const [h, m] = timeStr.split(':').map(Number);
-        return h * 60 + m;
-      }
-
-      const prayers = [
-        { id: 'prayer-fajr', name: 'الفجر', min: toMin(times.fajr) },
-        { id: 'prayer-dhuhr', name: 'الظهر', min: toMin(times.dhuhr) },
-        { id: 'prayer-asr', name: 'العصر', min: toMin(times.asr) },
-        { id: 'prayer-maghrib', name: 'المغرب', min: toMin(times.maghrib) },
-        { id: 'prayer-isha', name: 'العشاء', min: toMin(times.isha) },
-      ];
-
-      prayers.forEach(p => document.getElementById(p.id).classList.remove('active'));
-
-      let nextP = prayers.find(p => p.min > currentMinutes);
-      if (nextP) {
-        const diff = nextP.min - currentMinutes;
-        document.getElementById(nextP.id).classList.add('active');
-        const h = Math.floor(diff / 60);
-        const m = diff % 60;
-        document.getElementById('nextPrayerCountdown').innerText = 
-          `باقي على صلاة ${nextP.name}: ${h > 0 ? h + ' س و' : ''}${m} د`;
-      } else {
-        document.getElementById('prayer-fajr').classList.add('active');
-        const diffFajr = (24 * 60 - currentMinutes) + prayers[0].min;
-        const h = Math.floor(diffFajr / 60);
-        const m = diffFajr % 60;
-        document.getElementById('nextPrayerCountdown').innerText = `باقي على صلاة الفجر: ${h} س و${m} د`;
-      }
-    }
-
-    /* ========================================================
-       LIVE "WHAT'S HAPPENING NOW" (Dynamic Island Engine)
-       ======================================================== */
-    function updateLiveScheduleEngine() {
+    function updateLiveEngine() {
       const now = new Date();
       const h = now.getHours();
       const m = now.getMinutes();
       const s = now.getSeconds();
       const nowMin = h * 60 + m;
 
-      // Digital Clock string
-      const clockStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-      document.getElementById('liveDigitalClock').innerText = clockStr;
+      document.getElementById('liveTickerClock').innerText = 
+        `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 
-      function parseMins(str) {
+      function toMins(str) {
         const [hh, mm] = str.split(':').map(Number);
         return hh * 60 + mm;
       }
 
-      let currentTask = null;
-      let nextTask = null;
+      let current = null;
+      let next = null;
 
-      for (let i = 0; i < DEFAULT_SCHEDULE.length; i++) {
-        const item = DEFAULT_SCHEDULE[i];
-        const start = parseMins(item.start);
-        const end = parseMins(item.end);
+      for (let i = 0; i < SCHEDULE_DATA.length; i++) {
+        const item = SCHEDULE_DATA[i];
+        const start = toMins(item.start);
+        const end = toMins(item.end);
 
         if (nowMin >= start && nowMin < end) {
-          currentTask = item;
-          nextTask = DEFAULT_SCHEDULE[(i + 1) % DEFAULT_SCHEDULE.length];
+          current = item;
+          next = SCHEDULE_DATA[(i + 1) % SCHEDULE_DATA.length];
           break;
         }
       }
 
-      if (!currentTask) {
-        currentTask = {
+      if (!current) {
+        current = {
           title: "النوم العميق والراحة الذهنية",
-          desc: "وقت إعادة شحن الجسد والدماغ لتستيقظ بنشاط لصلاة الفجر في المسجد.",
+          desc: "إعادة شحن الطاقة للاستيقاظ بنشاط لصلاة الفجر في المسجد.",
           start: "22:30",
           end: "05:00"
         };
-        nextTask = DEFAULT_SCHEDULE[0];
+        next = SCHEDULE_DATA[0];
       }
 
-      document.getElementById('nowTitle').innerText = currentTask.title;
-      document.getElementById('nowDesc').innerText = currentTask.desc;
-      document.getElementById('nextActivityText').innerText = `${nextTask.title} (${nextTask.start})`;
+      document.getElementById('islandCurrentTitle').innerText = current.title;
+      document.getElementById('islandCurrentDesc').innerText = current.desc;
+      document.getElementById('islandNextTitle').innerText = `${next.title} (${next.start})`;
 
-      let startM = parseMins(currentTask.start);
-      let endM = parseMins(currentTask.end);
+      let startM = toMins(current.start);
+      let endM = toMins(current.end);
       if (endM < startM) endM += 24 * 60;
-      let effectiveNow = nowMin < startM ? nowMin + 24 * 60 : nowMin;
+      let effNow = nowMin < startM ? nowMin + 24 * 60 : nowMin;
 
-      const duration = endM - startM;
-      const elapsed = effectiveNow - startM;
-      const progressPercent = Math.min(100, Math.max(0, Math.round((elapsed / duration) * 100)));
-      document.getElementById('nowProgressFill').style.width = progressPercent + '%';
+      const dur = endM - startM;
+      const elp = effNow - startM;
+      const pct = Math.min(100, Math.max(0, Math.round((elp / dur) * 100)));
+      document.getElementById('islandProgressBar').style.width = pct + '%';
     }
 
     /* ========================================================
-       SCHEDULE TASKS TOGGLE & COMPLETION
+       FITNESS 3-RINGS ENGINE
        ======================================================== */
-    function renderTasks() {
-      const rows = document.querySelectorAll('.task-row');
-      let completedCount = 0;
+    function updateFitnessRings() {
+      // 1. Red Ring: Calories
+      const calGoal = state.caloriesGoal || 2200;
+      let calsConsumed = 0;
+      if (state.meals && state.meals.length > 0) {
+        calsConsumed = state.meals.reduce((sum, m) => sum + m.cals, 0);
+      }
+      const calPct = Math.min(100, Math.round((calsConsumed / calGoal) * 100));
+      const redCirc = 314.15;
+      const redOffset = redCirc - (calPct / 100) * redCirc;
+      document.getElementById('ringRed').style.strokeDashoffset = redOffset;
+      document.getElementById('valCaloriesMetric').innerText = `${calsConsumed} / ${calGoal}`;
+      document.getElementById('calBalanceHeader').innerText = `متبقي: ${Math.max(0, calGoal - calsConsumed)}`;
 
-      rows.forEach((row, idx) => {
-        if (state.completedTasks[idx]) {
-          row.classList.add('checked');
-          completedCount++;
+      // 2. Green Ring: Tasks completed
+      const totalTasks = SCHEDULE_DATA.length;
+      let doneCount = 0;
+      document.querySelectorAll('.task-item-row').forEach((row, i) => {
+        if (state.completedTasks[i]) {
+          row.classList.add('done');
+          doneCount++;
         } else {
-          row.classList.remove('checked');
+          row.classList.remove('done');
         }
       });
+      const taskPct = Math.round((doneCount / totalTasks) * 100);
+      const greenCirc = 238.76;
+      const greenOffset = greenCirc - (taskPct / 100) * greenCirc;
+      document.getElementById('ringGreen').style.strokeDashoffset = greenOffset;
+      document.getElementById('valTasksMetric').innerText = `${taskPct}% (${doneCount}/${totalTasks})`;
 
-      const total = DEFAULT_SCHEDULE.length;
-      const pct = Math.round((completedCount / total) * 100);
-      document.getElementById('statsTasksPercent').innerText = pct + '%';
-      document.getElementById('statsTasksSub').innerText = `${completedCount} من ${total} مهمة مكتملة`;
+      // 3. Teal Ring: Water
+      const wGoal = state.waterGoal || 3000;
+      const wMl = state.waterMl || 0;
+      const waterPct = Math.min(100, Math.round((wMl / wGoal) * 100));
+      const tealCirc = 163.36;
+      const tealOffset = tealCirc - (waterPct / 100) * tealCirc;
+      document.getElementById('ringTeal').style.strokeDashoffset = tealOffset;
+      document.getElementById('valWaterMetric').innerText = `${(wMl/1000).toFixed(1)} / ${(wGoal/1000).toFixed(1)}L`;
+
+      // Water Tank UI
+      document.getElementById('waterLevelBar').style.height = waterPct + '%';
+      document.getElementById('waterNumDisplay').innerHTML = `${wMl} <span style="font-size: 1rem; color: var(--label-secondary);">/ ${wGoal} مل</span>`;
+      document.getElementById('waterCupSub').innerText = `${Math.floor(wMl / 250)} من ${Math.ceil(wGoal / 250)} كوب اليوم`;
     }
 
     function toggleTask(id) {
       state.completedTasks[id] = !state.completedTasks[id];
       saveState();
-      renderTasks();
+      updateFitnessRings();
+      playAppleClick();
       if (state.completedTasks[id]) {
-        playAppleChime();
-        showToast("✓ تم إنجاز المهمة بنجاح!");
+        showToast("✓ تم إنجاز المهمة");
       }
     }
 
-    function triggerTaskDoneEffect() {
-      playAppleChime();
-      showToast("رائع! أحسنت الاستمرار والإنجاز 🔥");
-    }
-
-    /* ========================================================
-       WATER TRACKER
-       ======================================================== */
-    function updateWaterUI() {
-      const ml = state.waterMl || 0;
-      const goal = state.waterGoal || 3000;
-      const pct = Math.min(100, Math.round((ml / goal) * 100));
-
-      document.getElementById('waterAmountText').innerHTML = `${ml} <span style="font-size: 1rem; color: var(--text-secondary);">/ ${goal} مل</span>`;
-      document.getElementById('waterLevelFill').style.height = pct + '%';
-      document.getElementById('waterCupsCount').innerText = `${Math.floor(ml / 250)} من ${Math.ceil(goal / 250)} كوب اليوم`;
-      document.getElementById('statsWaterValue').innerText = (ml / 1000).toFixed(1) + ' لتر';
+    function markTaskDone() {
+      playAppleClick();
+      showToast("رائع! خطوة جديدة في الالتزام اليومي 🔥");
     }
 
     function addWater(amount) {
       state.waterMl = Math.max(0, (state.waterMl || 0) + amount);
       saveState();
-      updateWaterUI();
-      playAppleChime();
+      updateFitnessRings();
+      playAppleClick();
       if (amount > 0) {
         showToast(`💧 تمت إضافة ${amount} مل ماء`);
       }
     }
 
     /* ========================================================
-       CALORIE TRACKER
+       FOOD LOGGING
        ======================================================== */
-    function updateCaloriesUI() {
-      const goal = state.caloriesGoal || 2200;
-      let consumed = 0;
-      if (state.meals && state.meals.length > 0) {
-        consumed = state.meals.reduce((sum, item) => sum + item.cals, 0);
-      }
-
-      const left = Math.max(0, goal - consumed);
-      document.getElementById('ringCaloriesLeft').innerText = left;
-      document.getElementById('caloriesConsumedText').innerText = consumed;
-      document.getElementById('calorieGoalDisplay').innerText = goal;
-
-      const pct = Math.min(100, Math.round((consumed / goal) * 100));
-      document.getElementById('calorieBarFill').style.width = pct + '%';
-
-      const circumference = 251.2;
-      const offset = circumference - (pct / 100) * circumference;
-      document.getElementById('calorieRingProgress').style.strokeDashoffset = offset;
-
-      renderMealsList();
-    }
-
-    function renderMealsList() {
-      const container = document.getElementById('foodHistoryList');
-      if (!state.meals || state.meals.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.82rem; color: var(--text-tertiary); text-align: center; padding: 10px;">لم يتم تسجيل وجبات اليوم بعد.</div>';
-        return;
-      }
-
-      container.innerHTML = state.meals.map((m, idx) => `
-        <div class="food-history-item">
-          <span>${m.name}</span>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <strong style="color: var(--apple-red);">${m.cals} سعرة</strong>
-            <span class="food-delete-btn" onclick="deleteMeal(${idx})">✕</span>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function addCustomFood() {
-      const nameInput = document.getElementById('foodNameInput');
-      const calInput = document.getElementById('foodCalInput');
-      const name = nameInput.value.trim();
-      const cals = parseInt(calInput.value);
+    function submitCustomFood() {
+      const nInp = document.getElementById('foodNameInp');
+      const cInp = document.getElementById('foodCalInp');
+      const name = nInp.value.trim();
+      const cals = parseInt(cInp.value);
 
       if (!name || isNaN(cals) || cals <= 0) {
-        showToast("يرجى كتابة اسم الوجبة وعدد السعرات بشكل صحيح");
+        showToast("يرجى كتابة اسم الوجبة والسعرات");
         return;
       }
 
       if (!state.meals) state.meals = [];
       state.meals.push({ name, cals });
-      nameInput.value = '';
-      calInput.value = '';
+      nInp.value = '';
+      cInp.value = '';
 
       saveState();
-      updateCaloriesUI();
-      playAppleChime();
-      showToast(`🥗 تمت إضافة ${name} (${cals} سعرة)`);
+      updateFitnessRings();
+      renderFoodLog();
+      playAppleClick();
+      showToast(`✓ تمت إضافة: ${name}`);
     }
 
     function quickAddFood(name, cals) {
       if (!state.meals) state.meals = [];
       state.meals.push({ name, cals });
       saveState();
-      updateCaloriesUI();
-      playAppleChime();
+      updateFitnessRings();
+      renderFoodLog();
+      playAppleClick();
       showToast(`✓ تمت إضافة: ${name}`);
     }
 
-    function deleteMeal(idx) {
+    function deleteFood(idx) {
       if (state.meals && state.meals[idx]) {
         state.meals.splice(idx, 1);
         saveState();
-        updateCaloriesUI();
+        updateFitnessRings();
+        renderFoodLog();
       }
+    }
+
+    function renderFoodLog() {
+      const container = document.getElementById('foodLogHistory');
+      if (!state.meals || state.meals.length === 0) {
+        container.innerHTML = '<div style="font-size: 0.8rem; color: var(--label-tertiary); text-align: center; padding: 8px;">لا توجد وجبات مسجلة اليوم</div>';
+        return;
+      }
+
+      container.innerHTML = state.meals.map((m, idx) => `
+        <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:10px; font-size:0.86rem;">
+          <span>${m.name}</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <strong style="color:var(--ios-red);">${m.cals} سعرة</strong>
+            <span style="color:var(--ios-red); cursor:pointer; font-size:0.8rem;" onclick="deleteFood(${idx})">✕</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ========================================================
+       PRAYER TIMES
+       ======================================================== */
+    function updatePrayers() {
+      const city = state.selectedCity || 'riyadh';
+      const t = CITY_PRAYERS[city] || CITY_PRAYERS.riyadh;
+
+      document.getElementById('t-fajr').innerText = t.fajr;
+      document.getElementById('t-dhuhr').innerText = t.dhuhr;
+      document.getElementById('t-asr').innerText = t.asr;
+      document.getElementById('t-maghrib').innerText = t.maghrib;
+      document.getElementById('t-isha').innerText = t.isha;
+
+      const now = new Date();
+      const nowMin = now.getHours() * 60 + now.getMinutes();
+
+      function toM(str) {
+        const [h, m] = str.split(':').map(Number);
+        return h * 60 + m;
+      }
+
+      const prayers = [
+        { id: 'p-fajr', name: 'الفجر', min: toM(t.fajr) },
+        { id: 'p-dhuhr', name: 'الظهر', min: toM(t.dhuhr) },
+        { id: 'p-asr', name: 'العصر', min: toM(t.asr) },
+        { id: 'p-maghrib', name: 'المغرب', min: toM(t.maghrib) },
+        { id: 'p-isha', name: 'العشاء', min: toM(t.isha) },
+      ];
+
+      prayers.forEach(p => document.getElementById(p.id).classList.remove('active'));
+
+      let nextP = prayers.find(p => p.min > nowMin);
+      if (nextP) {
+        const diff = nextP.min - nowMin;
+        document.getElementById(nextP.id).classList.add('active');
+        const h = Math.floor(diff / 60);
+        const m = diff % 60;
+        document.getElementById('nextPrayerCountdown').innerText = `باقي على ${nextP.name}: ${h > 0 ? h + 'س و' : ''}${m}د`;
+      } else {
+        document.getElementById('p-fajr').classList.add('active');
+        const diffFajr = (24 * 60 - nowMin) + prayers[0].min;
+        const h = Math.floor(diffFajr / 60);
+        const m = diffFajr % 60;
+        document.getElementById('nextPrayerCountdown').innerText = `باقي على الفجر: ${h}س و${m}د`;
+      }
+    }
+
+    function changeCity(city) {
+      state.selectedCity = city;
+      saveState();
+      updatePrayers();
+      showToast(`تم التبديل إلى مواقيت: ${document.querySelector('#citySelect option:checked').text}`);
     }
 
     /* ========================================================
        TABS NAVIGATION
        ======================================================== */
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
       const target = document.getElementById('tab-' + tabId);
       if (target) target.classList.add('active');
 
-      const buttons = document.querySelectorAll('.nav-tab-btn');
-      const tabMap = { 'now': 0, 'schedule': 1, 'health': 2, 'knowledge': 3, 'settings': 4 };
-      if (buttons[tabMap[tabId]]) {
-        buttons[tabMap[tabId]].classList.add('active');
-      }
+      const buttons = document.querySelectorAll('.tab-btn');
+      const map = { 'now': 0, 'schedule': 1, 'health': 2, 'knowledge': 3, 'settings': 4 };
+      if (buttons[map[tabId]]) buttons[map[tabId]].classList.add('active');
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     /* ========================================================
-       ONBOARDING / LOGIN FLOW
+       ONBOARDING
        ======================================================== */
-    function checkOnboarding() {
+    function checkUser() {
       if (!state.user || !state.user.name) {
         openOnboarding();
       } else {
-        applyUserData(state.user.name);
+        document.getElementById('navUserName').innerText = state.user.name;
+        document.getElementById('settingsNameLbl').innerText = state.user.name;
       }
-    }
-
-    function applyUserData(name) {
-      document.getElementById('headerUserName').innerText = name;
-      document.getElementById('settingsUserNameDisplay').innerText = name;
-      
-      const hour = new Date().getHours();
-      let greeting = 'صباح الهمة والبركة يا ';
-      if (hour >= 12 && hour < 17) greeting = 'طاب يومك بالخير يا ';
-      else if (hour >= 17) greeting = 'مساء الإنجاز والسكينة يا ';
-      
-      document.getElementById('heroGreetingTitle').innerText = `${greeting}${name} ✨`;
-      document.getElementById('streakCountText').innerText = `${state.streakDays || 1} يوم التزام`;
     }
 
     function openOnboarding(isEdit = false) {
       const modal = document.getElementById('onboardingModal');
-      const input = document.getElementById('onboardingNameInput');
+      const input = document.getElementById('nameInputBox');
       if (isEdit && state.user && state.user.name) input.value = state.user.name;
       modal.classList.add('show');
     }
 
-    function submitOnboarding() {
-      const input = document.getElementById('onboardingNameInput');
+    function submitName() {
+      const input = document.getElementById('nameInputBox');
       const name = input.value.trim();
-      if (!name) {
-        alert("يرجى كتابة اسمك الكريم للمتابعة");
-        return;
-      }
-      state.user = { name: name, joinedDate: new Date().toISOString() };
+      if (!name) return;
+
+      state.user = { name };
       saveState();
 
-      applyUserData(name);
+      document.getElementById('navUserName').innerText = name;
+      document.getElementById('settingsNameLbl').innerText = name;
       document.getElementById('onboardingModal').classList.remove('show');
 
-      playAppleChime();
-      showToast(`أهلاً بك يا ${name} في سَمْت ✨`);
+      playAppleClick();
+      showToast(`أهلاً بك يا ${name} ✨`);
     }
 
     /* ========================================================
-       SETTINGS & CONTROLS
+       SETTINGS
        ======================================================== */
-    function updateCalorieGoal(val) {
-      const v = parseInt(val);
-      if (v > 500) {
-        state.caloriesGoal = v;
-        saveState();
-        updateCaloriesUI();
-        showToast("تم تحديث هدف السعرات");
-      }
+    function updateCalGoal(val) {
+      state.caloriesGoal = parseInt(val) || 2200;
+      saveState();
+      updateFitnessRings();
     }
 
     function updateWaterGoal(val) {
-      const v = parseInt(val);
-      if (v > 500) {
-        state.waterGoal = v;
-        saveState();
-        updateWaterUI();
-        showToast("تم تحديث هدف الماء");
-      }
+      state.waterGoal = parseInt(val) || 3000;
+      saveState();
+      updateFitnessRings();
     }
 
     function toggleSound(val) {
@@ -2247,47 +2028,33 @@
       saveState();
     }
 
-    function toggleNotifications(val) {
-      if (val) {
-        if ('Notification' in window) {
-          Notification.requestPermission().then(perm => {
-            if (perm === 'granted') {
-              state.notificationsEnabled = true;
-              showToast("🔔 تم تفعيل الإشعارات بنجاح");
-            } else {
-              state.notificationsEnabled = false;
-              document.getElementById('settingNotificationToggle').checked = false;
-              alert("يرجى السماح بالإشعارات من إعدادات المتصفح");
-            }
-            saveState();
-          });
-        } else {
-          alert("المتصفح الحالي لا يدعم الإشعارات المباشرة");
-          state.notificationsEnabled = false;
+    function toggleNotif(val) {
+      if (val && 'Notification' in window) {
+        Notification.requestPermission().then(p => {
+          state.notificationsEnabled = (p === 'granted');
           saveState();
-        }
+          showToast(p === 'granted' ? "🔔 تم تفعيل الإشعارات" : "يرجى تفعيلها من إعدادات المتصفح");
+        });
       } else {
         state.notificationsEnabled = false;
         saveState();
-        showToast("تم إيقاف الإشعارات");
       }
     }
 
     function resetDayData() {
-      if (confirm("هل تريد بالتأكيد إعادة تصفير مهام وسعرات اليوم والبدء من جديد؟")) {
+      if (confirm("هل تريد تصفير مهام وسعرات اليوم والبدء من جديد؟")) {
         state.completedTasks = {};
         state.waterMl = 0;
         state.meals = [];
         saveState();
-        renderTasks();
-        updateWaterUI();
-        updateCaloriesUI();
-        showToast("تمت إعادة ضبط اليوم بنجاح");
+        updateFitnessRings();
+        renderFoodLog();
+        showToast("تم تصفير اليوم بنجاح");
       }
     }
 
     function clearAllData() {
-      if (confirm("تحذير: سيتم مسح كافة البيانات المسجلة بما فيها اسمك والبدء من الصفر. هل توافق؟")) {
+      if (confirm("تحذير: سيتم مسح كافة البيانات المسجلة بالكامل. هل توافق؟")) {
         localStorage.removeItem(STORAGE_KEY);
         location.reload();
       }
@@ -2296,50 +2063,41 @@
     /* ========================================================
        TOAST UTILITY
        ======================================================== */
-    let toastTimeout = null;
+    let toastT = null;
     function showToast(msg) {
-      const banner = document.getElementById('toastBanner');
-      const text = document.getElementById('toastMsg');
-      text.innerText = msg;
-      banner.classList.add('show');
-      if (toastTimeout) clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        banner.classList.remove('show');
-      }, 2600);
+      const t = document.getElementById('iosToast');
+      document.getElementById('toastMsg').innerText = msg;
+      t.classList.add('show');
+      if (toastT) clearTimeout(toastT);
+      toastT = setTimeout(() => t.classList.remove('show'), 2400);
     }
 
     /* ========================================================
-       INITIALIZATION
+       INIT
        ======================================================== */
     window.addEventListener('DOMContentLoaded', () => {
       loadState();
-      checkOnboarding();
-      renderTasks();
-      updateWaterUI();
-      updateCaloriesUI();
-      
-      if (state.selectedCity) {
-        const sel = document.getElementById('citySelect');
-        if (sel) sel.value = state.selectedCity;
-      }
-      updatePrayersWidget();
-      updateLiveScheduleEngine();
+      checkUser();
+      renderFoodLog();
+      updatePrayers();
+      updateFitnessRings();
+      updateLiveEngine();
 
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       document.getElementById('scheduleDateStr').innerText = new Date().toLocaleDateString('ar-SA', options);
 
-      document.getElementById('settingCalGoalInput').value = state.caloriesGoal || 2200;
-      document.getElementById('settingWaterGoalInput').value = state.waterGoal || 3000;
-      document.getElementById('settingSoundToggle').checked = state.soundEnabled !== false;
-      document.getElementById('settingNotificationToggle').checked = !!state.notificationsEnabled;
+      if (state.selectedCity) {
+        document.getElementById('citySelect').value = state.selectedCity;
+      }
+      document.getElementById('cfgCalGoal').value = state.caloriesGoal || 2200;
+      document.getElementById('cfgWaterGoal').value = state.waterGoal || 3000;
+      document.getElementById('cfgSoundToggle').checked = state.soundEnabled !== false;
 
-      setInterval(updateLiveScheduleEngine, 1000);
-      setInterval(updatePrayersWidget, 60000);
+      setInterval(updateLiveEngine, 1000);
+      setInterval(updatePrayers, 60000);
 
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').then(() => {
-          console.log("سَمْت Service Worker جاهز للعمل أوفلاين.");
-        }).catch(err => console.log("SW Error:", err));
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
       }
     });
   </script>
