@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>سَمْت | SAMT - روتينك اليومي الذكي</title>
+  
+  <!-- Apple & PWA Meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="سَمْت">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+
+  <!-- Typography: Tajawal (Google Font) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #000000;
+      --bg-card: rgba(28, 28, 30, 0.78);
+      --bg-card-hover: rgba(44, 44, 46, 0.88);
+      --border-card: rgba(255, 255, 255, 0.12);
+      --text-primary: #ffffff;
+      --text-secondary: #98989d;
+      --text-tertiary: #636366;
+      --apple-blue: #0a84ff;
+      --apple-green: #30d158;
+      --apple-orange: #ff9f0a;
+      --apple-purple: #bf5af2;
+      --apple-teal: #64d2ff;
+      --apple-red: #ff453a;
+      --apple-yellow: #ffd60a;
+      --nav-bg: rgba(22, 22, 24, 0.88);
+      --spring-easing: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 95px;
+      position: relative;
+    }
+
+    /* Ambient Subtle Background Lighting */
+    .ambient-glow {
+      position: fixed;
+      top: -120px;
+      right: -80px;
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, rgba(10, 132, 255, 0.24) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(55px);
+    }
+
+    .ambient-glow-2 {
+      position: fixed;
+      bottom: 80px;
+      left: -90px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(191, 90, 242, 0.2) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(65px);
+    }
+
+    /* Top App Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      background: rgba(10, 10, 12, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      cursor: pointer;
+    }
+
+    .brand-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .brand-logo-img:active {
+      transform: scale(0.92);
+    }
+
+    .brand-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--apple-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-user-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
+
+    .header-user-badge .status-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--apple-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--apple-green);
+    }
+
+    /* Container for tab screens */
+    .main-view {
+      position: relative;
+      z-index: 10;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.32s var(--spring-easing);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Personalized Hero Banner */
+    .hero-greeting-box {
+      margin-bottom: 16px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(191, 90, 242, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .greeting-text-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .greeting-text-sub {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .streak-badge {
+      background: rgba(255, 159, 10, 0.15);
+      border: 1px solid rgba(255, 159, 10, 0.3);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--apple-orange);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Dynamic Island Card (Apple Live Activity) */
+    .dynamic-island {
+      background: linear-gradient(150deg, rgba(28, 28, 32, 0.95), rgba(14, 14, 16, 0.95));
+      border: 1px solid var(--border-card);
+      border-radius: 28px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .island-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .live-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(48, 209, 88, 0.15);
+      color: var(--apple-green);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid rgba(48, 209, 88, 0.3);
+    }
+
+    .live-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--apple-green);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.4); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .island-clock {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+      direction: ltr;
+    }
+
+    .current-activity-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+
+    .current-activity-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .island-progress-bar {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .island-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--apple-blue), var(--apple-teal));
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    .island-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+      padding: 10px 14px;
+    }
+
+    .next-activity-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .next-label {
+      font-size: 0.74rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+    }
+
+    .next-value {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #e5e5ea;
+    }
+
+    .btn-quick-done {
+      background: var(--apple-green);
+      color: #000000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-quick-done:active {
+      transform: scale(0.93);
+    }
+
+    /* Prayer Times Offline Widget */
+    .prayer-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-tag {
+      font-size: 0.78rem;
+      color: var(--apple-blue);
+      background: rgba(10, 132, 255, 0.12);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .prayers-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+
+    .prayer-slot {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 10px 4px;
+      transition: all 0.2s ease;
+    }
+
+    .prayer-slot.active {
+      background: linear-gradient(180deg, rgba(10, 132, 255, 0.25), rgba(10, 132, 255, 0.08));
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 14px rgba(10, 132, 255, 0.35);
+    }
+
+    .prayer-name {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .prayer-slot.active .prayer-name {
+      color: var(--apple-blue);
+      font-weight: 700;
+    }
+
+    .prayer-time {
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .prayer-status-note {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--apple-orange);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      background: rgba(255, 159, 10, 0.1);
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 159, 10, 0.2);
+    }
+
+    .city-select {
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 2px 6px;
+      font-size: 0.78rem;
+      outline: none;
+    }
+
+    /* Quick Stats Highlights */
+    .quick-stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .stat-box-title {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-box-value {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .stat-sub {
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+    }
+
+    /* Schedule Blocks */
+    .schedule-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .block-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .block-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .block-time-range {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      direction: ltr;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px 8px;
+      border-radius: 8px;
+    }
+
+    .task-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 12px;
+      margin-bottom: 6px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .task-row:active {
+      transform: scale(0.98);
+    }
+
+    .task-row.checked {
+      background: rgba(48, 209, 88, 0.1);
+      border-color: rgba(48, 209, 88, 0.3);
+    }
+
+    .task-checkbox-custom {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .task-row.checked .task-checkbox-custom {
+      background-color: var(--apple-green);
+      border-color: var(--apple-green);
+    }
+
+    .task-row.checked .task-checkbox-custom::after {
+      content: '✓';
+      color: #000000;
+      font-weight: 900;
+      font-size: 0.85rem;
+    }
+
+    .task-info {
+      flex: 1;
+    }
+
+    .task-headline {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #f2f2f7;
+      margin-bottom: 2px;
+    }
+
+    .task-row.checked .task-headline {
+      text-decoration: line-through;
+      color: #8e8e93;
+    }
+
+    .task-meta {
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+    }
+
+    /* Calorie Rings & Water Section */
+    .apple-ring-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .ring-svg-wrap {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+
+    .ring-svg-wrap svg {
+      transform: rotate(-90deg);
+    }
+
+    .ring-center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .ring-center-num {
+      font-size: 1.15rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .ring-center-label {
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+    }
+
+    .ring-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .water-tracker-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .water-visual-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .water-bottle {
+      width: 50px;
+      height: 90px;
+      border: 2px solid var(--apple-teal);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(100, 210, 255, 0.05);
+    }
+
+    .water-level {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, #64d2ff, #0a84ff);
+      transition: height 0.4s ease;
+    }
+
+    .water-stats-text {
+      flex: 1;
+      margin-right: 18px;
+    }
+
+    .water-val {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--apple-teal);
+    }
+
+    .water-buttons-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-water {
+      flex: 1;
+      background: rgba(100, 210, 255, 0.12);
+      color: var(--apple-teal);
+      border: 1px solid rgba(100, 210, 255, 0.25);
+      border-radius: 14px;
+      padding: 12px 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-water:active {
+      transform: scale(0.94);
+    }
+
+    /* Food Logger */
+    .food-log-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .food-input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .input-apple {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.92rem;
+      outline: none;
+    }
+
+    .input-apple:focus {
+      border-color: var(--apple-blue);
+    }
+
+    .btn-apple-add {
+      background: var(--apple-blue);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .btn-apple-add:active {
+      transform: scale(0.95);
+    }
+
+    .preset-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .food-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .food-history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+
+    .food-delete-btn {
+      color: var(--apple-red);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 2px 6px;
+    }
+
+    /* Knowledge & Video Cards */
+    .knowledge-card {
+      background: linear-gradient(170deg, rgba(38, 38, 42, 0.8), rgba(20, 20, 22, 0.8));
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      padding: 22px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+
+    .knowledge-card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .knowledge-tag {
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--apple-purple);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .knowledge-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .knowledge-body {
+      font-size: 0.94rem;
+      color: #d1d1d6;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .knowledge-highlight-box {
+      background: rgba(191, 90, 242, 0.1);
+      border-right: 3px solid var(--apple-purple);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: #f5d0fe;
+      margin-top: 10px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 14px;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Ambient Zen Focus Player */
+    .zen-audio-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 132, 255, 0.12);
+      border: 1px solid rgba(10, 132, 255, 0.25);
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+    }
+
+    .zen-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-zen-play {
+      background: var(--apple-blue);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+
+    /* Settings Screen */
+    .settings-group {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .settings-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .settings-row:last-child {
+      border-bottom: none;
+    }
+
+    .settings-label {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .settings-sublabel {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* iOS Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 30px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #39393d;
+      transition: .3s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 24px;
+      width: 24px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    input:checked + .slider {
+      background-color: var(--apple-green);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Bottom Apple Tab Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: 80px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: env(safe-area-inset-bottom, 12px);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .nav-tab-btn {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: var(--text-tertiary);
+      cursor: pointer;
+      width: 64px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--apple-blue);
+      transform: translateY(-2px);
+    }
+
+    .nav-tab-btn svg {
+      width: 24px;
+      height: 24px;
+      transition: stroke 0.2s ease;
+    }
+
+    .nav-tab-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    /* First-time Onboarding Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .onboarding-sheet {
+      background: #1c1c1e;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 32px;
+      max-width: 440px;
+      width: 100%;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      transform: translateY(20px);
+      transition: transform 0.3s var(--spring-easing);
+    }
+
+    .modal-overlay.show .onboarding-sheet {
+      transform: translateY(0);
+    }
+
+    .onboarding-logo {
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
+      margin: 0 auto 18px;
+      display: block;
+      box-shadow: 0 10px 28px rgba(10, 132, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .onboarding-title {
+      font-size: 1.7rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .onboarding-sub {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .input-onboarding {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 14px 18px;
+      color: #fff;
+      font-size: 1.05rem;
+      text-align: center;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    .btn-onboarding-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--apple-blue), #5856d6);
+      color: #fff;
+      border: none;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-onboarding-submit:active {
+      transform: scale(0.97);
+    }
+
+    /* Notification banner */
+    .toast-banner {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(44, 44, 46, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+      z-index: 120;
+      transition: transform 0.4s var(--spring-easing);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast-banner.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient light gradients -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand-wrap" onclick="switchTab('now')">
+      <img src="icons/icon.svg" alt="سَمْت" class="brand-logo-img">
+      <span class="brand-title">سَمْت | SAMT</span>
+    </div>
+    <div class="header-user-badge" onclick="openOnboarding(true)">
+      <span class="status-dot"></span>
+      <span id="headerUserName">أهلاً بك</span>
+    </div>
+  </header>
+
+  <!-- Notification Toast -->
+  <div id="toastBanner" class="toast-banner">
+    <span id="toastIcon">✨</span>
+    <span id="toastMsg">تم الإجراء بنجاح</span>
+  </div>
+
+  <!-- Main View -->
+  <main class="main-view">
+
+    <!-- ================= TAB 1: NOW / اليوم ================= -->
+    <section id="tab-now" class="tab-content active">
+
+      <!-- Hero Personalized Banner -->
+      <div class="hero-greeting-box">
+        <div>
+          <div class="greeting-text-title" id="heroGreetingTitle">صباح الهمة والبركة ✨</div>
+          <div class="greeting-text-sub">استثمر يومك لبناء مستقبلك الجامعي</div>
+        </div>
+        <div class="streak-badge">
+          <span>🔥</span>
+          <span id="streakCountText">1 يوم</span>
+        </div>
+      </div>
+
+      <!-- Dynamic Island / Live Activity -->
+      <div class="dynamic-island">
+        <div class="island-badge-row">
+          <div class="live-pulse">
+            <span class="live-pulse-dot"></span>
+            <span>النشاط الحالي الآن</span>
+          </div>
+          <div class="island-clock" id="liveDigitalClock">00:00:00</div>
+        </div>
+
+        <div class="current-activity-title" id="nowTitle">فترة التحميل...</div>
+        <div class="current-activity-desc" id="nowDesc">جاري قراءة الوقت وتحديث الجدول بدقة...</div>
+
+        <div class="island-progress-bar">
+          <div class="island-progress-fill" id="nowProgressFill" style="width: 45%;"></div>
+        </div>
+
+        <div class="island-footer">
+          <div class="next-activity-preview">
+            <span class="next-label">النشاط القادم</span>
+            <span class="next-value" id="nextActivityText">صلاة الظهر في المسجد</span>
+          </div>
+          <button class="btn-quick-done" onclick="triggerTaskDoneEffect()">
+            <span>✓</span> أنجزت
+          </button>
+        </div>
+      </div>
+
+      <!-- Prayer Times Offline Widget -->
+      <div class="prayer-card">
+        <div class="section-header">
+          <div class="section-title">
+            <span>🕌</span> أوقات الصلاة في المسجد
+          </div>
+          <span class="section-tag" id="nextPrayerCountdown">باقي 45 دقيقة</span>
+        </div>
+
+        <div class="prayers-grid">
+          <div class="prayer-slot" id="prayer-fajr">
+            <div class="prayer-name">الفجر</div>
+            <div class="prayer-time" id="time-fajr">05:12</div>
+          </div>
+          <div class="prayer-slot" id="prayer-dhuhr">
+            <div class="prayer-name">الظهر</div>
+            <div class="prayer-time" id="time-dhuhr">12:35</div>
+          </div>
+          <div class="prayer-slot" id="prayer-asr">
+            <div class="prayer-name">العصر</div>
+            <div class="prayer-time" id="time-asr">15:58</div>
+          </div>
+          <div class="prayer-slot" id="prayer-maghrib">
+            <div class="prayer-name">المغرب</div>
+            <div class="prayer-time" id="time-maghrib">18:25</div>
+          </div>
+          <div class="prayer-slot" id="prayer-isha">
+            <div class="prayer-name">العشاء</div>
+            <div class="prayer-time" id="time-isha">19:45</div>
+          </div>
+        </div>
+
+        <div class="prayer-status-note">
+          <span>المدينة المعتمدة:</span>
+          <select id="citySelect" class="city-select" onchange="changeCity(this.value)">
+            <option value="amman">عَمّان (الأردن)</option>
+            <option value="jerusalem">القدس (فلسطين)</option>
+            <option value="riyadh" selected>الرياض (السعودية)</option>
+            <option value="makkah">مكة المكرمة</option>
+            <option value="cairo">القاهرة (مصر)</option>
+            <option value="dubai">دبي (الإمارات)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="quick-stats-row">
+        <div class="stat-box">
+          <div class="stat-box-title">
+            <span>إنجاز المهام</span>
+            <span style="color: var(--apple-green);">✓</span>
+          </div>
+          <div class="stat-box-value" id="statsTasksPercent">0%</div>
+          <div class="stat-sub" id="statsTasksSub">0 من 13 مهمة مكتملة</div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-box-title">
+            <span>ترطيب اليوم</span>
+            <span style="color: var(--apple-teal);">💧</span>
+          </div>
+          <div class="stat-box-value" id="statsWaterValue">0 لتر</div>
+          <div class="stat-sub">الهدف: 3.0 لتر</div>
+        </div>
+      </div>
+
+      <!-- Wisdom Nugget of the Day -->
+      <div class="knowledge-card" style="margin-bottom: 24px; cursor: pointer;" onclick="switchTab('knowledge')">
+        <span class="knowledge-tag">💡 معلومة اليوم السرية الذهبية</span>
+        <div class="knowledge-title">قاعدة الـ 90 دقيقة (Ultradian Rhythm)</div>
+        <div class="knowledge-body">
+          دماغك لا يستطيع العمل بتركيز مطلق لأكثر من 90 دقيقة متواصلة. استثمار 3.5 ساعات عمل في الصباح مع استراحة قصيرة بعد كل 90 دقيقة يمنحك إنتاجية تعادل 8 ساعات عمل مجهدة في المساء.
+        </div>
+        <div style="font-size: 0.82rem; color: var(--apple-blue); font-weight: 700;">انقر لتصفح المزيد من المعارف والفيديوهات ←</div>
+      </div>
+
+    </section>
+
+    <!-- ================= TAB 2: SCHEDULE / الجدول الكامل ================= -->
+    <section id="tab-schedule" class="tab-content">
+      <div class="section-header" style="margin-bottom: 18px;">
+        <div class="section-title">
+          <span>🗓️</span> مسار يومك المتكامل
+        </div>
+        <span class="section-tag" id="scheduleDateStr">اليوم</span>
+      </div>
+
+      <!-- 1. البكور والروحانية -->
+      <div class="schedule-block">
+        <div class="block-top">
+          <span class="block-name">🌅 1. البكور والروحانية وتطوير الذات</span>
+          <span class="block-time-range">05:00 - 07:30</span>
+        </div>
+        <div class="task-row" onclick="toggleTask(0)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">الاستيقاظ وصلاة الفجر في المسجد + أذكار الصباح</div>
+            <div class="task-meta">05:00 ص – كوب ماء، وضوء، والذهاب للمسجد</div>
+          </div>
+        </div>
+        <div class="task-row" onclick="toggleTask(1)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">تطوير اللغة الإنجليزية (45 دقيقة)</div>
+            <div class="task-meta">06:00 ص – استماع، بودكاست، محادثة</div>
+          </div>
+        </div>
+        <div class="task-row" onclick="toggleTask(2)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">كورسات تحضير الجامعة وشهادات الخبرة (45 دقيقة)</div>
+            <div class="task-meta">06:45 ص – منصات Coursera أو قراءة تخصصية</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. الفطور والعمل الخاص -->
+      <div class="schedule-block">
+        <div class="block-top">
+          <span class="block-name">💻 2. الفطور والعمل الخاص العميق</span>
+          <span class="block-time-range">07:30 - 12:00</span>
+        </div>
+        <div class="task-row" onclick="toggleTask(3)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">فطور صحي متوازن وقهوة الصباح</div>
+            <div class="task-meta">07:30 ص – بيض، شوفان، فاكهة + تصفح هادئ للمهام</div>
+          </div>
+        </div>
+        <div class="task-row" onclick="toggleTask(4)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
+            <div class="task-meta">08:30 ص – إنهاء المهام الكبرى للمشروع دون مقاطعات</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. الظهيرة والغداء -->
+      <div class="schedule-block">
+        <div class="block-top">
+          <span class="block-name">☀️ 3. منتصف اليوم والاستراحة</span>
+          <span class="block-time-range">12:00 - 14:00</span>
+        </div>
+        <div class="task-row" onclick="toggleTask(5)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">صلاة الظهر في المسجد</div>
+            <div class="task-meta">12:00 م – فصل العقل عن الشاشات والتقاط الأنفاس</div>
+          </div>
+        </div>
+        <div class="task-row" onclick="toggleTask(6)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">وجبة الغداء + قيلولة الطاقة (20 دقيقة)</div>
+            <div class="task-meta">01:00 م – بروتين وخضار وكارب + شحن سريع للنشاط</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. المتابعات والتمرين -->
+      <div class="schedule-block">
+        <div class="block-top">
+          <span class="block-name">🏋️‍♂️ 4. الاجتماعات والتمرين الرياضي</span>
+          <span class="block-time-range">14:00 - 18:00</span>
+        </div>
+        <div class="task-row" onclick="toggleTask(7)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">اجتماعات العمل والمتابعات والردود</div>
+            <div class="task-meta">02:00 م – المكالمات وتنسيق العمل الخارجي</div>
+          </div>
+        </div>
+        <div class="task-row" onclick="toggleTask(8)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">صلاة العصر في المسجد وسناك التمرين</div>
+            <div class="task-meta">03:30 م – سناك خفيف (موزة + قهوة)</div>
+          </div>
+        </div>
+        <div class="task-row" onclick="toggleTask(9)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">التمرين البدني في النادي الرياضي</div>
+            <div class="task-meta">04:30 م – حديد / لياقة وتفريغ طاقة اليوم</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. المساء والراحة -->
+      <div class="schedule-block">
+        <div class="block-top">
+          <span class="block-name">🌙 5. المساء والراحة والنوم الهانئ</span>
+          <span class="block-time-range">18:00 - 22:15</span>
+        </div>
+        <div class="task-row" onclick="toggleTask(10)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">صلاة المغرب في المسجد وحمام منعش</div>
+            <div class="task-meta">06:00 م – استرخاء بعد النادي والانتعاش</div>
+          </div>
+        </div>
+        <div class="task-row" onclick="toggleTask(11)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">وجبة العشاء وصلاة العشاء في المسجد</div>
+            <div class="task-meta">07:00 م – عشاء خفيف وصحي ومجلس هادئ</div>
+          </div>
+        </div>
+        <div class="task-row" onclick="toggleTask(12)">
+          <div class="task-checkbox-custom"></div>
+          <div class="task-info">
+            <div class="task-headline">إغلاق الشاشات والاستعداد للنوم المبكر</div>
+            <div class="task-meta">10:00 م – وضع الهاتف بعيداً ونوم عميق 7.5 ساعات</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 3: HEALTH / صحتي والسعرات ================= -->
+    <section id="tab-health" class="tab-content">
+      <div class="section-header" style="margin-bottom: 18px;">
+        <div class="section-title">
+          <span>🍎</span> حاسبة السعرات والماء
+        </div>
+        <span class="section-tag">نمط أبل الصحي</span>
+      </div>
+
+      <!-- Calorie Rings Card -->
+      <div class="apple-ring-container">
+        <div class="ring-svg-wrap">
+          <svg width="100" height="100">
+            <circle cx="50" cy="50" r="40" stroke="rgba(255, 69, 58, 0.2)" stroke-width="10" fill="none" />
+            <circle id="calorieRingProgress" cx="50" cy="50" r="40" stroke="var(--apple-red)" stroke-width="10" fill="none"
+              stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke-linecap="round" style="transition: stroke-dashoffset 0.5s ease;" />
+          </svg>
+          <div class="ring-center-text">
+            <div class="ring-center-num" id="ringCaloriesLeft">2200</div>
+            <div class="ring-center-label">متبقي</div>
+          </div>
+        </div>
+
+        <div class="ring-details">
+          <div style="font-weight: 800; font-size: 1.1rem; color: var(--apple-red);">حركة السعرات اليومية</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">
+            تم استهلاك: <strong id="caloriesConsumedText" style="color: #fff;">0</strong> / <span id="calorieGoalDisplay">2200</span> سعرة
+          </div>
+          <div style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden;">
+            <div id="calorieBarFill" style="height:100%; width: 0%; background: var(--apple-red); transition: width 0.3s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Water Tracker -->
+      <div class="water-tracker-card">
+        <div class="water-visual-wrap">
+          <div class="water-bottle">
+            <div class="water-level" id="waterLevelFill" style="height: 0%;"></div>
+          </div>
+          <div class="water-stats-text">
+            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 4px;">كمية الماء المستهلكة:</div>
+            <div class="water-val" id="waterAmountText">0 <span style="font-size: 1rem; color: var(--text-secondary);">/ 3000 مل</span></div>
+            <div style="font-size: 0.78rem; color: var(--text-tertiary);" id="waterCupsCount">0 من 12 كوب اليوم</div>
+          </div>
+        </div>
+
+        <div class="water-buttons-row">
+          <button class="btn-water" onclick="addWater(250)">+ 250 مل (كوب)</button>
+          <button class="btn-water" onclick="addWater(500)">+ 500 مل (علبة)</button>
+          <button class="btn-water" style="background: rgba(255,255,255,0.06); color: var(--text-secondary); border-color: transparent;" onclick="addWater(-250)">- 250 مل</button>
+        </div>
+      </div>
+
+      <!-- Food Logger Form -->
+      <div class="food-log-card">
+        <div style="font-weight: 800; margin-bottom: 12px; font-size: 1.05rem;">تسجيل وجبة أو سناك</div>
+        
+        <div class="preset-chips">
+          <span class="chip" onclick="quickAddFood('فطور بيض وتوست', 280)">🥚 بيضتين وتوست (280)</span>
+          <span class="chip" onclick="quickAddFood('غداء دجاج وأرز', 550)">🍗 دجاج وأرز (550)</span>
+          <span class="chip" onclick="quickAddFood('سكوب بروتين', 130)">🥤 بروتين شيك (130)</span>
+          <span class="chip" onclick="quickAddFood('موزة وتمر', 140)">🍌 موزة وتمر (140)</span>
+        </div>
+
+        <div class="food-input-group">
+          <input type="text" id="foodNameInput" class="input-apple" style="flex: 2;" placeholder="اسم الوجبة (مثلاً: سلطة تونة)">
+          <input type="number" id="foodCalInput" class="input-apple" style="flex: 1;" placeholder="السعرات">
+          <button class="btn-apple-add" onclick="addCustomFood()">+ إضافة</button>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; margin-top: 14px;">سجل وجبات اليوم:</div>
+        <div class="food-history-list" id="foodHistoryList">
+          <div style="font-size: 0.82rem; color: var(--text-tertiary); text-align: center; padding: 10px;">لم يتم تسجيل وجبات اليوم بعد.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 4: WISDOM / معلومات نادرة وقيمة ================= -->
+    <section id="tab-knowledge" class="tab-content">
+      <div class="section-header" style="margin-bottom: 18px;">
+        <div class="section-title">
+          <span>🧠</span> معلومات نادرة للتحضير والنجاح
+        </div>
+        <span class="section-tag">وعي عالي</span>
+      </div>
+
+      <!-- Focus Ambience Synthesizer -->
+      <div class="zen-audio-bar">
+        <div class="zen-info">
+          <span style="font-size: 1.3rem;">🎧</span>
+          <div>
+            <div style="font-weight: 700; font-size: 0.92rem;">موجات التركيز العالي (Zen Ambience)</div>
+            <div style="font-size: 0.75rem; color: var(--text-secondary);">ترددات صوتية مهدئة لعزل التشتت أثناء العمل والمذاكرة</div>
+          </div>
+        </div>
+        <button id="zenAudioBtn" class="btn-zen-play" onclick="toggleZenAudio()">تشغيل</button>
+      </div>
+
+      <!-- Card 1: University Hack + Video -->
+      <div class="knowledge-card">
+        <span class="knowledge-tag">🎓 سر التحضير الجامعي الخارق</span>
+        <div class="knowledge-title">تقنية "Active Recall" بدلاً من قراءة المذكرات</div>
+        <div class="knowledge-body">
+          95% من طلاب الجامعات يقعون في فخ "إعادة قراءة الكتب" وتظليل السطور (Highlighting)، وهو ما يسميه علماء الأعصاب **"وهم الفهم" (Illusion of Competence)**. 
+          <br><br>
+          الطلاب المتفوقون في أرقى الجامعات العالمية يستخدمون طريقة الاستدعاء النشط: إغلاق الكتاب ومحاولة شرح الفكرة بورقة بيضاء أو لشخص وهمي. هذا يرفع نسبة ثبات المعلومة في الذاكرة طويلة المدى بنسبة 400% بأقل من نصف وقت الدراسة!
+        </div>
+        <div class="knowledge-highlight-box">
+          📌 <strong>تطبيق عملي:</strong> ابدأ الآن مع أي كورس تشاهده بكتابة سطرين ملخص من ذاكرتك فقط بعد إيقاف الفيديو.
+        </div>
+        
+        <!-- Video walkthrough -->
+        <div class="video-container">
+          <iframe src="https://www.youtube-nocookie.com/embed/ukLnPbI9phY" title="Active Recall Technique" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <!-- Card 2: English Shadowing + Video -->
+      <div class="knowledge-card">
+        <span class="knowledge-tag">🗣️ طلاقة اللغة الإنجليزية</span>
+        <div class="knowledge-title">سر الـ "Shadowing": تحدث كالمواطن الأصلي في 90 يوماً</div>
+        <div class="knowledge-body">
+          مشكلة أغلب الناس في اللغة ليست نقص المفردات، بل **"تأتأة العضلات وتأخر الترجمة العقلية"**. تقنية Shadowing (الظل) التي يستخدمها المترجمون الفوريون تعتمد على الاستماع لمقطع صوتي إنجليزي مدته دقيقة واحدة وتكرار الكلام وراء المتحدث **في نفس اللحظة بفاصل نصف ثانية فقط**.
+        </div>
+        <div class="knowledge-highlight-box">
+          📌 <strong>النتيجة:</strong> يتجاوز دماغك مرحلة الترجمة من العربية إلى الإنجليزية، وتكتسب النبرة الطبيعية ومخارج الحروف السليمة بـ 15 دقيقة يومياً.
+        </div>
+
+        <!-- Video walkthrough -->
+        <div class="video-container">
+          <iframe src="https://www.youtube-nocookie.com/embed/13m3dFpms14" title="English Shadowing Technique" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <!-- Card 3: Neuroscience of Morning Focus -->
+      <div class="knowledge-card">
+        <span class="knowledge-tag">⚡ علم الأعصاب والطاقة</span>
+        <div class="knowledge-title">لماذا ساعات الصباح (البكور) تسحق ساعات الليل؟</div>
+        <div class="knowledge-body">
+          هرمون الكورتيزول الطبيعي الصحي يصل إلى قمته (Cortisol Awakening Response) بعد الاستيقاظ بـ 45 دقيقة، بالتزامن مع توفر مخزون الجليكوجين الكامل في الدماغ. إنجازك للعمل الخاص أو المذاكرة بين 6:00 ص و 11:00 ص يكون فيه تركيزك يعادل 3 أضعاف التركيز في المساء لأن الفص الجبهي لم يتعرض بعد لما يُعرف بـ **"إرهاق اتخاذ القرار" (Decision Fatigue)**.
+        </div>
+        <div class="knowledge-highlight-box">
+          📌 <strong>نصيحة ذهبية:</strong> احمِ أول 4 ساعات من يومك من الشاشات التافهة، فهذه الساعات هي مصنع مستقبلك الحقيقي.
+        </div>
+      </div>
+
+      <!-- Card 4: Hidden Fat Burn NEAT -->
+      <div class="knowledge-card">
+        <span class="knowledge-tag">🏃‍♂️ أسرار اللياقة والصحة</span>
+        <div class="knowledge-title">تأثير الـ NEAT: حرق سعرات أكثر من الجيم بمقدار الضعف</div>
+        <div class="knowledge-body">
+          ساعة التمرين في الجيم تحرق قرابة 300 إلى 400 سعرة حرارية فقط، وتمثل 5% من يومك. أما الـ **NEAT** (حرق الطاقة عبر الأنشطة غير الرياضية: المشي للمسجد، صعود الدرج، الوقوف أثناء المكالمات، تنظيف الغرفة) فيحرق ما بين 600 إلى 900 سعرة يومياً دون أن تشعر!
+        </div>
+        <div class="knowledge-highlight-box">
+          📌 <strong>السر:</strong> المشي للصلوات الخمس في المسجد يضمن لك قطع 3,000 إلى 5,000 خطوة يومياً تلقائياً، ما يحميك من خمول العمل المكتبي.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 5: SETTINGS / الإعدادات ================= -->
+    <section id="tab-settings" class="tab-content">
+      <div class="section-header" style="margin-bottom: 18px;">
+        <div class="section-title">
+          <span>⚙️</span> إعدادات النظام وحسابي
+        </div>
+        <span class="section-tag">تخصيص كامل</span>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">اسم المستخدم</div>
+            <div class="settings-sublabel" id="settingsUserNameDisplay">المستخدم</div>
+          </div>
+          <button class="btn-quick-done" style="background: rgba(255,255,255,0.1); color: #fff;" onclick="openOnboarding(true)">تعديل</button>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">هدف السعرات اليومي</div>
+            <div class="settings-sublabel">السعرات المستهدفة للاستهلاك</div>
+          </div>
+          <input type="number" id="settingCalGoalInput" class="input-apple" style="width: 90px; text-align: center;" value="2200" onchange="updateCalorieGoal(this.value)">
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">هدف شرب الماء اليومي (مل)</div>
+            <div class="settings-sublabel">موصى به: 3000 مل يومياً</div>
+          </div>
+          <input type="number" id="settingWaterGoalInput" class="input-apple" style="width: 90px; text-align: center;" value="3000" onchange="updateWaterGoal(this.value)">
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">إشعارات التذكير وتنبيه المهام</div>
+            <div class="settings-sublabel">تنبيه عند بداية كل صلاة ومرحلة عمل</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="settingNotificationToggle" onchange="toggleNotifications(this.checked)">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">المؤثرات الصوتية (Apple Chimes)</div>
+            <div class="settings-sublabel">أصوات لطيفة عند الإنجاز وحساب الماء</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="settingSoundToggle" checked onchange="toggleSound(this.checked)">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">تجربة نغمة الإنجاز فوراً</div>
+            <div class="settings-sublabel">استمع لصوت الرنة التوليفية اللطيفة</div>
+          </div>
+          <button class="btn-quick-done" style="background: rgba(10, 132, 255, 0.2); color: var(--apple-blue);" onclick="playAppleChime()">🎵 استماع</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">العمل دون اتصال (Offline PWA)</div>
+            <div class="settings-sublabel">التطبيق مجهز ومخزن في متصفحك للعمل 100% بدون نت</div>
+          </div>
+          <span style="color: var(--apple-green); font-weight: 700; font-size: 0.85rem;">مفعل كلياً ✓</span>
+        </div>
+
+        <div class="settings-row" style="cursor: pointer;" onclick="resetDayData()">
+          <div>
+            <div class="settings-label" style="color: var(--apple-orange);">إعادة تصفير مهام وسعرات اليوم</div>
+            <div class="settings-sublabel">يبدأ يوماً جديداً دون مسح اسمك وإعداداتك</div>
+          </div>
+          <span style="color: var(--apple-orange); font-size: 1.1rem;">🔄</span>
+        </div>
+
+        <div class="settings-row" style="cursor: pointer;" onclick="clearAllData()">
+          <div>
+            <div class="settings-label" style="color: var(--apple-red);">مسح كل البيانات والبدء من الصفر</div>
+            <div class="settings-sublabel">يعيد التطبيق إلى شاشة الإعداد الأولى</div>
+          </div>
+          <span style="color: var(--apple-red); font-size: 1.1rem;">⚠️</span>
+        </div>
+      </div>
+
+      <!-- About App Card -->
+      <div style="text-align: center; color: var(--text-tertiary); font-size: 0.8rem; margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <img src="icons/icon.svg" style="width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 4px 12px rgba(10,132,255,0.3);" alt="سَمْت">
+        <div><strong>سَمْت | SAMT</strong> • نظام الحياة المتوازن • الإصدار 2.5</div>
+        <div>تصميم وهندسة مخصصة للأجهزة الذكية بنمط Apple HIG</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar (Apple Cupertino Tab Bar) -->
+  <nav class="bottom-nav">
+    <button class="nav-tab-btn active" onclick="switchTab('now')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      <span class="nav-tab-label">اليوم</span>
+    </button>
+
+    <button class="nav-tab-btn" onclick="switchTab('schedule')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      <span class="nav-tab-label">الجدول</span>
+    </button>
+
+    <button class="nav-tab-btn" onclick="switchTab('health')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span class="nav-tab-label">صحتي</span>
+    </button>
+
+    <button class="nav-tab-btn" onclick="switchTab('knowledge')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </svg>
+      <span class="nav-tab-label">الوعي</span>
+    </button>
+
+    <button class="nav-tab-btn" onclick="switchTab('settings')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+      <span class="nav-tab-label">إعداداتي</span>
+    </button>
+  </nav>
+
+  <!-- First-time Onboarding Sheet -->
+  <div id="onboardingModal" class="modal-overlay">
+    <div class="onboarding-sheet">
+      <img src="icons/icon.svg" class="onboarding-logo" alt="سَمْت">
+      <div class="onboarding-title">مرحباً بك في سَمْت</div>
+      <div class="onboarding-sub">
+        نظامك اليومي المتكامل بنمط أبل: صلاة في المسجد، إنجاز في عملك، تمرين، وتطوير الذات قبل الجامعة.
+      </div>
+      <input type="text" id="onboardingNameInput" class="input-onboarding" placeholder="اكتب اسمك الكريم هنا..." maxlength="25">
+      <button class="btn-onboarding-submit" onclick="submitOnboarding()">ابدأ أسلوب حياتك الجديد ✨</button>
+    </div>
+  </div>
+
+  <script>
+    /* ========================================================
+       STATE MANAGEMENT & LOCAL STORAGE
+       ======================================================== */
+    const STORAGE_KEY = 'samt_app_state_v3';
+    
+    const DEFAULT_SCHEDULE = [
+      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", block: "البكور", start: "05:00", end: "06:00", desc: "شرب كوب ماء كبير والذهاب للمسجد لانطلاقة يوم مليئة بالبركة" },
+      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", block: "تطوير الذات", start: "06:00", end: "06:45", desc: "ممارسة الاستماع أو تقنية Shadowing وبودكاست إنجليزي" },
+      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", block: "تطوير الذات", start: "06:45", end: "07:30", desc: "التعلم الذاتي من Coursera أو مهارات تخصصك الجامعي المستقبلي" },
+      { id: 3, title: "الفطور الصحي والقهوة الصباحية", block: "التغذية", start: "07:30", end: "08:30", desc: "فطور متوازن وإعداد قائمة مهام العمل بدون توتر" },
+      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", block: "العمل", start: "08:30", end: "12:00", desc: "إنجاز المهام الكبرى للمشروع ومتابعة العمل بأعلى كفاءة" },
+      { id: 5, title: "صلاة الظهر في المسجد", block: "الروحانية", start: "12:00", end: "13:00", desc: "الذهاب للمسجد وأخذ استراحة كاملة من الشاشات والأجهزة" },
+      { id: 6, title: "وجبة الغداء + قيلولة الطاقة الخفيفة", block: "التغذية والراحة", start: "13:00", end: "14:00", desc: "غداء متوازن وقيلولة 20 دقيقة لاستعادة النشاط الذهني" },
+      { id: 7, title: "متابعات العمل والاجتماعات", block: "العمل التكميلي", start: "14:00", end: "15:30", desc: "الرد على المراسلات والمكالمات ومتابعة مجريات العمل" },
+      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", block: "الروحانية والرياضة", start: "15:30", end: "16:30", desc: "صلاة العصر في المسجد وموزة + قهوة لتجهيز طاقة الجيم" },
+      { id: 9, title: "التمرين الرياضي (النادي / الحديد / اللياقة)", block: "اللياقة", start: "16:30", end: "18:00", desc: "تفريغ طاقة اليوم وبناء القوة البدنية وكسر روتين الخمول" },
+      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", block: "الروحانية والانتعاش", start: "18:00", end: "19:00", desc: "صلاة المغرب وشاور دافئ بعد التمرين وتبديل الملابس" },
+      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", block: "المساء", start: "19:00", end: "21:30", desc: "عشاء صحي خفيف، صلاة العشاء، ووقت حر مع العائلة والأصدقاء" },
+      { id: 12, title: "إغلاق الشاشات والاستعداد للنوم الباكر", block: "النوم الهانئ", start: "21:30", end: "22:30", desc: "إبعاد الهاتف عن السرير ونوم عميق للحصول على 7.5 ساعات راحة" }
+    ];
+
+    const CITY_PRAYERS = {
+      riyadh: { fajr: "04:35", sunrise: "05:52", dhuhr: "11:52", asr: "15:15", maghrib: "17:51", isha: "19:21" },
+      makkah: { fajr: "04:55", sunrise: "06:12", dhuhr: "12:12", asr: "15:35", maghrib: "18:11", isha: "19:41" },
+      amman: { fajr: "05:12", sunrise: "06:30", dhuhr: "12:35", asr: "15:58", maghrib: "18:25", isha: "19:45" },
+      jerusalem: { fajr: "05:14", sunrise: "06:32", dhuhr: "12:37", asr: "16:00", maghrib: "18:27", isha: "19:47" },
+      cairo: { fajr: "04:22", sunrise: "05:48", dhuhr: "11:47", asr: "15:12", maghrib: "17:45", isha: "19:02" },
+      dubai: { fajr: "04:50", sunrise: "06:06", dhuhr: "12:15", asr: "15:38", maghrib: "18:22", isha: "19:38" }
+    };
+
+    let state = {
+      user: { name: "", joinedDate: new Date().toISOString() },
+      completedTasks: {},
+      waterMl: 0,
+      waterGoal: 3000,
+      caloriesGoal: 2200,
+      meals: [],
+      soundEnabled: true,
+      notificationsEnabled: false,
+      selectedCity: 'riyadh',
+      streakDays: 1,
+      lastDate: new Date().toDateString()
+    };
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          state = { ...state, ...parsed };
+          
+          const today = new Date().toDateString();
+          if (state.lastDate !== today) {
+            state.completedTasks = {};
+            state.waterMl = 0;
+            state.meals = [];
+            state.streakDays = (state.streakDays || 1) + 1;
+            state.lastDate = today;
+            saveState();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    /* ========================================================
+       APPLE SOUND & ZEN SYNTHESIZER (Web Audio API)
+       ======================================================== */
+    let audioCtx = null;
+    let zenOscillator = null;
+    let zenGain = null;
+    let isZenPlaying = false;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Unlock audio on iOS Safari upon first user interaction
+    window.addEventListener('click', () => {
+      try { getAudioContext(); } catch(e){}
+    }, { once: true });
+
+    function playAppleChime() {
+      if (!state.soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+
+        const now = ctx.currentTime;
+        osc.frequency.setValueAtTime(784, now); // G5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, now + 0.08); // C6
+
+        gain.gain.setValueAtTime(0.22, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.45);
+
+        // Haptic feedback if supported
+        if (navigator.vibrate) navigator.vibrate([15]);
+      } catch (err) {
+        console.warn("Audio Context not available", err);
+      }
+    }
+
+    function toggleZenAudio() {
+      const btn = document.getElementById('zenAudioBtn');
+      const ctx = getAudioContext();
+
+      if (isZenPlaying) {
+        if (zenGain) {
+          zenGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
+          setTimeout(() => {
+            if (zenOscillator) zenOscillator.stop();
+            isZenPlaying = false;
+            btn.innerText = 'تشغيل';
+            btn.style.background = 'var(--apple-blue)';
+          }, 500);
+        }
+      } else {
+        zenOscillator = ctx.createOscillator();
+        zenGain = ctx.createGain();
+
+        // 432 Hz Calm Alpha Focus Frequency
+        zenOscillator.type = 'triangle';
+        zenOscillator.frequency.setValueAtTime(432, ctx.currentTime);
+
+        zenGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        zenGain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 1.2);
+
+        zenOscillator.connect(zenGain);
+        zenGain.connect(ctx.destination);
+
+        zenOscillator.start();
+        isZenPlaying = true;
+        btn.innerText = 'إيقاف ⏸';
+        btn.style.background = 'var(--apple-green)';
+        showToast("🎧 تم تفعيل موجات التركيز والهدوء الذهني");
+      }
+    }
+
+    /* ========================================================
+       PRAYER TIMES ENGINE
+       ======================================================== */
+    function getSelectedPrayerTimes() {
+      const city = state.selectedCity || 'riyadh';
+      return CITY_PRAYERS[city] || CITY_PRAYERS.riyadh;
+    }
+
+    function changeCity(city) {
+      state.selectedCity = city;
+      saveState();
+      updatePrayersWidget();
+      showToast(`تم ضبط مواقيت الصلاة على: ${document.querySelector('#citySelect option:checked').text}`);
+    }
+
+    function updatePrayersWidget() {
+      const times = getSelectedPrayerTimes();
+      document.getElementById('time-fajr').innerText = times.fajr;
+      document.getElementById('time-dhuhr').innerText = times.dhuhr;
+      document.getElementById('time-asr').innerText = times.asr;
+      document.getElementById('time-maghrib').innerText = times.maghrib;
+      document.getElementById('time-isha').innerText = times.isha;
+
+      const now = new Date();
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+      function toMin(timeStr) {
+        const [h, m] = timeStr.split(':').map(Number);
+        return h * 60 + m;
+      }
+
+      const prayers = [
+        { id: 'prayer-fajr', name: 'الفجر', min: toMin(times.fajr) },
+        { id: 'prayer-dhuhr', name: 'الظهر', min: toMin(times.dhuhr) },
+        { id: 'prayer-asr', name: 'العصر', min: toMin(times.asr) },
+        { id: 'prayer-maghrib', name: 'المغرب', min: toMin(times.maghrib) },
+        { id: 'prayer-isha', name: 'العشاء', min: toMin(times.isha) },
+      ];
+
+      prayers.forEach(p => document.getElementById(p.id).classList.remove('active'));
+
+      let nextP = prayers.find(p => p.min > currentMinutes);
+      if (nextP) {
+        const diff = nextP.min - currentMinutes;
+        document.getElementById(nextP.id).classList.add('active');
+        const h = Math.floor(diff / 60);
+        const m = diff % 60;
+        document.getElementById('nextPrayerCountdown').innerText = 
+          `باقي على صلاة ${nextP.name}: ${h > 0 ? h + ' س و' : ''}${m} د`;
+      } else {
+        document.getElementById('prayer-fajr').classList.add('active');
+        const diffFajr = (24 * 60 - currentMinutes) + prayers[0].min;
+        const h = Math.floor(diffFajr / 60);
+        const m = diffFajr % 60;
+        document.getElementById('nextPrayerCountdown').innerText = `باقي على صلاة الفجر: ${h} س و${m} د`;
+      }
+    }
+
+    /* ========================================================
+       LIVE "WHAT'S HAPPENING NOW" (Dynamic Island Engine)
+       ======================================================== */
+    function updateLiveScheduleEngine() {
+      const now = new Date();
+      const h = now.getHours();
+      const m = now.getMinutes();
+      const s = now.getSeconds();
+      const nowMin = h * 60 + m;
+
+      // Digital Clock string
+      const clockStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      document.getElementById('liveDigitalClock').innerText = clockStr;
+
+      function parseMins(str) {
+        const [hh, mm] = str.split(':').map(Number);
+        return hh * 60 + mm;
+      }
+
+      let currentTask = null;
+      let nextTask = null;
+
+      for (let i = 0; i < DEFAULT_SCHEDULE.length; i++) {
+        const item = DEFAULT_SCHEDULE[i];
+        const start = parseMins(item.start);
+        const end = parseMins(item.end);
+
+        if (nowMin >= start && nowMin < end) {
+          currentTask = item;
+          nextTask = DEFAULT_SCHEDULE[(i + 1) % DEFAULT_SCHEDULE.length];
+          break;
+        }
+      }
+
+      if (!currentTask) {
+        currentTask = {
+          title: "النوم العميق والراحة الذهنية",
+          desc: "وقت إعادة شحن الجسد والدماغ لتستيقظ بنشاط لصلاة الفجر في المسجد.",
+          start: "22:30",
+          end: "05:00"
+        };
+        nextTask = DEFAULT_SCHEDULE[0];
+      }
+
+      document.getElementById('nowTitle').innerText = currentTask.title;
+      document.getElementById('nowDesc').innerText = currentTask.desc;
+      document.getElementById('nextActivityText').innerText = `${nextTask.title} (${nextTask.start})`;
+
+      let startM = parseMins(currentTask.start);
+      let endM = parseMins(currentTask.end);
+      if (endM < startM) endM += 24 * 60;
+      let effectiveNow = nowMin < startM ? nowMin + 24 * 60 : nowMin;
+
+      const duration = endM - startM;
+      const elapsed = effectiveNow - startM;
+      const progressPercent = Math.min(100, Math.max(0, Math.round((elapsed / duration) * 100)));
+      document.getElementById('nowProgressFill').style.width = progressPercent + '%';
+    }
+
+    /* ========================================================
+       SCHEDULE TASKS TOGGLE & COMPLETION
+       ======================================================== */
+    function renderTasks() {
+      const rows = document.querySelectorAll('.task-row');
+      let completedCount = 0;
+
+      rows.forEach((row, idx) => {
+        if (state.completedTasks[idx]) {
+          row.classList.add('checked');
+          completedCount++;
+        } else {
+          row.classList.remove('checked');
+        }
+      });
+
+      const total = DEFAULT_SCHEDULE.length;
+      const pct = Math.round((completedCount / total) * 100);
+      document.getElementById('statsTasksPercent').innerText = pct + '%';
+      document.getElementById('statsTasksSub').innerText = `${completedCount} من ${total} مهمة مكتملة`;
+    }
+
+    function toggleTask(id) {
+      state.completedTasks[id] = !state.completedTasks[id];
+      saveState();
+      renderTasks();
+      if (state.completedTasks[id]) {
+        playAppleChime();
+        showToast("✓ تم إنجاز المهمة بنجاح!");
+      }
+    }
+
+    function triggerTaskDoneEffect() {
+      playAppleChime();
+      showToast("رائع! أحسنت الاستمرار والإنجاز 🔥");
+    }
+
+    /* ========================================================
+       WATER TRACKER
+       ======================================================== */
+    function updateWaterUI() {
+      const ml = state.waterMl || 0;
+      const goal = state.waterGoal || 3000;
+      const pct = Math.min(100, Math.round((ml / goal) * 100));
+
+      document.getElementById('waterAmountText').innerHTML = `${ml} <span style="font-size: 1rem; color: var(--text-secondary);">/ ${goal} مل</span>`;
+      document.getElementById('waterLevelFill').style.height = pct + '%';
+      document.getElementById('waterCupsCount').innerText = `${Math.floor(ml / 250)} من ${Math.ceil(goal / 250)} كوب اليوم`;
+      document.getElementById('statsWaterValue').innerText = (ml / 1000).toFixed(1) + ' لتر';
+    }
+
+    function addWater(amount) {
+      state.waterMl = Math.max(0, (state.waterMl || 0) + amount);
+      saveState();
+      updateWaterUI();
+      playAppleChime();
+      if (amount > 0) {
+        showToast(`💧 تمت إضافة ${amount} مل ماء`);
+      }
+    }
+
+    /* ========================================================
+       CALORIE TRACKER
+       ======================================================== */
+    function updateCaloriesUI() {
+      const goal = state.caloriesGoal || 2200;
+      let consumed = 0;
+      if (state.meals && state.meals.length > 0) {
+        consumed = state.meals.reduce((sum, item) => sum + item.cals, 0);
+      }
+
+      const left = Math.max(0, goal - consumed);
+      document.getElementById('ringCaloriesLeft').innerText = left;
+      document.getElementById('caloriesConsumedText').innerText = consumed;
+      document.getElementById('calorieGoalDisplay').innerText = goal;
+
+      const pct = Math.min(100, Math.round((consumed / goal) * 100));
+      document.getElementById('calorieBarFill').style.width = pct + '%';
+
+      const circumference = 251.2;
+      const offset = circumference - (pct / 100) * circumference;
+      document.getElementById('calorieRingProgress').style.strokeDashoffset = offset;
+
+      renderMealsList();
+    }
+
+    function renderMealsList() {
+      const container = document.getElementById('foodHistoryList');
+      if (!state.meals || state.meals.length === 0) {
+        container.innerHTML = '<div style="font-size: 0.82rem; color: var(--text-tertiary); text-align: center; padding: 10px;">لم يتم تسجيل وجبات اليوم بعد.</div>';
+        return;
+      }
+
+      container.innerHTML = state.meals.map((m, idx) => `
+        <div class="food-history-item">
+          <span>${m.name}</span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <strong style="color: var(--apple-red);">${m.cals} سعرة</strong>
+            <span class="food-delete-btn" onclick="deleteMeal(${idx})">✕</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addCustomFood() {
+      const nameInput = document.getElementById('foodNameInput');
+      const calInput = document.getElementById('foodCalInput');
+      const name = nameInput.value.trim();
+      const cals = parseInt(calInput.value);
+
+      if (!name || isNaN(cals) || cals <= 0) {
+        showToast("يرجى كتابة اسم الوجبة وعدد السعرات بشكل صحيح");
+        return;
+      }
+
+      if (!state.meals) state.meals = [];
+      state.meals.push({ name, cals });
+      nameInput.value = '';
+      calInput.value = '';
+
+      saveState();
+      updateCaloriesUI();
+      playAppleChime();
+      showToast(`🥗 تمت إضافة ${name} (${cals} سعرة)`);
+    }
+
+    function quickAddFood(name, cals) {
+      if (!state.meals) state.meals = [];
+      state.meals.push({ name, cals });
+      saveState();
+      updateCaloriesUI();
+      playAppleChime();
+      showToast(`✓ تمت إضافة: ${name}`);
+    }
+
+    function deleteMeal(idx) {
+      if (state.meals && state.meals[idx]) {
+        state.meals.splice(idx, 1);
+        saveState();
+        updateCaloriesUI();
+      }
+    }
+
+    /* ========================================================
+       TABS NAVIGATION
+       ======================================================== */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.classList.add('active');
+
+      const buttons = document.querySelectorAll('.nav-tab-btn');
+      const tabMap = { 'now': 0, 'schedule': 1, 'health': 2, 'knowledge': 3, 'settings': 4 };
+      if (buttons[tabMap[tabId]]) {
+        buttons[tabMap[tabId]].classList.add('active');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ========================================================
+       ONBOARDING / LOGIN FLOW
+       ======================================================== */
+    function checkOnboarding() {
+      if (!state.user || !state.user.name) {
+        openOnboarding();
+      } else {
+        applyUserData(state.user.name);
+      }
+    }
+
+    function applyUserData(name) {
+      document.getElementById('headerUserName').innerText = name;
+      document.getElementById('settingsUserNameDisplay').innerText = name;
+      
+      const hour = new Date().getHours();
+      let greeting = 'صباح الهمة والبركة يا ';
+      if (hour >= 12 && hour < 17) greeting = 'طاب يومك بالخير يا ';
+      else if (hour >= 17) greeting = 'مساء الإنجاز والسكينة يا ';
+      
+      document.getElementById('heroGreetingTitle').innerText = `${greeting}${name} ✨`;
+      document.getElementById('streakCountText').innerText = `${state.streakDays || 1} يوم التزام`;
+    }
+
+    function openOnboarding(isEdit = false) {
+      const modal = document.getElementById('onboardingModal');
+      const input = document.getElementById('onboardingNameInput');
+      if (isEdit && state.user && state.user.name) input.value = state.user.name;
+      modal.classList.add('show');
+    }
+
+    function submitOnboarding() {
+      const input = document.getElementById('onboardingNameInput');
+      const name = input.value.trim();
+      if (!name) {
+        alert("يرجى كتابة اسمك الكريم للمتابعة");
+        return;
+      }
+      state.user = { name: name, joinedDate: new Date().toISOString() };
+      saveState();
+
+      applyUserData(name);
+      document.getElementById('onboardingModal').classList.remove('show');
+
+      playAppleChime();
+      showToast(`أهلاً بك يا ${name} في سَمْت ✨`);
+    }
+
+    /* ========================================================
+       SETTINGS & CONTROLS
+       ======================================================== */
+    function updateCalorieGoal(val) {
+      const v = parseInt(val);
+      if (v > 500) {
+        state.caloriesGoal = v;
+        saveState();
+        updateCaloriesUI();
+        showToast("تم تحديث هدف السعرات");
+      }
+    }
+
+    function updateWaterGoal(val) {
+      const v = parseInt(val);
+      if (v > 500) {
+        state.waterGoal = v;
+        saveState();
+        updateWaterUI();
+        showToast("تم تحديث هدف الماء");
+      }
+    }
+
+    function toggleSound(val) {
+      state.soundEnabled = val;
+      saveState();
+    }
+
+    function toggleNotifications(val) {
+      if (val) {
+        if ('Notification' in window) {
+          Notification.requestPermission().then(perm => {
+            if (perm === 'granted') {
+              state.notificationsEnabled = true;
+              showToast("🔔 تم تفعيل الإشعارات بنجاح");
+            } else {
+              state.notificationsEnabled = false;
+              document.getElementById('settingNotificationToggle').checked = false;
+              alert("يرجى السماح بالإشعارات من إعدادات المتصفح");
+            }
+            saveState();
+          });
+        } else {
+          alert("المتصفح الحالي لا يدعم الإشعارات المباشرة");
+          state.notificationsEnabled = false;
+          saveState();
+        }
+      } else {
+        state.notificationsEnabled = false;
+        saveState();
+        showToast("تم إيقاف الإشعارات");
+      }
+    }
+
+    function resetDayData() {
+      if (confirm("هل تريد بالتأكيد إعادة تصفير مهام وسعرات اليوم والبدء من جديد؟")) {
+        state.completedTasks = {};
+        state.waterMl = 0;
+        state.meals = [];
+        saveState();
+        renderTasks();
+        updateWaterUI();
+        updateCaloriesUI();
+        showToast("تمت إعادة ضبط اليوم بنجاح");
+      }
+    }
+
+    function clearAllData() {
+      if (confirm("تحذير: سيتم مسح كافة البيانات المسجلة بما فيها اسمك والبدء من الصفر. هل توافق؟")) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    }
+
+    /* ========================================================
+       TOAST UTILITY
+       ======================================================== */
+    let toastTimeout = null;
+    function showToast(msg) {
+      const banner = document.getElementById('toastBanner');
+      const text = document.getElementById('toastMsg');
+      text.innerText = msg;
+      banner.classList.add('show');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        banner.classList.remove('show');
+      }, 2600);
+    }
+
+    /* ========================================================
+       INITIALIZATION
+       ======================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      checkOnboarding();
+      renderTasks();
+      updateWaterUI();
+      updateCaloriesUI();
+      
+      if (state.selectedCity) {
+        const sel = document.getElementById('citySelect');
+        if (sel) sel.value = state.selectedCity;
+      }
+      updatePrayersWidget();
+      updateLiveScheduleEngine();
+
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('scheduleDateStr').innerText = new Date().toLocaleDateString('ar-SA', options);
+
+      document.getElementById('settingCalGoalInput').value = state.caloriesGoal || 2200;
+      document.getElementById('settingWaterGoalInput').value = state.waterGoal || 3000;
+      document.getElementById('settingSoundToggle').checked = state.soundEnabled !== false;
+      document.getElementById('settingNotificationToggle').checked = !!state.notificationsEnabled;
+
+      setInterval(updateLiveScheduleEngine, 1000);
+      setInterval(updatePrayersWidget, 60000);
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').then(() => {
+          console.log("سَمْت Service Worker جاهز للعمل أوفلاين.");
+        }).catch(err => console.log("SW Error:", err));
+      }
+    });
+  </script>
+</body>
+</html>

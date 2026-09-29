@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Deep Space Apple Dark Gradient -->
+    <linearGradient id="samtBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0e"/>
+      <stop offset="40%" stop-color="#12131a"/>
+      <stop offset="100%" stop-color="#050508"/>
+    </linearGradient>
+
+    <!-- Radial Apple Glow -->
+    <radialGradient id="auroraGlow" cx="50%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#0a84ff" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#5e5ce6" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#bf5af2" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- High-End Gold & Azure Energy Gradient -->
+    <linearGradient id="zenithGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a84ff"/>
+      <stop offset="45%" stop-color="#5e5ce6"/>
+      <stop offset="85%" stop-color="#bf5af2"/>
+      <stop offset="100%" stop-color="#ffd60a"/>
+    </linearGradient>
+
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe600"/>
+      <stop offset="100%" stop-color="#ff9f0a"/>
+    </linearGradient>
+
+    <!-- Glass Specular Reflection Highlight -->
+    <linearGradient id="glassGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="appleBloom" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="coreGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- iOS Continuous Squircle (Radius 115) -->
+  <rect width="512" height="512" rx="115" fill="url(#samtBg)"/>
+  <rect width="512" height="512" rx="115" fill="url(#auroraGlow)"/>
+
+  <!-- Subtle Specular Glass Highlight -->
+  <rect width="512" height="512" rx="115" fill="url(#glassGloss)" stroke="rgba(255, 255, 255, 0.16)" stroke-width="2"/>
+
+  <!-- Ambient Concentric Orbit Rings (representing time cycles & prayers) -->
+  <circle cx="256" cy="256" r="175" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1.5"/>
+  <circle cx="256" cy="256" r="130" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" stroke-dasharray="4 8"/>
+
+  <!-- Iconic Central Emblem: Ascending Crescent / Zenith Arc & Core Spark -->
+  <g filter="url(#appleBloom)">
+    <!-- Primary Flow Dynamic Arc -->
+    <path d="M 160 300 C 160 200, 220 148, 320 148 C 340 148, 355 152, 355 152 C 320 175, 280 210, 280 260 C 280 300, 310 330, 340 348 C 315 362, 285 368, 256 368 C 200 368, 160 335, 160 300 Z" 
+          fill="url(#zenithGrad)" />
+
+    <!-- Pure Zenith Star Spark (Point of Elevation & Morning Light) -->
+    <g transform="translate(335, 155)" filter="url(#coreGlow)">
+      <circle cx="0" cy="0" r="16" fill="url(#goldAccent)"/>
+      <circle cx="0" cy="0" r="8" fill="#ffffff"/>
+      <!-- Compass / Dawn Ray Spikes -->
+      <path d="M 0 -28 L 3 -8 L 28 0 L 3 8 L 0 28 L -3 8 L -28 0 L -3 -8 Z" fill="#ffffff" opacity="0.9"/>
+    </g>
+  </g>
+
+  <!-- Golden Habit Orbital Seed -->
+  <circle cx="185" cy="205" r="7" fill="#ffd60a" filter="url(#coreGlow)"/>
+  <circle cx="340" cy="310" r="5" fill="#30d158" filter="url(#coreGlow)"/>
+</svg>
