@@ -96,11 +96,16 @@
       position: sticky;
       top: 0;
       z-index: 60;
-      background: rgba(14, 14, 16, 0.82);
+      background: rgba(10, 10, 12, 0.88);
       backdrop-filter: blur(35px) saturate(190%);
       -webkit-backdrop-filter: blur(35px) saturate(190%);
-      border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
-      padding: 12px 18px;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.10);
+      padding: max(8px, env(safe-area-inset-top, 8px)) 14px 8px;
+    }
+
+    .top-navbar-inner {
+      max-width: 480px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -109,64 +114,59 @@
     .brand-cluster {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       cursor: pointer;
     }
 
     .brand-icon-img {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(10, 132, 255, 0.4);
+      box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
       border: 0.5px solid rgba(255, 255, 255, 0.2);
     }
 
     .brand-wordmark {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
-      letter-spacing: -0.4px;
+      letter-spacing: -0.3px;
       color: #ffffff;
     }
 
-    .user-profile-badge {
+    .top-date-capsule {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 0.5px solid rgba(255, 255, 255, 0.16);
-      padding: 5px 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 0.5px solid rgba(255, 255, 255, 0.14);
+      padding: 5px 12px;
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-
-    .user-profile-badge:active {
-      transform: scale(0.96);
+      color: var(--text-muted);
     }
 
     .active-status-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green);
+      box-shadow: 0 0 6px var(--accent-green);
     }
 
-    /* Main Container */
+    /* Main Container (Engineered for Mobile Screens) */
     .app-viewport {
-      max-width: 520px;
+      max-width: 480px;
+      width: 100%;
       margin: 0 auto;
-      padding: 16px;
+      padding: 12px 14px;
       position: relative;
       z-index: 10;
     }
 
     .tab-view {
       display: none;
-      animation: viewSlide 0.28s var(--anim-spring);
+      animation: viewSlide 0.25s var(--anim-spring);
     }
 
     .tab-view.active {
@@ -174,15 +174,15 @@
     }
 
     @keyframes viewSlide {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .page-main-header {
-      font-size: 1.6rem;
+      font-size: 1.45rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
-      margin: 4px 4px 16px;
+      letter-spacing: -0.4px;
+      margin: 2px 2px 14px;
       color: #ffffff;
       display: flex;
       justify-content: space-between;
@@ -190,47 +190,49 @@
     }
 
     .header-aside-tag {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     /* Greeting Hero Banner */
     .hero-greeting-card {
-      background: linear-gradient(135deg, rgba(10, 132, 255, 0.14), rgba(94, 92, 230, 0.12));
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.12), rgba(94, 92, 230, 0.10));
       border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: var(--card-specular), 0 8px 24px rgba(0, 0, 0, 0.4);
-      border-radius: 24px;
-      padding: 16px 20px;
-      margin-bottom: 18px;
+      box-shadow: var(--card-specular), 0 6px 20px rgba(0, 0, 0, 0.35);
+      border-radius: 20px;
+      padding: 13px 16px;
+      margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .greeting-lead {
-      font-size: 1.15rem;
+      font-size: 1.08rem;
       font-weight: 800;
       color: #ffffff;
+      line-height: 1.25;
     }
 
     .greeting-date-sub {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
     .streak-capsule {
-      background: rgba(255, 159, 10, 0.16);
-      border: 1px solid rgba(255, 159, 10, 0.35);
-      padding: 6px 12px;
+      background: rgba(255, 159, 10, 0.15);
+      border: 1px solid rgba(255, 159, 10, 0.32);
+      padding: 5px 11px;
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 800;
       color: var(--accent-orange);
       display: flex;
       align-items: center;
       gap: 5px;
+      flex-shrink: 0;
     }
 
     /* ==========================================================================
@@ -238,11 +240,11 @@
        ========================================================================== */
     .live-activity-island {
       background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.22);
-      border-radius: 34px;
-      padding: 20px 22px;
-      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      padding: 16px 16px 14px;
+      margin-bottom: 12px;
     }
 
     .island-meta-bar {
@@ -288,18 +290,18 @@
     }
 
     .island-current-task {
-      font-size: 1.35rem;
+      font-size: 1.15rem;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 4px;
-      line-height: 1.3;
+      margin-bottom: 3px;
+      line-height: 1.35;
     }
 
     .island-current-sub {
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      margin-bottom: 16px;
-      line-height: 1.45;
+      margin-bottom: 12px;
+      line-height: 1.4;
     }
 
     .island-progress-track {
@@ -307,7 +309,7 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .island-progress-fill {
@@ -322,23 +324,24 @@
       justify-content: space-between;
       align-items: center;
       background: rgba(255, 255, 255, 0.05);
-      border-radius: 18px;
-      padding: 10px 14px;
+      border-radius: 14px;
+      padding: 9px 12px;
     }
 
     .btn-island-check {
       background: var(--accent-green);
       color: #000000;
       border: none;
-      padding: 7px 16px;
+      padding: 6px 14px;
       border-radius: 999px;
-      font-size: 0.84rem;
+      font-size: 0.80rem;
       font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 5px;
       transition: transform 0.15s ease;
+      flex-shrink: 0;
     }
 
     .btn-island-check:active {
@@ -346,71 +349,74 @@
     }
 
     /* ==========================================================================
-       PRAYER TIMES MODULE (Redesigned with 12h format & Mosque Icon)
+       PRAYER TIMES MODULE (Engineered for Mobile Screens - No Text Clipping)
        ========================================================================== */
     .prayer-station-card {
       background: var(--card-bg);
       backdrop-filter: blur(35px) saturate(180%);
       -webkit-backdrop-filter: blur(35px) saturate(180%);
       border: 1px solid var(--card-border);
-      box-shadow: var(--card-specular), 0 10px 30px rgba(0, 0, 0, 0.4);
-      border-radius: 28px;
-      padding: 20px;
-      margin-bottom: 20px;
+      box-shadow: var(--card-specular), 0 8px 24px rgba(0, 0, 0, 0.35);
+      border-radius: 22px;
+      padding: 15px 12px 13px;
+      margin-bottom: 12px;
     }
 
     .prayer-station-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .station-heading {
-      font-size: 1.08rem;
+      font-size: 0.98rem;
       font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
     }
 
     .countdown-tag {
       background: rgba(10, 132, 255, 0.16);
       color: var(--accent-blue);
       border: 0.5px solid rgba(10, 132, 255, 0.35);
-      padding: 4px 12px;
+      padding: 3px 10px;
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 700;
+      white-space: nowrap;
     }
 
     .prayer-slots-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 7px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 5px;
     }
 
     .slot-box {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      padding: 12px 4px 10px;
+      border-radius: 14px;
+      padding: 9px 2px 8px;
       text-align: center;
       transition: all 0.25s var(--anim-spring);
+      min-width: 0;
     }
 
     .slot-box.active {
-      background: linear-gradient(180deg, rgba(10, 132, 255, 0.28), rgba(10, 132, 255, 0.09));
+      background: linear-gradient(180deg, rgba(10, 132, 255, 0.26), rgba(10, 132, 255, 0.08));
       border-color: var(--accent-blue);
-      box-shadow: 0 0 18px rgba(10, 132, 255, 0.35);
+      box-shadow: 0 0 14px rgba(10, 132, 255, 0.35);
       transform: translateY(-2px);
     }
 
     .slot-name {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
-      margin-bottom: 4px;
-      font-weight: 600;
+      margin-bottom: 3px;
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .slot-box.active .slot-name {
@@ -419,17 +425,18 @@
     }
 
     .slot-time-number {
-      font-size: 0.98rem;
+      font-size: clamp(0.76rem, 2.7vw, 0.88rem);
       font-weight: 800;
       font-variant-numeric: tabular-nums;
       line-height: 1.1;
+      white-space: nowrap;
     }
 
     .slot-period-tag {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 700;
       color: var(--text-muted);
-      margin-top: 2px;
+      margin-top: 1px;
       display: block;
     }
 
@@ -441,10 +448,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 14px;
-      padding-top: 12px;
+      margin-top: 12px;
+      padding-top: 10px;
       border-top: 0.5px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
@@ -828,83 +835,158 @@
       justify-content: space-between;
       align-items: center;
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 9px 12px;
       border-radius: 14px;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
 
     .food-delete-trigger {
-      color: var(--accent-red);
+      color: rgba(255, 255, 255, 0.4);
       cursor: pointer;
-      padding: 2px 6px;
+      padding: 3px 8px;
+      border-radius: 8px;
       font-size: 0.82rem;
+      transition: all 0.15s ease;
+    }
+
+    .food-delete-trigger:hover, .food-delete-trigger:active {
+      color: var(--accent-red);
+      background: rgba(250, 17, 79, 0.14);
     }
 
     /* ==========================================================================
-       SCHEDULE TIMELINE (With 12-Hour Format & Visual Tags)
+       SCHEDULE TIMELINE & LISTS (Engineered for Mobile Flow & Micro-interactivity)
        ========================================================================== */
+    .schedule-progress-summary-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 13px 16px;
+      margin-bottom: 12px;
+    }
+
+    .summary-meta-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 7px;
+    }
+
+    .summary-title-text {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .summary-percent-pill {
+      background: rgba(48, 209, 88, 0.16);
+      color: var(--accent-green);
+      border: 0.5px solid rgba(48, 209, 88, 0.35);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .summary-bar-track {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .summary-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-teal));
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.4s var(--anim-spring);
+    }
+
+    .summary-stats-sub {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
     .timeline-block-card {
       background: var(--card-bg);
       backdrop-filter: blur(35px) saturate(180%);
       -webkit-backdrop-filter: blur(35px) saturate(180%);
       border: 1px solid var(--card-border);
       box-shadow: var(--card-specular), 0 8px 24px rgba(0, 0, 0, 0.35);
-      border-radius: 26px;
-      padding: 16px;
-      margin-bottom: 16px;
+      border-radius: 22px;
+      padding: 14px 14px 10px;
+      margin-bottom: 12px;
     }
 
     .timeline-header-line {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       padding-bottom: 8px;
-      border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .timeline-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
     }
 
     .timeline-title-text {
-      font-size: 0.95rem;
-      font-weight: 700;
+      font-size: 0.94rem;
+      font-weight: 800;
       color: #ffffff;
+      line-height: 1.25;
     }
 
     .timeline-time-badge {
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       direction: ltr;
       background: rgba(255, 255, 255, 0.06);
-      padding: 2px 8px;
+      border: 0.5px solid rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
       border-radius: 8px;
       font-weight: 700;
       font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
 
     .task-row-entry {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      padding: 10px 8px;
-      border-radius: 14px;
+      gap: 11px;
+      padding: 9px 8px;
+      border-radius: 12px;
       cursor: pointer;
       transition: background 0.15s, transform 0.15s;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .task-row-entry:last-child {
+      border-bottom: none;
     }
 
     .task-row-entry:active {
       transform: scale(0.98);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .task-checkbox-bubble {
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      border: 1.5px solid rgba(255, 255, 255, 0.32);
+      background: rgba(255, 255, 255, 0.03);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 2px;
+      margin-top: 1px;
       flex-shrink: 0;
       transition: all 0.2s var(--anim-spring);
     }
@@ -912,18 +994,19 @@
     .task-row-entry.done .task-checkbox-bubble {
       background: var(--accent-green);
       border-color: var(--accent-green);
+      box-shadow: 0 0 10px rgba(48, 209, 88, 0.4);
     }
 
     .task-row-entry.done .task-checkbox-bubble::after {
       content: '✓';
       color: #000;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 900;
     }
 
     .task-headline-text {
-      font-size: 0.92rem;
-      font-weight: 600;
+      font-size: 0.90rem;
+      font-weight: 700;
       color: #ffffff;
       line-height: 1.35;
       margin-bottom: 2px;
@@ -937,6 +1020,7 @@
     .task-submeta-text {
       font-size: 0.76rem;
       color: var(--text-muted);
+      line-height: 1.3;
     }
 
     /* ==========================================================================
@@ -1015,22 +1099,26 @@
       border-bottom: none;
     }
 
-    /* Bottom Tab Bar */
+    /* Bottom Tab Bar (Ergonomic Mobile Dock) */
     .dock-navigation-bar {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 70;
-      height: 74px;
-      background: rgba(18, 18, 20, 0.85);
-      backdrop-filter: blur(35px) saturate(190%);
-      -webkit-backdrop-filter: blur(35px) saturate(190%);
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      background: rgba(14, 14, 16, 0.94);
+      backdrop-filter: blur(35px) saturate(200%);
+      -webkit-backdrop-filter: blur(35px) saturate(200%);
       border-top: 0.5px solid rgba(255, 255, 255, 0.12);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding-bottom: env(safe-area-inset-bottom, 8px);
-      max-width: 520px;
-      margin: 0 auto;
+      padding-top: 8px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom, 12px));
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.65);
     }
 
     .tab-item-btn {
@@ -1041,20 +1129,22 @@
       align-items: center;
       justify-content: center;
       gap: 3px;
-      color: var(--text-dim);
+      color: rgba(235, 235, 245, 0.45);
       cursor: pointer;
-      width: 60px;
+      padding: 4px 10px;
+      border-radius: 12px;
       transition: all 0.2s var(--anim-spring);
+      -webkit-tap-highlight-color: transparent;
     }
 
     .tab-item-btn.active {
       color: var(--accent-blue);
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     .tab-vector-svg {
-      width: 22px;
-      height: 22px;
+      width: 21px;
+      height: 21px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
@@ -1063,50 +1153,8 @@
     }
 
     .tab-caption-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-    }
-
-    /* Modal Sheet */
-    .modal-overlay-shade {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay-shade.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-sheet-dialog {
-      background: #1c1c1e;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
-      border-radius: 32px;
-      max-width: 400px;
-      width: 100%;
-      padding: 30px 24px;
-      text-align: center;
-    }
-
-    .sheet-brand-logo {
-      width: 74px;
-      height: 74px;
-      border-radius: 18px;
-      margin: 0 auto 16px;
-      display: block;
-      box-shadow: 0 8px 24px rgba(10, 132, 255, 0.4);
+      font-size: 0.70rem;
+      font-weight: 700;
     }
 
     .toast-pill-alert {
@@ -1144,13 +1192,15 @@
 
   <!-- Top App Navigation -->
   <header class="top-navbar">
-    <div class="brand-cluster" onclick="switchTab('now')">
-      <img src="icons/icon.svg" alt="سَمْت" class="brand-icon-img">
-      <span class="brand-wordmark">سَمْت</span>
-    </div>
-    <div class="user-profile-badge" onclick="openOnboarding(true)">
-      <span class="active-status-dot"></span>
-      <span id="navUserName">أهلاً بك</span>
+    <div class="top-navbar-inner">
+      <div class="brand-cluster" onclick="switchTab('now')">
+        <img src="icons/icon.svg" alt="سَمْت" class="brand-icon-img">
+        <span class="brand-wordmark">سَمْت</span>
+      </div>
+      <div class="top-date-capsule">
+        <span class="active-status-dot"></span>
+        <span id="topNavDateText">اليوم</span>
+      </div>
     </div>
   </header>
 
@@ -1165,11 +1215,11 @@
     <!-- ================= TAB 1: NOW / اليوم ================= -->
     <section id="tab-now" class="tab-view active">
 
-      <!-- Hero Personalized Banner -->
+      <!-- Hero Daily Banner -->
       <div class="hero-greeting-card">
         <div>
-          <div class="greeting-lead" id="heroGreetingLead">أهلاً بك</div>
-          <div class="greeting-date-sub" id="heroDateFormatted">اليوم</div>
+          <div class="greeting-lead" id="heroGreetingLead">طاب يومك بالبركة والهمّة</div>
+          <div class="greeting-date-sub" id="heroDateFormatted">استثمر يومك لبناء مستقبلك الجامعي</div>
         </div>
         <div class="streak-capsule">
           <span>🔥</span>
@@ -1263,6 +1313,38 @@
         </div>
       </div>
 
+      <!-- Quick Action / Today's Routine Preview Card -->
+      <div class="timeline-block-card">
+        <div class="timeline-header-line">
+          <div class="timeline-title-wrap">
+            <span style="font-size:1.05rem;">⚡</span>
+            <span class="timeline-title-text">أبرز محطات يومك</span>
+          </div>
+          <span class="timeline-time-badge" style="cursor:pointer;" onclick="switchTab('schedule')">عرض الجدول الكامل ←</span>
+        </div>
+        <div class="task-row-entry" data-task-id="0" onclick="toggleTask(0)">
+          <div class="task-checkbox-bubble"></div>
+          <div>
+            <div class="task-headline-text">صلاة الفجر في المسجد + أذكار الصباح</div>
+            <div class="task-submeta-text">5:00 ص – البكور وبركة اليوم</div>
+          </div>
+        </div>
+        <div class="task-row-entry" data-task-id="4" onclick="toggleTask(4)">
+          <div class="task-checkbox-bubble"></div>
+          <div>
+            <div class="task-headline-text">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
+            <div class="task-submeta-text">8:30 ص – إنجاز مشاريعك وأعمالك</div>
+          </div>
+        </div>
+        <div class="task-row-entry" data-task-id="9" onclick="toggleTask(9)">
+          <div class="task-checkbox-bubble"></div>
+          <div>
+            <div class="task-headline-text">التمرين الرياضي في النادي (حديد / لياقة)</div>
+            <div class="task-submeta-text">4:30 م – بناء القوة والصحة البدنية</div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ================= TAB 2: SCHEDULE / الجدول ================= -->
@@ -1272,27 +1354,42 @@
         <span class="header-aside-tag" id="scheduleDateStr">اليوم</span>
       </div>
 
+      <!-- Daily Progress Summary Card -->
+      <div class="schedule-progress-summary-card">
+        <div class="summary-meta-line">
+          <span class="summary-title-text">معدل إنجاز المهام اليومية</span>
+          <span class="summary-percent-pill" id="scheduleProgressPercent">0%</span>
+        </div>
+        <div class="summary-bar-track">
+          <div class="summary-bar-fill" id="scheduleProgressBarFill" style="width: 0%;"></div>
+        </div>
+        <div class="summary-stats-sub" id="scheduleTasksRatio">0 من 13 مهمة مكتملة</div>
+      </div>
+
       <!-- Schedule Blocks (All 12-Hour Format) -->
       <div class="timeline-block-card">
         <div class="timeline-header-line">
-          <span class="timeline-title-text">1. البكور وتطوير الذات</span>
+          <div class="timeline-title-wrap">
+            <span style="font-size:1.05rem;">🌅</span>
+            <span class="timeline-title-text">1. البكور وتطوير الذات</span>
+          </div>
           <span class="timeline-time-badge">5:00 ص - 7:30 ص</span>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(0)">
+        <div class="task-row-entry" data-task-id="0" onclick="toggleTask(0)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">صلاة الفجر في المسجد + أذكار الصباح</div>
             <div class="task-submeta-text">5:00 ص – كوب ماء وانطلاقة اليوم بالبركة</div>
           </div>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(1)">
+        <div class="task-row-entry" data-task-id="1" onclick="toggleTask(1)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">تطوير اللغة الإنجليزية (45 دقيقة)</div>
             <div class="task-submeta-text">6:00 ص – استماع وبودكاست وتقنية Shadowing</div>
           </div>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(2)">
+        <div class="task-row-entry" data-task-id="2" onclick="toggleTask(2)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">دورات تحضير الجامعة وشهادات الخبرة</div>
@@ -1303,17 +1400,20 @@
 
       <div class="timeline-block-card">
         <div class="timeline-header-line">
-          <span class="timeline-title-text">2. العمل الخاص</span>
+          <div class="timeline-title-wrap">
+            <span style="font-size:1.05rem;">💼</span>
+            <span class="timeline-title-text">2. العمل الخاص المُرَكَّز</span>
+          </div>
           <span class="timeline-time-badge">7:30 ص - 12:00 م</span>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(3)">
+        <div class="task-row-entry" data-task-id="3" onclick="toggleTask(3)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">فطور صحي متوازن وقهوة الصباح</div>
             <div class="task-submeta-text">7:30 ص – تهيئة بيئة العمل والمهام</div>
           </div>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(4)">
+        <div class="task-row-entry" data-task-id="4" onclick="toggleTask(4)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
@@ -1324,17 +1424,20 @@
 
       <div class="timeline-block-card">
         <div class="timeline-header-line">
-          <span class="timeline-title-text">3. منتصف اليوم والاستراحة</span>
+          <div class="timeline-title-wrap">
+            <span style="font-size:1.05rem;">🍲</span>
+            <span class="timeline-title-text">3. منتصف اليوم والاستراحة</span>
+          </div>
           <span class="timeline-time-badge">12:00 م - 2:00 م</span>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(5)">
+        <div class="task-row-entry" data-task-id="5" onclick="toggleTask(5)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">صلاة الظهر في المسجد</div>
             <div class="task-submeta-text">12:00 م – فصل العقل عن الشاشات</div>
           </div>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(6)">
+        <div class="task-row-entry" data-task-id="6" onclick="toggleTask(6)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">وجبة الغداء + قيلولة 20 دقيقة</div>
@@ -1345,24 +1448,27 @@
 
       <div class="timeline-block-card">
         <div class="timeline-header-line">
-          <span class="timeline-title-text">4. المتابعات والتمرين البدني</span>
+          <div class="timeline-title-wrap">
+            <span style="font-size:1.05rem;">🏋️‍♂️</span>
+            <span class="timeline-title-text">4. المتابعات والتمرين البدني</span>
+          </div>
           <span class="timeline-time-badge">2:00 م - 6:00 م</span>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(7)">
+        <div class="task-row-entry" data-task-id="7" onclick="toggleTask(7)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">متابعات العمل والاجتماعات والمكالمات</div>
             <div class="task-submeta-text">2:00 م – الردود والتنسيق</div>
           </div>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(8)">
+        <div class="task-row-entry" data-task-id="8" onclick="toggleTask(8)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">صلاة العصر في المسجد وسناك التمرين</div>
             <div class="task-submeta-text">3:30 م – موزة وقهوة لطاقة النادي</div>
           </div>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(9)">
+        <div class="task-row-entry" data-task-id="9" onclick="toggleTask(9)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">التمرين الرياضي في النادي (حديد / لياقة)</div>
@@ -1373,24 +1479,27 @@
 
       <div class="timeline-block-card">
         <div class="timeline-header-line">
-          <span class="timeline-title-text">5. المساء والنوم الهانئ</span>
+          <div class="timeline-title-wrap">
+            <span style="font-size:1.05rem;">🌙</span>
+            <span class="timeline-title-text">5. المساء والتعافي والنوم</span>
+          </div>
           <span class="timeline-time-badge">6:00 م - 10:30 م</span>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(10)">
+        <div class="task-row-entry" data-task-id="10" onclick="toggleTask(10)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">صلاة المغرب في المسجد وحمام منعش</div>
             <div class="task-submeta-text">6:00 م – استرخاء بعد النادي والانتعاش</div>
           </div>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(11)">
+        <div class="task-row-entry" data-task-id="11" onclick="toggleTask(11)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">وجبة العشاء وصلاة العشاء في المسجد</div>
             <div class="task-submeta-text">7:00 م – عشاء خفيف ووقت حر عائلي</div>
           </div>
         </div>
-        <div class="task-row-entry" onclick="toggleTask(12)">
+        <div class="task-row-entry" data-task-id="12" onclick="toggleTask(12)">
           <div class="task-checkbox-bubble"></div>
           <div>
             <div class="task-headline-text">إغلاق الشاشات ونوم باكر هانئ</div>
@@ -1568,13 +1677,6 @@
       <div class="settings-table-card">
         <div class="settings-row-cell">
           <div>
-            <div style="font-weight:600; font-size:0.95rem;">الاسم الشخصي</div>
-            <div style="font-size:0.78rem; color:var(--text-muted);" id="settingsNameLbl">المستخدم</div>
-          </div>
-          <button style="background:rgba(255,255,255,0.08); border:0.5px solid rgba(255,255,255,0.16); color:#fff; padding:6px 14px; border-radius:12px; font-weight:600; cursor:pointer;" onclick="openOnboarding(true)">تعديل</button>
-        </div>
-        <div class="settings-row-cell">
-          <div>
             <div style="font-weight:600; font-size:0.95rem;">هدف السعرات اليومي</div>
             <div style="font-size:0.78rem; color:var(--text-muted);">السعرات المستهدفة</div>
           </div>
@@ -1630,19 +1732,6 @@
       <span class="tab-caption-label">الإعدادات</span>
     </button>
   </nav>
-
-  <!-- Onboarding Sheet Modal -->
-  <div id="onboardingModal" class="modal-overlay-shade">
-    <div class="modal-sheet-dialog">
-      <img src="icons/icon.svg" class="sheet-brand-logo" alt="سَمْت">
-      <div style="font-size:1.55rem; font-weight:800; margin-bottom:6px;">مرحباً بك في سَمْت</div>
-      <div style="color:var(--text-muted); font-size:0.9rem; line-height:1.5; margin-bottom:22px;">
-        نظامك المتكامل لبناء روتين استثنائي قبل الجامعة: صلاة في المسجد، إنجاز في عملك، لياقة بدنية، وتطوير مستمر.
-      </div>
-      <input type="text" id="nameInputBox" class="custom-text-input" style="width:100%; text-align:center; margin-bottom:18px; font-size:1.05rem;" placeholder="اكتب اسمك الكريم...">
-      <button style="width:100%; background:linear-gradient(135deg, var(--accent-blue), var(--accent-indigo)); color:#fff; border:none; border-radius:16px; padding:13px; font-size:1rem; font-weight:700; cursor:pointer;" onclick="submitName()">ابدأ أسلوب حياتك الجديد</button>
-    </div>
-  </div>
 
   <script>
     /* ========================================================
@@ -2005,16 +2094,19 @@
     function renderFoodLog() {
       const container = document.getElementById('foodLogHistory');
       if (!state.meals || state.meals.length === 0) {
-        container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-dim); text-align:center; padding:8px;">لا توجد وجبات مسجلة اليوم</div>';
+        container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-dim); text-align:center; padding:10px 0;">لا توجد وجبات مسجلة بعد اليوم</div>';
         return;
       }
 
       container.innerHTML = state.meals.map((m, idx) => `
         <div class="food-logged-row">
-          <span>${m.name}</span>
           <div style="display:flex; align-items:center; gap:8px;">
-            <strong style="color:var(--accent-red); font-variant-numeric:tabular-nums;">${m.cals} سعرة</strong>
-            <span class="food-delete-trigger" onclick="deleteFood(${idx})">✕</span>
+            <span style="font-size:1rem;">🍽️</span>
+            <span style="font-weight:700; color:#fff;">${m.name}</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="background:rgba(250,17,79,0.18); color:var(--accent-red); padding:3px 8px; border-radius:8px; font-size:0.75rem; font-weight:800; font-variant-numeric:tabular-nums;">${m.cals} سعرة</span>
+            <span class="food-delete-trigger" onclick="deleteFood(${idx})" title="حذف">✕</span>
           </div>
         </div>
       `).join('');
@@ -2030,10 +2122,30 @@
     }
 
     function renderSchedule() {
-      document.querySelectorAll('.task-row-entry').forEach((row, i) => {
-        if (state.completedTasks[i]) row.classList.add('done');
-        else row.classList.remove('done');
+      const total = SCHEDULE_DATA.length;
+      document.querySelectorAll('.task-row-entry').forEach((row) => {
+        const taskId = row.getAttribute('data-task-id');
+        if (taskId !== null) {
+          if (state.completedTasks[taskId]) {
+            row.classList.add('done');
+          } else {
+            row.classList.remove('done');
+          }
+        }
       });
+
+      let doneCount = 0;
+      for (let i = 0; i < total; i++) {
+        if (state.completedTasks[i]) doneCount++;
+      }
+
+      const pct = Math.round((doneCount / total) * 100);
+      const pctEl = document.getElementById('scheduleProgressPercent');
+      const barEl = document.getElementById('scheduleProgressBarFill');
+      const ratioEl = document.getElementById('scheduleTasksRatio');
+      if (pctEl) pctEl.innerText = `${pct}%`;
+      if (barEl) barEl.style.width = `${pct}%`;
+      if (ratioEl) ratioEl.innerText = `${doneCount} من ${total} مهمة مكتملة`;
     }
 
     function markTaskDone() {
@@ -2056,47 +2168,15 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* Onboarding */
-    function checkUser() {
-      if (!state.user || !state.user.name) {
-        openOnboarding();
-      } else {
-        applyUserName(state.user.name);
-      }
-    }
-
-    function applyUserName(name) {
-      document.getElementById('navUserName').innerText = name;
-      document.getElementById('settingsNameLbl').innerText = name;
-      
+    /* Dynamic Time-Based Greeting (Zero Login Needed) */
+    function updateGreeting() {
       const hour = new Date().getHours();
-      let greeting = 'صباح الهمة يا ';
-      if (hour >= 12 && hour < 17) greeting = 'طاب يومك يا ';
-      else if (hour >= 17) greeting = 'مساء الخير يا ';
+      let greeting = 'صباح الهمة والبركة';
+      if (hour >= 12 && hour < 17) greeting = 'طاب يومك بالبركة والهمّة';
+      else if (hour >= 17) greeting = 'مساء الخير والسكينة';
       
-      document.getElementById('heroGreetingLead').innerText = `${greeting}${name}`;
-    }
-
-    function openOnboarding(isEdit = false) {
-      const modal = document.getElementById('onboardingModal');
-      const input = document.getElementById('nameInputBox');
-      if (isEdit && state.user && state.user.name) input.value = state.user.name;
-      modal.classList.add('show');
-    }
-
-    function submitName() {
-      const input = document.getElementById('nameInputBox');
-      const name = input.value.trim();
-      if (!name) return;
-
-      state.user = { name };
-      saveState();
-
-      applyUserName(name);
-      document.getElementById('onboardingModal').classList.remove('show');
-
-      playHapticClick();
-      showToast(`أهلاً بك يا ${name}`);
+      const el = document.getElementById('heroGreetingLead');
+      if (el) el.innerText = greeting;
     }
 
     /* Settings */
@@ -2145,7 +2225,7 @@
     /* Init */
     window.addEventListener('DOMContentLoaded', () => {
       loadState();
-      checkUser();
+      updateGreeting();
       renderSchedule();
       renderFoodLog();
       updatePrayers();
@@ -2156,6 +2236,11 @@
       const dateStr = new Date().toLocaleDateString('ar-SA', options);
       document.getElementById('scheduleDateStr').innerText = dateStr;
       document.getElementById('heroDateFormatted').innerText = dateStr;
+
+      const shortOptions = { weekday: 'long', day: 'numeric', month: 'short' };
+      const shortDate = new Date().toLocaleDateString('ar-SA', shortOptions);
+      const topDateEl = document.getElementById('topNavDateText');
+      if (topDateEl) topDateEl.innerText = shortDate;
 
       if (state.selectedCity) {
         document.getElementById('citySelect').value = state.selectedCity;
