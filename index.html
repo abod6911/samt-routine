@@ -1168,7 +1168,7 @@
       <!-- Hero Personalized Banner -->
       <div class="hero-greeting-card">
         <div>
-          <div class="greeting-lead" id="heroGreetingLead">أهلاً بك ✨</div>
+          <div class="greeting-lead" id="heroGreetingLead">أهلاً بك</div>
           <div class="greeting-date-sub" id="heroDateFormatted">اليوم</div>
         </div>
         <div class="streak-capsule">
@@ -2074,7 +2074,7 @@
       if (hour >= 12 && hour < 17) greeting = 'طاب يومك يا ';
       else if (hour >= 17) greeting = 'مساء الخير يا ';
       
-      document.getElementById('heroGreetingLead').innerText = `${greeting}${name} ✨`;
+      document.getElementById('heroGreetingLead').innerText = `${greeting}${name}`;
     }
 
     function openOnboarding(isEdit = false) {
@@ -2096,7 +2096,7 @@
       document.getElementById('onboardingModal').classList.remove('show');
 
       playHapticClick();
-      showToast(`أهلاً بك يا ${name} ✨`);
+      showToast(`أهلاً بك يا ${name}`);
     }
 
     /* Settings */
