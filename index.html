@@ -6,10 +6,11 @@
   <title>سَمْت | SAMT</title>
   
   <!-- Web App Meta -->
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="سَمْت">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#090a0f">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon.svg">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
@@ -17,33 +18,39 @@
   <!-- Typography: Readex Pro & IBM Plex Sans Arabic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Readex+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       DESIGN SYSTEM TOKENS (Modern Glassmorphic Dark UI)
+       DESIGN SYSTEM TOKENS (Bespoke Islamic Celestial & High-End Obsidian)
        ========================================================================== */
     :root {
-      --bg-canvas: #060608;
-      --card-bg: rgba(26, 26, 30, 0.75);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --card-specular: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
-      --text-main: #ffffff;
-      --text-muted: rgba(235, 235, 245, 0.65);
-      --text-dim: rgba(235, 235, 245, 0.38);
+      --bg-canvas: #090a0f;
+      --card-bg: rgba(18, 20, 28, 0.82);
+      --card-bg-elevated: rgba(26, 29, 41, 0.90);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-gold: rgba(212, 175, 55, 0.28);
+      --card-specular: inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
       
-      /* Vibrant Accent Palette */
-      --accent-blue: #0a84ff;
-      --accent-green: #30d158;
-      --accent-indigo: #5e5ce6;
-      --accent-orange: #ff9f0a;
-      --accent-purple: #bf5af2;
-      --accent-red: #fa114f;
-      --accent-teal: #64d2ff;
-      --accent-gold: #ffd60a;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
       
-      /* Smooth Physics */
-      --anim-spring: cubic-bezier(0.32, 0.72, 0, 1);
+      /* Pure Bespoke Accents */
+      --gold-primary: #d4af37;
+      --gold-light: #fdf0cd;
+      --gold-glow: rgba(212, 175, 55, 0.25);
+      
+      --emerald-accent: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
+      
+      --sapphire-accent: #3b82f6;
+      --crimson-accent: #f43f5e;
+      --coral-accent: #f97316;
+      --indigo-accent: #8b5cf6;
+      --teal-accent: #06b6d4;
+
+      --anim-spring: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * {
@@ -54,11 +61,14 @@
       -moz-osx-font-smoothing: grayscale;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
-      font-family: -apple-system, BlinkMacSystemFont, "Readex Pro", "IBM Plex Sans Arabic", "Segoe UI", Roboto, sans-serif;
+      font-family: "Readex Pro", "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
       background-color: var(--bg-canvas);
+      background-image: 
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.05) 0%, rgba(9, 10, 15, 0) 70%),
+        radial-gradient(ellipse at 80% 80%, rgba(16, 185, 129, 0.04) 0%, rgba(9, 10, 15, 0) 60%);
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
@@ -66,40 +76,15 @@
       position: relative;
     }
 
-    /* Ambient Radiance Orbs */
-    .ambient-aurora-1 {
-      position: fixed;
-      top: -100px;
-      right: -80px;
-      width: 340px;
-      height: 340px;
-      background: radial-gradient(circle, rgba(10, 132, 255, 0.22) 0%, rgba(0, 0, 0, 0) 70%);
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(70px);
-    }
-
-    .ambient-aurora-2 {
-      position: fixed;
-      bottom: 100px;
-      left: -80px;
-      width: 360px;
-      height: 360px;
-      background: radial-gradient(circle, rgba(94, 92, 230, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(80px);
-    }
-
-    /* Navigation Bar */
+    /* Top Navigation Bar */
     .top-navbar {
       position: sticky;
       top: 0;
       z-index: 60;
-      background: rgba(10, 10, 12, 0.88);
-      backdrop-filter: blur(35px) saturate(190%);
-      -webkit-backdrop-filter: blur(35px) saturate(190%);
-      border-bottom: 0.5px solid rgba(255, 255, 255, 0.10);
+      background: rgba(9, 10, 15, 0.92);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
       padding: max(8px, env(safe-area-inset-top, 8px)) 14px 8px;
     }
 
@@ -114,34 +99,52 @@
     .brand-cluster {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       cursor: pointer;
     }
 
     .brand-icon-img {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
-      border: 0.5px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.25);
+      border: 0.5px solid rgba(212, 175, 55, 0.35);
+      transition: transform 0.2s var(--anim-spring);
+    }
+
+    .brand-cluster:active .brand-icon-img {
+      transform: scale(0.95);
+    }
+
+    .brand-text-column {
+      display: flex;
+      flex-direction: column;
     }
 
     .brand-wordmark {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 800;
       letter-spacing: -0.3px;
       color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .brand-tagline {
+      font-size: 0.68rem;
+      color: var(--gold-primary);
+      font-weight: 600;
+      letter-spacing: 0.3px;
     }
 
     .top-date-capsule {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 0.5px solid rgba(255, 255, 255, 0.14);
-      padding: 5px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 0.5px solid rgba(255, 255, 255, 0.12);
+      padding: 6px 13px;
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 600;
       color: var(--text-muted);
     }
@@ -150,23 +153,23 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--accent-green);
-      box-shadow: 0 0 6px var(--accent-green);
+      background: var(--emerald-accent);
+      box-shadow: 0 0 8px var(--emerald-accent);
     }
 
-    /* Main Container (Engineered for Mobile Screens) */
+    /* Viewport Container */
     .app-viewport {
       max-width: 480px;
       width: 100%;
       margin: 0 auto;
-      padding: 12px 14px;
+      padding: 12px 14px calc(95px + env(safe-area-inset-bottom, 20px));
       position: relative;
       z-index: 10;
     }
 
     .tab-view {
       display: none;
-      animation: viewSlide 0.25s var(--anim-spring);
+      animation: viewSlide 0.22s var(--anim-spring);
     }
 
     .tab-view.active {
@@ -174,7 +177,7 @@
     }
 
     @keyframes viewSlide {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -182,7 +185,7 @@
       font-size: 1.45rem;
       font-weight: 800;
       letter-spacing: -0.4px;
-      margin: 2px 2px 14px;
+      margin: 4px 2px 14px;
       color: #ffffff;
       display: flex;
       justify-content: space-between;
@@ -190,18 +193,36 @@
     }
 
     .header-aside-tag {
-      font-size: 0.8rem;
-      color: var(--text-muted);
+      font-size: 0.78rem;
+      color: var(--gold-primary);
       font-weight: 600;
+      background: rgba(212, 175, 55, 0.1);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 0.5px solid rgba(212, 175, 55, 0.2);
     }
 
-    /* Greeting Hero Banner */
-    .hero-greeting-card {
-      background: linear-gradient(135deg, rgba(10, 132, 255, 0.12), rgba(94, 92, 230, 0.10));
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: var(--card-specular), 0 6px 20px rgba(0, 0, 0, 0.35);
+    /* Cards Base */
+    .sanctuary-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-specular), 0 8px 24px rgba(0, 0, 0, 0.45);
       border-radius: 20px;
-      padding: 13px 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Hero Banner */
+    .hero-greeting-card {
+      background: linear-gradient(135deg, rgba(26, 29, 41, 0.95), rgba(18, 20, 28, 0.95));
+      border: 1px solid var(--card-border-gold);
+      box-shadow: var(--card-specular), 0 8px 25px rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      padding: 14px 16px;
       margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
@@ -209,10 +230,10 @@
     }
 
     .greeting-lead {
-      font-size: 1.08rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: #ffffff;
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
     .greeting-date-sub {
@@ -222,13 +243,13 @@
     }
 
     .streak-capsule {
-      background: rgba(255, 159, 10, 0.15);
-      border: 1px solid rgba(255, 159, 10, 0.32);
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       padding: 5px 11px;
       border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: var(--accent-orange);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--gold-light);
       display: flex;
       align-items: center;
       gap: 5px;
@@ -236,182 +257,188 @@
     }
 
     /* ==========================================================================
-       DYNAMIC ISLAND (Live Activity Widget)
+       CURRENT LIFE STATION CARD (Precision Instrument UI)
        ========================================================================== */
-    .live-activity-island {
-      background: #000000;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      border-radius: 24px;
-      padding: 16px 16px 14px;
+    .station-instrument-card {
+      background: #0f1118;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 1.5px solid var(--gold-primary);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      border-radius: 22px;
+      padding: 16px;
       margin-bottom: 12px;
     }
 
-    .island-meta-bar {
+    .station-instrument-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .pulse-pill {
-      display: flex;
+    .station-indicator-tag {
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(48, 209, 88, 0.14);
-      border: 0.5px solid rgba(48, 209, 88, 0.35);
-      padding: 3px 10px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 0.5px solid rgba(16, 185, 129, 0.3);
+      padding: 3px 9px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
-      color: var(--accent-green);
+      color: var(--emerald-accent);
     }
 
-    .pulse-core-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--accent-green);
-      animation: coreBlink 1.8s infinite;
-    }
-
-    @keyframes coreBlink {
-      0% { transform: scale(0.9); opacity: 0.7; }
-      50% { transform: scale(1.4); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.7; }
-    }
-
-    .live-clock-12h {
-      font-size: 0.84rem;
+    .station-live-clock {
+      font-size: 0.82rem;
       color: var(--text-muted);
       font-variant-numeric: tabular-nums;
       font-weight: 700;
-      direction: ltr;
+      direction: rtl;
     }
 
-    .island-current-task {
+    .station-activity-title {
       font-size: 1.15rem;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
       line-height: 1.35;
     }
 
-    .island-current-sub {
-      font-size: 0.82rem;
+    .station-activity-sub {
+      font-size: 0.80rem;
       color: var(--text-muted);
       margin-bottom: 12px;
       line-height: 1.4;
     }
 
-    .island-progress-track {
+    .station-progress-line {
       height: 5px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 999px;
       overflow: hidden;
       margin-bottom: 12px;
     }
 
-    .island-progress-fill {
+    .station-progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+      background: linear-gradient(90deg, var(--gold-primary), var(--emerald-accent));
       border-radius: 999px;
       transition: width 0.4s var(--anim-spring);
     }
 
-    .island-footer-bar {
+    .station-footer-split {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border-radius: 14px;
       padding: 9px 12px;
     }
 
-    .btn-island-check {
-      background: var(--accent-green);
-      color: #000000;
+    .station-next-label {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .station-next-val {
+      font-size: 0.80rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 210px;
+    }
+
+    .btn-station-complete {
+      background: linear-gradient(135deg, var(--emerald-accent), #059669);
+      color: #ffffff;
       border: none;
       padding: 6px 14px;
       border-radius: 999px;
-      font-size: 0.80rem;
-      font-weight: 800;
+      font-size: 0.78rem;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 5px;
+      box-shadow: 0 3px 10px rgba(16, 185, 129, 0.35);
       transition: transform 0.15s ease;
       flex-shrink: 0;
     }
 
-    .btn-island-check:active {
+    .btn-station-complete:active {
       transform: scale(0.94);
     }
 
     /* ==========================================================================
-       PRAYER TIMES MODULE (Engineered for Mobile Screens - No Text Clipping)
+       PRAYER SANCTUARY CARD (Sacred Architecture Styling)
        ========================================================================== */
-    .prayer-station-card {
+    .prayer-sanctuary-card {
       background: var(--card-bg);
-      backdrop-filter: blur(35px) saturate(180%);
-      -webkit-backdrop-filter: blur(35px) saturate(180%);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-specular), 0 8px 24px rgba(0, 0, 0, 0.35);
-      border-radius: 22px;
-      padding: 15px 12px 13px;
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid var(--card-border-gold);
+      box-shadow: var(--card-specular), 0 8px 25px rgba(0, 0, 0, 0.45);
+      border-radius: 20px;
+      padding: 15px 12px 12px;
       margin-bottom: 12px;
     }
 
-    .prayer-station-header {
+    .prayer-header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
     }
 
-    .station-heading {
-      font-size: 0.98rem;
+    .prayer-heading-title {
+      font-size: 0.95rem;
       font-weight: 800;
       display: flex;
       align-items: center;
       gap: 8px;
+      color: #ffffff;
     }
 
-    .countdown-tag {
-      background: rgba(10, 132, 255, 0.16);
-      color: var(--accent-blue);
-      border: 0.5px solid rgba(10, 132, 255, 0.35);
-      padding: 3px 10px;
+    .prayer-countdown-pill {
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--gold-light);
+      border: 0.5px solid rgba(212, 175, 55, 0.35);
+      padding: 3px 9px;
       border-radius: 999px;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       white-space: nowrap;
     }
 
-    .prayer-slots-grid {
+    .prayers-station-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 5px;
     }
 
-    .slot-box {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 9px 2px 8px;
+    .prayer-cell-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 13px;
+      padding: 8px 2px 7px;
       text-align: center;
       transition: all 0.25s var(--anim-spring);
       min-width: 0;
     }
 
-    .slot-box.active {
-      background: linear-gradient(180deg, rgba(10, 132, 255, 0.26), rgba(10, 132, 255, 0.08));
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 14px rgba(10, 132, 255, 0.35);
+    .prayer-cell-box.active {
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.24), rgba(212, 175, 55, 0.06));
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 14px var(--gold-glow);
       transform: translateY(-2px);
     }
 
-    .slot-name {
+    .prayer-cell-name {
       font-size: 0.72rem;
       color: var(--text-muted);
       margin-bottom: 3px;
@@ -419,20 +446,21 @@
       white-space: nowrap;
     }
 
-    .slot-box.active .slot-name {
-      color: var(--accent-blue);
+    .prayer-cell-box.active .prayer-cell-name {
+      color: var(--gold-light);
       font-weight: 800;
     }
 
-    .slot-time-number {
-      font-size: clamp(0.76rem, 2.7vw, 0.88rem);
+    .prayer-cell-time {
+      font-size: clamp(0.76rem, 2.7vw, 0.86rem);
       font-weight: 800;
       font-variant-numeric: tabular-nums;
       line-height: 1.1;
       white-space: nowrap;
+      color: #ffffff;
     }
 
-    .slot-period-tag {
+    .prayer-cell-period {
       font-size: 0.62rem;
       font-weight: 700;
       color: var(--text-muted);
@@ -440,449 +468,61 @@
       display: block;
     }
 
-    .slot-box.active .slot-period-tag {
-      color: var(--accent-blue);
+    .prayer-cell-box.active .prayer-cell-period {
+      color: var(--gold-primary);
     }
 
-    .station-city-selector {
+    .city-picker-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 12px;
       padding-top: 10px;
-      border-top: 0.5px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.78rem;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.76rem;
       color: var(--text-muted);
     }
 
-    .city-dropdown-input {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      border: 0.5px solid rgba(255, 255, 255, 0.18);
-      border-radius: 10px;
-      padding: 4px 10px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      outline: none;
-      cursor: pointer;
-    }
-
-    /* ==========================================================================
-       HEALTH TAB (Calorie Ring & Fluid Hydration System)
-       ========================================================================== */
-    .calorie-hero-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(40px) saturate(190%);
-      -webkit-backdrop-filter: blur(40px) saturate(190%);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-specular), 0 12px 32px rgba(0, 0, 0, 0.5);
-      border-radius: 28px;
-      padding: 22px;
-      margin-bottom: 18px;
-    }
-
-    .calorie-split-flex {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .cal-ring-container {
-      position: relative;
-      width: 112px;
-      height: 112px;
-      flex-shrink: 0;
-    }
-
-    .cal-svg-element {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .cal-circle-base {
-      fill: none;
-      stroke: rgba(250, 17, 79, 0.18);
-      stroke-width: 11;
-    }
-
-    .cal-circle-active {
-      fill: none;
-      stroke: var(--accent-red);
-      stroke-width: 11;
-      stroke-linecap: round;
-      stroke-dasharray: 282.74;
-      stroke-dashoffset: 282.74;
-      transition: stroke-dashoffset 0.6s var(--anim-spring);
-    }
-
-    .cal-ring-text-center {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-
-    .cal-center-bold {
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .cal-center-label {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .cal-info-column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .cal-category-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--accent-red);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .cal-bar-container {
-      height: 6px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .cal-bar-fill-indicator {
-      height: 100%;
-      background: var(--accent-red);
-      border-radius: 999px;
-      width: 0%;
-      transition: width 0.4s var(--anim-spring);
-    }
-
-    .cal-sub-stats {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    /* Water Station */
-    .hydration-station-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(40px) saturate(190%);
-      -webkit-backdrop-filter: blur(40px) saturate(190%);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-specular), 0 12px 32px rgba(0, 0, 0, 0.5);
-      border-radius: 28px;
-      padding: 22px;
-      margin-bottom: 18px;
-    }
-
-    .hydration-top-split {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .water-flask-flask {
-      width: 66px;
-      height: 110px;
-      border: 2.5px solid var(--accent-teal);
-      border-radius: 20px;
-      position: relative;
-      overflow: hidden;
-      background: rgba(100, 210, 255, 0.06);
-      box-shadow: 0 0 20px rgba(100, 210, 255, 0.15), inset 0 0 12px rgba(100, 210, 255, 0.1);
-    }
-
-    .water-fill-level {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(180deg, #64d2ff, #0a84ff);
-      transition: height 0.6s var(--anim-spring);
-      border-radius: 0 0 16px 16px;
-    }
-
-    .water-fill-level::before {
-      content: '';
-      position: absolute;
-      top: -6px; left: -20%; right: -20%;
-      height: 12px;
-      background: rgba(255, 255, 255, 0.35);
-      border-radius: 50%;
-      animation: waveMotion 3s infinite linear;
-    }
-
-    @keyframes waveMotion {
-      0% { transform: translateX(0) scaleY(1); }
-      50% { transform: translateX(10%) scaleY(1.3); }
-      100% { transform: translateX(0) scaleY(1); }
-    }
-
-    .water-metric-details {
-      flex: 1;
-      margin-right: 22px;
-    }
-
-    .water-section-tag {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--accent-teal);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-
-    .water-num-large {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1.1;
-      font-variant-numeric: tabular-nums;
-      margin-bottom: 4px;
-    }
-
-    .water-num-large small {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .cups-dots-row {
-      display: flex;
-      gap: 5px;
-      margin-top: 8px;
-    }
-
-    .cup-pip {
-      width: 14px;
-      height: 14px;
-      border-radius: 4px;
-      border: 1px solid rgba(100, 210, 255, 0.3);
-      background: rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .cup-pip.filled {
-      background: var(--accent-teal);
-      border-color: var(--accent-teal);
-      box-shadow: 0 0 8px rgba(100, 210, 255, 0.5);
-    }
-
-    .water-buttons-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-    }
-
-    .btn-tile-action {
+    .city-dropdown-styled {
       background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 12px 6px;
-      text-align: center;
       color: #ffffff;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-    }
-
-    .btn-tile-action:active {
-      transform: scale(0.95);
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    .btn-tile-action.highlight {
-      background: rgba(100, 210, 255, 0.12);
-      border-color: rgba(100, 210, 255, 0.35);
-      color: var(--accent-teal);
-    }
-
-    /* Food Logger Module */
-    .meals-logging-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(40px) saturate(190%);
-      -webkit-backdrop-filter: blur(40px) saturate(190%);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-specular), 0 12px 32px rgba(0, 0, 0, 0.5);
-      border-radius: 28px;
-      padding: 22px;
-      margin-bottom: 24px;
-    }
-
-    .meals-bar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .meals-header-text {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    .smart-chips-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .meal-chip-btn {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .meal-chip-btn:active {
-      transform: scale(0.95);
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-    }
-
-    .cal-chip-tag {
-      background: rgba(250, 17, 79, 0.2);
-      color: var(--accent-red);
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
-    }
-
-    .meal-input-box-block {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      padding: 14px;
-      margin-bottom: 16px;
-    }
-
-    .split-input-fields {
-      display: flex;
-      gap: 10px;
-      width: 100%;
-    }
-
-    .custom-text-input {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 12px;
-      padding: 11px 14px;
-      color: #fff;
-      font-size: 0.92rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .custom-text-input:focus {
-      border-color: var(--accent-blue);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .btn-submit-food {
-      width: 100%;
-      background: var(--accent-blue);
-      color: #ffffff;
-      border: none;
-      border-radius: 14px;
-      padding: 12px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-
-    .btn-submit-food:active {
-      transform: scale(0.97);
-    }
-
-    .food-history-container {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .food-logged-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 9px 12px;
-      border-radius: 14px;
-      font-size: 0.86rem;
-    }
-
-    .food-delete-trigger {
-      color: rgba(255, 255, 255, 0.4);
-      cursor: pointer;
+      border: 0.5px solid rgba(255, 255, 255, 0.16);
+      border-radius: 9px;
       padding: 3px 8px;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      transition: all 0.15s ease;
-    }
-
-    .food-delete-trigger:hover, .food-delete-trigger:active {
-      color: var(--accent-red);
-      background: rgba(250, 17, 79, 0.14);
+      font-size: 0.78rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
     }
 
     /* ==========================================================================
-       SCHEDULE TIMELINE & LISTS (Engineered for Mobile Flow & Micro-interactivity)
+       SCHEDULE TIMELINE (Master Life Stations)
        ========================================================================== */
-    .schedule-progress-summary-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+    .progress-summary-banner {
+      background: linear-gradient(135deg, rgba(26, 29, 41, 0.9), rgba(18, 20, 28, 0.9));
       border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 13px 16px;
+      border-radius: 18px;
+      padding: 12px 15px;
       margin-bottom: 12px;
     }
 
-    .summary-meta-line {
+    .progress-meta-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 7px;
     }
 
-    .summary-title-text {
-      font-size: 0.86rem;
+    .progress-headline {
+      font-size: 0.84rem;
       font-weight: 700;
-      color: #fff;
+      color: #ffffff;
     }
 
-    .summary-percent-pill {
-      background: rgba(48, 209, 88, 0.16);
-      color: var(--accent-green);
-      border: 0.5px solid rgba(48, 209, 88, 0.35);
+    .progress-score-pill {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald-accent);
+      border: 0.5px solid rgba(16, 185, 129, 0.35);
       padding: 2px 8px;
       border-radius: 999px;
       font-size: 0.74rem;
@@ -890,7 +530,7 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .summary-bar-track {
+    .progress-track-bg {
       height: 6px;
       background: rgba(255, 255, 255, 0.08);
       border-radius: 999px;
@@ -898,208 +538,693 @@
       margin-bottom: 6px;
     }
 
-    .summary-bar-fill {
+    .progress-fill-bar {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent-green), var(--accent-teal));
+      background: linear-gradient(90deg, var(--gold-primary), var(--emerald-accent));
       border-radius: 999px;
       width: 0%;
       transition: width 0.4s var(--anim-spring);
     }
 
-    .summary-stats-sub {
-      font-size: 0.74rem;
+    .progress-sub-caption {
+      font-size: 0.72rem;
       color: var(--text-muted);
     }
 
-    .timeline-block-card {
+    .station-block-card {
       background: var(--card-bg);
-      backdrop-filter: blur(35px) saturate(180%);
-      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
       border: 1px solid var(--card-border);
-      box-shadow: var(--card-specular), 0 8px 24px rgba(0, 0, 0, 0.35);
-      border-radius: 22px;
-      padding: 14px 14px 10px;
+      box-shadow: var(--card-specular), 0 6px 20px rgba(0, 0, 0, 0.35);
+      border-radius: 18px;
+      padding: 13px 13px 8px;
       margin-bottom: 12px;
     }
 
-    .timeline-header-line {
+    .station-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 8px;
       padding-bottom: 8px;
-      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.07);
     }
 
-    .timeline-title-wrap {
+    .station-title-cluster {
       display: flex;
       align-items: center;
       gap: 7px;
     }
 
-    .timeline-title-text {
-      font-size: 0.94rem;
+    .station-order-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-light);
+      border: 0.5px solid rgba(212, 175, 55, 0.3);
+      font-size: 0.72rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .station-title-text {
+      font-size: 0.90rem;
       font-weight: 800;
       color: #ffffff;
       line-height: 1.25;
     }
 
-    .timeline-time-badge {
-      font-size: 0.74rem;
+    .station-time-pill {
+      font-size: 0.72rem;
       color: var(--text-muted);
-      direction: ltr;
-      background: rgba(255, 255, 255, 0.06);
-      border: 0.5px solid rgba(255, 255, 255, 0.1);
+      direction: rtl;
+      background: rgba(255, 255, 255, 0.05);
+      border: 0.5px solid rgba(255, 255, 255, 0.09);
       padding: 3px 8px;
-      border-radius: 8px;
+      border-radius: 7px;
       font-weight: 700;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
 
-    .task-row-entry {
+    .task-entry-row {
       display: flex;
       align-items: flex-start;
-      gap: 11px;
-      padding: 9px 8px;
-      border-radius: 12px;
+      gap: 10px;
+      padding: 8px 6px;
+      border-radius: 11px;
       cursor: pointer;
       transition: background 0.15s, transform 0.15s;
       border-bottom: 0.5px solid rgba(255, 255, 255, 0.04);
     }
 
-    .task-row-entry:last-child {
+    .task-entry-row:last-child {
       border-bottom: none;
     }
 
-    .task-row-entry:active {
-      transform: scale(0.98);
-      background: rgba(255, 255, 255, 0.05);
+    .task-entry-row:active {
+      transform: scale(0.985);
+      background: rgba(255, 255, 255, 0.04);
     }
 
-    .task-checkbox-bubble {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255, 255, 255, 0.32);
-      background: rgba(255, 255, 255, 0.03);
+    .task-squircle-checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.02);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 1px;
+      margin-top: 2px;
       flex-shrink: 0;
       transition: all 0.2s var(--anim-spring);
     }
 
-    .task-row-entry.done .task-checkbox-bubble {
-      background: var(--accent-green);
-      border-color: var(--accent-green);
-      box-shadow: 0 0 10px rgba(48, 209, 88, 0.4);
+    .task-entry-row.done .task-squircle-checkbox {
+      background: var(--emerald-accent);
+      border-color: var(--emerald-accent);
+      box-shadow: 0 0 10px var(--emerald-glow);
     }
 
-    .task-row-entry.done .task-checkbox-bubble::after {
+    .task-entry-row.done .task-squircle-checkbox::after {
       content: '✓';
       color: #000;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 900;
     }
 
-    .task-headline-text {
-      font-size: 0.90rem;
+    .task-title-bold {
+      font-size: 0.88rem;
       font-weight: 700;
       color: #ffffff;
       line-height: 1.35;
       margin-bottom: 2px;
     }
 
-    .task-row-entry.done .task-headline-text {
+    .task-entry-row.done .task-title-bold {
       text-decoration: line-through;
       color: var(--text-dim);
     }
 
-    .task-submeta-text {
-      font-size: 0.76rem;
+    .task-sub-hint {
+      font-size: 0.74rem;
       color: var(--text-muted);
       line-height: 1.3;
     }
 
     /* ==========================================================================
-       EDITORIAL & SETTINGS
+       HEALTH & VITALS (Calorie Ring, Hydration, Food Log)
        ========================================================================== */
-    .knowledge-story-card {
-      background: linear-gradient(160deg, rgba(34, 34, 38, 0.9), rgba(18, 18, 20, 0.9));
+    .vitals-matrix-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(30px);
       border: 1px solid var(--card-border);
-      box-shadow: var(--card-specular), 0 12px 30px rgba(0, 0, 0, 0.5);
-      border-radius: 28px;
-      padding: 22px;
-      margin-bottom: 18px;
+      box-shadow: var(--card-specular), 0 8px 24px rgba(0, 0, 0, 0.45);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 12px;
     }
 
-    .story-kicker {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--accent-purple);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 8px;
-      display: block;
+    .cal-split-layout {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
-    .story-headline {
+    .cal-ring-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+
+    .cal-svg-track {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .cal-circle-under {
+      fill: none;
+      stroke: rgba(244, 63, 94, 0.16);
+      stroke-width: 10;
+    }
+
+    .cal-circle-active-bar {
+      fill: none;
+      stroke: var(--crimson-accent);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 282.74;
+      stroke-dashoffset: 282.74;
+      transition: stroke-dashoffset 0.6s var(--anim-spring);
+    }
+
+    .cal-ring-center-content {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .cal-center-val {
       font-size: 1.25rem;
       font-weight: 800;
-      line-height: 1.35;
       color: #ffffff;
-      margin-bottom: 10px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
     }
 
-    .story-body {
-      font-size: 0.92rem;
-      color: rgba(235, 235, 245, 0.85);
-      line-height: 1.6;
+    .cal-center-unit {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .cal-data-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .cal-header-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--crimson-accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cal-progress-rail {
+      height: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .cal-rail-fill {
+      height: 100%;
+      background: var(--crimson-accent);
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.4s var(--anim-spring);
+    }
+
+    .cal-sub-ratios {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    /* Hydration */
+    .water-split-layout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 14px;
     }
 
-    .video-frame-box {
+    .water-flask-art {
+      width: 58px;
+      height: 96px;
+      border: 2px solid rgba(6, 182, 212, 0.4);
+      border-radius: 14px;
       position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      border-radius: 16px;
       overflow: hidden;
-      margin-top: 14px;
-      background: #000;
-      border: 0.5px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.4);
+      flex-shrink: 0;
     }
 
-    .video-frame-box iframe {
+    .water-flask-level {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      border: 0;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(180deg, #06b6d4, #0284c7);
+      transition: height 0.5s var(--anim-spring);
+      border-radius: 0 0 12px 12px;
     }
 
-    .settings-table-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(35px) saturate(180%);
-      -webkit-backdrop-filter: blur(35px) saturate(180%);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      margin-bottom: 20px;
-      overflow: hidden;
+    .water-info-pane {
+      flex: 1;
+      margin-right: 18px;
     }
 
-    .settings-row-cell {
+    .water-accent-tag {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--teal-accent);
+      margin-bottom: 3px;
+    }
+
+    .water-large-num {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 2px;
+    }
+
+    .water-large-num small {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .water-cups-grid-row {
+      display: flex;
+      gap: 4px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .water-pip-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+      transition: all 0.25s ease;
+    }
+
+    .water-pip-dot.filled {
+      background: var(--teal-accent);
+      border-color: var(--teal-accent);
+      box-shadow: 0 0 6px rgba(6, 182, 212, 0.5);
+    }
+
+    .water-buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-water-step {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 13px;
+      padding: 9px 4px;
+      text-align: center;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .btn-water-step:active {
+      transform: scale(0.95);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-water-step.accented {
+      background: rgba(6, 182, 212, 0.12);
+      border-color: rgba(6, 182, 212, 0.3);
+      color: var(--teal-accent);
+    }
+
+    /* Food Logger */
+    .smart-chips-scroll {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .meal-chip-touch {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+
+    .meal-chip-touch:active {
+      transform: scale(0.95);
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .chip-cal-pill {
+      background: rgba(244, 63, 94, 0.2);
+      color: var(--crimson-accent);
+      padding: 1px 5px;
+      border-radius: 5px;
+      font-size: 0.70rem;
+      font-weight: 700;
+    }
+
+    .food-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .food-input-row {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .custom-app-input {
+      box-sizing: border-box;
+      min-width: 0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+
+    .custom-app-input:focus {
+      border-color: var(--sapphire-accent);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .btn-submit-action {
+      width: 100%;
+      background: linear-gradient(135deg, var(--sapphire-accent), #2563eb);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 11px;
+      font-size: 0.90rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-submit-action:active {
+      transform: scale(0.97);
+    }
+
+    .food-log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .food-log-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 18px;
-      border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-size: 0.84rem;
     }
 
-    .settings-row-cell:last-child {
+    .food-del-btn {
+      color: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.80rem;
+      transition: all 0.15s ease;
+    }
+
+    .food-del-btn:hover, .food-del-btn:active {
+      color: var(--crimson-accent);
+      background: rgba(244, 63, 94, 0.12);
+    }
+
+    /* ==========================================================================
+       WISDOM & MASTERCLASS CARDS (Eliminating Black Voids)
+       ========================================================================== */
+    .binaural-audio-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(99, 102, 241, 0.10));
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+
+    .audio-freq-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 18px;
+      margin-top: 3px;
+    }
+
+    .freq-bar {
+      width: 3px;
+      background: var(--sapphire-accent);
+      border-radius: 999px;
+      height: 6px;
+      transition: height 0.2s ease;
+    }
+
+    .freq-bar.active {
+      animation: soundWave 0.8s infinite ease-in-out alternate;
+    }
+
+    .freq-bar:nth-child(2).active { animation-delay: 0.2s; }
+    .freq-bar:nth-child(3).active { animation-delay: 0.4s; }
+    .freq-bar:nth-child(4).active { animation-delay: 0.1s; }
+
+    @keyframes soundWave {
+      0% { height: 4px; }
+      100% { height: 18px; }
+    }
+
+    .btn-audio-toggle {
+      background: var(--sapphire-accent);
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.80rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .editorial-story-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(28px);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-specular), 0 8px 24px rgba(0, 0, 0, 0.45);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .story-category-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .story-headline-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .story-prose-text {
+      font-size: 0.80rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .video-preview-shell {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(circle at center, #1b2030 0%, #0c0e15 100%);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 0.5px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .video-poster-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.45;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .video-preview-shell:hover .video-poster-bg {
+      opacity: 0.65;
+      transform: scale(1.03);
+    }
+
+    .video-play-center-btn {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .video-play-ring {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.45);
+      transition: transform 0.2s var(--anim-spring), background 0.2s;
+    }
+
+    .video-preview-shell:hover .video-play-ring {
+      transform: scale(1.08);
+      background: #fcd34d;
+    }
+
+    .video-badge-pill {
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 0.5px solid rgba(255, 255, 255, 0.2);
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.2px;
+    }
+
+    .video-preview-shell iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 14px;
+    }
+
+    /* ==========================================================================
+       SETTINGS & PREFERENCES
+       ========================================================================== */
+    .grouped-settings-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(28px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .setting-item-cell {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 16px;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .setting-item-cell:last-child {
       border-bottom: none;
     }
 
-    /* Bottom Tab Bar (Ergonomic Mobile Dock) */
+    .setting-title-txt {
+      font-weight: 700;
+      font-size: 0.90rem;
+      color: #ffffff;
+    }
+
+    .setting-sub-txt {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Bottom Dock Navigation */
     .dock-navigation-bar {
       position: fixed;
       bottom: 0;
@@ -1109,16 +1234,16 @@
       width: 100%;
       max-width: 480px;
       height: auto;
-      background: rgba(14, 14, 16, 0.94);
-      backdrop-filter: blur(35px) saturate(200%);
-      -webkit-backdrop-filter: blur(35px) saturate(200%);
-      border-top: 0.5px solid rgba(255, 255, 255, 0.12);
+      background: rgba(9, 10, 15, 0.94);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border-top: 0.5px solid rgba(255, 255, 255, 0.1);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding-top: 8px;
+      padding-top: 7px;
       padding-bottom: max(10px, env(safe-area-inset-bottom, 12px));
-      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.7);
     }
 
     .tab-item-btn {
@@ -1129,22 +1254,22 @@
       align-items: center;
       justify-content: center;
       gap: 3px;
-      color: rgba(235, 235, 245, 0.45);
+      color: rgba(156, 163, 175, 0.6);
       cursor: pointer;
       padding: 4px 10px;
-      border-radius: 12px;
+      border-radius: 10px;
       transition: all 0.2s var(--anim-spring);
       -webkit-tap-highlight-color: transparent;
     }
 
     .tab-item-btn.active {
-      color: var(--accent-blue);
+      color: var(--gold-primary);
       transform: translateY(-1px);
     }
 
     .tab-vector-svg {
-      width: 21px;
-      height: 21px;
+      width: 20px;
+      height: 20px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
@@ -1153,30 +1278,31 @@
     }
 
     .tab-caption-label {
-      font-size: 0.70rem;
+      font-size: 0.68rem;
       font-weight: 700;
     }
 
+    /* Toast Notification */
     .toast-pill-alert {
       position: fixed;
       top: 18px;
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
-      background: rgba(36, 36, 38, 0.92);
+      background: rgba(26, 29, 41, 0.95);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid var(--card-border-gold);
       border-radius: 999px;
-      padding: 9px 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
       color: #fff;
       z-index: 120;
       transition: transform 0.35s var(--anim-spring);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .toast-pill-alert.show {
@@ -1186,16 +1312,15 @@
 </head>
 <body>
 
-  <!-- Ambient Radiance -->
-  <div class="ambient-aurora-1"></div>
-  <div class="ambient-aurora-2"></div>
-
   <!-- Top App Navigation -->
   <header class="top-navbar">
     <div class="top-navbar-inner">
       <div class="brand-cluster" onclick="switchTab('now')">
         <img src="icons/icon.svg" alt="سَمْت" class="brand-icon-img">
-        <span class="brand-wordmark">سَمْت</span>
+        <div class="brand-text-column">
+          <span class="brand-wordmark">سَمْت</span>
+          <span class="brand-tagline">مِنْهَاجُ الْيَوْمِ وَالسَّكِينَة</span>
+        </div>
       </div>
       <div class="top-date-capsule">
         <span class="active-status-dot"></span>
@@ -1206,7 +1331,7 @@
 
   <!-- Toast Notification -->
   <div id="toastNotification" class="toast-pill-alert">
-    <span id="toastIcon">✓</span>
+    <span id="toastIcon" style="color:var(--emerald-accent);">✓</span>
     <span id="toastMsg">تم الإجراء بنجاح</span>
   </div>
 
@@ -1219,90 +1344,93 @@
       <div class="hero-greeting-card">
         <div>
           <div class="greeting-lead" id="heroGreetingLead">طاب يومك بالبركة والهمّة</div>
-          <div class="greeting-date-sub" id="heroDateFormatted">استثمر يومك لبناء مستقبلك الجامعي</div>
+          <div class="greeting-date-sub" id="heroDateFormatted">استثمر ساعات يومك لصناعة مستقبلك الجامعي</div>
         </div>
         <div class="streak-capsule">
-          <span>🔥</span>
-          <span id="heroStreakCount">1 يوم التزام</span>
+          <span style="color:var(--gold-primary);">✦</span>
+          <span id="heroStreakCount">التزام اليوم الأول</span>
         </div>
       </div>
 
-      <!-- Live Activity Dynamic Island -->
-      <div class="live-activity-island">
-        <div class="island-meta-bar">
-          <div class="pulse-pill">
-            <span class="pulse-core-dot"></span>
-            <span>النشاط الجاري الآن</span>
+      <!-- Current Life Station (Precision Instrument) -->
+      <div class="station-instrument-card">
+        <div class="station-instrument-meta">
+          <div class="station-indicator-tag">
+            <span class="active-status-dot"></span>
+            <span>المحطة الحالية الجارية</span>
           </div>
-          <div class="live-clock-12h" id="liveTickerClock">00:00:00 ص</div>
+          <div class="station-live-clock" id="liveTickerClock">00:00:00 ص</div>
         </div>
 
-        <div class="island-current-task" id="islandCurrentTitle">تحميل النشاط...</div>
-        <div class="island-current-sub" id="islandCurrentDesc">مزامنة الوقت الحالي بدقة...</div>
+        <div class="station-activity-title" id="islandCurrentTitle">تحميل المحطة...</div>
+        <div class="station-activity-sub" id="islandCurrentDesc">مزامنة الوقت الحالي بدقة...</div>
 
-        <div class="island-progress-track">
-          <div class="island-progress-fill" id="islandProgressBar" style="width: 30%;"></div>
+        <div class="station-progress-line">
+          <div class="station-progress-fill" id="islandProgressBar" style="width: 30%;"></div>
         </div>
 
-        <div class="island-footer-bar">
+        <div class="station-footer-split">
           <div style="display:flex; flex-direction:column; gap:2px;">
-            <span style="font-size:0.7rem; color:var(--text-dim); text-transform:uppercase; font-weight:600;">النشاط التالي</span>
-            <span style="font-size:0.84rem; font-weight:600; color:rgba(255,255,255,0.9);" id="islandNextTitle">صلاة الظهر في المسجد</span>
+            <span class="station-next-label">المحطة التالية</span>
+            <span class="station-next-val" id="islandNextTitle">صلاة الظهر في المسجد</span>
           </div>
-          <button class="btn-island-check" onclick="markTaskDone()">
-            <span>✓</span> أنجزت
+          <button class="btn-station-complete" onclick="markTaskDone()">
+            <span>✓</span> أنجزت المحطة
           </button>
         </div>
       </div>
 
-      <!-- Mosque Prayer Station (Redesigned with Mosque Icon & 12h format) -->
-      <div class="prayer-station-card">
-        <div class="prayer-station-header">
-          <div class="station-heading">
-            <!-- Elegant Mosque Minaret & Crescent Vector -->
-            <svg class="tab-vector-svg" style="width:20px;height:20px; color:var(--accent-blue);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Mosque Prayer Station (Sacred Architecture) -->
+      <div class="prayer-sanctuary-card">
+        <div class="prayer-header-bar">
+          <div class="prayer-heading-title">
+            <!-- Elegant Mosque Minaret Vector -->
+            <svg style="width:19px; height:19px; color:var(--gold-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 3c-2.2 2-3.8 4.5-3.8 7v11h7.6V10c0-2.5-1.6-5-3.8-7z"/>
               <path d="M4 21V12a2 2 0 0 1 2-2h2"/>
               <path d="M20 21V12a2 2 0 0 0-2-2h-2"/>
               <path d="M12 3V1"/>
             </svg>
-            <span>أوقات الصلاة في المسجد</span>
+            <span>مواقيت الصلاة في المسجد</span>
           </div>
-          <span class="countdown-tag" id="nextPrayerCountdown">باقي 35 دقيقة</span>
+          <span class="prayer-countdown-pill" id="nextPrayerCountdown">باقي 35 دقيقة</span>
         </div>
 
         <!-- 5 Prayers Grid in 12-Hour System -->
-        <div class="prayer-slots-grid">
-          <div class="slot-box" id="p-fajr">
-            <div class="slot-name">الفجر</div>
-            <div class="slot-time-number" id="t-fajr">4:55</div>
-            <span class="slot-period-tag" id="per-fajr">ص</span>
+        <div class="prayers-station-grid">
+          <div class="prayer-cell-box" id="p-fajr">
+            <div class="prayer-cell-name">الفجر</div>
+            <div class="prayer-cell-time" id="t-fajr">4:35</div>
+            <span class="prayer-cell-period" id="per-fajr">ص</span>
           </div>
-          <div class="slot-box" id="p-dhuhr">
-            <div class="slot-name">الظهر</div>
-            <div class="slot-time-number" id="t-dhuhr">12:12</div>
-            <span class="slot-period-tag" id="per-dhuhr">م</span>
+          <div class="prayer-cell-box" id="p-dhuhr">
+            <div class="prayer-cell-name">الظهر</div>
+            <div class="prayer-cell-time" id="t-dhuhr">11:52</div>
+            <span class="prayer-cell-period" id="per-dhuhr">ص</span>
           </div>
-          <div class="slot-box" id="p-asr">
-            <div class="slot-name">العصر</div>
-            <div class="slot-time-number" id="t-asr">3:35</div>
-            <span class="slot-period-tag" id="per-asr">م</span>
+          <div class="prayer-cell-box" id="p-asr">
+            <div class="prayer-cell-name">العصر</div>
+            <div class="prayer-cell-time" id="t-asr">3:15</div>
+            <span class="prayer-cell-period" id="per-asr">م</span>
           </div>
-          <div class="slot-box" id="p-maghrib">
-            <div class="slot-name">المغرب</div>
-            <div class="slot-time-number" id="t-maghrib">6:11</div>
-            <span class="slot-period-tag" id="per-maghrib">م</span>
+          <div class="prayer-cell-box" id="p-maghrib">
+            <div class="prayer-cell-name">المغرب</div>
+            <div class="prayer-cell-time" id="t-maghrib">5:51</div>
+            <span class="prayer-cell-period" id="per-maghrib">م</span>
           </div>
-          <div class="slot-box" id="p-isha">
-            <div class="slot-name">العشاء</div>
-            <div class="slot-time-number" id="t-isha">7:41</div>
-            <span class="slot-period-tag" id="per-isha">م</span>
+          <div class="prayer-cell-box" id="p-isha">
+            <div class="prayer-cell-name">العشاء</div>
+            <div class="prayer-cell-time" id="t-isha">7:21</div>
+            <span class="prayer-cell-period" id="per-isha">م</span>
           </div>
         </div>
 
-        <div class="station-city-selector">
-          <span>المدينة المعتمدة:</span>
-          <select id="citySelect" class="city-dropdown-input" onchange="changeCity(this.value)">
+        <div class="city-picker-bar">
+          <span style="display:flex; align-items:center; gap:5px;">
+            <svg style="width:14px; height:14px; color:var(--gold-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            المدينة المعتمدة:
+          </span>
+          <select id="citySelect" class="city-dropdown-styled" onchange="changeCity(this.value)">
             <option value="riyadh" selected>الرياض</option>
             <option value="makkah">مكة المكرمة</option>
             <option value="amman">عَمّان</option>
@@ -1314,33 +1442,33 @@
       </div>
 
       <!-- Quick Action / Today's Routine Preview Card -->
-      <div class="timeline-block-card">
-        <div class="timeline-header-line">
-          <div class="timeline-title-wrap">
-            <span style="font-size:1.05rem;">⚡</span>
-            <span class="timeline-title-text">أبرز محطات يومك</span>
+      <div class="sanctuary-card">
+        <div class="station-header-row">
+          <div class="station-title-cluster">
+            <span style="color:var(--gold-primary);">✦</span>
+            <span class="station-title-text">أبرز محطات يومك</span>
           </div>
-          <span class="timeline-time-badge" style="cursor:pointer;" onclick="switchTab('schedule')">عرض الجدول الكامل ←</span>
+          <span class="station-time-pill" style="cursor:pointer;" onclick="switchTab('schedule')">عرض الجدول الكامل ←</span>
         </div>
-        <div class="task-row-entry" data-task-id="0" onclick="toggleTask(0)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="0" onclick="toggleTask(0)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">صلاة الفجر في المسجد + أذكار الصباح</div>
-            <div class="task-submeta-text">5:00 ص – البكور وبركة اليوم</div>
-          </div>
-        </div>
-        <div class="task-row-entry" data-task-id="4" onclick="toggleTask(4)">
-          <div class="task-checkbox-bubble"></div>
-          <div>
-            <div class="task-headline-text">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
-            <div class="task-submeta-text">8:30 ص – إنجاز مشاريعك وأعمالك</div>
+            <div class="task-title-bold">صلاة الفجر في المسجد + أذكار الصباح</div>
+            <div class="task-sub-hint">5:00 ص – البكور وبركة انطلاقة اليوم</div>
           </div>
         </div>
-        <div class="task-row-entry" data-task-id="9" onclick="toggleTask(9)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="4" onclick="toggleTask(4)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">التمرين الرياضي في النادي (حديد / لياقة)</div>
-            <div class="task-submeta-text">4:30 م – بناء القوة والصحة البدنية</div>
+            <div class="task-title-bold">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
+            <div class="task-sub-hint">8:30 ص – إنجاز مشاريعك وأعمالك بدون مشتتات</div>
+          </div>
+        </div>
+        <div class="task-entry-row" data-task-id="9" onclick="toggleTask(9)">
+          <div class="task-squircle-checkbox"></div>
+          <div>
+            <div class="task-title-bold">التمرين الرياضي في النادي (حديد / لياقة)</div>
+            <div class="task-sub-hint">4:30 م – تفريغ طاقة اليوم وبناء القوة البدنية</div>
           </div>
         </div>
       </div>
@@ -1355,155 +1483,155 @@
       </div>
 
       <!-- Daily Progress Summary Card -->
-      <div class="schedule-progress-summary-card">
-        <div class="summary-meta-line">
-          <span class="summary-title-text">معدل إنجاز المهام اليومية</span>
-          <span class="summary-percent-pill" id="scheduleProgressPercent">0%</span>
+      <div class="progress-summary-banner">
+        <div class="progress-meta-row">
+          <span class="progress-headline">معدل إنجاز محطات اليوم</span>
+          <span class="progress-score-pill" id="scheduleProgressPercent">0%</span>
         </div>
-        <div class="summary-bar-track">
-          <div class="summary-bar-fill" id="scheduleProgressBarFill" style="width: 0%;"></div>
+        <div class="progress-track-bg">
+          <div class="progress-fill-bar" id="scheduleProgressBarFill" style="width: 0%;"></div>
         </div>
-        <div class="summary-stats-sub" id="scheduleTasksRatio">0 من 13 مهمة مكتملة</div>
+        <div class="progress-sub-caption" id="scheduleTasksRatio">0 من 13 محطة مكتملة</div>
       </div>
 
       <!-- Schedule Blocks (All 12-Hour Format) -->
-      <div class="timeline-block-card">
-        <div class="timeline-header-line">
-          <div class="timeline-title-wrap">
-            <span style="font-size:1.05rem;">🌅</span>
-            <span class="timeline-title-text">1. البكور وتطوير الذات</span>
+      <div class="station-block-card">
+        <div class="station-header-row">
+          <div class="station-title-cluster">
+            <span class="station-order-badge">١</span>
+            <span class="station-title-text">محطة البكور وتطوير الذات</span>
           </div>
-          <span class="timeline-time-badge">5:00 ص - 7:30 ص</span>
+          <span class="station-time-pill">5:00 ص – 7:30 ص</span>
         </div>
-        <div class="task-row-entry" data-task-id="0" onclick="toggleTask(0)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="0" onclick="toggleTask(0)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">صلاة الفجر في المسجد + أذكار الصباح</div>
-            <div class="task-submeta-text">5:00 ص – كوب ماء وانطلاقة اليوم بالبركة</div>
-          </div>
-        </div>
-        <div class="task-row-entry" data-task-id="1" onclick="toggleTask(1)">
-          <div class="task-checkbox-bubble"></div>
-          <div>
-            <div class="task-headline-text">تطوير اللغة الإنجليزية (45 دقيقة)</div>
-            <div class="task-submeta-text">6:00 ص – استماع وبودكاست وتقنية Shadowing</div>
+            <div class="task-title-bold">صلاة الفجر في المسجد + أذكار الصباح</div>
+            <div class="task-sub-hint">5:00 ص – كوب ماء وانطلاقة اليوم بالبركة</div>
           </div>
         </div>
-        <div class="task-row-entry" data-task-id="2" onclick="toggleTask(2)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="1" onclick="toggleTask(1)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">دورات تحضير الجامعة وشهادات الخبرة</div>
-            <div class="task-submeta-text">6:45 ص – منصات Coursera ومواد التخصص</div>
+            <div class="task-title-bold">تطوير اللغة الإنجليزية (45 دقيقة)</div>
+            <div class="task-sub-hint">6:00 ص – استماع وبودكاست وتقنية Shadowing</div>
+          </div>
+        </div>
+        <div class="task-entry-row" data-task-id="2" onclick="toggleTask(2)">
+          <div class="task-squircle-checkbox"></div>
+          <div>
+            <div class="task-title-bold">دورات تحضير الجامعة وشهادات الخبرة</div>
+            <div class="task-sub-hint">6:45 ص – منصات Coursera ومواد التخصص</div>
           </div>
         </div>
       </div>
 
-      <div class="timeline-block-card">
-        <div class="timeline-header-line">
-          <div class="timeline-title-wrap">
-            <span style="font-size:1.05rem;">💼</span>
-            <span class="timeline-title-text">2. العمل الخاص المُرَكَّز</span>
+      <div class="station-block-card">
+        <div class="station-header-row">
+          <div class="station-title-cluster">
+            <span class="station-order-badge">٢</span>
+            <span class="station-title-text">محطة العمل الخاص المُرَكَّز</span>
           </div>
-          <span class="timeline-time-badge">7:30 ص - 12:00 م</span>
+          <span class="station-time-pill">7:30 ص – 12:00 م</span>
         </div>
-        <div class="task-row-entry" data-task-id="3" onclick="toggleTask(3)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="3" onclick="toggleTask(3)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">فطور صحي متوازن وقهوة الصباح</div>
-            <div class="task-submeta-text">7:30 ص – تهيئة بيئة العمل والمهام</div>
+            <div class="task-title-bold">فطور صحي متوازن وقهوة الصباح</div>
+            <div class="task-sub-hint">7:30 ص – تهيئة بيئة العمل والمهام</div>
           </div>
         </div>
-        <div class="task-row-entry" data-task-id="4" onclick="toggleTask(4)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="4" onclick="toggleTask(4)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
-            <div class="task-submeta-text">8:30 ص – إنجاز مهام المشروع بدون مشتتات</div>
+            <div class="task-title-bold">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
+            <div class="task-sub-hint">8:30 ص – إنجاز مهام المشروع بدون مشتتات</div>
           </div>
         </div>
       </div>
 
-      <div class="timeline-block-card">
-        <div class="timeline-header-line">
-          <div class="timeline-title-wrap">
-            <span style="font-size:1.05rem;">🍲</span>
-            <span class="timeline-title-text">3. منتصف اليوم والاستراحة</span>
+      <div class="station-block-card">
+        <div class="station-header-row">
+          <div class="station-title-cluster">
+            <span class="station-order-badge">٣</span>
+            <span class="station-title-text">محطة منتصف اليوم والاستراحة</span>
           </div>
-          <span class="timeline-time-badge">12:00 م - 2:00 م</span>
+          <span class="station-time-pill">12:00 م – 2:00 م</span>
         </div>
-        <div class="task-row-entry" data-task-id="5" onclick="toggleTask(5)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="5" onclick="toggleTask(5)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">صلاة الظهر في المسجد</div>
-            <div class="task-submeta-text">12:00 م – فصل العقل عن الشاشات</div>
+            <div class="task-title-bold">صلاة الظهر في المسجد</div>
+            <div class="task-sub-hint">12:00 م – فصل العقل عن الشاشات والسكينة</div>
           </div>
         </div>
-        <div class="task-row-entry" data-task-id="6" onclick="toggleTask(6)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="6" onclick="toggleTask(6)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">وجبة الغداء + قيلولة 20 دقيقة</div>
-            <div class="task-submeta-text">1:00 م – وجبة متوازنة وشحن النشاط</div>
+            <div class="task-title-bold">وجبة الغداء + قيلولة 20 دقيقة</div>
+            <div class="task-sub-hint">1:00 م – وجبة متوازنة وشحن النشاط</div>
           </div>
         </div>
       </div>
 
-      <div class="timeline-block-card">
-        <div class="timeline-header-line">
-          <div class="timeline-title-wrap">
-            <span style="font-size:1.05rem;">🏋️‍♂️</span>
-            <span class="timeline-title-text">4. المتابعات والتمرين البدني</span>
+      <div class="station-block-card">
+        <div class="station-header-row">
+          <div class="station-title-cluster">
+            <span class="station-order-badge">٤</span>
+            <span class="station-title-text">محطة المتابعات والنشاط البدني</span>
           </div>
-          <span class="timeline-time-badge">2:00 م - 6:00 م</span>
+          <span class="station-time-pill">2:00 م – 6:00 م</span>
         </div>
-        <div class="task-row-entry" data-task-id="7" onclick="toggleTask(7)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="7" onclick="toggleTask(7)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">متابعات العمل والاجتماعات والمكالمات</div>
-            <div class="task-submeta-text">2:00 م – الردود والتنسيق</div>
-          </div>
-        </div>
-        <div class="task-row-entry" data-task-id="8" onclick="toggleTask(8)">
-          <div class="task-checkbox-bubble"></div>
-          <div>
-            <div class="task-headline-text">صلاة العصر في المسجد وسناك التمرين</div>
-            <div class="task-submeta-text">3:30 م – موزة وقهوة لطاقة النادي</div>
+            <div class="task-title-bold">متابعات العمل والاجتماعات والمكالمات</div>
+            <div class="task-sub-hint">2:00 م – الردود والتنسيق وإنهاء الملفات</div>
           </div>
         </div>
-        <div class="task-row-entry" data-task-id="9" onclick="toggleTask(9)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="8" onclick="toggleTask(8)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">التمرين الرياضي في النادي (حديد / لياقة)</div>
-            <div class="task-submeta-text">4:30 م – تفريغ طاقة اليوم وبناء القوة</div>
+            <div class="task-title-bold">صلاة العصر في المسجد وسناك التمرين</div>
+            <div class="task-sub-hint">3:30 م – موزة وقهوة لطاقة النادي</div>
+          </div>
+        </div>
+        <div class="task-entry-row" data-task-id="9" onclick="toggleTask(9)">
+          <div class="task-squircle-checkbox"></div>
+          <div>
+            <div class="task-title-bold">التمرين الرياضي في النادي (حديد / لياقة)</div>
+            <div class="task-sub-hint">4:30 م – تفريغ طاقة اليوم وبناء القوة</div>
           </div>
         </div>
       </div>
 
-      <div class="timeline-block-card">
-        <div class="timeline-header-line">
-          <div class="timeline-title-wrap">
-            <span style="font-size:1.05rem;">🌙</span>
-            <span class="timeline-title-text">5. المساء والتعافي والنوم</span>
+      <div class="station-block-card">
+        <div class="station-header-row">
+          <div class="station-title-cluster">
+            <span class="station-order-badge">٥</span>
+            <span class="station-title-text">محطة المساء والتعافي والنوم الهانئ</span>
           </div>
-          <span class="timeline-time-badge">6:00 م - 10:30 م</span>
+          <span class="station-time-pill">6:00 م – 10:30 م</span>
         </div>
-        <div class="task-row-entry" data-task-id="10" onclick="toggleTask(10)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="10" onclick="toggleTask(10)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">صلاة المغرب في المسجد وحمام منعش</div>
-            <div class="task-submeta-text">6:00 م – استرخاء بعد النادي والانتعاش</div>
-          </div>
-        </div>
-        <div class="task-row-entry" data-task-id="11" onclick="toggleTask(11)">
-          <div class="task-checkbox-bubble"></div>
-          <div>
-            <div class="task-headline-text">وجبة العشاء وصلاة العشاء في المسجد</div>
-            <div class="task-submeta-text">7:00 م – عشاء خفيف ووقت حر عائلي</div>
+            <div class="task-title-bold">صلاة المغرب في المسجد وحمام منعش</div>
+            <div class="task-sub-hint">6:00 م – استرخاء بعد النادي والانتعاش</div>
           </div>
         </div>
-        <div class="task-row-entry" data-task-id="12" onclick="toggleTask(12)">
-          <div class="task-checkbox-bubble"></div>
+        <div class="task-entry-row" data-task-id="11" onclick="toggleTask(11)">
+          <div class="task-squircle-checkbox"></div>
           <div>
-            <div class="task-headline-text">إغلاق الشاشات ونوم باكر هانئ</div>
-            <div class="task-submeta-text">10:00 م – هاتف بعيد عن السرير لنوم عميق</div>
+            <div class="task-title-bold">وجبة العشاء وصلاة العشاء في المسجد</div>
+            <div class="task-sub-hint">7:00 م – عشاء خفيف ووقت عائلي هادئ</div>
+          </div>
+        </div>
+        <div class="task-entry-row" data-task-id="12" onclick="toggleTask(12)">
+          <div class="task-squircle-checkbox"></div>
+          <div>
+            <div class="task-title-bold">إغلاق الشاشات ونوم باكر هانئ</div>
+            <div class="task-sub-hint">10:00 م – هاتف بعيد عن السرير لنوم عميق متصل</div>
           </div>
         </div>
       </div>
@@ -1516,116 +1644,114 @@
         <span class="header-aside-tag">مؤشرات الحيوية</span>
       </div>
 
-      <!-- Calorie Energy Ring Card -->
-      <div class="calorie-hero-card">
-        <div class="calorie-split-flex">
-          <div class="cal-ring-container">
-            <svg class="cal-svg-element" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" class="cal-circle-base" />
-              <circle id="calCircleBar" cx="50" cy="50" r="45" class="cal-circle-active" />
+      <!-- Calorie Energy Card -->
+      <div class="vitals-matrix-card">
+        <div class="cal-split-layout">
+          <div class="cal-ring-wrapper">
+            <svg class="cal-svg-track" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" class="cal-circle-under" />
+              <circle id="calCircleBar" cx="50" cy="50" r="45" class="cal-circle-active-bar" />
             </svg>
-            <div class="cal-ring-text-center">
-              <div class="cal-center-bold" id="calCenterLeftNumber">2200</div>
-              <div class="cal-center-label">متبقي</div>
+            <div class="cal-ring-center-content">
+              <div class="cal-center-val" id="calCenterLeftNumber">2200</div>
+              <div class="cal-center-unit">متبقي</div>
             </div>
           </div>
 
-          <div class="cal-info-column">
-            <div class="cal-category-title">
-              <svg class="tab-vector-svg" style="width:18px;height:18px;" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/></svg>
-              <span>السعرات اليومية</span>
+          <div class="cal-data-column">
+            <div class="cal-header-title">
+              <svg style="width:17px; height:17px; color:var(--crimson-accent);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+              <span>ميزان السعرات اليومي</span>
             </div>
-            <div class="cal-bar-container">
-              <div class="cal-bar-fill-indicator" id="calLinearFill"></div>
+            <div class="cal-progress-rail">
+              <div class="cal-rail-fill" id="calBarFill"></div>
             </div>
-            <div class="cal-sub-stats">
-              <span>تم استهلاك: <strong id="calConsumedDisplay" style="color:#fff;">0</strong></span>
-              <span>الهدف: <strong id="calGoalDisplay">2200</strong></span>
+            <div class="cal-sub-ratios">
+              <span>المستهلك: <strong id="calConsumedTxt" style="color:#fff;">0</strong> سعرة</span>
+              <span>الهدف: <strong id="calGoalTxt">2200</strong> سعرة</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Water Hydration Card - Liquid Wave -->
-      <div class="hydration-station-card">
-        <div class="hydration-top-split">
-          <div class="water-flask-flask">
-            <div class="water-fill-level" id="waterFlaskAnimated" style="height: 0%;"></div>
+      <!-- Hydration Card -->
+      <div class="vitals-matrix-card">
+        <div class="water-split-layout">
+          <div class="water-flask-art">
+            <div class="water-flask-level" id="waterFlaskAnimated" style="height: 0%;"></div>
           </div>
 
-          <div class="water-metric-details">
-            <div class="water-section-tag">
-              <svg class="tab-vector-svg" style="width:16px;height:16px;" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          <div class="water-info-pane">
+            <div class="water-accent-tag">
               <span>الترطيب وشرب الماء</span>
             </div>
-            <div class="water-num-large" id="waterTotalDisplay">0 <small>/ 3000 مل</small></div>
-            <div style="font-size:0.78rem; color:var(--text-muted);" id="waterCupsCountTxt">0 من 12 كوب يومياً</div>
+            <div class="water-large-num" id="waterTotalDisplay">0 <small>/ 3000 مل</small></div>
+            <div style="font-size:0.76rem; color:var(--text-muted);" id="waterCupsCountTxt">0 من 12 كوب يومياً</div>
 
             <!-- 12-Cups Grid Pips -->
-            <div class="cups-dots-row">
-              <span class="cup-pip"></span><span class="cup-pip"></span><span class="cup-pip"></span>
-              <span class="cup-pip"></span><span class="cup-pip"></span><span class="cup-pip"></span>
-              <span class="cup-pip"></span><span class="cup-pip"></span><span class="cup-pip"></span>
-              <span class="cup-pip"></span><span class="cup-pip"></span><span class="cup-pip"></span>
+            <div class="water-cups-grid-row">
+              <span class="water-pip-dot"></span><span class="water-pip-dot"></span><span class="water-pip-dot"></span>
+              <span class="water-pip-dot"></span><span class="water-pip-dot"></span><span class="water-pip-dot"></span>
+              <span class="water-pip-dot"></span><span class="water-pip-dot"></span><span class="water-pip-dot"></span>
+              <span class="water-pip-dot"></span><span class="water-pip-dot"></span><span class="water-pip-dot"></span>
             </div>
           </div>
         </div>
 
-        <div class="water-buttons-grid">
-          <button class="btn-tile-action highlight" onclick="addWater(250)">
-            <span style="font-size:0.95rem; font-weight:800;">+ 250 مل</span>
-            <span style="font-size:0.72rem; color:var(--text-muted);">كوب ماء</span>
+        <div class="water-buttons-row">
+          <button class="btn-water-step accented" onclick="addWater(250)">
+            <span style="font-size:0.92rem; font-weight:800;">+ 250 مل</span>
+            <span style="font-size:0.70rem; color:var(--text-muted);">كوب ماء</span>
           </button>
-          <button class="btn-tile-action highlight" onclick="addWater(500)">
-            <span style="font-size:0.95rem; font-weight:800;">+ 500 مل</span>
-            <span style="font-size:0.72rem; color:var(--text-muted);">علبة ماء</span>
+          <button class="btn-water-step accented" onclick="addWater(500)">
+            <span style="font-size:0.92rem; font-weight:800;">+ 500 مل</span>
+            <span style="font-size:0.70rem; color:var(--text-muted);">عبوة ماء</span>
           </button>
-          <button class="btn-tile-action" onclick="addWater(-250)">
-            <span style="font-size:0.95rem; font-weight:800;">- 250 مل</span>
-            <span style="font-size:0.72rem; color:var(--text-muted);">تراجع</span>
+          <button class="btn-water-step" onclick="addWater(-250)">
+            <span style="font-size:0.92rem; font-weight:800;">- 250 مل</span>
+            <span style="font-size:0.70rem; color:var(--text-muted);">تراجع</span>
           </button>
         </div>
       </div>
 
       <!-- Meals & Calories Logger -->
-      <div class="meals-logging-card">
-        <div class="meals-bar-header">
-          <span class="meals-header-text">تسجيل الوجبات والسناكات</span>
-          <span style="font-size:0.78rem; color:var(--accent-blue); font-weight:700;">تسجيل فوري</span>
+      <div class="vitals-matrix-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span style="font-size:1.02rem; font-weight:800; color:#fff;">تسجيل الوجبات والسناكات</span>
+          <span style="font-size:0.76rem; color:var(--gold-primary); font-weight:700;">تسجيل فوري</span>
         </div>
 
         <!-- Quick Smart Chips -->
-        <div class="smart-chips-wrapper">
-          <div class="meal-chip-btn" onclick="quickAddFood('بيضتين وتوست صحي', 280)">
+        <div class="smart-chips-scroll">
+          <div class="meal-chip-touch" onclick="quickAddFood('بيض وتوست صحي', 280)">
             <span>بيض وتوست</span>
-            <span class="cal-chip-tag">280</span>
+            <span class="chip-cal-pill">280</span>
           </div>
-          <div class="meal-chip-btn" onclick="quickAddFood('صدر دجاج وأرز أبيض', 550)">
+          <div class="meal-chip-touch" onclick="quickAddFood('صدر دجاج وأرز أبيض', 550)">
             <span>دجاج وأرز</span>
-            <span class="cal-chip-tag">550</span>
+            <span class="chip-cal-pill">550</span>
           </div>
-          <div class="meal-chip-btn" onclick="quickAddFood('بروتين شيك وموز', 190)">
+          <div class="meal-chip-touch" onclick="quickAddFood('بروتين شيك وموز', 190)">
             <span>بروتين شيك</span>
-            <span class="cal-chip-tag">190</span>
+            <span class="chip-cal-pill">190</span>
           </div>
-          <div class="meal-chip-btn" onclick="quickAddFood('حبة موزة و3 حبات تمر', 140)">
+          <div class="meal-chip-touch" onclick="quickAddFood('موز وتمر', 140)">
             <span>موز وتمر</span>
-            <span class="cal-chip-tag">140</span>
+            <span class="chip-cal-pill">140</span>
           </div>
         </div>
 
-        <!-- Balanced Form (No Overflow) -->
-        <div class="meal-input-box-block">
-          <div class="split-input-fields">
-            <input type="text" id="foodNameInp" class="custom-text-input" style="flex:2;" placeholder="اسم الوجبة (مثلاً: سلطة تونة)">
-            <input type="number" id="foodCalInp" class="custom-text-input" style="flex:1; text-align:center;" placeholder="السعرات">
+        <div class="food-input-group">
+          <div class="food-input-row">
+            <input type="text" id="foodNameInp" class="custom-app-input" style="flex:2; min-width:0;" placeholder="اسم الوجبة (مثال: دجاج)">
+            <input type="number" inputmode="numeric" id="foodCalInp" class="custom-app-input" style="flex:1; min-width:0; text-align:center;" placeholder="السعرات">
           </div>
-          <button class="btn-submit-food" onclick="submitCustomFood()">إضافة الوجبة إلى اليوم</button>
+          <button class="btn-submit-action" onclick="submitCustomFood()">إضافة الوجبة إلى اليوم</button>
         </div>
 
-        <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">سجل وجبات اليوم:</div>
-        <div class="food-history-container" id="foodLogHistory">
-          <div style="font-size:0.8rem; color:var(--text-dim); text-align:center; padding:8px;">لا توجد وجبات مسجلة اليوم</div>
+        <div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:8px;">سجل وجبات اليوم:</div>
+        <div class="food-log-list" id="foodLogHistory">
+          <div style="font-size:0.78rem; color:var(--text-dim); text-align:center; padding:10px 0;">لا توجد وجبات مسجلة بعد اليوم</div>
         </div>
       </div>
     </section>
@@ -1634,36 +1760,57 @@
     <section id="tab-knowledge" class="tab-view">
       <div class="page-main-header">
         <span>الوعي والتحضير</span>
+        <span class="header-aside-tag">الإتقان الجامعي</span>
       </div>
 
-      <!-- Zen Sound -->
-      <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(10,132,255,0.12); border:1px solid rgba(10,132,255,0.28); border-radius:18px; padding:12px 16px; margin-bottom:18px;">
+      <!-- 432 Hz Zen Audio Player -->
+      <div class="binaural-audio-card">
         <div>
-          <div style="font-weight:700; font-size:0.92rem; color:#fff;">موجات التركيز العالي (432 Hz)</div>
-          <div style="font-size:0.74rem; color:var(--text-muted);">عزل الضوضاء أثناء العمل والمذاكرة</div>
+          <div style="font-weight:700; font-size:0.90rem; color:#fff;">موجات التركيز العالي (432 Hz)</div>
+          <div style="font-size:0.72rem; color:var(--text-muted);">عزل الضوضاء أثناء العمل والمذاكرة</div>
+          <div class="audio-freq-bars">
+            <span class="freq-bar" id="fb1"></span>
+            <span class="freq-bar" id="fb2"></span>
+            <span class="freq-bar" id="fb3"></span>
+            <span class="freq-bar" id="fb4"></span>
+          </div>
         </div>
-        <button id="zenBtn" style="background:var(--accent-blue); color:#fff; border:none; padding:7px 16px; border-radius:999px; font-weight:700; font-size:0.84rem; cursor:pointer;" onclick="toggleZenSound()">تشغيل</button>
+        <button id="zenBtn" class="btn-audio-toggle" onclick="toggleZenSound()">تشغيل</button>
       </div>
 
-      <div class="knowledge-story-card">
-        <span class="story-kicker">سر التفوق الجامعي</span>
-        <div class="story-headline">تقنية "Active Recall": كيف تدرس بذكاء وتتفوق بنصف الوقت؟</div>
-        <div class="story-body">
+      <!-- Masterclass Article 1 -->
+      <div class="editorial-story-card">
+        <span class="story-category-tag">سر التفوق الجامعي</span>
+        <div class="story-headline-title">تقنية "Active Recall": كيف تدرس بذكاء وتتفوق بنصف الوقت؟</div>
+        <div class="story-prose-text">
           أغلب الطلاب يضيعون مئات الساعات في قراءة الكتب وتظليلها، وهو ما يثبت علمياً أنه يمنح الدماغ وهماً زائفاً بالمعرفة. الطلاب المتميزون يتبعون أسلوب الاستدعاء النشط: قراءة الفكرة لمرة واحدة، ثم إغلاق المرجع وشرحها بكلماتك على ورقة فارغة.
         </div>
-        <div class="video-frame-box">
-          <iframe src="https://www.youtube-nocookie.com/embed/ukLnPbI9phY" title="Active Recall" allowfullscreen loading="lazy"></iframe>
+        <div class="video-preview-shell" id="videoShell1" onclick="playVideoShell('videoShell1', 'ukLnPbI9phY', 'Active Recall')">
+          <img src="https://img.youtube.com/vi/ukLnPbI9phY/hqdefault.jpg" class="video-poster-bg" alt="Active Recall" onerror="this.style.opacity='0'">
+          <div class="video-play-center-btn">
+            <div class="video-play-ring">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#0b0c10" style="margin-left:2px;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            </div>
+            <span class="video-badge-pill">شاهد الشرح المرئي (8 دقائق)</span>
+          </div>
         </div>
       </div>
 
-      <div class="knowledge-story-card">
-        <span class="story-kicker">طلاقة الإنجليزية في 90 يوماً</span>
-        <div class="story-headline">طريقة الـ "Shadowing": كسر حاجز التأتأة والترجمة العقلية</div>
-        <div class="story-body">
+      <!-- Masterclass Article 2 -->
+      <div class="editorial-story-card">
+        <span class="story-category-tag">طلاقة الإنجليزية في 90 يوماً</span>
+        <div class="story-headline-title">طريقة الـ "Shadowing": كسر حاجز التأتأة والترجمة العقلية</div>
+        <div class="story-prose-text">
           المشكلة الحقيقية في التحدث بالإنجليزية ليست قلة القواعد، بل تأخر الترجمة في دماغك وضعف مرونة عضلات الفم على النطق السريع. في تقنية Shadowing، تستمع لمتحدث أصلي وتكرر كلامه وراءه مباشرة بفارق نصف ثانية فقط.
         </div>
-        <div class="video-frame-box">
-          <iframe src="https://www.youtube-nocookie.com/embed/13m3dFpms14" title="English Shadowing" allowfullscreen loading="lazy"></iframe>
+        <div class="video-preview-shell" id="videoShell2" onclick="playVideoShell('videoShell2', '13m3dFpms14', 'English Shadowing')">
+          <img src="https://img.youtube.com/vi/13m3dFpms14/hqdefault.jpg" class="video-poster-bg" alt="English Shadowing" onerror="this.style.opacity='0'">
+          <div class="video-play-center-btn">
+            <div class="video-play-ring">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#0b0c10" style="margin-left:2px;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            </div>
+            <span class="video-badge-pill">شاهد التدريب العملي (10 دقائق)</span>
+          </div>
         </div>
       </div>
     </section>
@@ -1672,38 +1819,101 @@
     <section id="tab-settings" class="tab-view">
       <div class="page-main-header">
         <span>الإعدادات</span>
+        <span class="header-aside-tag">التخصيص الفاخر</span>
       </div>
 
-      <div class="settings-table-card">
-        <div class="settings-row-cell">
+      <!-- Section: Vital Goals -->
+      <div style="font-size:0.80rem; font-weight:700; color:var(--gold-primary); margin:6px 4px 8px;">الأهداف اليومية والمواقيت</div>
+      <div class="grouped-settings-card">
+        <div class="setting-item-cell">
           <div>
-            <div style="font-weight:600; font-size:0.95rem;">هدف السعرات اليومي</div>
-            <div style="font-size:0.78rem; color:var(--text-muted);">السعرات المستهدفة</div>
+            <div class="setting-title-txt">هدف السعرات اليومي</div>
+            <div class="setting-sub-txt">السعرات المستهدفة يومياً (كالوري)</div>
           </div>
-          <input type="number" id="cfgCalGoal" class="custom-text-input" style="width:85px; text-align:center; padding:6px 8px;" value="2200" onchange="updateCalGoal(this.value)">
+          <input type="number" inputmode="numeric" id="cfgCalGoal" class="custom-app-input" style="width:85px; text-align:center; padding:6px 8px;" value="2200" onchange="updateCalGoal(this.value)">
         </div>
-        <div class="settings-row-cell">
+        <div class="setting-item-cell">
           <div>
-            <div style="font-weight:600; font-size:0.95rem;">هدف شرب الماء (مل)</div>
-            <div style="font-size:0.78rem; color:var(--text-muted);">الكمية اليومية</div>
+            <div class="setting-title-txt">هدف شرب الماء</div>
+            <div class="setting-sub-txt">الكمية اليومية المستهدفة (مل)</div>
           </div>
-          <input type="number" id="cfgWaterGoal" class="custom-text-input" style="width:85px; text-align:center; padding:6px 8px;" value="3000" onchange="updateWaterGoal(this.value)">
+          <input type="number" inputmode="numeric" id="cfgWaterGoal" class="custom-app-input" style="width:85px; text-align:center; padding:6px 8px;" value="3000" onchange="updateWaterGoal(this.value)">
+        </div>
+        <div class="setting-item-cell">
+          <div>
+            <div class="setting-title-txt">المدينة المعتمدة للمواقيت</div>
+            <div class="setting-sub-txt">حساب مواعيد الصلاة الدقيقة</div>
+          </div>
+          <select id="cfgCitySelect" class="city-dropdown-styled" style="max-width:140px; padding:6px 10px;" onchange="changeCity(this.value)">
+            <option value="riyadh">الرياض</option>
+            <option value="makkah">مكة المكرمة</option>
+            <option value="amman">عمّان</option>
+            <option value="jerusalem">القدس</option>
+            <option value="cairo">القاهرة</option>
+            <option value="dubai">دبي</option>
+          </select>
         </div>
       </div>
 
-      <div class="settings-table-card">
-        <div class="settings-row-cell" style="cursor:pointer;" onclick="resetDayData()">
-          <div style="font-weight:600; color:var(--accent-orange);">تصفير إنجاز وسعرات اليوم</div>
-          <span style="color:var(--accent-orange);">🔄</span>
+      <!-- Section: System & Notifications -->
+      <div style="font-size:0.80rem; font-weight:700; color:var(--gold-primary); margin:12px 4px 8px;">التنبيهات والأصوات التفاعلية</div>
+      <div class="grouped-settings-card">
+        <div class="setting-item-cell" style="cursor:pointer;" onclick="testPushNotification()">
+          <div>
+            <div class="setting-title-txt">تنبيهات المحطات والمواقيت</div>
+            <div class="setting-sub-txt">إشعار عند بداية كل محطة جديدة ودخول الصلاة</div>
+          </div>
+          <button class="settings-action-pill" style="background:rgba(212,175,55,0.15); color:var(--gold-light); border:0.5px solid rgba(212,175,55,0.35); padding:5px 10px; border-radius:8px; font-weight:700; font-size:0.75rem; cursor:pointer;">
+            تجربة إشعار 🔔
+          </button>
         </div>
-        <div class="settings-row-cell" style="cursor:pointer;" onclick="clearAllData()">
-          <div style="font-weight:600; color:var(--accent-red);">مسح البيانات والبدء من جديد</div>
-          <span style="color:var(--accent-red);">⚠️</span>
+        <div class="setting-item-cell" style="cursor:pointer;" onclick="testHapticSound()">
+          <div>
+            <div class="setting-title-txt">المؤثرات التكتيكية (Haptic Click)</div>
+            <div class="setting-sub-txt">استجابة ناعمة عند النقر وإتمام المهام</div>
+          </div>
+          <span style="font-size:0.82rem; color:var(--emerald-accent); font-weight:700;">نشط 🔊</span>
         </div>
       </div>
 
-      <div style="text-align:center; color:var(--text-dim); font-size:0.78rem; padding:12px 0 24px;">
-        سَمْت • SAMT • روتينك اليومي المتكامل
+      <!-- Section: Privacy & Offline Status -->
+      <div style="font-size:0.80rem; font-weight:700; color:var(--gold-primary); margin:12px 4px 8px;">الأمان والعمل دون إنترنت</div>
+      <div class="grouped-settings-card">
+        <div class="setting-item-cell">
+          <div>
+            <div class="setting-title-txt" style="display:flex; align-items:center; gap:6px;">
+              <span style="color:var(--emerald-accent);">●</span>
+              <span>العمل بدون إنترنت (PWA Offline)</span>
+            </div>
+            <div class="setting-sub-txt">جاهز ومحفوظ بالكامل في ذاكرة هاتفك</div>
+          </div>
+          <span class="progress-score-pill" style="font-size:0.72rem;">100% مستقل</span>
+        </div>
+        <div class="setting-item-cell">
+          <div>
+            <div class="setting-title-txt">الخصوصية التامة للمعلومات</div>
+            <div class="setting-sub-txt">بياناتك وسجلاتك لا تغادر جهازك إطلاقاً</div>
+          </div>
+          <span style="font-size:0.80rem; color:var(--gold-primary); font-weight:700;">مشفر محلياً</span>
+        </div>
+      </div>
+
+      <!-- Section: Reset & Data Management -->
+      <div style="font-size:0.80rem; font-weight:700; color:var(--crimson-accent); margin:12px 4px 8px;">إدارة البيانات وإعادة الضبط</div>
+      <div class="grouped-settings-card">
+        <div class="setting-item-cell" style="cursor:pointer;" onclick="resetDayData()">
+          <div style="font-weight:700; font-size:0.90rem; color:var(--coral-accent);">تصفير إنجاز وسعرات اليوم</div>
+          <span style="color:var(--coral-accent); font-size:1.1rem;">🔄</span>
+        </div>
+        <div class="setting-item-cell" style="cursor:pointer;" onclick="clearAllData()">
+          <div style="font-weight:700; font-size:0.90rem; color:var(--crimson-accent);">مسح كافة البيانات والبدء من جديد</div>
+          <span style="color:var(--crimson-accent); font-size:1.1rem;">⚠️</span>
+        </div>
+      </div>
+
+      <div style="text-align:center; color:var(--text-dim); font-size:0.74rem; padding:12px 0 28px; line-height:1.6;">
+        <strong style="color:var(--gold-primary);">سَمْت • SAMT v2.0</strong><br>
+        رَفِيقُكَ الْيَوْمِيُّ لِلْبَرَكَةِ وَالسَّكِينَةِ وَالإِنْتَاجِيَّةِ
       </div>
     </section>
 
@@ -1737,7 +1947,7 @@
     /* ========================================================
        STATE & TIME UTILITIES (12-Hour System)
        ======================================================== */
-    const STORAGE_KEY = 'samt_app_v6';
+    const STORAGE_KEY = 'samt_app_v7';
 
     // 12-Hour Converter Utility
     function parse24to12(time24) {
@@ -1752,19 +1962,19 @@
     }
 
     const SCHEDULE_DATA = [
-      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", start: "05:00", end: "06:00", time12: "5:00 ص - 6:00 ص" },
-      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", start: "06:00", end: "06:45", time12: "6:00 ص - 6:45 ص" },
-      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", start: "06:45", end: "07:30", time12: "6:45 ص - 7:30 ص" },
-      { id: 3, title: "الفطور الصحي والقهوة الصباحية", start: "07:30", end: "08:30", time12: "7:30 ص - 8:30 ص" },
-      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", start: "08:30", end: "12:00", time12: "8:30 ص - 12:00 م" },
-      { id: 5, title: "صلاة الظهر في المسجد", start: "12:00", end: "13:00", time12: "12:00 م - 1:00 م" },
-      { id: 6, title: "وجبة الغداء + قيلولة 20 دقيقة", start: "13:00", end: "14:00", time12: "1:00 م - 2:00 م" },
-      { id: 7, title: "متابعات العمل والاجتماعات", start: "14:00", end: "15:30", time12: "2:00 م - 3:30 م" },
-      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", start: "15:30", end: "16:30", time12: "3:30 م - 4:30 م" },
-      { id: 9, title: "التمرين الرياضي في النادي (حديد / لياقة)", start: "16:30", end: "18:00", time12: "4:30 م - 6:00 م" },
-      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", start: "18:00", end: "19:00", time12: "6:00 م - 7:00 م" },
-      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", start: "19:00", end: "21:30", time12: "7:00 م - 9:30 م" },
-      { id: 12, title: "إغلاق الشاشات ونوم باكر هانئ", start: "21:30", end: "22:30", time12: "9:30 م - 10:30 م" }
+      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", start: "05:00", end: "06:00", time12: "5:00 ص – 6:00 ص" },
+      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", start: "06:00", end: "06:45", time12: "6:00 ص – 6:45 ص" },
+      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", start: "06:45", end: "07:30", time12: "6:45 ص – 7:30 ص" },
+      { id: 3, title: "فطور صحي متوازن وقهوة الصباح", start: "07:30", end: "08:30", time12: "7:30 ص – 8:30 ص" },
+      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", start: "08:30", end: "12:00", time12: "8:30 ص – 12:00 م" },
+      { id: 5, title: "صلاة الظهر في المسجد", start: "12:00", end: "13:00", time12: "12:00 م – 1:00 م" },
+      { id: 6, title: "وجبة الغداء + قيلولة 20 دقيقة", start: "13:00", end: "14:00", time12: "1:00 م – 2:00 م" },
+      { id: 7, title: "متابعات العمل والاجتماعات والمكالمات", start: "14:00", end: "15:30", time12: "2:00 م – 3:30 م" },
+      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", start: "15:30", end: "16:30", time12: "3:30 م – 4:30 م" },
+      { id: 9, title: "التمرين الرياضي في النادي (حديد / لياقة)", start: "16:30", end: "18:00", time12: "4:30 م – 6:00 م" },
+      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", start: "18:00", end: "19:00", time12: "6:00 م – 7:00 م" },
+      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", start: "19:00", end: "21:30", time12: "7:00 م – 9:30 م" },
+      { id: 12, title: "إغلاق الشاشات ونوم باكر هانئ", start: "21:30", end: "22:30", time12: "9:30 م – 10:30 م" }
     ];
 
     const CITY_PRAYERS = {
@@ -1777,7 +1987,6 @@
     };
 
     let state = {
-      user: { name: "" },
       completedTasks: {},
       waterMl: 0,
       waterGoal: 3000,
@@ -1836,205 +2045,261 @@
         osc.type = 'sine';
 
         const now = ctx.currentTime;
-        osc.frequency.setValueAtTime(800, now);
-        osc.frequency.exponentialRampToValueAtTime(1100, now + 0.06);
+        osc.frequency.setValueAtTime(650, now);
+        osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
 
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
 
         osc.start(now);
-        osc.stop(now + 0.35);
-
-        if (navigator.vibrate) navigator.vibrate([12]);
-      } catch (err) {}
+        osc.stop(now + 0.04);
+      } catch (e) {}
     }
 
     function toggleZenSound() {
       const btn = document.getElementById('zenBtn');
-      const ctx = getAudioCtx();
-
+      const bars = [document.getElementById('fb1'), document.getElementById('fb2'), document.getElementById('fb3'), document.getElementById('fb4')];
+      
       if (isZenOn) {
-        if (zenGain) {
-          zenGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
-          setTimeout(() => {
-            if (zenOsc) zenOsc.stop();
-            isZenOn = false;
-            btn.innerText = 'تشغيل';
-          }, 400);
+        if (zenOsc) {
+          try { zenOsc.stop(); zenOsc.disconnect(); } catch (e) {}
+          zenOsc = null;
         }
+        isZenOn = false;
+        btn.innerText = "تشغيل";
+        bars.forEach(b => b.classList.remove('active'));
+        showToast("تم إيقاف موجات التركيز");
       } else {
-        zenOsc = ctx.createOscillator();
-        zenGain = ctx.createGain();
-        zenOsc.type = 'triangle';
-        zenOsc.frequency.setValueAtTime(432, ctx.currentTime);
+        try {
+          const ctx = getAudioCtx();
+          zenOsc = ctx.createOscillator();
+          zenGain = ctx.createGain();
 
-        zenGain.gain.setValueAtTime(0.0001, ctx.currentTime);
-        zenGain.gain.exponentialRampToValueAtTime(0.035, ctx.currentTime + 0.8);
+          zenOsc.type = 'sine';
+          zenOsc.frequency.setValueAtTime(432, ctx.currentTime);
 
-        zenOsc.connect(zenGain);
-        zenGain.connect(ctx.destination);
+          zenGain.gain.setValueAtTime(0.001, ctx.currentTime);
+          zenGain.gain.exponentialRampToValueAtTime(0.07, ctx.currentTime + 1.2);
 
-        zenOsc.start();
-        isZenOn = true;
-        btn.innerText = 'إيقاف ⏸';
-        showToast("🎧 تم تفعيل موجات التركيز");
-      }
-    }
+          zenOsc.connect(zenGain);
+          zenGain.connect(ctx.destination);
 
-    /* Dynamic Island & 12-Hour Clock */
-    function updateLiveEngine() {
-      const now = new Date();
-      const h24 = now.getHours();
-      const m = now.getMinutes();
-      const s = now.getSeconds();
-      const nowMin = h24 * 60 + m;
-
-      // 12-Hour live clock
-      let h12 = h24 % 12;
-      if (h12 === 0) h12 = 12;
-      const period = h24 >= 12 ? 'م' : 'ص';
-      document.getElementById('liveTickerClock').innerText = 
-        `${String(h12).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} ${period}`;
-
-      function toMins(str) {
-        const [hh, mm] = str.split(':').map(Number);
-        return hh * 60 + mm;
-      }
-
-      let current = null;
-      let next = null;
-
-      for (let i = 0; i < SCHEDULE_DATA.length; i++) {
-        const item = SCHEDULE_DATA[i];
-        const start = toMins(item.start);
-        const end = toMins(item.end);
-
-        if (nowMin >= start && nowMin < end) {
-          current = item;
-          next = SCHEDULE_DATA[(i + 1) % SCHEDULE_DATA.length];
-          break;
+          zenOsc.start();
+          isZenOn = true;
+          btn.innerText = "إيقاف";
+          bars.forEach(b => b.classList.add('active'));
+          showToast("تم تشغيل موجات التركيز 432Hz 🎧");
+        } catch (e) {
+          showToast("يرجى النقر على الشاشة أولاً لتفعيل الصوت");
         }
       }
-
-      if (!current) {
-        current = { title: "النوم العميق والراحة الذهنية", start: "22:30", end: "05:00" };
-        next = SCHEDULE_DATA[0];
-      }
-
-      document.getElementById('islandCurrentTitle').innerText = current.title;
-      const next12 = parse24to12(next.start);
-      document.getElementById('islandNextTitle').innerText = `${next.title} (${next12.full})`;
-
-      let startM = toMins(current.start);
-      let endM = toMins(current.end);
-      if (endM < startM) endM += 24 * 60;
-      let effNow = nowMin < startM ? nowMin + 24 * 60 : nowMin;
-
-      const dur = endM - startM;
-      const elp = effNow - startM;
-      const pct = Math.min(100, Math.max(0, Math.round((elp / dur) * 100)));
-      document.getElementById('islandProgressBar').style.width = pct + '%';
     }
 
-    /* Prayer Times in 12-Hour Format */
+    /* Prayers Engine */
     function updatePrayers() {
       const city = state.selectedCity || 'riyadh';
-      const t = CITY_PRAYERS[city] || CITY_PRAYERS.riyadh;
+      const times = CITY_PRAYERS[city] || CITY_PRAYERS.riyadh;
 
-      const pFajr = parse24to12(t.fajr);
-      const pDhuhr = parse24to12(t.dhuhr);
-      const pAsr = parse24to12(t.asr);
-      const pMaghrib = parse24to12(t.maghrib);
-      const pIsha = parse24to12(t.isha);
-
-      document.getElementById('t-fajr').innerText = pFajr.num;
-      document.getElementById('per-fajr').innerText = pFajr.period;
-
-      document.getElementById('t-dhuhr').innerText = pDhuhr.num;
-      document.getElementById('per-dhuhr').innerText = pDhuhr.period;
-
-      document.getElementById('t-asr').innerText = pAsr.num;
-      document.getElementById('per-asr').innerText = pAsr.period;
-
-      document.getElementById('t-maghrib').innerText = pMaghrib.num;
-      document.getElementById('per-maghrib').innerText = pMaghrib.period;
-
-      document.getElementById('t-isha').innerText = pIsha.num;
-      document.getElementById('per-isha').innerText = pIsha.period;
-
+      const keys = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
       const now = new Date();
-      const nowMin = now.getHours() * 60 + now.getMinutes();
+      const curMins = now.getHours() * 60 + now.getMinutes();
 
-      function toM(str) {
-        const [h, m] = str.split(':').map(Number);
-        return h * 60 + m;
-      }
+      let nextPrayerKey = null;
+      let minDiff = Infinity;
 
-      const prayers = [
-        { id: 'p-fajr', name: 'الفجر', min: toM(t.fajr) },
-        { id: 'p-dhuhr', name: 'الظهر', min: toM(t.dhuhr) },
-        { id: 'p-asr', name: 'العصر', min: toM(t.asr) },
-        { id: 'p-maghrib', name: 'المغرب', min: toM(t.maghrib) },
-        { id: 'p-isha', name: 'العشاء', min: toM(t.isha) },
-      ];
+      keys.forEach(k => {
+        const rawTime = times[k];
+        const p12 = parse24to12(rawTime);
+        const timeEl = document.getElementById(`t-${k}`);
+        const perEl = document.getElementById(`per-${k}`);
+        if (timeEl) timeEl.innerText = p12.num;
+        if (perEl) perEl.innerText = p12.period;
 
-      prayers.forEach(p => document.getElementById(p.id).classList.remove('active'));
+        const [h, m] = rawTime.split(':').map(Number);
+        const pMins = h * 60 + m;
+        let diff = pMins - curMins;
+        if (diff > 0 && diff < minDiff) {
+          minDiff = diff;
+          nextPrayerKey = k;
+        }
+      });
 
-      let nextP = prayers.find(p => p.min > nowMin);
-      if (nextP) {
-        const diff = nextP.min - nowMin;
-        document.getElementById(nextP.id).classList.add('active');
-        const h = Math.floor(diff / 60);
-        const m = diff % 60;
-        document.getElementById('nextPrayerCountdown').innerText = `باقي على ${nextP.name}: ${h > 0 ? h + 'س و' : ''}${m}د`;
+      if (!nextPrayerKey) nextPrayerKey = 'fajr';
+
+      keys.forEach(k => {
+        const box = document.getElementById(`p-${k}`);
+        if (box) {
+          if (k === nextPrayerKey) box.classList.add('active');
+          else box.classList.remove('active');
+        }
+      });
+
+      const prayerNamesAr = { fajr: 'الفجر', dhuhr: 'الظهر', asr: 'العصر', maghrib: 'المغرب', isha: 'العشاء' };
+      const hoursLeft = Math.floor(minDiff / 60);
+      const minsLeft = minDiff % 60;
+      let countdownStr = '';
+      if (minDiff === Infinity) {
+        countdownStr = `صلاة الفجر غداً`;
+      } else if (hoursLeft > 0) {
+        countdownStr = `باقي على ${prayerNamesAr[nextPrayerKey]}: ${hoursLeft}س و${minsLeft}د`;
       } else {
-        document.getElementById('p-fajr').classList.add('active');
-        const diffFajr = (24 * 60 - nowMin) + prayers[0].min;
-        const h = Math.floor(diffFajr / 60);
-        const m = diffFajr % 60;
-        document.getElementById('nextPrayerCountdown').innerText = `باقي على الفجر: ${h}س و${m}د`;
+        countdownStr = `باقي على ${prayerNamesAr[nextPrayerKey]}: ${minsLeft} دقيقة`;
       }
+      const countdownEl = document.getElementById('nextPrayerCountdown');
+      if (countdownEl) countdownEl.innerText = countdownStr;
     }
 
     function changeCity(city) {
       state.selectedCity = city;
       saveState();
+      const s1 = document.getElementById('citySelect');
+      const s2 = document.getElementById('cfgCitySelect');
+      if (s1 && s1.value !== city) s1.value = city;
+      if (s2 && s2.value !== city) s2.value = city;
       updatePrayers();
-      showToast(`تم التبديل لمواقيت: ${document.querySelector('#citySelect option:checked').text}`);
+      playHapticClick();
+      showToast("تم تحديث مواقيت الصلاة للمدينة المحددة");
     }
 
-    /* Health & Nutrition Engine */
-    function updateHealthUI() {
-      const calGoal = state.caloriesGoal || 2200;
-      let consumed = 0;
-      if (state.meals && state.meals.length > 0) {
-        consumed = state.meals.reduce((acc, m) => acc + m.cals, 0);
+    function playVideoShell(shellId, videoId, title) {
+      const container = document.getElementById(shellId);
+      if (!container) return;
+      playHapticClick();
+      container.onclick = null;
+      container.style.cursor = 'default';
+      container.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:0; position:absolute; top:0; left:0; border-radius:14px;"></iframe>`;
+    }
+
+    function testPushNotification() {
+      playHapticClick();
+      if (!("Notification" in window)) {
+        showToast("الإشعارات غير مدعومة في هذا المتصفح");
+        return;
       }
-      const left = Math.max(0, calGoal - consumed);
-      const calPct = Math.min(100, Math.round((consumed / calGoal) * 100));
+      if (Notification.permission === "granted") {
+        try {
+          new Notification("سَمْت | SAMT", {
+            body: "أهلاً بك! محطتك الحالية تسير ببركة وهدوء.",
+            icon: "icons/icon-192.png",
+            badge: "icons/icon-192.png"
+          });
+          showToast("تم إرسال الإشعار التجريبي بنجاح 🔔");
+        } catch (e) {
+          showToast("أهلاً بك في سَمْت! التنبيهات نشطة 🔔");
+        }
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            try {
+              new Notification("سَمْت | SAMT", {
+                body: "تم تفعيل إشعارات المحطات اليومية بنجاح!",
+                icon: "icons/icon-192.png"
+              });
+            } catch(e){}
+            showToast("تم تفعيل الإشعارات بنجاح 🔔");
+          } else {
+            showToast("يرجى السماح بالإشعارات من إعدادات المتصفح");
+          }
+        });
+      } else {
+        showToast("يرجى تفعيل صلاحية الإشعارات من إعدادات المتصفح");
+      }
+    }
 
+    function testHapticSound() {
+      state.soundEnabled = !state.soundEnabled;
+      saveState();
+      if (state.soundEnabled) {
+        playHapticClick();
+        showToast("المؤثر التكتيكي مفعل 🔊");
+      } else {
+        showToast("تم كتم المؤثرات الصوتية 🔇");
+      }
+    }
+
+    /* Live Station Engine */
+    function updateLiveEngine() {
+      const now = new Date();
+      let h = now.getHours();
+      const m = now.getMinutes();
+      const s = now.getSeconds();
+
+      // 12h Live Ticker
+      const period = h >= 12 ? 'م' : 'ص';
+      let h12 = h % 12;
+      if (h12 === 0) h12 = 12;
+      const pad = (n) => String(n).padStart(2, '0');
+      const timeStr = `${pad(h12)}:${pad(m)}:${pad(s)} ${period}`;
+      const clockEl = document.getElementById('liveTickerClock');
+      if (clockEl) clockEl.innerText = timeStr;
+
+      const curMins = h * 60 + m;
+      let currentIdx = -1;
+
+      for (let i = 0; i < SCHEDULE_DATA.length; i++) {
+        const item = SCHEDULE_DATA[i];
+        const [sh, sm] = item.start.split(':').map(Number);
+        const [eh, em] = item.end.split(':').map(Number);
+        const startM = sh * 60 + sm;
+        const endM = eh * 60 + em;
+
+        if (curMins >= startM && curMins < endM) {
+          currentIdx = i;
+          const totalDur = endM - startM;
+          const passed = curMins - startM + (s / 60);
+          const pct = Math.min(100, Math.max(0, (passed / totalDur) * 100));
+          const pBar = document.getElementById('islandProgressBar');
+          if (pBar) pBar.style.width = pct + '%';
+          break;
+        }
+      }
+
+      if (currentIdx !== -1) {
+        const cur = SCHEDULE_DATA[currentIdx];
+        document.getElementById('islandCurrentTitle').innerText = cur.title;
+        document.getElementById('islandCurrentDesc').innerText = `${cur.time12} • محطتك الحالية المقررة`;
+
+        const nextIdx = (currentIdx + 1) % SCHEDULE_DATA.length;
+        const nextItem = SCHEDULE_DATA[nextIdx];
+        document.getElementById('islandNextTitle').innerText = `${nextItem.title} (${parse24to12(nextItem.start).full})`;
+      } else {
+        document.getElementById('islandCurrentTitle').innerText = "وقت حر وراحة واستشفاء";
+        document.getElementById('islandCurrentDesc').innerText = "استرخِ، استمتع بوقتك وحافظ على سكينتك";
+        document.getElementById('islandProgressBar').style.width = "100%";
+        document.getElementById('islandNextTitle').innerText = "صلاة الفجر في المسجد (5:00 ص)";
+      }
+    }
+
+    /* Health & Nutrition */
+    function updateHealthUI() {
+      const cGoal = state.caloriesGoal || 2200;
+      let consumed = 0;
+      if (state.meals) {
+        state.meals.forEach(m => consumed += m.cals);
+      }
+      const left = Math.max(0, cGoal - consumed);
       document.getElementById('calCenterLeftNumber').innerText = left;
-      document.getElementById('calConsumedDisplay').innerText = `${consumed} سعرة`;
-      document.getElementById('calGoalDisplay').innerText = `${calGoal} سعرة`;
-      document.getElementById('calLinearFill').style.width = calPct + '%';
+      document.getElementById('calConsumedTxt').innerText = consumed;
+      document.getElementById('calGoalTxt').innerText = cGoal;
 
-      const circ = 282.74;
-      const offset = circ - (calPct / 100) * circ;
+      const pct = Math.min(100, (consumed / cGoal) * 100);
+      const strokeMax = 282.74;
+      const offset = strokeMax - (pct / 100) * strokeMax;
       document.getElementById('calCircleBar').style.strokeDashoffset = offset;
+      document.getElementById('calBarFill').style.width = pct + '%';
 
       const wGoal = state.waterGoal || 3000;
       const wMl = state.waterMl || 0;
-      const wPct = Math.min(100, Math.round((wMl / wGoal) * 100));
-
+      const wPct = Math.min(100, (wMl / wGoal) * 100);
       document.getElementById('waterTotalDisplay').innerHTML = `${wMl} <small>/ ${wGoal} مل</small>`;
       document.getElementById('waterFlaskAnimated').style.height = wPct + '%';
       const cupsDrank = Math.floor(wMl / 250);
       document.getElementById('waterCupsCountTxt').innerText = `${cupsDrank} من ${Math.ceil(wGoal / 250)} كوب يومياً`;
 
-      const pips = document.querySelectorAll('.cup-pip');
+      const pips = document.querySelectorAll('.water-pip-dot');
       pips.forEach((pip, index) => {
         if (index < cupsDrank) pip.classList.add('filled');
         else pip.classList.remove('filled');
@@ -2094,19 +2359,19 @@
     function renderFoodLog() {
       const container = document.getElementById('foodLogHistory');
       if (!state.meals || state.meals.length === 0) {
-        container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-dim); text-align:center; padding:10px 0;">لا توجد وجبات مسجلة بعد اليوم</div>';
+        container.innerHTML = '<div style="font-size:0.78rem; color:var(--text-dim); text-align:center; padding:10px 0;">لا توجد وجبات مسجلة بعد اليوم</div>';
         return;
       }
 
       container.innerHTML = state.meals.map((m, idx) => `
-        <div class="food-logged-row">
+        <div class="food-log-item">
           <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:1rem;">🍽️</span>
+            <span style="color:var(--gold-primary);">🍽️</span>
             <span style="font-weight:700; color:#fff;">${m.name}</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
-            <span style="background:rgba(250,17,79,0.18); color:var(--accent-red); padding:3px 8px; border-radius:8px; font-size:0.75rem; font-weight:800; font-variant-numeric:tabular-nums;">${m.cals} سعرة</span>
-            <span class="food-delete-trigger" onclick="deleteFood(${idx})" title="حذف">✕</span>
+            <span style="background:rgba(244,63,94,0.18); color:var(--crimson-accent); padding:3px 8px; border-radius:6px; font-size:0.75rem; font-weight:800; font-variant-numeric:tabular-nums;">${m.cals} سعرة</span>
+            <span class="food-del-btn" onclick="deleteFood(${idx})" title="حذف">✕</span>
           </div>
         </div>
       `).join('');
@@ -2118,12 +2383,12 @@
       saveState();
       renderSchedule();
       playHapticClick();
-      if (state.completedTasks[id]) showToast("✓ تم إنجاز المهمة");
+      if (state.completedTasks[id]) showToast("✓ تم إنجاز المهمة بنجاح");
     }
 
     function renderSchedule() {
       const total = SCHEDULE_DATA.length;
-      document.querySelectorAll('.task-row-entry').forEach((row) => {
+      document.querySelectorAll('.task-entry-row').forEach((row) => {
         const taskId = row.getAttribute('data-task-id');
         if (taskId !== null) {
           if (state.completedTasks[taskId]) {
@@ -2145,12 +2410,12 @@
       const ratioEl = document.getElementById('scheduleTasksRatio');
       if (pctEl) pctEl.innerText = `${pct}%`;
       if (barEl) barEl.style.width = `${pct}%`;
-      if (ratioEl) ratioEl.innerText = `${doneCount} من ${total} مهمة مكتملة`;
+      if (ratioEl) ratioEl.innerText = `${doneCount} من ${total} محطة مكتملة`;
     }
 
     function markTaskDone() {
       playHapticClick();
-      showToast("رائع! خطوة جديدة في الالتزام اليومي 🔥");
+      showToast("رائع! خطوة جديدة في الالتزام اليومي والسكينة ✦");
     }
 
     /* Tabs */
@@ -2168,7 +2433,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* Dynamic Time-Based Greeting (Zero Login Needed) */
+    /* Dynamic Time-Based Greeting */
     function updateGreeting() {
       const hour = new Date().getHours();
       let greeting = 'صباح الهمة والبركة';
@@ -2243,13 +2508,23 @@
       if (topDateEl) topDateEl.innerText = shortDate;
 
       if (state.selectedCity) {
-        document.getElementById('citySelect').value = state.selectedCity;
+        if (document.getElementById('citySelect')) document.getElementById('citySelect').value = state.selectedCity;
+        if (document.getElementById('cfgCitySelect')) document.getElementById('cfgCitySelect').value = state.selectedCity;
       }
       document.getElementById('cfgCalGoal').value = state.caloriesGoal || 2200;
       document.getElementById('cfgWaterGoal').value = state.waterGoal || 3000;
 
       setInterval(updateLiveEngine, 1000);
       setInterval(updatePrayers, 60000);
+
+      function handleHash() {
+        const h = window.location.hash.replace('#', '');
+        if (h && ['now', 'schedule', 'health', 'knowledge', 'settings'].includes(h)) {
+          switchTab(h);
+        }
+      }
+      handleHash();
+      window.addEventListener('hashchange', handleHash);
 
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js').catch(() => {});

@@ -1,77 +1,108 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <!-- Deep Space Apple Dark Gradient -->
-    <linearGradient id="samtBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a0a0e"/>
-      <stop offset="40%" stop-color="#12131a"/>
-      <stop offset="100%" stop-color="#050508"/>
+    <!-- Deep Obsidian Metallic Slate -->
+    <linearGradient id="shieldBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12141c"/>
+      <stop offset="50%" stop-color="#090a0f"/>
+      <stop offset="100%" stop-color="#040507"/>
     </linearGradient>
 
-    <!-- Radial Apple Glow -->
-    <radialGradient id="auroraGlow" cx="50%" cy="30%" r="75%">
-      <stop offset="0%" stop-color="#0a84ff" stop-opacity="0.35"/>
-      <stop offset="50%" stop-color="#5e5ce6" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#bf5af2" stop-opacity="0"/>
+    <!-- Luxury 24K Polished Gold Gradient -->
+    <linearGradient id="goldLux" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#996515"/>
+      <stop offset="25%" stop-color="#d4af37"/>
+      <stop offset="50%" stop-color="#fdf0cd"/>
+      <stop offset="75%" stop-color="#e6ca65"/>
+      <stop offset="100%" stop-color="#aa7c11"/>
+    </linearGradient>
+
+    <!-- Emerald Dawn Accent (Signifying Renewal & Spirit) -->
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="50%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+
+    <!-- Inner Radial Glow -->
+    <radialGradient id="celestialAura" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#d4af37" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#10b981" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- High-End Gold & Azure Energy Gradient -->
-    <linearGradient id="zenithGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0a84ff"/>
-      <stop offset="45%" stop-color="#5e5ce6"/>
-      <stop offset="85%" stop-color="#bf5af2"/>
-      <stop offset="100%" stop-color="#ffd60a"/>
-    </linearGradient>
-
-    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffe600"/>
-      <stop offset="100%" stop-color="#ff9f0a"/>
-    </linearGradient>
-
-    <!-- Glass Specular Reflection Highlight -->
-    <linearGradient id="glassGloss" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.04"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-
-    <filter id="appleBloom" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="18" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
 
-    <filter id="coreGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    <filter id="metallicBevel">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.8"/>
     </filter>
   </defs>
 
-  <!-- iOS Continuous Squircle (Radius 115) -->
-  <rect width="512" height="512" rx="115" fill="url(#samtBg)"/>
-  <rect width="512" height="512" rx="115" fill="url(#auroraGlow)"/>
+  <!-- Squircle Base with Precision Inset -->
+  <rect width="512" height="512" rx="116" fill="url(#shieldBg)"/>
+  <rect width="512" height="512" rx="116" fill="url(#celestialAura)"/>
+  
+  <!-- Outer Gold Micro Hairline Rim -->
+  <rect x="6" y="6" width="500" height="500" rx="110" fill="none" stroke="url(#goldLux)" stroke-width="1.5" stroke-opacity="0.6"/>
+  <rect x="16" y="16" width="480" height="480" rx="100" fill="none" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1"/>
 
-  <!-- Subtle Specular Glass Highlight -->
-  <rect width="512" height="512" rx="115" fill="url(#glassGloss)" stroke="rgba(255, 255, 255, 0.16)" stroke-width="2"/>
-
-  <!-- Ambient Concentric Orbit Rings (representing time cycles & prayers) -->
-  <circle cx="256" cy="256" r="175" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1.5"/>
-  <circle cx="256" cy="256" r="130" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" stroke-dasharray="4 8"/>
-
-  <!-- Iconic Central Emblem: Ascending Crescent / Zenith Arc & Core Spark -->
-  <g filter="url(#appleBloom)">
-    <!-- Primary Flow Dynamic Arc -->
-    <path d="M 160 300 C 160 200, 220 148, 320 148 C 340 148, 355 152, 355 152 C 320 175, 280 210, 280 260 C 280 300, 310 330, 340 348 C 315 362, 285 368, 256 368 C 200 368, 160 335, 160 300 Z" 
-          fill="url(#zenithGrad)" />
-
-    <!-- Pure Zenith Star Spark (Point of Elevation & Morning Light) -->
-    <g transform="translate(335, 155)" filter="url(#coreGlow)">
-      <circle cx="0" cy="0" r="16" fill="url(#goldAccent)"/>
-      <circle cx="0" cy="0" r="8" fill="#ffffff"/>
-      <!-- Compass / Dawn Ray Spikes -->
-      <path d="M 0 -28 L 3 -8 L 28 0 L 3 8 L 0 28 L -3 8 L -28 0 L -3 -8 Z" fill="#ffffff" opacity="0.9"/>
-    </g>
+  <!-- Celestial Horizon Coordinates & Astrolabe Track -->
+  <g opacity="0.35">
+    <circle cx="256" cy="256" r="180" fill="none" stroke="url(#goldLux)" stroke-width="1" stroke-dasharray="2 6"/>
+    <circle cx="256" cy="256" r="135" fill="none" stroke="rgba(255, 255, 255, 0.15)" stroke-width="0.75"/>
+    <line x1="256" y1="60" x2="256" y2="80" stroke="url(#goldLux)" stroke-width="1.5"/>
+    <line x1="256" y1="432" x2="256" y2="452" stroke="url(#goldLux)" stroke-width="1.5"/>
+    <line x1="60" y1="256" x2="80" y2="256" stroke="url(#goldLux)" stroke-width="1.5"/>
+    <line x1="432" y1="256" x2="452" y2="256" stroke="url(#goldLux)" stroke-width="1.5"/>
   </g>
 
-  <!-- Golden Habit Orbital Seed -->
-  <circle cx="185" cy="205" r="7" fill="#ffd60a" filter="url(#coreGlow)"/>
-  <circle cx="340" cy="310" r="5" fill="#30d158" filter="url(#coreGlow)"/>
+  <!-- Central Emblem: The Zenith Arch & Calligraphic "س" (SAMT) -->
+  <g filter="url(#metallicBevel)">
+    <!-- Outer Sacred Geometry Arch (Minaret & Dome Apex) -->
+    <path d="M 256 100 
+             C 275 145, 335 200, 365 260 
+             C 385 300, 375 355, 340 385 
+             C 310 410, 275 416, 256 416 
+             C 237 416, 202 410, 172 385 
+             C 137 355, 127 300, 147 260 
+             C 177 200, 237 145, 256 100 Z" 
+          fill="none" 
+          stroke="url(#goldLux)" 
+          stroke-width="5" 
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- Inner Geometric Star / 8-Point Rub el Hizb Compass Apex -->
+    <g transform="translate(256, 170)" filter="url(#softGlow)">
+      <!-- Octagram Compass Core -->
+      <polygon points="0,-24 7,-7 24,0 7,7 0,24 -7,7 -24,0 -7,-7" fill="url(#goldLux)"/>
+      <polygon points="-17,-17 0,-10 17,-17 10,0 17,17 0,10 -17,17 -10,0" fill="url(#goldLux)" opacity="0.85"/>
+      <circle cx="0" cy="0" r="5" fill="#ffffff"/>
+    </g>
+
+    <!-- Harmonious Calligraphic Three Teeth of the Arabic "س" (Seen) forming Ascent -->
+    <path d="M 180 320 
+             C 185 270, 210 270, 215 320 
+             C 220 270, 245 270, 250 320 
+             C 255 260, 290 260, 305 320
+             C 320 375, 350 350, 350 320" 
+          fill="none" 
+          stroke="url(#goldLux)" 
+          stroke-width="7" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+
+    <!-- Flowing Emerald Base Horizon (Foundation of Daily Routine & Balance) -->
+    <path d="M 175 350 
+             C 215 375, 295 375, 335 350" 
+          fill="none" 
+          stroke="url(#emeraldGrad)" 
+          stroke-width="4.5" 
+          stroke-linecap="round"/>
+
+    <!-- The Golden Meridian Coordinate Pivot -->
+    <circle cx="256" cy="335" r="4" fill="#ffffff" filter="url(#softGlow)"/>
+  </g>
 </svg>
