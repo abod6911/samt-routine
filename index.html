@@ -17,7 +17,7 @@
   <!-- Apple SF Pro + Readex Pro & IBM Plex Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
@@ -25,22 +25,18 @@
        ========================================================================== */
     :root {
       --system-bg: #000000;
-      --system-grouped-bg: #000000;
-      --card-material: rgba(28, 28, 30, 0.68);
-      --card-material-opaque: #1c1c1e;
+      --card-bg: rgba(28, 28, 32, 0.72);
       --card-border: rgba(255, 255, 255, 0.12);
       --card-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
       --label-primary: #ffffff;
-      --label-secondary: rgba(235, 235, 245, 0.6);
-      --label-tertiary: rgba(235, 235, 245, 0.35);
-      --label-quaternary: rgba(235, 235, 245, 0.18);
+      --label-secondary: rgba(235, 235, 245, 0.65);
+      --label-tertiary: rgba(235, 235, 245, 0.38);
       
       /* Apple iOS Vibrant Accent Palette */
       --ios-blue: #0a84ff;
       --ios-green: #30d158;
       --ios-indigo: #5e5ce6;
       --ios-orange: #ff9f0a;
-      --ios-pink: #ff375f;
       --ios-purple: #bf5af2;
       --ios-red: #fa114f;
       --ios-teal: #64d2ff;
@@ -48,7 +44,6 @@
       
       /* Cupertino Physics */
       --ios-spring: cubic-bezier(0.32, 0.72, 0, 1);
-      --ios-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
     }
 
     * {
@@ -67,51 +62,48 @@
       color: var(--label-primary);
       min-height: 100vh;
       overflow-x: hidden;
-      padding-bottom: 110px;
+      padding-bottom: 105px;
       position: relative;
     }
 
-    /* Ambient Subtle iOS Vibrancy Backdrops */
-    .ios-aurora-glow-1 {
+    /* Subtle Ambient Lighting */
+    .ios-glow-1 {
       position: fixed;
-      top: -80px;
-      right: -60px;
+      top: -100px;
+      right: -80px;
       width: 320px;
       height: 320px;
-      background: radial-gradient(circle, rgba(10, 132, 255, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+      background: radial-gradient(circle, rgba(10, 132, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
       pointer-events: none;
       z-index: 0;
-      filter: blur(60px);
+      filter: blur(65px);
     }
 
-    .ios-aurora-glow-2 {
+    .ios-glow-2 {
       position: fixed;
-      bottom: 120px;
+      bottom: 100px;
       left: -80px;
       width: 340px;
       height: 340px;
-      background: radial-gradient(circle, rgba(94, 92, 230, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
+      background: radial-gradient(circle, rgba(94, 92, 230, 0.16) 0%, rgba(0, 0, 0, 0) 70%);
       pointer-events: none;
       z-index: 0;
-      filter: blur(70px);
+      filter: blur(75px);
     }
 
-    /* ==========================================================================
-       TOP NAVIGATION BAR (Apple Translucent Header)
-       ========================================================================== */
+    /* Top Navigation Bar */
     .ios-navbar {
       position: sticky;
       top: 0;
       z-index: 60;
-      background: rgba(18, 18, 20, 0.75);
-      backdrop-filter: blur(30px) saturate(190%);
-      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      background: rgba(16, 16, 18, 0.78);
+      backdrop-filter: blur(35px) saturate(190%);
+      -webkit-backdrop-filter: blur(35px) saturate(190%);
       border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
       padding: 12px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: all 0.3s ease;
     }
 
     .ios-brand {
@@ -124,14 +116,14 @@
     .ios-app-icon {
       width: 32px;
       height: 32px;
-      border-radius: 8.5px;
-      box-shadow: 0 4px 12px rgba(10, 132, 255, 0.3);
+      border-radius: 9px;
+      box-shadow: 0 4px 12px rgba(10, 132, 255, 0.35);
       border: 0.5px solid rgba(255, 255, 255, 0.2);
     }
 
     .ios-brand-text {
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.18rem;
+      font-weight: 800;
       letter-spacing: -0.4px;
       color: #ffffff;
     }
@@ -141,18 +133,17 @@
       align-items: center;
       gap: 6px;
       background: rgba(255, 255, 255, 0.08);
-      border: 0.5px solid rgba(255, 255, 255, 0.15);
+      border: 0.5px solid rgba(255, 255, 255, 0.16);
       padding: 5px 12px;
       border-radius: 999px;
       font-size: 0.8rem;
       font-weight: 600;
       color: #fff;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: transform 0.15s ease;
     }
 
     .ios-user-pill:active {
-      background: rgba(255, 255, 255, 0.14);
       transform: scale(0.96);
     }
 
@@ -168,7 +159,7 @@
     .ios-viewport {
       max-width: 520px;
       margin: 0 auto;
-      padding: 16px 16px 24px;
+      padding: 16px;
       position: relative;
       z-index: 10;
     }
@@ -187,8 +178,475 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Section Title */
+    .view-large-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin: 4px 4px 16px;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title-subtag {
+      font-size: 0.8rem;
+      color: var(--label-secondary);
+      font-weight: 500;
+    }
+
     /* ==========================================================================
-       DYNAMIC ISLAND (Apple Live Activity Widget)
+       HEALTH TAB (Apple Health & Fitness Redesign)
+       ========================================================================== */
+    .apple-health-hero-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-highlight), 0 12px 32px rgba(0, 0, 0, 0.5);
+      border-radius: 28px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .calorie-split-layout {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cal-ring-wrap {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      flex-shrink: 0;
+    }
+
+    .cal-ring-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .cal-ring-bg {
+      fill: none;
+      stroke: rgba(250, 17, 79, 0.18);
+      stroke-width: 11;
+    }
+
+    .cal-ring-progress {
+      fill: none;
+      stroke: var(--ios-red);
+      stroke-width: 11;
+      stroke-linecap: round;
+      stroke-dasharray: 282.74;
+      stroke-dashoffset: 282.74;
+      transition: stroke-dashoffset 0.6s var(--ios-spring);
+    }
+
+    .cal-ring-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .cal-center-val {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cal-center-sub {
+      font-size: 0.68rem;
+      color: var(--label-secondary);
+      margin-top: 2px;
+    }
+
+    .cal-meta-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cal-headline {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--ios-red);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cal-progress-bar-wrap {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .cal-progress-bar-fill {
+      height: 100%;
+      background: var(--ios-red);
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.4s var(--ios-spring);
+    }
+
+    .cal-stats-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--label-secondary);
+    }
+
+    /* Water Hydration Card - Liquid Wave Simulation */
+    .apple-water-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-highlight), 0 12px 32px rgba(0, 0, 0, 0.5);
+      border-radius: 28px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .water-main-split {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .water-tank-flask {
+      width: 66px;
+      height: 110px;
+      border: 2.5px solid var(--ios-teal);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(100, 210, 255, 0.06);
+      box-shadow: 0 0 20px rgba(100, 210, 255, 0.15), inset 0 0 12px rgba(100, 210, 255, 0.1);
+    }
+
+    .water-liquid-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, #64d2ff, #0a84ff);
+      transition: height 0.6s var(--ios-spring);
+      border-radius: 0 0 16px 16px;
+    }
+
+    .water-liquid-fill::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: -20%; right: -20%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      animation: waterWave 3s infinite linear;
+    }
+
+    @keyframes waterWave {
+      0% { transform: translateX(0) scaleY(1); }
+      50% { transform: translateX(10%) scaleY(1.3); }
+      100% { transform: translateX(0) scaleY(1); }
+    }
+
+    .water-details-col {
+      flex: 1;
+      margin-right: 22px;
+    }
+
+    .water-title-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ios-teal);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .water-huge-number {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 4px;
+    }
+
+    .water-huge-number small {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--label-secondary);
+    }
+
+    .cups-dots-grid {
+      display: flex;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .cup-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(100, 210, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .cup-dot.filled {
+      background: var(--ios-teal);
+      border-color: var(--ios-teal);
+      box-shadow: 0 0 8px rgba(100, 210, 255, 0.5);
+    }
+
+    /* Water Action Buttons */
+    .water-action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-water-tile {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 12px 6px;
+      text-align: center;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .btn-water-tile:active {
+      transform: scale(0.95);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-water-tile.highlight {
+      background: rgba(100, 210, 255, 0.12);
+      border-color: rgba(100, 210, 255, 0.35);
+      color: var(--ios-teal);
+    }
+
+    .tile-main-text {
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .tile-sub-text {
+      font-size: 0.72rem;
+      color: var(--label-secondary);
+    }
+
+    /* Food Logger Module */
+    .apple-meals-module {
+      background: var(--card-bg);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-highlight), 0 12px 32px rgba(0, 0, 0, 0.5);
+      border-radius: 28px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+
+    .meals-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .meals-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .chips-horizontal-scroll {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .smart-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--label-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .smart-chip:active {
+      transform: scale(0.95);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .chip-cal-badge {
+      background: rgba(250, 17, 79, 0.2);
+      color: var(--ios-red);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    /* Fixed Food Input Form (No Layout Breakage in RTL) */
+    .apple-input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .input-fields-split {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .apple-text-field {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: 11px 14px;
+      color: #fff;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .apple-text-field:focus {
+      border-color: var(--ios-blue);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-submit-meal {
+      width: 100%;
+      background: var(--ios-blue);
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-submit-meal:active {
+      transform: scale(0.97);
+    }
+
+    .logged-meals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .logged-meal-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 0.88rem;
+    }
+
+    .meal-del-icon {
+      color: var(--ios-red);
+      cursor: pointer;
+      padding: 2px 6px;
+      font-size: 0.82rem;
+    }
+
+    /* ==========================================================================
+       BOTTOM TAB BAR (Apple Cupertino Floating Bar)
+       ========================================================================== */
+    .ios-tabbar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 70;
+      height: 74px;
+      background: rgba(18, 18, 20, 0.82);
+      backdrop-filter: blur(35px) saturate(190%);
+      -webkit-backdrop-filter: blur(35px) saturate(190%);
+      border-top: 0.5px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: env(safe-area-inset-bottom, 8px);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--label-tertiary);
+      cursor: pointer;
+      width: 60px;
+      transition: all 0.2s var(--ios-spring);
+    }
+
+    .tab-btn.active {
+      color: var(--ios-blue);
+      transform: translateY(-2px);
+    }
+
+    .tab-icon-svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .tab-caption {
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       DYNAMIC ISLAND & HOME MODULES
        ========================================================================== */
     .dynamic-island {
       background: #000000;
@@ -196,10 +654,7 @@
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.2);
       border-radius: 34px;
       padding: 20px 22px;
-      margin-bottom: 22px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s var(--ios-spring);
+      margin-bottom: 20px;
     }
 
     .island-status-bar {
@@ -223,8 +678,7 @@
     }
 
     .island-badge-pulse {
-      width: 5px;
-      height: 5px;
+      width: 5px; height: 5px;
       border-radius: 50%;
       background: var(--ios-green);
       animation: islandPulse 1.8s infinite;
@@ -246,8 +700,7 @@
 
     .island-activity-name {
       font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
+      font-weight: 800;
       color: #ffffff;
       margin-bottom: 4px;
       line-height: 1.3;
@@ -284,25 +737,6 @@
       padding: 10px 14px;
     }
 
-    .island-next-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .island-next-caption {
-      font-size: 0.7rem;
-      color: var(--label-tertiary);
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .island-next-title {
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.9);
-    }
-
     .btn-island-action {
       background: var(--ios-green);
       color: #000000;
@@ -322,81 +756,9 @@
       transform: scale(0.93);
     }
 
-    /* ==========================================================================
-       APPLE FITNESS 3-RING WIDGET
-       ========================================================================== */
-    .apple-fitness-widget {
-      background: var(--card-material);
-      backdrop-filter: blur(35px) saturate(180%);
-      -webkit-backdrop-filter: blur(35px) saturate(180%);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-highlight), 0 10px 30px rgba(0, 0, 0, 0.4);
-      border-radius: 26px;
-      padding: 20px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .fitness-rings-svg {
-      width: 110px;
-      height: 110px;
-      flex-shrink: 0;
-      transform: rotate(-90deg);
-    }
-
-    .ring-bg {
-      fill: none;
-      stroke-width: 10;
-      opacity: 0.2;
-    }
-
-    .ring-fg {
-      fill: none;
-      stroke-width: 10;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 0.6s var(--ios-spring);
-    }
-
-    .fitness-metrics {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .metric-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .metric-title {
-      font-size: 0.82rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .metric-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .metric-value {
-      font-size: 0.95rem;
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* ==========================================================================
-       PRAYER TIMES MODULE (Mosque Focus)
-       ========================================================================== */
+    /* Prayers Widget */
     .ios-prayer-card {
-      background: var(--card-material);
+      background: var(--card-bg);
       backdrop-filter: blur(35px) saturate(180%);
       -webkit-backdrop-filter: blur(35px) saturate(180%);
       border: 1px solid var(--card-border);
@@ -406,36 +768,11 @@
       margin-bottom: 20px;
     }
 
-    .card-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .card-header-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .ios-badge-blue {
-      background: rgba(10, 132, 255, 0.14);
-      color: var(--ios-blue);
-      border: 0.5px solid rgba(10, 132, 255, 0.3);
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 600;
-    }
-
     .prayers-row {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
+      margin-top: 12px;
     }
 
     .prayer-item {
@@ -471,43 +808,9 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .prayer-footer-note {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 0.5px solid rgba(255, 255, 255, 0.06);
-      font-size: 0.78rem;
-      color: var(--label-secondary);
-    }
-
-    .ios-select {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      border: 0.5px solid rgba(255, 255, 255, 0.16);
-      border-radius: 8px;
-      padding: 3px 8px;
-      font-size: 0.78rem;
-      outline: none;
-    }
-
-    /* ==========================================================================
-       SCHEDULE TIMELINE (Apple Reminders & Calendar)
-       ========================================================================== */
-    .ios-section-header {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      margin: 18px 4px 12px;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .ios-card {
-      background: var(--card-material);
+    /* Schedule Timeline */
+    .schedule-block-card {
+      background: var(--card-bg);
       backdrop-filter: blur(35px) saturate(180%);
       -webkit-backdrop-filter: blur(35px) saturate(180%);
       border: 1px solid var(--card-border);
@@ -582,10 +885,6 @@
       font-weight: 900;
     }
 
-    .task-text-wrap {
-      flex: 1;
-    }
-
     .task-main-text {
       font-size: 0.92rem;
       font-weight: 600;
@@ -604,155 +903,7 @@
       color: var(--label-secondary);
     }
 
-    /* ==========================================================================
-       HEALTH & CALORIES (Apple Health Style)
-       ========================================================================== */
-    .water-fluid-card {
-      background: var(--card-material);
-      backdrop-filter: blur(35px) saturate(180%);
-      -webkit-backdrop-filter: blur(35px) saturate(180%);
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-highlight), 0 8px 24px rgba(0, 0, 0, 0.35);
-      border-radius: 26px;
-      padding: 20px;
-      margin-bottom: 18px;
-    }
-
-    .water-row-display {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .water-tank {
-      width: 52px;
-      height: 94px;
-      border: 2px solid var(--ios-teal);
-      border-radius: 14px;
-      position: relative;
-      overflow: hidden;
-      background: rgba(100, 210, 255, 0.05);
-    }
-
-    .water-tank-level {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(180deg, #64d2ff, #0a84ff);
-      transition: height 0.5s var(--ios-spring);
-    }
-
-    .water-data-col {
-      flex: 1;
-      margin-right: 18px;
-    }
-
-    .water-title-lbl {
-      font-size: 0.82rem;
-      color: var(--label-secondary);
-      margin-bottom: 4px;
-    }
-
-    .water-big-num {
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: var(--ios-teal);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .water-btn-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-    }
-
-    .ios-btn-pill {
-      background: rgba(255, 255, 255, 0.08);
-      border: 0.5px solid rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-      padding: 11px 6px;
-      border-radius: 14px;
-      font-size: 0.84rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
-      transition: background 0.15s, transform 0.15s;
-    }
-
-    .ios-btn-pill:active {
-      background: rgba(255, 255, 255, 0.16);
-      transform: scale(0.95);
-    }
-
-    .ios-btn-pill.teal {
-      background: rgba(100, 210, 255, 0.12);
-      border-color: rgba(100, 210, 255, 0.28);
-      color: var(--ios-teal);
-    }
-
-    .quick-preset-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .preset-pill {
-      background: rgba(255, 255, 255, 0.06);
-      border: 0.5px solid rgba(255, 255, 255, 0.1);
-      padding: 5px 11px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      color: var(--label-secondary);
-      cursor: pointer;
-    }
-
-    .preset-pill:active {
-      background: rgba(255, 255, 255, 0.14);
-      color: #fff;
-    }
-
-    .food-input-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .ios-input {
-      background: rgba(255, 255, 255, 0.07);
-      border: 0.5px solid rgba(255, 255, 255, 0.14);
-      border-radius: 12px;
-      padding: 10px 14px;
-      color: #fff;
-      font-size: 0.88rem;
-      outline: none;
-    }
-
-    .ios-input:focus {
-      border-color: var(--ios-blue);
-    }
-
-    .btn-add-food {
-      background: var(--ios-blue);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 16px;
-      font-weight: 700;
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: transform 0.15s;
-    }
-
-    .btn-add-food:active {
-      transform: scale(0.95);
-    }
-
-    /* ==========================================================================
-       WISDOM & EDITORIAL (Apple News / App Store Stories)
-       ========================================================================== */
+    /* Editorial & Settings */
     .editorial-story-card {
       background: linear-gradient(160deg, rgba(34, 34, 38, 0.9), rgba(18, 18, 20, 0.9));
       border: 1px solid var(--card-border);
@@ -760,8 +911,6 @@
       border-radius: 28px;
       padding: 22px;
       margin-bottom: 18px;
-      position: relative;
-      overflow: hidden;
     }
 
     .editorial-kicker {
@@ -789,17 +938,6 @@
       margin-bottom: 14px;
     }
 
-    .editorial-quote {
-      background: rgba(191, 90, 242, 0.1);
-      border-right: 3px solid var(--ios-purple);
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: #f5d0fe;
-      margin-top: 10px;
-      line-height: 1.45;
-    }
-
     .ios-video-wrap {
       position: relative;
       width: 100%;
@@ -817,23 +955,8 @@
       border: 0;
     }
 
-    /* Ambient Sound Bar */
-    .zen-audio-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(10, 132, 255, 0.12);
-      border: 1px solid rgba(10, 132, 255, 0.28);
-      border-radius: 18px;
-      padding: 12px 16px;
-      margin-bottom: 20px;
-    }
-
-    /* ==========================================================================
-       SETTINGS & PREFERENCES (iOS Grouped Tables)
-       ========================================================================== */
     .ios-grouped-list {
-      background: var(--card-material);
+      background: var(--card-bg);
       backdrop-filter: blur(35px) saturate(180%);
       -webkit-backdrop-filter: blur(35px) saturate(180%);
       border: 1px solid var(--card-border);
@@ -854,120 +977,7 @@
       border-bottom: none;
     }
 
-    .cell-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .cell-sub {
-      font-size: 0.78rem;
-      color: var(--label-secondary);
-      margin-top: 2px;
-    }
-
-    /* iOS Toggle Switch */
-    .ios-switch {
-      position: relative;
-      display: inline-block;
-      width: 48px;
-      height: 28px;
-    }
-
-    .ios-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .switch-track {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #39393d;
-      transition: .25s var(--ios-spring);
-      border-radius: 34px;
-    }
-
-    .switch-track:before {
-      position: absolute;
-      content: "";
-      height: 22px;
-      width: 22px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: .25s var(--ios-spring);
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-
-    input:checked + .switch-track {
-      background-color: var(--ios-green);
-    }
-
-    input:checked + .switch-track:before {
-      transform: translateX(20px);
-    }
-
-    /* ==========================================================================
-       BOTTOM TAB BAR (Apple Cupertino Floating Dock)
-       ========================================================================== */
-    .ios-tabbar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 70;
-      height: 76px;
-      background: rgba(18, 18, 20, 0.82);
-      backdrop-filter: blur(35px) saturate(190%);
-      -webkit-backdrop-filter: blur(35px) saturate(190%);
-      border-top: 0.5px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding-bottom: env(safe-area-inset-bottom, 8px);
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    .tab-btn {
-      background: none;
-      border: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      color: var(--label-tertiary);
-      cursor: pointer;
-      width: 60px;
-      transition: all 0.2s var(--ios-spring);
-    }
-
-    .tab-btn.active {
-      color: var(--ios-blue);
-      transform: translateY(-2px);
-    }
-
-    .tab-icon-svg {
-      width: 23px;
-      height: 23px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .tab-caption {
-      font-size: 0.72rem;
-      font-weight: 600;
-    }
-
-    /* ==========================================================================
-       APPLE MODAL ONBOARDING SHEET
-       ========================================================================== */
+    /* Modal Sheet */
     .ios-modal-backdrop {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -998,55 +1008,16 @@
       width: 100%;
       padding: 30px 24px;
       text-align: center;
-      transform: translateY(20px);
-      transition: transform 0.3s var(--ios-spring);
-    }
-
-    .ios-modal-backdrop.show .ios-sheet {
-      transform: translateY(0);
     }
 
     .sheet-logo {
-      width: 74px;
-      height: 74px;
+      width: 74px; height: 74px;
       border-radius: 18px;
       margin: 0 auto 16px;
       display: block;
       box-shadow: 0 8px 24px rgba(10, 132, 255, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .sheet-h1 {
-      font-size: 1.55rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    .sheet-desc {
-      color: var(--label-secondary);
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 22px;
-    }
-
-    .btn-sheet-submit {
-      width: 100%;
-      background: linear-gradient(135deg, var(--ios-blue), var(--ios-indigo));
-      color: #fff;
-      border: none;
-      border-radius: 16px;
-      padding: 13px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-
-    .btn-sheet-submit:active {
-      transform: scale(0.97);
-    }
-
-    /* Toast */
     .ios-toast {
       position: fixed;
       top: 18px;
@@ -1077,8 +1048,8 @@
 <body>
 
   <!-- Background Lighting -->
-  <div class="ios-aurora-glow-1"></div>
-  <div class="ios-aurora-glow-2"></div>
+  <div class="ios-glow-1"></div>
+  <div class="ios-glow-2"></div>
 
   <!-- Apple Navigation Bar -->
   <header class="ios-navbar">
@@ -1092,7 +1063,7 @@
     </div>
   </header>
 
-  <!-- iOS Toast Banner -->
+  <!-- iOS Toast -->
   <div id="iosToast" class="ios-toast">
     <span id="toastIcon">✓</span>
     <span id="toastMsg">تم الإجراء بنجاح</span>
@@ -1121,9 +1092,9 @@
         </div>
 
         <div class="island-bottom-bar">
-          <div class="island-next-info">
-            <span class="island-next-caption">النشاط التالي</span>
-            <span class="island-next-title" id="islandNextTitle">صلاة الظهر في المسجد</span>
+          <div style="display:flex; flex-direction:column; gap:2px;">
+            <span style="font-size:0.7rem; color:var(--label-tertiary); text-transform:uppercase; font-weight:600;">النشاط التالي</span>
+            <span style="font-size:0.84rem; font-weight:600; color:rgba(255,255,255,0.9);" id="islandNextTitle">صلاة الظهر في المسجد</span>
           </div>
           <button class="btn-island-action" onclick="markTaskDone()">
             <span>✓</span> أنجزت
@@ -1131,49 +1102,14 @@
         </div>
       </div>
 
-      <!-- Apple Fitness 3-Rings Activity Widget -->
-      <div class="apple-fitness-widget">
-        <svg class="fitness-rings-svg" viewBox="0 0 120 120">
-          <!-- Ring 1: Red (Calories) -->
-          <circle cx="60" cy="60" r="50" class="ring-bg" stroke="var(--ios-red)" />
-          <circle id="ringRed" cx="60" cy="60" r="50" class="ring-fg" stroke="var(--ios-red)"
-                  stroke-dasharray="314.15" stroke-dashoffset="314.15" />
-
-          <!-- Ring 2: Green (Habits/Schedule) -->
-          <circle cx="60" cy="60" r="38" class="ring-bg" stroke="var(--ios-green)" />
-          <circle id="ringGreen" cx="60" cy="60" r="38" class="ring-fg" stroke="var(--ios-green)"
-                  stroke-dasharray="238.76" stroke-dashoffset="238.76" />
-
-          <!-- Ring 3: Teal (Water Hydration) -->
-          <circle cx="60" cy="60" r="26" class="ring-bg" stroke="var(--ios-teal)" />
-          <circle id="ringTeal" cx="60" cy="60" r="26" class="ring-fg" stroke="var(--ios-teal)"
-                  stroke-dasharray="163.36" stroke-dashoffset="163.36" />
-        </svg>
-
-        <div class="fitness-metrics">
-          <div class="metric-row">
-            <span class="metric-title"><span class="metric-dot" style="background: var(--ios-red);"></span> السعرات</span>
-            <span class="metric-value" id="valCaloriesMetric">0 / 2200</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-title"><span class="metric-dot" style="background: var(--ios-green);"></span> المهام</span>
-            <span class="metric-value" id="valTasksMetric">0%</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-title"><span class="metric-dot" style="background: var(--ios-teal);"></span> الماء</span>
-            <span class="metric-value" id="valWaterMetric">0.0 / 3.0L</span>
-          </div>
-        </div>
-      </div>
-
       <!-- Prayer Times Widget -->
       <div class="ios-prayer-card">
-        <div class="card-header-row">
-          <div class="card-header-title">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:1.05rem; font-weight:700; display:flex; align-items:center; gap:8px;">
             <svg class="tab-icon-svg" style="width:19px;height:19px;" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>
             <span>أوقات الصلاة في المسجد</span>
           </div>
-          <span class="ios-badge-blue" id="nextPrayerCountdown">باقي 35 دقيقة</span>
+          <span style="background:rgba(10,132,255,0.14); color:var(--ios-blue); border:0.5px solid rgba(10,132,255,0.3); padding:3px 10px; border-radius:999px; font-size:0.76rem; font-weight:600;" id="nextPrayerCountdown">باقي 35 دقيقة</span>
         </div>
 
         <div class="prayers-row">
@@ -1199,9 +1135,9 @@
           </div>
         </div>
 
-        <div class="prayer-footer-note">
-          <span>المدينة:</span>
-          <select id="citySelect" class="ios-select" onchange="changeCity(this.value)">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding-top:10px; border-top:0.5px solid rgba(255,255,255,0.06); font-size:0.78rem; color:var(--label-secondary);">
+          <span>المدينة المعتمدة:</span>
+          <select id="citySelect" style="background:rgba(255,255,255,0.08); color:#fff; border:0.5px solid rgba(255,255,255,0.16); border-radius:8px; padding:3px 8px; font-size:0.78rem; outline:none;" onchange="changeCity(this.value)">
             <option value="amman">عَمّان</option>
             <option value="jerusalem">القدس</option>
             <option value="riyadh" selected>الرياض</option>
@@ -1214,311 +1150,346 @@
 
     </section>
 
-    <!-- ================= TAB 2: SCHEDULE / الجدول الكامل ================= -->
+    <!-- ================= TAB 2: SCHEDULE / الجدول ================= -->
     <section id="tab-schedule" class="tab-pane">
-      <div class="ios-section-header">
-        <span>مسار اليوم</span>
-        <span style="font-size: 0.8rem; color: var(--label-secondary);" id="scheduleDateStr">اليوم</span>
+      <div class="view-large-title">
+        <span>الجدول اليومي</span>
+        <span class="title-subtag" id="scheduleDateStr">اليوم</span>
       </div>
 
-      <!-- 1. البكور والروحانية -->
-      <div class="ios-card">
+      <!-- Schedule Blocks -->
+      <div class="schedule-block-card">
         <div class="block-header-line">
           <span class="block-title-text">1. البكور وتطوير الذات</span>
           <span class="block-hours">05:00 - 07:30</span>
         </div>
         <div class="task-item-row" onclick="toggleTask(0)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">صلاة الفجر في المسجد + أذكار الصباح</div>
             <div class="task-sub-meta">05:00 ص – كوب ماء وانطلاقة اليوم</div>
           </div>
         </div>
         <div class="task-item-row" onclick="toggleTask(1)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">تطوير اللغة الإنجليزية (45 دقيقة)</div>
-            <div class="task-sub-meta">06:00 ص – استماع وبودكاست وتقنية Shadowing</div>
+            <div class="task-sub-meta">06:00 ص – استماع وتقنية Shadowing</div>
           </div>
         </div>
         <div class="task-item-row" onclick="toggleTask(2)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">دورات تحضير الجامعة وشهادات الخبرة</div>
-            <div class="task-sub-meta">06:45 ص – كورسات Coursera ومهارات تخصصك</div>
+            <div class="task-sub-meta">06:45 ص – منصات Coursera ومهارات التخصص</div>
           </div>
         </div>
       </div>
 
-      <!-- 2. العمل الخاص -->
-      <div class="ios-card">
+      <div class="schedule-block-card">
         <div class="block-header-line">
-          <span class="block-title-text">2. الفطور والعمل الخاص</span>
+          <span class="block-title-text">2. العمل الخاص</span>
           <span class="block-hours">07:30 - 12:00</span>
         </div>
         <div class="task-item-row" onclick="toggleTask(3)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">فطور صحي متوازن وقهوة الصباح</div>
             <div class="task-sub-meta">07:30 ص – تهيئة بيئة العمل والمهام</div>
           </div>
         </div>
         <div class="task-item-row" onclick="toggleTask(4)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">العمل الخاص (تركيز عميق 3.5 ساعات)</div>
             <div class="task-sub-meta">08:30 ص – إنجاز مهام المشروع بدون مشتتات</div>
           </div>
         </div>
       </div>
 
-      <!-- 3. منتصف اليوم -->
-      <div class="ios-card">
+      <div class="schedule-block-card">
         <div class="block-header-line">
           <span class="block-title-text">3. منتصف اليوم والاستراحة</span>
           <span class="block-hours">12:00 - 14:00</span>
         </div>
         <div class="task-item-row" onclick="toggleTask(5)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">صلاة الظهر في المسجد</div>
             <div class="task-sub-meta">12:00 م – فصل العقل عن الشاشات</div>
           </div>
         </div>
         <div class="task-item-row" onclick="toggleTask(6)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">وجبة الغداء + قيلولة 20 دقيقة</div>
             <div class="task-sub-meta">01:00 م – وجبة متوازنة وشحن النشاط</div>
           </div>
         </div>
       </div>
 
-      <!-- 4. الاجتماعات والتمرين -->
-      <div class="ios-card">
+      <div class="schedule-block-card">
         <div class="block-header-line">
           <span class="block-title-text">4. المتابعات والتمرين البدني</span>
           <span class="block-hours">14:00 - 18:00</span>
         </div>
         <div class="task-item-row" onclick="toggleTask(7)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">متابعات العمل والاجتماعات والمكالمات</div>
             <div class="task-sub-meta">02:00 م – الردود والتنسيق</div>
           </div>
         </div>
         <div class="task-item-row" onclick="toggleTask(8)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">صلاة العصر في المسجد وسناك التمرين</div>
             <div class="task-sub-meta">03:30 م – موزة وقهوة لطاقة النادي</div>
           </div>
         </div>
         <div class="task-item-row" onclick="toggleTask(9)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">التمرين الرياضي في النادي (حديد / لياقة)</div>
             <div class="task-sub-meta">04:30 م – تفريغ طاقة اليوم وبناء الصحة</div>
           </div>
         </div>
       </div>
 
-      <!-- 5. المساء والراحة -->
-      <div class="ios-card">
+      <div class="schedule-block-card">
         <div class="block-header-line">
           <span class="block-title-text">5. المساء والنوم الهانئ</span>
           <span class="block-hours">18:00 - 22:30</span>
         </div>
         <div class="task-item-row" onclick="toggleTask(10)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">صلاة المغرب في المسجد وحمام منعش</div>
             <div class="task-sub-meta">06:00 م – استرخاء بعد النادي</div>
           </div>
         </div>
         <div class="task-item-row" onclick="toggleTask(11)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">وجبة العشاء وصلاة العشاء في المسجد</div>
             <div class="task-sub-meta">07:00 م – عشاء خفيف ووقت حر عائلي</div>
           </div>
         </div>
         <div class="task-item-row" onclick="toggleTask(12)">
           <div class="ios-checkbox"></div>
-          <div class="task-text-wrap">
+          <div>
             <div class="task-main-text">إغلاق الشاشات ونوم باكر هانئ</div>
-            <div class="task-sub-meta">10:00 م – هاتف بعيد عن السرير لـ 7.5 ساعات نوم</div>
+            <div class="task-sub-meta">10:00 م – هاتف بعيد عن السرير لنوم عميق</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= TAB 3: HEALTH / صحتي والسعرات ================= -->
+    <!-- ================= TAB 3: HEALTH / صحتي (REDESIGNED) ================= -->
     <section id="tab-health" class="tab-pane">
-      <div class="ios-section-header">
+      <div class="view-large-title">
         <span>الصحة والنشاط</span>
+        <span class="title-subtag">Apple Health</span>
       </div>
 
-      <!-- Water Hydration Card -->
-      <div class="water-fluid-card">
-        <div class="water-row-display">
-          <div class="water-tank">
-            <div class="water-tank-level" id="waterLevelBar" style="height: 0%;"></div>
+      <!-- Hero Calorie Ring Card -->
+      <div class="apple-health-hero-card">
+        <div class="calorie-split-layout">
+          <div class="cal-ring-wrap">
+            <svg class="cal-ring-svg" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" class="cal-ring-bg" />
+              <circle id="calRingProgress" cx="50" cy="50" r="45" class="cal-ring-progress" />
+            </svg>
+            <div class="cal-ring-center">
+              <div class="cal-center-val" id="calCenterLeftVal">2200</div>
+              <div class="cal-center-sub">متبقي</div>
+            </div>
           </div>
-          <div class="water-data-col">
-            <div class="water-title-lbl">شرب الماء اليوم:</div>
-            <div class="water-big-num" id="waterNumDisplay">0 <span style="font-size: 1rem; color: var(--label-secondary);">/ 3000 مل</span></div>
-            <div style="font-size: 0.78rem; color: var(--label-tertiary);" id="waterCupSub">0 من 12 كوب اليوم</div>
-          </div>
-        </div>
 
-        <div class="water-btn-group">
-          <button class="ios-btn-pill teal" onclick="addWater(250)">+ 250 مل</button>
-          <button class="ios-btn-pill teal" onclick="addWater(500)">+ 500 مل</button>
-          <button class="ios-btn-pill" onclick="addWater(-250)">- 250 مل</button>
+          <div class="cal-meta-col">
+            <div class="cal-headline">
+              <svg class="tab-icon-svg" style="width:18px;height:18px;" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/></svg>
+              <span>السعرات اليومية</span>
+            </div>
+            <div class="cal-progress-bar-wrap">
+              <div class="cal-progress-bar-fill" id="calBarFill"></div>
+            </div>
+            <div class="cal-stats-row">
+              <span>تم استهلاك: <strong id="calConsumedTxt" style="color:#fff;">0</strong></span>
+              <span>الهدف: <strong id="calGoalTxt">2200</strong></span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Calorie Logging -->
-      <div class="ios-card">
-        <div class="block-header-line">
-          <span class="block-title-text">تسجيل وجبات اليوم</span>
-          <span class="block-hours" id="calBalanceHeader">متبقي: 2200</span>
+      <!-- Water Hydration Card - Liquid Wave -->
+      <div class="apple-water-card">
+        <div class="water-main-split">
+          <div class="water-tank-flask">
+            <div class="water-liquid-fill" id="waterFlaskFill" style="height: 0%;"></div>
+          </div>
+
+          <div class="water-details-col">
+            <div class="water-title-tag">
+              <svg class="tab-icon-svg" style="width:16px;height:16px;" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              <span>الترطيب وشرب الماء</span>
+            </div>
+            <div class="water-huge-number" id="waterMainVal">0 <small>/ 3000 مل</small></div>
+            <div style="font-size:0.78rem; color:var(--label-secondary);" id="waterCupsCount">0 من 12 كوب يومياً</div>
+
+            <!-- Visual 12-Cups Progress Grid -->
+            <div class="cups-dots-grid" id="cupsGridContainer">
+              <span class="cup-dot"></span><span class="cup-dot"></span><span class="cup-dot"></span>
+              <span class="cup-dot"></span><span class="cup-dot"></span><span class="cup-dot"></span>
+              <span class="cup-dot"></span><span class="cup-dot"></span><span class="cup-dot"></span>
+              <span class="cup-dot"></span><span class="cup-dot"></span><span class="cup-dot"></span>
+            </div>
+          </div>
         </div>
 
-        <div class="quick-preset-wrap">
-          <span class="preset-pill" onclick="quickAddFood('فطور بيض وتوست', 280)">🥚 بيض وتوست (280)</span>
-          <span class="preset-pill" onclick="quickAddFood('صدر دجاج وأرز', 550)">🍗 دجاج وأرز (550)</span>
-          <span class="preset-pill" onclick="quickAddFood('بروتين شيك', 130)">🥤 بروتين (130)</span>
-          <span class="preset-pill" onclick="quickAddFood('موزة وتمر', 140)">🍌 موزة وتمر (140)</span>
+        <div class="water-action-grid">
+          <button class="btn-water-tile highlight" onclick="addWater(250)">
+            <span class="tile-main-text">+ 250 مل</span>
+            <span class="tile-sub-text">كوب ماء</span>
+          </button>
+          <button class="btn-water-tile highlight" onclick="addWater(500)">
+            <span class="tile-main-text">+ 500 مل</span>
+            <span class="tile-sub-text">علبة ماء</span>
+          </button>
+          <button class="btn-water-tile" onclick="addWater(-250)">
+            <span class="tile-main-text">- 250 مل</span>
+            <span class="tile-sub-text">تراجع</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Meals & Calories Logger Module -->
+      <div class="apple-meals-module">
+        <div class="meals-header-row">
+          <span class="meals-title">تسجيل الوجبات والسناكات</span>
+          <span style="font-size:0.78rem; color:var(--ios-blue); font-weight:700;">تسجيل فوري</span>
         </div>
 
-        <div class="food-input-row">
-          <input type="text" id="foodNameInp" class="ios-input" style="flex: 2;" placeholder="اسم الوجبة...">
-          <input type="number" id="foodCalInp" class="ios-input" style="flex: 1;" placeholder="سعرات">
-          <button class="btn-add-food" onclick="submitCustomFood()">إضافة</button>
+        <!-- Quick Smart Chips -->
+        <div class="chips-horizontal-scroll">
+          <div class="smart-chip" onclick="quickAddFood('بيضتين وتوست صحي', 280)">
+            <span>بيض وتوست</span>
+            <span class="chip-cal-badge">280</span>
+          </div>
+          <div class="smart-chip" onclick="quickAddFood('صدر دجاج وأرز أبيض', 550)">
+            <span>دجاج وأرز</span>
+            <span class="chip-cal-badge">550</span>
+          </div>
+          <div class="smart-chip" onclick="quickAddFood('بروتين شيك وموز', 190)">
+            <span>بروتين شيك</span>
+            <span class="chip-cal-badge">190</span>
+          </div>
+          <div class="smart-chip" onclick="quickAddFood('حبة موزة و3 حبات تمر', 140)">
+            <span>موز وتمر</span>
+            <span class="chip-cal-badge">140</span>
+          </div>
         </div>
 
-        <div id="foodLogHistory" style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
-          <div style="font-size: 0.8rem; color: var(--label-tertiary); text-align: center; padding: 8px;">لا توجد وجبات مسجلة اليوم</div>
+        <!-- Stable Non-Overflowing Form Container -->
+        <div class="apple-input-container">
+          <div class="input-fields-split">
+            <input type="text" id="foodNameInp" class="apple-text-field" style="flex:2;" placeholder="اسم الوجبة (مثلاً: سلطة تونة)">
+            <input type="number" id="foodCalInp" class="apple-text-field" style="flex:1; text-align:center;" placeholder="السعرات">
+          </div>
+          <button class="btn-submit-meal" onclick="submitCustomFood()">إضافة الوجبة إلى اليوم</button>
+        </div>
+
+        <!-- Logged Meals List -->
+        <div style="font-size:0.8rem; color:var(--label-secondary); margin-bottom:8px;">سجل وجبات اليوم:</div>
+        <div class="logged-meals-list" id="foodLogHistory">
+          <div style="font-size:0.8rem; color:var(--label-tertiary); text-align:center; padding:8px;">لا توجد وجبات مسجلة اليوم</div>
         </div>
       </div>
     </section>
 
-    <!-- ================= TAB 4: WISDOM / الوعي والمعرفة ================= -->
+    <!-- ================= TAB 4: WISDOM / الوعي ================= -->
     <section id="tab-knowledge" class="tab-pane">
-      <div class="ios-section-header">
+      <div class="view-large-title">
         <span>الوعي والتحضير</span>
       </div>
 
-      <!-- Zen Focus Frequency -->
-      <div class="zen-audio-card">
+      <!-- Zen Sound Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(10,132,255,0.12); border:1px solid rgba(10,132,255,0.28); border-radius:18px; padding:12px 16px; margin-bottom:18px;">
         <div>
-          <div style="font-weight: 700; font-size: 0.92rem; color: #fff;">موجات التركيز العالي (432 Hz)</div>
-          <div style="font-size: 0.74rem; color: var(--label-secondary);">عزل الضوضاء أثناء العمل والمذاكرة</div>
+          <div style="font-weight:700; font-size:0.92rem; color:#fff;">موجات التركيز العالي (432 Hz)</div>
+          <div style="font-size:0.74rem; color:var(--label-secondary);">عزل الضوضاء أثناء العمل والمذاكرة</div>
         </div>
-        <button id="zenBtn" class="ios-btn-pill" style="background: var(--ios-blue); color: #fff; padding: 6px 14px;" onclick="toggleZenSound()">تشغيل</button>
+        <button id="zenBtn" style="background:var(--ios-blue); color:#fff; border:none; padding:7px 16px; border-radius:999px; font-weight:700; font-size:0.84rem; cursor:pointer;" onclick="toggleZenSound()">تشغيل</button>
       </div>
 
-      <!-- Story 1: University Prep + Video -->
+      <!-- Story 1: University Hack -->
       <div class="editorial-story-card">
         <span class="editorial-kicker">سر التفوق الجامعي</span>
         <div class="editorial-headline">تقنية "Active Recall": كيف تدرس بذكاء وتتفوق بنصف الوقت؟</div>
         <div class="editorial-copy">
-          أغلب الطلاب يضيعون مئات الساعات في قراءة الكتب وإعادة تظليلها، وهو ما يثبت علمياً أنه يمنح الدماغ وهماً زائفاً بالمعرفة. الطلاب المتميزون يتبعون أسلوب الاستدعاء النشط: قراءة الفكرة لمرة واحدة، ثم إغلاق المرجع وشرحها بكلماتك بورقة فارغة.
+          أغلب الطلاب يضيعون مئات الساعات في قراءة الكتب وتظليلها، وهو ما يثبت علمياً أنه يمنح الدماغ وهماً زائفاً بالمعرفة. الطلاب المتميزون يتبعون أسلوب الاستدعاء النشط: قراءة الفكرة لمرة واحدة، ثم إغلاق المرجع وشرحها بكلماتك على ورقة فارغة.
         </div>
-        <div class="editorial-quote">
-          📌 <strong>تطبيق فوري:</strong> في أي مهارة أو كورس تشاهده قبل الجامعة، لخص الفكرة في 3 نقاط من ذاكرتك فور انتهاء المقطع.
-        </div>
-
         <div class="ios-video-wrap">
-          <iframe src="https://www.youtube-nocookie.com/embed/ukLnPbI9phY" title="Active Recall Method" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/ukLnPbI9phY" title="Active Recall" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
-      <!-- Story 2: English Shadowing + Video -->
+      <!-- Story 2: English Shadowing -->
       <div class="editorial-story-card">
         <span class="editorial-kicker">طلاقة الإنجليزية في 90 يوماً</span>
         <div class="editorial-headline">طريقة الـ "Shadowing": كسر حاجز التأتأة والترجمة العقلية</div>
         <div class="editorial-copy">
           المشكلة الحقيقية في التحدث بالإنجليزية ليست قلة القواعد، بل تأخر الترجمة في دماغك وضعف مرونة عضلات الفم على النطق السريع. في تقنية Shadowing، تستمع لمتحدث أصلي وتكرر كلامه وراءه مباشرة بفارق نصف ثانية فقط.
         </div>
-        <div class="editorial-quote">
-          📌 <strong>النتيجة:</strong> 15 دقيقة يومياً تعيد برمجة نطقك وتمنحك طلاقة وتلقائية تامة بدون تفكير في القواعد.
-        </div>
-
         <div class="ios-video-wrap">
-          <iframe src="https://www.youtube-nocookie.com/embed/13m3dFpms14" title="English Shadowing Technique" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/13m3dFpms14" title="English Shadowing" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </section>
 
     <!-- ================= TAB 5: SETTINGS / الإعدادات ================= -->
     <section id="tab-settings" class="tab-pane">
-      <div class="ios-section-header">
-        <span>الإعدادات والتفضيلات</span>
+      <div class="view-large-title">
+        <span>الإعدادات</span>
       </div>
 
       <div class="ios-grouped-list">
         <div class="ios-cell">
           <div>
-            <div class="cell-title">الاسم الشخصي</div>
-            <div class="cell-sub" id="settingsNameLbl">المستخدم</div>
+            <div style="font-weight:600; font-size:0.95rem;">الاسم الشخصي</div>
+            <div style="font-size:0.78rem; color:var(--label-secondary);" id="settingsNameLbl">المستخدم</div>
           </div>
-          <button class="ios-btn-pill" onclick="openOnboarding(true)">تعديل</button>
+          <button style="background:rgba(255,255,255,0.08); border:0.5px solid rgba(255,255,255,0.16); color:#fff; padding:6px 14px; border-radius:12px; font-weight:600; cursor:pointer;" onclick="openOnboarding(true)">تعديل</button>
         </div>
         <div class="ios-cell">
           <div>
-            <div class="cell-title">هدف السعرات اليومي</div>
-            <div class="cell-sub">السعرات المستهدفة</div>
+            <div style="font-weight:600; font-size:0.95rem;">هدف السعرات اليومي</div>
+            <div style="font-size:0.78rem; color:var(--label-secondary);">السعرات المستهدفة</div>
           </div>
-          <input type="number" id="cfgCalGoal" class="ios-input" style="width: 85px; text-align: center;" value="2200" onchange="updateCalGoal(this.value)">
+          <input type="number" id="cfgCalGoal" class="apple-text-field" style="width:85px; text-align:center; padding:6px 8px;" value="2200" onchange="updateCalGoal(this.value)">
         </div>
         <div class="ios-cell">
           <div>
-            <div class="cell-title">هدف شرب الماء (مل)</div>
-            <div class="cell-sub">الكمية اليومية</div>
+            <div style="font-weight:600; font-size:0.95rem;">هدف شرب الماء (مل)</div>
+            <div style="font-size:0.78rem; color:var(--label-secondary);">الكمية اليومية</div>
           </div>
-          <input type="number" id="cfgWaterGoal" class="ios-input" style="width: 85px; text-align: center;" value="3000" onchange="updateWaterGoal(this.value)">
+          <input type="number" id="cfgWaterGoal" class="apple-text-field" style="width:85px; text-align:center; padding:6px 8px;" value="3000" onchange="updateWaterGoal(this.value)">
         </div>
       </div>
 
       <div class="ios-grouped-list">
-        <div class="ios-cell">
-          <div>
-            <div class="cell-title">المؤثرات الصوتية واللمسية</div>
-            <div class="cell-sub">أصوات لطيفة عند التفاعل والإنجاز</div>
-          </div>
-          <label class="ios-switch">
-            <input type="checkbox" id="cfgSoundToggle" checked onchange="toggleSound(this.checked)">
-            <span class="switch-track"></span>
-          </label>
+        <div class="ios-cell" style="cursor:pointer;" onclick="resetDayData()">
+          <div style="font-weight:600; color:var(--ios-orange);">تصفير إنجاز وسعرات اليوم</div>
+          <span style="color:var(--ios-orange);">🔄</span>
         </div>
-        <div class="ios-cell">
-          <div>
-            <div class="cell-title">تنبيهات الإشعارات</div>
-            <div class="cell-sub">إشعارات التذكير بالمهام والصلوات</div>
-          </div>
-          <label class="ios-switch">
-            <input type="checkbox" id="cfgNotifToggle" onchange="toggleNotif(this.checked)">
-            <span class="switch-track"></span>
-          </label>
+        <div class="ios-cell" style="cursor:pointer;" onclick="clearAllData()">
+          <div style="font-weight:600; color:var(--ios-red);">مسح البيانات والبدء من جديد</div>
+          <span style="color:var(--ios-red);">⚠️</span>
         </div>
       </div>
 
-      <div class="ios-grouped-list">
-        <div class="ios-cell" style="cursor: pointer;" onclick="resetDayData()">
-          <div class="cell-title" style="color: var(--ios-orange);">تصفير إنجاز وسعرات اليوم</div>
-          <span style="color: var(--ios-orange);">🔄</span>
-        </div>
-        <div class="ios-cell" style="cursor: pointer;" onclick="clearAllData()">
-          <div class="cell-title" style="color: var(--ios-red);">مسح البيانات والبدء من جديد</div>
-          <span style="color: var(--ios-red);">⚠️</span>
-        </div>
-      </div>
-
-      <div style="text-align: center; color: var(--label-tertiary); font-size: 0.78rem; padding: 12px 0 24px;">
-        سَمْت • SAMT • الإصدار 3.0 • هندسة واجهات أبل
+      <div style="text-align:center; color:var(--label-tertiary); font-size:0.78rem; padding:12px 0 24px;">
+        سَمْت • SAMT • الإصدار 3.5 • واجهات أبل الأصلية
       </div>
     </section>
 
@@ -1552,12 +1523,12 @@
   <div id="onboardingModal" class="ios-modal-backdrop">
     <div class="ios-sheet">
       <img src="icons/icon.svg" class="sheet-logo" alt="سَمْت">
-      <div class="sheet-h1">مرحباً بك في سَمْت</div>
-      <div class="sheet-desc">
+      <div style="font-size:1.55rem; font-weight:800; margin-bottom:6px;">مرحباً بك في سَمْت</div>
+      <div style="color:var(--label-secondary); font-size:0.9rem; line-height:1.5; margin-bottom:22px;">
         نظامك اليومي المتوازن بنمط أبل: صلاة في المسجد، إنجاز في عملك، تمرين، وتطوير الذات قبل الجامعة.
       </div>
-      <input type="text" id="nameInputBox" class="ios-input" style="width: 100%; text-align: center; margin-bottom: 18px; font-size: 1.05rem;" placeholder="اكتب اسمك الكريم...">
-      <button class="btn-sheet-submit" onclick="submitName()">ابدأ أسلوب حياتك الجديد</button>
+      <input type="text" id="nameInputBox" class="apple-text-field" style="width:100%; text-align:center; margin-bottom:18px; font-size:1.05rem;" placeholder="اكتب اسمك الكريم...">
+      <button style="width:100%; background:linear-gradient(135deg, var(--ios-blue), var(--ios-indigo)); color:#fff; border:none; border-radius:16px; padding:13px; font-size:1rem; font-weight:700; cursor:pointer;" onclick="submitName()">ابدأ أسلوب حياتك الجديد</button>
     </div>
   </div>
 
@@ -1565,22 +1536,22 @@
     /* ========================================================
        STATE MANAGEMENT
        ======================================================== */
-    const STORAGE_KEY = 'samt_apple_v4';
+    const STORAGE_KEY = 'samt_apple_v5';
 
     const SCHEDULE_DATA = [
-      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", start: "05:00", end: "06:00", desc: "كوب ماء والذهاب للمسجد لانطلاقة يوم مليئة بالبركة" },
-      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", start: "06:00", end: "06:45", desc: "ممارسة الاستماع وتقنية Shadowing وبودكاست إنجليزي" },
-      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", start: "06:45", end: "07:30", desc: "التعلم الذاتي من Coursera ومهارات تخصصك الجامعي" },
-      { id: 3, title: "الفطور الصحي والقهوة الصباحية", start: "07:30", end: "08:30", desc: "فطور متوازن وإعداد قائمة مهام العمل بدون توتر" },
-      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", start: "08:30", end: "12:00", desc: "إنجاز المهام الكبرى للمشروع ومتابعة العمل بأعلى كفاءة" },
-      { id: 5, title: "صلاة الظهر في المسجد", start: "12:00", end: "13:00", desc: "فصل العقل عن الشاشات والتقاط الأنفاس في المسجد" },
-      { id: 6, title: "وجبة الغداء + قيلولة 20 دقيقة", start: "13:00", end: "14:00", desc: "غداء متوازن وشحن سريع للنشاط الذهني" },
-      { id: 7, title: "متابعات العمل والاجتماعات", start: "14:00", end: "15:30", desc: "الرد على المراسلات والمكالمات وتنسيق العمل الخارجي" },
-      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", start: "15:30", end: "16:30", desc: "صلاة العصر وموزة + قهوة لتجهيز طاقة الجيم" },
-      { id: 9, title: "التمرين الرياضي في النادي (حديد / لياقة)", start: "16:30", end: "18:00", desc: "تفريغ طاقة اليوم وبناء القوة البدنية وكسر الخمول" },
-      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", start: "18:00", end: "19:00", desc: "صلاة المغرب وشاور دافئ بعد التمرين والانتعاش" },
-      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", start: "19:00", end: "21:30", desc: "عشاء خفيف وصلاة العشاء ووقت حر عائلي" },
-      { id: 12, title: "إغلاق الشاشات ونوم باكر هانئ", start: "21:30", end: "22:30", desc: "هاتف بعيد عن السرير لـ 7.5 ساعات نوم عميق ومريح" }
+      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", start: "05:00", end: "06:00" },
+      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", start: "06:00", end: "06:45" },
+      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", start: "06:45", end: "07:30" },
+      { id: 3, title: "الفطور الصحي والقهوة الصباحية", start: "07:30", end: "08:30" },
+      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", start: "08:30", end: "12:00" },
+      { id: 5, title: "صلاة الظهر في المسجد", start: "12:00", end: "13:00" },
+      { id: 6, title: "وجبة الغداء + قيلولة 20 دقيقة", start: "13:00", end: "14:00" },
+      { id: 7, title: "متابعات العمل والاجتماعات", start: "14:00", end: "15:30" },
+      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", start: "15:30", end: "16:30" },
+      { id: 9, title: "التمرين الرياضي في النادي (حديد / لياقة)", start: "16:30", end: "18:00" },
+      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", start: "18:00", end: "19:00" },
+      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", start: "19:00", end: "21:30" },
+      { id: 12, title: "إغلاق الشاشات ونوم باكر هانئ", start: "21:30", end: "22:30" }
     ];
 
     const CITY_PRAYERS = {
@@ -1600,7 +1571,6 @@
       caloriesGoal: 2200,
       meals: [],
       soundEnabled: true,
-      notificationsEnabled: false,
       selectedCity: 'riyadh',
       lastDate: new Date().toDateString()
     };
@@ -1620,9 +1590,7 @@
             state.lastDate = today;
             saveState();
           }
-        } catch (e) {
-          console.error(e);
-        }
+        } catch (e) {}
       }
     }
 
@@ -1630,9 +1598,7 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
 
-    /* ========================================================
-       APPLE SOUND & HAPTIC ENGINE (Web Audio API)
-       ======================================================== */
+    /* Sound */
     let audioCtx = null;
     let zenOsc = null;
     let zenGain = null;
@@ -1684,7 +1650,6 @@
             if (zenOsc) zenOsc.stop();
             isZenOn = false;
             btn.innerText = 'تشغيل';
-            btn.style.background = 'var(--ios-blue)';
           }, 400);
         }
       } else {
@@ -1702,14 +1667,11 @@
         zenOsc.start();
         isZenOn = true;
         btn.innerText = 'إيقاف ⏸';
-        btn.style.background = 'var(--ios-green)';
-        showToast("🎧 تم تفعيل موجات التركيز والهدوء");
+        showToast("🎧 تم تفعيل موجات التركيز");
       }
     }
 
-    /* ========================================================
-       DYNAMIC ISLAND & LIVE TICKER
-       ======================================================== */
+    /* Dynamic Island */
     function updateLiveEngine() {
       const now = new Date();
       const h = now.getHours();
@@ -1741,17 +1703,11 @@
       }
 
       if (!current) {
-        current = {
-          title: "النوم العميق والراحة الذهنية",
-          desc: "إعادة شحن الطاقة للاستيقاظ بنشاط لصلاة الفجر في المسجد.",
-          start: "22:30",
-          end: "05:00"
-        };
+        current = { title: "النوم العميق والراحة الذهنية", start: "22:30", end: "05:00" };
         next = SCHEDULE_DATA[0];
       }
 
       document.getElementById('islandCurrentTitle').innerText = current.title;
-      document.getElementById('islandCurrentDesc').innerText = current.desc;
       document.getElementById('islandNextTitle').innerText = `${next.title} (${next.start})`;
 
       let startM = toMins(current.start);
@@ -1765,83 +1721,56 @@
       document.getElementById('islandProgressBar').style.width = pct + '%';
     }
 
-    /* ========================================================
-       FITNESS 3-RINGS ENGINE
-       ======================================================== */
-    function updateFitnessRings() {
-      // 1. Red Ring: Calories
+    /* Health & Nutrition Engine */
+    function updateHealthUI() {
+      // 1. Calories Calculation
       const calGoal = state.caloriesGoal || 2200;
-      let calsConsumed = 0;
+      let consumed = 0;
       if (state.meals && state.meals.length > 0) {
-        calsConsumed = state.meals.reduce((sum, m) => sum + m.cals, 0);
+        consumed = state.meals.reduce((acc, m) => acc + m.cals, 0);
       }
-      const calPct = Math.min(100, Math.round((calsConsumed / calGoal) * 100));
-      const redCirc = 314.15;
-      const redOffset = redCirc - (calPct / 100) * redCirc;
-      document.getElementById('ringRed').style.strokeDashoffset = redOffset;
-      document.getElementById('valCaloriesMetric').innerText = `${calsConsumed} / ${calGoal}`;
-      document.getElementById('calBalanceHeader').innerText = `متبقي: ${Math.max(0, calGoal - calsConsumed)}`;
+      const left = Math.max(0, calGoal - consumed);
+      const calPct = Math.min(100, Math.round((consumed / calGoal) * 100));
 
-      // 2. Green Ring: Tasks completed
-      const totalTasks = SCHEDULE_DATA.length;
-      let doneCount = 0;
-      document.querySelectorAll('.task-item-row').forEach((row, i) => {
-        if (state.completedTasks[i]) {
-          row.classList.add('done');
-          doneCount++;
-        } else {
-          row.classList.remove('done');
-        }
-      });
-      const taskPct = Math.round((doneCount / totalTasks) * 100);
-      const greenCirc = 238.76;
-      const greenOffset = greenCirc - (taskPct / 100) * greenCirc;
-      document.getElementById('ringGreen').style.strokeDashoffset = greenOffset;
-      document.getElementById('valTasksMetric').innerText = `${taskPct}% (${doneCount}/${totalTasks})`;
+      document.getElementById('calCenterLeftVal').innerText = left;
+      document.getElementById('calConsumedTxt').innerText = `${consumed} سعرة`;
+      document.getElementById('calGoalTxt').innerText = `${calGoal} سعرة`;
+      document.getElementById('calBarFill').style.width = calPct + '%';
 
-      // 3. Teal Ring: Water
+      // Circumference = 2 * PI * 45 ≈ 282.74
+      const circ = 282.74;
+      const offset = circ - (calPct / 100) * circ;
+      document.getElementById('calRingProgress').style.strokeDashoffset = offset;
+
+      // 2. Water Calculation
       const wGoal = state.waterGoal || 3000;
       const wMl = state.waterMl || 0;
-      const waterPct = Math.min(100, Math.round((wMl / wGoal) * 100));
-      const tealCirc = 163.36;
-      const tealOffset = tealCirc - (waterPct / 100) * tealCirc;
-      document.getElementById('ringTeal').style.strokeDashoffset = tealOffset;
-      document.getElementById('valWaterMetric').innerText = `${(wMl/1000).toFixed(1)} / ${(wGoal/1000).toFixed(1)}L`;
+      const wPct = Math.min(100, Math.round((wMl / wGoal) * 100));
 
-      // Water Tank UI
-      document.getElementById('waterLevelBar').style.height = waterPct + '%';
-      document.getElementById('waterNumDisplay').innerHTML = `${wMl} <span style="font-size: 1rem; color: var(--label-secondary);">/ ${wGoal} مل</span>`;
-      document.getElementById('waterCupSub').innerText = `${Math.floor(wMl / 250)} من ${Math.ceil(wGoal / 250)} كوب اليوم`;
-    }
+      document.getElementById('waterMainVal').innerHTML = `${wMl} <small>/ ${wGoal} مل</small>`;
+      document.getElementById('waterFlaskFill').style.height = wPct + '%';
+      const cupsDrank = Math.floor(wMl / 250);
+      document.getElementById('waterCupsCount').innerText = `${cupsDrank} من ${Math.ceil(wGoal / 250)} كوب يومياً`;
 
-    function toggleTask(id) {
-      state.completedTasks[id] = !state.completedTasks[id];
-      saveState();
-      updateFitnessRings();
-      playAppleClick();
-      if (state.completedTasks[id]) {
-        showToast("✓ تم إنجاز المهمة");
-      }
-    }
-
-    function markTaskDone() {
-      playAppleClick();
-      showToast("رائع! خطوة جديدة في الالتزام اليومي 🔥");
+      // Update 12 cups grid
+      const cupDots = document.querySelectorAll('.cup-dot');
+      cupDots.forEach((dot, index) => {
+        if (index < cupsDrank) {
+          dot.classList.add('filled');
+        } else {
+          dot.classList.remove('filled');
+        }
+      });
     }
 
     function addWater(amount) {
       state.waterMl = Math.max(0, (state.waterMl || 0) + amount);
       saveState();
-      updateFitnessRings();
+      updateHealthUI();
       playAppleClick();
-      if (amount > 0) {
-        showToast(`💧 تمت إضافة ${amount} مل ماء`);
-      }
+      if (amount > 0) showToast(`💧 تمت إضافة ${amount} مل ماء`);
     }
 
-    /* ========================================================
-       FOOD LOGGING
-       ======================================================== */
     function submitCustomFood() {
       const nInp = document.getElementById('foodNameInp');
       const cInp = document.getElementById('foodCalInp');
@@ -1849,7 +1778,7 @@
       const cals = parseInt(cInp.value);
 
       if (!name || isNaN(cals) || cals <= 0) {
-        showToast("يرجى كتابة اسم الوجبة والسعرات");
+        showToast("يرجى كتابة اسم الوجبة والسعرات بشكل صحيح");
         return;
       }
 
@@ -1859,7 +1788,7 @@
       cInp.value = '';
 
       saveState();
-      updateFitnessRings();
+      updateHealthUI();
       renderFoodLog();
       playAppleClick();
       showToast(`✓ تمت إضافة: ${name}`);
@@ -1869,7 +1798,7 @@
       if (!state.meals) state.meals = [];
       state.meals.push({ name, cals });
       saveState();
-      updateFitnessRings();
+      updateHealthUI();
       renderFoodLog();
       playAppleClick();
       showToast(`✓ تمت إضافة: ${name}`);
@@ -1879,7 +1808,7 @@
       if (state.meals && state.meals[idx]) {
         state.meals.splice(idx, 1);
         saveState();
-        updateFitnessRings();
+        updateHealthUI();
         renderFoodLog();
       }
     }
@@ -1887,24 +1816,46 @@
     function renderFoodLog() {
       const container = document.getElementById('foodLogHistory');
       if (!state.meals || state.meals.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.8rem; color: var(--label-tertiary); text-align: center; padding: 8px;">لا توجد وجبات مسجلة اليوم</div>';
+        container.innerHTML = '<div style="font-size:0.8rem; color:var(--label-tertiary); text-align:center; padding:8px;">لا توجد وجبات مسجلة اليوم</div>';
         return;
       }
 
       container.innerHTML = state.meals.map((m, idx) => `
-        <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:10px; font-size:0.86rem;">
+        <div class="logged-meal-item">
           <span>${m.name}</span>
           <div style="display:flex; align-items:center; gap:8px;">
-            <strong style="color:var(--ios-red);">${m.cals} سعرة</strong>
-            <span style="color:var(--ios-red); cursor:pointer; font-size:0.8rem;" onclick="deleteFood(${idx})">✕</span>
+            <strong style="color:var(--ios-red); font-variant-numeric:tabular-nums;">${m.cals} سعرة</strong>
+            <span class="meal-del-icon" onclick="deleteFood(${idx})">✕</span>
           </div>
         </div>
       `).join('');
     }
 
-    /* ========================================================
-       PRAYER TIMES
-       ======================================================== */
+    /* Schedule */
+    function toggleTask(id) {
+      state.completedTasks[id] = !state.completedTasks[id];
+      saveState();
+      renderSchedule();
+      playAppleClick();
+      if (state.completedTasks[id]) showToast("✓ تم إنجاز المهمة");
+    }
+
+    function renderSchedule() {
+      document.querySelectorAll('.task-item-row').forEach((row, i) => {
+        if (state.completedTasks[i]) {
+          row.classList.add('done');
+        } else {
+          row.classList.remove('done');
+        }
+      });
+    }
+
+    function markTaskDone() {
+      playAppleClick();
+      showToast("رائع! خطوة جديدة في الالتزام اليومي 🔥");
+    }
+
+    /* Prayers */
     function updatePrayers() {
       const city = state.selectedCity || 'riyadh';
       const t = CITY_PRAYERS[city] || CITY_PRAYERS.riyadh;
@@ -1953,12 +1904,10 @@
       state.selectedCity = city;
       saveState();
       updatePrayers();
-      showToast(`تم التبديل إلى مواقيت: ${document.querySelector('#citySelect option:checked').text}`);
+      showToast(`تم التبديل لمواقيت: ${document.querySelector('#citySelect option:checked').text}`);
     }
 
-    /* ========================================================
-       TABS NAVIGATION
-       ======================================================== */
+    /* Tabs */
     function switchTab(tabId) {
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -1973,9 +1922,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ========================================================
-       ONBOARDING
-       ======================================================== */
+    /* Onboarding */
     function checkUser() {
       if (!state.user || !state.user.name) {
         openOnboarding();
@@ -2008,37 +1955,17 @@
       showToast(`أهلاً بك يا ${name} ✨`);
     }
 
-    /* ========================================================
-       SETTINGS
-       ======================================================== */
+    /* Settings */
     function updateCalGoal(val) {
       state.caloriesGoal = parseInt(val) || 2200;
       saveState();
-      updateFitnessRings();
+      updateHealthUI();
     }
 
     function updateWaterGoal(val) {
       state.waterGoal = parseInt(val) || 3000;
       saveState();
-      updateFitnessRings();
-    }
-
-    function toggleSound(val) {
-      state.soundEnabled = val;
-      saveState();
-    }
-
-    function toggleNotif(val) {
-      if (val && 'Notification' in window) {
-        Notification.requestPermission().then(p => {
-          state.notificationsEnabled = (p === 'granted');
-          saveState();
-          showToast(p === 'granted' ? "🔔 تم تفعيل الإشعارات" : "يرجى تفعيلها من إعدادات المتصفح");
-        });
-      } else {
-        state.notificationsEnabled = false;
-        saveState();
-      }
+      updateHealthUI();
     }
 
     function resetDayData() {
@@ -2047,7 +1974,8 @@
         state.waterMl = 0;
         state.meals = [];
         saveState();
-        updateFitnessRings();
+        renderSchedule();
+        updateHealthUI();
         renderFoodLog();
         showToast("تم تصفير اليوم بنجاح");
       }
@@ -2060,9 +1988,7 @@
       }
     }
 
-    /* ========================================================
-       TOAST UTILITY
-       ======================================================== */
+    /* Toast */
     let toastT = null;
     function showToast(msg) {
       const t = document.getElementById('iosToast');
@@ -2072,15 +1998,14 @@
       toastT = setTimeout(() => t.classList.remove('show'), 2400);
     }
 
-    /* ========================================================
-       INIT
-       ======================================================== */
+    /* Init */
     window.addEventListener('DOMContentLoaded', () => {
       loadState();
       checkUser();
+      renderSchedule();
       renderFoodLog();
       updatePrayers();
-      updateFitnessRings();
+      updateHealthUI();
       updateLiveEngine();
 
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -2091,7 +2016,6 @@
       }
       document.getElementById('cfgCalGoal').value = state.caloriesGoal || 2200;
       document.getElementById('cfgWaterGoal').value = state.waterGoal || 3000;
-      document.getElementById('cfgSoundToggle').checked = state.soundEnabled !== false;
 
       setInterval(updateLiveEngine, 1000);
       setInterval(updatePrayers, 60000);
