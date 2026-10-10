@@ -684,98 +684,327 @@
     }
 
     /* ==========================================================================
-       APPLE HEALTH TRIPLE ACTIVITY RINGS
+       APPLE HEALTH TRIPLE ACTIVITY RINGS (PREMIUM REDESIGN)
        ========================================================================== */
-    .activity-rings-container {
+    .activity-rings-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(28, 28, 35, 0.72) 0%, rgba(18, 18, 22, 0.88) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .activity-rings-card::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -20px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(255, 45, 85, 0.12) 0%, rgba(48, 209, 88, 0.06) 45%, transparent 70%);
+      pointer-events: none;
+      filter: blur(20px);
+    }
+
+    .rings-card-header {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 4px 0;
+      justify-content: space-between;
+      margin-bottom: 14px;
     }
 
-    .rings-svg-wrapper {
+    .rings-card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rings-badge-icons {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .rings-mini-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .rings-mini-dot.red { background: #FF2442; box-shadow: 0 0 5px rgba(255, 36, 66, 0.8); }
+    .rings-mini-dot.green { background: #30D158; box-shadow: 0 0 5px rgba(48, 209, 88, 0.8); }
+    .rings-mini-dot.blue { background: #0A84FF; box-shadow: 0 0 5px rgba(10, 132, 255, 0.8); }
+
+    .rings-card-heading {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+
+    .rings-completion-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 0.5px solid rgba(255, 255, 255, 0.14);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--ios-gold);
+      backdrop-filter: blur(12px);
+    }
+
+    .rings-completion-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ios-gold);
+      box-shadow: 0 0 6px var(--ios-gold);
+      animation: pulseGoldDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGoldDot {
+      0%, 100% { opacity: 0.6; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .activity-rings-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .rings-graphic-wrap {
       position: relative;
-      width: 120px;
-      height: 120px;
+      width: 122px;
+      height: 122px;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .rings-svg {
+    .rings-graphic-wrap::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 110px;
+      height: 110px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255, 36, 66, 0.09) 0%, rgba(48, 209, 88, 0.06) 50%, rgba(10, 132, 255, 0.06) 80%, transparent 100%);
+      border-radius: 50%;
+      filter: blur(10px);
+      pointer-events: none;
+    }
+
+    .rings-svg-elem {
       width: 100%;
       height: 100%;
       transform: rotate(-90deg);
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
     }
 
     .ring-bg-track {
       fill: none;
       stroke-width: 9;
-      opacity: 0.22;
+      opacity: 0.95;
     }
+
+    .ring-bg-track.red { stroke: rgba(255, 36, 66, 0.20); }
+    .ring-bg-track.green { stroke: rgba(48, 209, 88, 0.20); }
+    .ring-bg-track.blue { stroke: rgba(10, 132, 255, 0.20); }
 
     .ring-active-track {
       fill: none;
       stroke-width: 9;
       stroke-linecap: round;
-      transition: stroke-dashoffset 1s var(--spring-smooth);
+      transition: stroke-dashoffset 1s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .rings-center-icon {
+    .rings-center-meta {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 32px;
-      height: 32px;
+      text-align: center;
+      pointer-events: none;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: var(--ios-gold);
     }
 
-    .rings-legend-column {
+    .rings-center-score {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+
+    .rings-center-label {
+      font-size: 0.58rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.45);
+      margin-top: 2px;
+      letter-spacing: 0.2px;
+    }
+
+    .rings-stats-stack {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
+      min-width: 0;
     }
 
-    .ring-legend-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .ring-stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 0.5px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-md);
+      padding: 7px 10px;
       cursor: pointer;
-      padding: 2px 0;
-      transition: transform 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: all 0.2s var(--spring-smooth);
+      position: relative;
+      overflow: hidden;
     }
 
-    .ring-legend-row:active {
+    .ring-stat-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .ring-stat-card:active {
       transform: scale(0.97);
     }
 
-    .ring-stat-label {
+    .ring-stat-card.red-metric:hover {
+      border-color: rgba(255, 36, 66, 0.35);
+      box-shadow: 0 4px 14px rgba(255, 36, 66, 0.12);
+    }
+    .ring-stat-card.green-metric:hover {
+      border-color: rgba(48, 209, 88, 0.35);
+      box-shadow: 0 4px 14px rgba(48, 209, 88, 0.12);
+    }
+    .ring-stat-card.blue-metric:hover {
+      border-color: rgba(10, 132, 255, 0.35);
+      box-shadow: 0 4px 14px rgba(10, 132, 255, 0.12);
+    }
+
+    .ring-stat-card-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.80rem;
-      font-weight: 600;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .ring-stat-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ring-stat-icon-squircle {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ring-stat-icon-squircle.red {
+      background: rgba(255, 36, 66, 0.16);
+      color: #FF2442;
+    }
+    .ring-stat-icon-squircle.green {
+      background: rgba(48, 209, 88, 0.16);
+      color: #30D158;
+    }
+    .ring-stat-icon-squircle.blue {
+      background: rgba(10, 132, 255, 0.16);
+      color: #0A84FF;
+    }
+
+    .ring-stat-label-text {
+      font-size: 0.78rem;
+      font-weight: 700;
       color: #ffffff;
     }
 
-    .ring-dot-indicator {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .ring-dot-red { background: var(--ios-red); box-shadow: 0 0 6px var(--ios-red-glow); }
-    .ring-dot-green { background: var(--ios-green); box-shadow: 0 0 6px var(--ios-green-glow); }
-    .ring-dot-blue { background: var(--ios-blue); box-shadow: 0 0 6px var(--ios-blue-glow); }
-
-    .ring-stat-value {
-      font-size: 0.78rem;
+    .ring-stat-values-display {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Cairo", sans-serif;
+      font-size: 0.74rem;
       font-weight: 700;
       font-variant-numeric: tabular-nums;
-      color: var(--text-secondary);
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .ring-stat-current {
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.84rem;
+    }
+
+    .ring-stat-separator {
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 0.70rem;
+    }
+
+    .ring-stat-target {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.70rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .ring-stat-unit {
+      color: rgba(255, 255, 255, 0.40);
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+
+    .ring-stat-micro-bar {
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .ring-stat-micro-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .ring-stat-micro-fill.red {
+      background: linear-gradient(90deg, #FF2442, #FF5E3A);
+      box-shadow: 0 0 6px rgba(255, 36, 66, 0.6);
+    }
+    .ring-stat-micro-fill.green {
+      background: linear-gradient(90deg, #30D158, #80FF00);
+      box-shadow: 0 0 6px rgba(48, 209, 88, 0.6);
+    }
+    .ring-stat-micro-fill.blue {
+      background: linear-gradient(90deg, #0A84FF, #00D2FF);
+      box-shadow: 0 0 6px rgba(10, 132, 255, 0.6);
     }
 
     /* ==========================================================================
@@ -1794,58 +2023,128 @@
          ==================================================================== -->
     <section id="tab-now" class="tab-content-panel active">
 
-      <!-- Apple Activity Rings Widget Card -->
-      <div class="ios-card">
-        <div class="ios-card-header">
-          <div class="ios-card-title">
-            <span>مؤشرات النشاط واليوم</span>
+      <!-- Apple Activity Rings Widget Card (Premium Obsidian Glass) -->
+      <div class="activity-rings-card">
+        <div class="rings-card-header">
+          <div class="rings-card-title-group">
+            <div class="rings-badge-icons">
+              <span class="rings-mini-dot red"></span>
+              <span class="rings-mini-dot green"></span>
+              <span class="rings-mini-dot blue"></span>
+            </div>
+            <span class="rings-card-heading">مؤشرات النشاط واليوم</span>
           </div>
-          <span class="ios-tag-pill gold" id="ringsPercentBadge">0% مكتمل</span>
+          <div class="rings-completion-pill" id="ringsPercentBadge">
+            <span class="rings-completion-dot"></span>
+            <span id="ringsPercentText">0% مكتمل</span>
+          </div>
         </div>
 
-        <div class="activity-rings-container">
-          <!-- Triple Activity Rings SVG -->
-          <div class="rings-svg-wrapper">
-            <svg class="rings-svg" viewBox="0 0 120 120">
-              <!-- Outer Ring: Calories (Red) -->
-              <circle cx="60" cy="60" r="48" class="ring-bg-track" stroke="#ff2d55"></circle>
-              <circle id="ringTrackCal" cx="60" cy="60" r="48" class="ring-active-track" stroke="#ff2d55" stroke-dasharray="301.59" stroke-dashoffset="301.59"></circle>
+        <div class="activity-rings-main">
+          <!-- Triple Activity Rings SVG Graphic -->
+          <div class="rings-graphic-wrap">
+            <svg class="rings-svg-elem" viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="ringGradRed" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FF2442"/>
+                  <stop offset="100%" stop-color="#FF5E3A"/>
+                </linearGradient>
+                <linearGradient id="ringGradGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#30D158"/>
+                  <stop offset="100%" stop-color="#80FF00"/>
+                </linearGradient>
+                <linearGradient id="ringGradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0A84FF"/>
+                  <stop offset="100%" stop-color="#00D2FF"/>
+                </linearGradient>
+              </defs>
 
-              <!-- Middle Ring: Stations Completed (Green) -->
-              <circle cx="60" cy="60" r="35" class="ring-bg-track" stroke="#30d158"></circle>
-              <circle id="ringTrackStations" cx="60" cy="60" r="35" class="ring-active-track" stroke="#30d158" stroke-dasharray="219.91" stroke-dashoffset="219.91"></circle>
+              <!-- Track Backgrounds (Saturated, crisp dark glass) -->
+              <circle cx="60" cy="60" r="48" class="ring-bg-track" stroke="rgba(255, 36, 66, 0.16)"></circle>
+              <circle cx="60" cy="60" r="35" class="ring-bg-track" stroke="rgba(48, 209, 88, 0.16)"></circle>
+              <circle cx="60" cy="60" r="22" class="ring-bg-track" stroke="rgba(10, 132, 255, 0.16)"></circle>
 
-              <!-- Inner Ring: Hydration (Blue) -->
-              <circle cx="60" cy="60" r="22" class="ring-bg-track" stroke="#0a84ff"></circle>
-              <circle id="ringTrackWater" cx="60" cy="60" r="22" class="ring-active-track" stroke="#0a84ff" stroke-dasharray="138.23" stroke-dashoffset="138.23"></circle>
+              <!-- Active Animated Tracks with Gradients -->
+              <circle id="ringTrackCal" cx="60" cy="60" r="48" class="ring-active-track" stroke="url(#ringGradRed)" stroke-dasharray="301.59" stroke-dashoffset="301.59"></circle>
+              <circle id="ringTrackStations" cx="60" cy="60" r="35" class="ring-active-track" stroke="url(#ringGradGreen)" stroke-dasharray="219.91" stroke-dashoffset="219.91"></circle>
+              <circle id="ringTrackWater" cx="60" cy="60" r="22" class="ring-active-track" stroke="url(#ringGradBlue)" stroke-dasharray="138.23" stroke-dashoffset="138.23"></circle>
             </svg>
-            <div class="rings-center-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+
+            <!-- Center Metric Display -->
+            <div class="rings-center-meta">
+              <span class="rings-center-score" id="ringsCenterPct">0%</span>
+              <span class="rings-center-label">المعدل</span>
             </div>
           </div>
 
-          <!-- Rings Legend -->
-          <div class="rings-legend-column">
-            <div class="ring-legend-row" onclick="switchTab('health')">
-              <span class="ring-stat-label">
-                <span class="ring-dot-indicator ring-dot-red"></span>
-                <span>السعرات</span>
-              </span>
-              <span class="ring-stat-value" id="ringLegendCal">0 / 2200</span>
+          <!-- Structured 3 Metric Tiles -->
+          <div class="rings-stats-stack">
+            <!-- 1. Calories Tile -->
+            <div class="ring-stat-card red-metric" onclick="switchTab('health')">
+              <div class="ring-stat-card-row">
+                <div class="ring-stat-title-wrap">
+                  <div class="ring-stat-icon-squircle red">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 17c1.38 0 2.5-1.12 2.5-2.5 0-1.63-1.87-3.67-2.5-4.32-.63.65-2.5 2.69-2.5 4.32z"/>
+                      <path d="M12 2c-4 4.5-6.5 8-6.5 12a6.5 6.5 0 0 0 13 0c0-4-2.5-7.5-6.5-12z"/>
+                    </svg>
+                  </div>
+                  <span class="ring-stat-label-text">السعرات</span>
+                </div>
+                <div class="ring-stat-values-display">
+                  <span class="ring-stat-current" id="ringLegendCal">0</span>
+                  <span class="ring-stat-target">من <span id="ringLegendCalGoal">2200</span></span>
+                  <span class="ring-stat-unit">ك.س</span>
+                </div>
+              </div>
+              <div class="ring-stat-micro-bar">
+                <div class="ring-stat-micro-fill red" id="calTileMiniBar" style="width: 0%;"></div>
+              </div>
             </div>
-            <div class="ring-legend-row" onclick="switchTab('schedule')">
-              <span class="ring-stat-label">
-                <span class="ring-dot-indicator ring-dot-green"></span>
-                <span>المحطات</span>
-              </span>
-              <span class="ring-stat-value" id="ringLegendStations">0 / 13</span>
+
+            <!-- 2. Stations Tile -->
+            <div class="ring-stat-card green-metric" onclick="switchTab('schedule')">
+              <div class="ring-stat-card-row">
+                <div class="ring-stat-title-wrap">
+                  <div class="ring-stat-icon-squircle green">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                      <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                  </div>
+                  <span class="ring-stat-label-text">المحطات</span>
+                </div>
+                <div class="ring-stat-values-display">
+                  <span class="ring-stat-current" id="ringLegendStations">0</span>
+                  <span class="ring-stat-target">من <span id="ringLegendStationsGoal">13</span></span>
+                  <span class="ring-stat-unit">محطة</span>
+                </div>
+              </div>
+              <div class="ring-stat-micro-bar">
+                <div class="ring-stat-micro-fill green" id="stationsTileMiniBar" style="width: 0%;"></div>
+              </div>
             </div>
-            <div class="ring-legend-row" onclick="switchTab('health')">
-              <span class="ring-stat-label">
-                <span class="ring-dot-indicator ring-dot-blue"></span>
-                <span>الترطيب</span>
-              </span>
-              <span class="ring-stat-value" id="ringLegendWater">0 / 3000 مل</span>
+
+            <!-- 3. Hydration Tile -->
+            <div class="ring-stat-card blue-metric" onclick="switchTab('health')">
+              <div class="ring-stat-card-row">
+                <div class="ring-stat-title-wrap">
+                  <div class="ring-stat-icon-squircle blue">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                  </div>
+                  <span class="ring-stat-label-text">الترطيب</span>
+                </div>
+                <div class="ring-stat-values-display">
+                  <span class="ring-stat-current" id="ringLegendWater">0</span>
+                  <span class="ring-stat-target">من <span id="ringLegendWaterGoal">3000</span></span>
+                  <span class="ring-stat-unit">مل</span>
+                </div>
+              </div>
+              <div class="ring-stat-micro-bar">
+                <div class="ring-stat-micro-fill blue" id="waterTileMiniBar" style="width: 0%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -2979,49 +3278,73 @@
 
       const calCircumference = 301.59; // 2 * PI * 48
       const calOffset = calCircumference - (calCircumference * Math.min(1, consumedCal / calGoal));
-      document.getElementById('ringTrackCal').style.strokeDashoffset = calOffset;
-      document.getElementById('ringLegendCal').innerText = `${consumedCal} / ${calGoal}`;
-      document.getElementById('calRemainingNum').innerHTML = `${remainingCal} <small>سعرة</small>`;
-      document.getElementById('calConsumedNum').innerText = `${consumedCal} سعرة`;
-      document.getElementById('calGoalNum').innerText = `${calGoal} سعرة`;
-      document.getElementById('calProgressBar').style.width = calPct + '%';
-      document.getElementById('calBurnRatioTag').innerText = calPct + '%';
+      const ringTrackCal = document.getElementById('ringTrackCal');
+      if (ringTrackCal) ringTrackCal.style.strokeDashoffset = calOffset;
+      const ringLegendCal = document.getElementById('ringLegendCal');
+      if (ringLegendCal) ringLegendCal.innerText = consumedCal;
+      const ringLegendCalGoal = document.getElementById('ringLegendCalGoal');
+      if (ringLegendCalGoal) ringLegendCalGoal.innerText = calGoal;
+      const calTileMiniBar = document.getElementById('calTileMiniBar');
+      if (calTileMiniBar) calTileMiniBar.style.width = calPct + '%';
+
+      if (document.getElementById('calRemainingNum')) document.getElementById('calRemainingNum').innerHTML = `${remainingCal} <small>سعرة</small>`;
+      if (document.getElementById('calConsumedNum')) document.getElementById('calConsumedNum').innerText = `${consumedCal} سعرة`;
+      if (document.getElementById('calGoalNum')) document.getElementById('calGoalNum').innerText = `${calGoal} سعرة`;
+      if (document.getElementById('calProgressBar')) document.getElementById('calProgressBar').style.width = calPct + '%';
+      if (document.getElementById('calBurnRatioTag')) document.getElementById('calBurnRatioTag').innerText = calPct + '%';
 
       // 2. Stations Ring (Green)
       const totalStations = SCHEDULE_DATA.length;
       const completedCount = Object.keys(appState.completedTasks).length;
+      const stationsPct = Math.min(100, Math.round((completedCount / totalStations) * 100));
       const stationsCircumference = 219.91; // 2 * PI * 35
       const stationsOffset = stationsCircumference - (stationsCircumference * Math.min(1, completedCount / totalStations));
-      document.getElementById('ringTrackStations').style.strokeDashoffset = stationsOffset;
-      document.getElementById('ringLegendStations').innerText = `${completedCount} / ${totalStations}`;
+      const ringTrackStations = document.getElementById('ringTrackStations');
+      if (ringTrackStations) ringTrackStations.style.strokeDashoffset = stationsOffset;
+      const ringLegendStations = document.getElementById('ringLegendStations');
+      if (ringLegendStations) ringLegendStations.innerText = completedCount;
+      const ringLegendStationsGoal = document.getElementById('ringLegendStationsGoal');
+      if (ringLegendStationsGoal) ringLegendStationsGoal.innerText = totalStations;
+      const stationsTileMiniBar = document.getElementById('stationsTileMiniBar');
+      if (stationsTileMiniBar) stationsTileMiniBar.style.width = stationsPct + '%';
 
       // 3. Hydration Ring (Blue)
       const waterGoal = appState.waterGoal || 3000;
       const curWater = appState.waterMl || 0;
+      const waterPct = Math.min(100, Math.round((curWater / waterGoal) * 100));
       const waterCircumference = 138.23; // 2 * PI * 22
       const waterOffset = waterCircumference - (waterCircumference * Math.min(1, curWater / waterGoal));
-      document.getElementById('ringTrackWater').style.strokeDashoffset = waterOffset;
-      document.getElementById('ringLegendWater').innerText = `${curWater} / ${waterGoal} مل`;
+      const ringTrackWater = document.getElementById('ringTrackWater');
+      if (ringTrackWater) ringTrackWater.style.strokeDashoffset = waterOffset;
+      const ringLegendWater = document.getElementById('ringLegendWater');
+      if (ringLegendWater) ringLegendWater.innerText = curWater;
+      const ringLegendWaterGoal = document.getElementById('ringLegendWaterGoal');
+      if (ringLegendWaterGoal) ringLegendWaterGoal.innerText = waterGoal;
+      const waterTileMiniBar = document.getElementById('waterTileMiniBar');
+      if (waterTileMiniBar) waterTileMiniBar.style.width = waterPct + '%';
 
-      // Hydration Card Display
-      const waterPct = Math.min(100, Math.round((curWater / waterGoal) * 100));
-      document.getElementById('waterFluidLevel').style.height = waterPct + '%';
-      document.getElementById('waterAmountText').innerHTML = `${curWater} <small style="font-size:0.75rem; color:var(--ios-blue);">/ ${waterGoal} مل</small>`;
-      document.getElementById('waterGoalBadge').innerText = waterPct + '%';
+      // Hydration Card Display in Health Tab
+      if (document.getElementById('waterFluidLevel')) document.getElementById('waterFluidLevel').style.height = waterPct + '%';
+      if (document.getElementById('waterAmountText')) document.getElementById('waterAmountText').innerHTML = `${curWater} <small style="font-size:0.75rem; color:var(--ios-blue);">/ ${waterGoal} مل</small>`;
+      if (document.getElementById('waterGoalBadge')) document.getElementById('waterGoalBadge').innerText = waterPct + '%';
 
       const cupsCount = Math.min(12, Math.floor(curWater / 250));
-      document.getElementById('waterCupsCountText').innerText = `${cupsCount} من 12 كوب يومياً`;
+      if (document.getElementById('waterCupsCountText')) document.getElementById('waterCupsCountText').innerText = `${cupsCount} من 12 كوب يومياً`;
 
-      // 12 Cups Grid
       let cupsHtml = '';
       for (let i = 0; i < 12; i++) {
         cupsHtml += `<div class="cup-indicator-glass ${i < cupsCount ? 'filled' : ''}"></div>`;
       }
-      document.getElementById('waterCupsGrid').innerHTML = cupsHtml;
+      if (document.getElementById('waterCupsGrid')) document.getElementById('waterCupsGrid').innerHTML = cupsHtml;
 
-      // Overall Score Badge
-      const overallAvg = Math.round((calPct + (completedCount / totalStations * 100) + waterPct) / 3);
-      document.getElementById('ringsPercentBadge').innerText = overallAvg + '% مكتمل';
+      // Overall Score Badge and Center Score
+      const overallAvg = Math.round((calPct + stationsPct + waterPct) / 3);
+      const ringsCenterPct = document.getElementById('ringsCenterPct');
+      if (ringsCenterPct) ringsCenterPct.innerText = overallAvg + '%';
+      const ringsPercentText = document.getElementById('ringsPercentText');
+      if (ringsPercentText) ringsPercentText.innerText = overallAvg + '% مكتمل';
+      const ringsPercentBadge = document.getElementById('ringsPercentBadge');
+      if (ringsPercentBadge && !ringsPercentText) ringsPercentBadge.innerText = overallAvg + '% مكتمل';
     }
 
     function addWaterIntake(delta) {
