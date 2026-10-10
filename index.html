@@ -378,6 +378,39 @@
       letter-spacing: 0.2px;
     }
 
+    .brand-date-cluster {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      background: rgba(255, 255, 255, 0.06);
+      border: 0.5px solid rgba(255, 255, 255, 0.14);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.18), 0 4px 14px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      transition: all 0.2s var(--spring-smooth);
+    }
+
+    .brand-date-cluster:active {
+      transform: scale(0.96);
+      background: rgba(255, 255, 255, 0.10);
+    }
+
+    .brand-date-weekday {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--ios-gold);
+      line-height: 1.15;
+    }
+
+    .brand-date-details {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+      margin-top: 1px;
+    }
+
     .top-action-pills {
       display: flex;
       align-items: center;
@@ -1010,6 +1043,26 @@
     /* ==========================================================================
        MOSQUE & PRAYER TIMES CELESTIAL WIDGET
        ========================================================================== */
+    .prayer-celestial-card {
+      background: linear-gradient(155deg, rgba(20, 26, 44, 0.92) 0%, rgba(12, 14, 22, 0.96) 100%);
+      border: 0.5px solid rgba(255, 214, 10, 0.25);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prayer-title-glyph {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: rgba(255, 214, 10, 0.15);
+      color: var(--ios-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
     .prayer-widget-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -1021,20 +1074,33 @@
       background: rgba(255, 255, 255, 0.05);
       border: 0.5px solid rgba(255, 255, 255, 0.08);
       border-radius: var(--radius-md);
-      padding: 9px 4px;
+      padding: 10px 4px 8px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      transition: all 0.2s var(--spring-smooth);
+      gap: 3px;
+      transition: all 0.25s var(--spring-smooth);
+    }
+
+    .prayer-cell-icon {
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2px;
+      transition: color 0.2s;
     }
 
     .prayer-cell-btn.next-prayer {
-      background: linear-gradient(180deg, rgba(255, 214, 10, 0.18), rgba(255, 214, 10, 0.06));
-      border: 1px solid rgba(255, 214, 10, 0.55);
-      box-shadow: 0 4px 16px rgba(255, 214, 10, 0.2);
+      background: linear-gradient(180deg, rgba(255, 214, 10, 0.22), rgba(255, 214, 10, 0.06));
+      border: 1px solid rgba(255, 214, 10, 0.65);
+      box-shadow: 0 4px 20px rgba(255, 214, 10, 0.25), inset 0 0.5px 0 rgba(255, 255, 255, 0.35);
       transform: translateY(-2px);
+    }
+
+    .prayer-cell-btn.next-prayer .prayer-cell-icon {
+      color: var(--ios-gold);
     }
 
     .prayer-name {
@@ -1048,7 +1114,7 @@
     }
 
     .prayer-time {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 800;
       font-variant-numeric: tabular-nums;
       color: #ffffff;
@@ -1056,6 +1122,7 @@
 
     .prayer-period {
       font-size: 0.65rem;
+      font-weight: 600;
       color: var(--text-tertiary);
     }
 
@@ -1067,16 +1134,29 @@
       border-top: 0.5px solid rgba(255, 255, 255, 0.08);
     }
 
+    .prayer-city-label-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
     .city-picker-select {
       background: rgba(255, 255, 255, 0.08);
-      border: 0.5px solid rgba(255, 255, 255, 0.16);
+      border: 0.5px solid rgba(255, 255, 255, 0.18);
       border-radius: var(--radius-pill);
       color: #ffffff;
       font-size: 0.76rem;
       font-weight: 600;
-      padding: 4px 12px;
+      padding: 5px 12px 5px 28px;
       outline: none;
       cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201L5%205L9%201%22%20stroke%3D%22%23EBEBF5%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 10px center;
     }
 
     /* ==========================================================================
@@ -1089,24 +1169,28 @@
       display: flex;
       gap: 3px;
       margin-bottom: 14px;
-      border: 0.5px solid rgba(255, 255, 255, 0.08);
+      border: 0.5px solid rgba(255, 255, 255, 0.10);
     }
 
     .segment-btn {
       flex: 1;
-      padding: 7px;
+      padding: 7px 12px;
       border-radius: var(--radius-pill);
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-secondary);
       border: none;
       background: none;
       cursor: pointer;
-      transition: all 0.2s var(--spring-smooth);
+      transition: all 0.25s var(--spring-smooth);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
     }
 
     .segment-btn.active {
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.16);
       color: #ffffff;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
@@ -1125,17 +1209,97 @@
       border: 0.5px solid var(--glass-border);
       border-radius: var(--radius-lg);
       padding: 14px 16px;
-      transition: all 0.2s var(--spring-smooth);
+      transition: all 0.25s var(--spring-smooth);
     }
 
     .timeline-node-card.active-now {
-      border: 1px solid rgba(255, 214, 10, 0.55);
-      background: linear-gradient(135deg, rgba(40, 36, 24, 0.85), rgba(28, 28, 30, 0.85));
-      box-shadow: 0 6px 24px rgba(255, 214, 10, 0.18), inset 0 0.5px 0 rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(48, 209, 88, 0.6);
+      background: linear-gradient(145deg, rgba(20, 36, 26, 0.88), rgba(18, 20, 25, 0.92));
+      box-shadow: 0 8px 30px rgba(48, 209, 88, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
 
     .timeline-node-card.completed {
-      opacity: 0.65;
+      opacity: 0.6;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .station-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .station-meta-tags {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .station-cat-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.2px;
+    }
+    .station-cat-pill.gold {
+      background: rgba(255, 214, 10, 0.12);
+      color: var(--ios-gold);
+      border: 0.5px solid rgba(255, 214, 10, 0.3);
+    }
+    .station-cat-pill.purple {
+      background: rgba(191, 90, 242, 0.12);
+      color: var(--ios-purple);
+      border: 0.5px solid rgba(191, 90, 242, 0.3);
+    }
+    .station-cat-pill.green {
+      background: rgba(48, 209, 88, 0.12);
+      color: var(--ios-green);
+      border: 0.5px solid rgba(48, 209, 88, 0.3);
+    }
+    .station-cat-pill.blue {
+      background: rgba(10, 132, 255, 0.12);
+      color: var(--ios-blue);
+      border: 0.5px solid rgba(10, 132, 255, 0.3);
+    }
+    .station-cat-pill.orange {
+      background: rgba(255, 159, 10, 0.12);
+      color: var(--ios-orange);
+      border: 0.5px solid rgba(255, 159, 10, 0.3);
+    }
+    .station-cat-pill.cyan {
+      background: rgba(100, 210, 255, 0.12);
+      color: var(--ios-teal);
+      border: 0.5px solid rgba(100, 210, 255, 0.3);
+    }
+    .station-cat-pill.indigo {
+      background: rgba(94, 92, 230, 0.12);
+      color: var(--ios-indigo);
+      border: 0.5px solid rgba(94, 92, 230, 0.3);
+    }
+
+    .station-duration-pill {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .station-live-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--ios-green);
+      background: rgba(48, 209, 88, 0.15);
+      border: 0.5px solid rgba(48, 209, 88, 0.4);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
     }
 
     .timeline-row-content {
@@ -1173,18 +1337,18 @@
     }
 
     .station-time-pill {
-      font-size: 0.70rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--ios-gold);
       font-variant-numeric: tabular-nums;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .station-title-text {
-      font-size: 0.90rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .timeline-node-card.completed .station-title-text {
@@ -1193,10 +1357,37 @@
     }
 
     .station-sub-note {
-      font-size: 0.74rem;
+      font-size: 0.75rem;
       color: var(--text-secondary);
-      margin-top: 3px;
-      line-height: 1.35;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .station-active-action-bar {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.10);
+    }
+
+    .btn-quick-complete {
+      width: 100%;
+      background: var(--ios-green);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 9px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-quick-complete:active {
+      transform: scale(0.97);
     }
 
     /* ==========================================================================
@@ -1701,25 +1892,48 @@
        WISDOM & FOCUS TAB (Apple Music / Podcasts Aesthetic)
        ========================================================================== */
     .focus-player-card {
-      background: linear-gradient(145deg, rgba(30, 24, 45, 0.85), rgba(18, 16, 25, 0.85));
+      background: linear-gradient(145deg, rgba(38, 24, 58, 0.90) 0%, rgba(18, 14, 28, 0.95) 100%);
       border: 0.5px solid rgba(191, 90, 242, 0.35);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.16);
       border-radius: var(--radius-lg);
-      padding: 16px;
+      padding: 18px;
       margin-bottom: 14px;
+      position: relative;
+    }
+
+    .focus-player-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .focus-tag-pill {
+      font-size: 0.70rem;
+      font-weight: 700;
+      color: var(--ios-purple);
+      background: rgba(191, 90, 242, 0.15);
+      border: 0.5px solid rgba(191, 90, 242, 0.35);
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .player-controls-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
 
     .audio-wave-bars {
       display: flex;
       align-items: flex-end;
       gap: 3px;
-      height: 18px;
+      height: 22px;
+      padding: 0 4px;
     }
 
     .audio-bar {
@@ -1734,13 +1948,18 @@
       animation: waveBeat 0.7s infinite alternate ease-in-out;
     }
 
+    .audio-bar:nth-child(1).pulsing { animation-delay: 0.05s; }
     .audio-bar:nth-child(2).pulsing { animation-delay: 0.15s; }
     .audio-bar:nth-child(3).pulsing { animation-delay: 0.30s; }
     .audio-bar:nth-child(4).pulsing { animation-delay: 0.45s; }
+    .audio-bar:nth-child(5).pulsing { animation-delay: 0.20s; }
+    .audio-bar:nth-child(6).pulsing { animation-delay: 0.35s; }
+    .audio-bar:nth-child(7).pulsing { animation-delay: 0.50s; }
+    .audio-bar:nth-child(8).pulsing { animation-delay: 0.10s; }
 
     @keyframes waveBeat {
       0% { height: 4px; }
-      100% { height: 18px; }
+      100% { height: 20px; }
     }
 
     .btn-audio-play {
@@ -1748,18 +1967,69 @@
       color: #ffffff;
       border: none;
       border-radius: var(--radius-pill);
-      padding: 8px 18px;
-      font-size: 0.82rem;
+      padding: 9px 20px;
+      font-size: 0.84rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: transform 0.15s;
+      box-shadow: 0 4px 16px rgba(191, 90, 242, 0.4);
+      transition: all 0.2s;
     }
 
     .btn-audio-play:active {
       transform: scale(0.95);
+    }
+
+    .zen-volume-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .zen-volume-slider {
+      flex: 1;
+      accent-color: var(--ios-purple);
+      height: 4px;
+      cursor: pointer;
+    }
+
+    /* Daily Wisdom Quote Card (Apple Editorial) */
+    .wisdom-quote-card {
+      background: linear-gradient(145deg, rgba(255, 214, 10, 0.07) 0%, rgba(20, 20, 24, 0.90) 100%);
+      border: 0.5px solid rgba(255, 214, 10, 0.22);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      padding: 20px 18px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .wisdom-quote-mark {
+      font-size: 2.2rem;
+      line-height: 1;
+      color: var(--ios-gold);
+      opacity: 0.5;
+      margin-bottom: 4px;
+      font-family: serif;
+    }
+
+    .wisdom-quote-text {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .wisdom-quote-author {
+      font-size: 0.74rem;
+      color: var(--ios-gold);
+      font-weight: 600;
     }
 
     /* Video Story Cards (Apple App Store "Today" Style) */
@@ -1962,17 +2232,38 @@
       transform: translateX(20px);
     }
 
-    .ios-input-number {
+    .ios-number-field-wrap {
+      display: flex;
+      align-items: center;
       background: rgba(255, 255, 255, 0.08);
       border: 0.5px solid rgba(255, 255, 255, 0.16);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
+      padding: 3px 8px;
+      gap: 4px;
+      transition: border-color 0.2s;
+    }
+
+    .ios-number-field-wrap:focus-within {
+      border-color: var(--ios-gold);
+    }
+
+    .ios-number-field-wrap .ios-input-number {
+      background: none;
+      border: none;
+      padding: 4px 2px;
+      width: 58px;
+      text-align: center;
       color: #ffffff;
       font-weight: 700;
-      font-size: 0.85rem;
-      padding: 6px 10px;
-      text-align: center;
-      width: 80px;
+      font-size: 0.88rem;
       outline: none;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ios-input-unit {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-secondary);
     }
 
     /* ==========================================================================
@@ -2237,38 +2528,36 @@
         </div>
       </div>
 
-      <div class="top-action-pills">
-        <button id="topNotifyBtn" class="btn-notification-prompt" onclick="requestNotificationAccess()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span id="topNotifyTxt">تفعيل التنبيهات</span>
-        </button>
+      <div class="brand-date-cluster" id="appleLiveDateCluster" onclick="switchTab('now')">
+        <span class="brand-date-weekday" id="appleDateWeekday">السبت</span>
+        <span class="brand-date-details" id="appleDateDetails">10 أكتوبر</span>
       </div>
     </header>
-
-    <!-- Native Notification Permission Card (Shows if ungranted) -->
-    <div id="notificationPermissionBanner" class="ios-notification-banner" style="display:none;">
-      <div class="banner-content-row">
-        <div class="banner-bell-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-        </div>
-        <div class="banner-text-info">
-          <h3>تفعيل إشعارات مَدَار الذكية</h3>
-          <p>احصل على تنبيه تلقائي في هاتفك عند دخول وقت كل صلاة وبداية محطات روتينك اليومي.</p>
-        </div>
-      </div>
-      <div class="banner-button-row">
-        <button class="btn-banner-allow" onclick="requestNotificationAccess()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>السماح بالإشعارات الآن</span>
-        </button>
-        <button class="btn-banner-dismiss" onclick="dismissNotificationBanner()">لاحقاً</button>
-      </div>
-    </div>
 
     <!-- ====================================================================
          TAB 1: TODAY (اليوم)
          ==================================================================== -->
     <section id="tab-now" class="tab-content-panel active">
+
+      <!-- Native Notification Permission Card (Scoped cleanly to Today overview) -->
+      <div id="notificationPermissionBanner" class="ios-notification-banner" style="display:none; margin-bottom:14px;">
+        <div class="banner-content-row">
+          <div class="banner-bell-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div class="banner-text-info">
+            <h3>تفعيل إشعارات مَدَار الذكية</h3>
+            <p>احصل على تنبيه تلقائي في هاتفك عند دخول وقت كل صلاة وبداية محطات روتينك اليومي.</p>
+          </div>
+        </div>
+        <div class="banner-button-row">
+          <button class="btn-banner-allow" onclick="requestNotificationAccess()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span>السماح بالإشعارات الآن</span>
+          </button>
+          <button class="btn-banner-dismiss" onclick="dismissNotificationBanner()">لاحقاً</button>
+        </div>
+      </div>
 
       <!-- Apple Activity Rings Widget Card (Premium Obsidian Glass) -->
       <div class="activity-rings-card">
@@ -2398,10 +2687,14 @@
       </div>
 
       <!-- Mosque & Prayer Times Celestial Card -->
-      <div class="ios-card">
+      <div class="ios-card prayer-celestial-card">
         <div class="ios-card-header">
           <div class="ios-card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ios-gold)" stroke-width="2"><path d="M12 3v19M5 10l7-7 7 7M5 21h14"/></svg>
+            <div class="prayer-title-glyph">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v19M5 10l7-7 7 7M5 21h14"/>
+              </svg>
+            </div>
             <span>مواقيت الصلاة في المسجد</span>
           </div>
           <span class="ios-tag-pill gold" id="prayerCountdownBadge">جاري الحساب...</span>
@@ -2409,26 +2702,41 @@
 
         <div class="prayer-widget-grid">
           <div class="prayer-cell-btn" id="pCell-fajr">
+            <div class="prayer-cell-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M4.93 10.93l2.83-2.83M2 18h20M20 18a8 8 0 0 0-16 0"/></svg>
+            </div>
             <span class="prayer-name">الفجر</span>
             <span class="prayer-time" id="pTime-fajr">--:--</span>
             <span class="prayer-period">ص</span>
           </div>
           <div class="prayer-cell-btn" id="pCell-dhuhr">
+            <div class="prayer-cell-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+            </div>
             <span class="prayer-name">الظهر</span>
             <span class="prayer-time" id="pTime-dhuhr">--:--</span>
             <span class="prayer-period">م</span>
           </div>
           <div class="prayer-cell-btn" id="pCell-asr">
+            <div class="prayer-cell-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2"/></svg>
+            </div>
             <span class="prayer-name">العصر</span>
             <span class="prayer-time" id="pTime-asr">--:--</span>
             <span class="prayer-period">م</span>
           </div>
           <div class="prayer-cell-btn" id="pCell-maghrib">
+            <div class="prayer-cell-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0M12 9V2M4.22 10.22l1.42 1.42M19.78 10.22l-1.42 1.42M1 18h22M1 22h22"/></svg>
+            </div>
             <span class="prayer-name">المغرب</span>
             <span class="prayer-time" id="pTime-maghrib">--:--</span>
             <span class="prayer-period">م</span>
           </div>
           <div class="prayer-cell-btn" id="pCell-isha">
+            <div class="prayer-cell-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </div>
             <span class="prayer-name">العشاء</span>
             <span class="prayer-time" id="pTime-isha">--:--</span>
             <span class="prayer-period">م</span>
@@ -2436,7 +2744,10 @@
         </div>
 
         <div class="prayer-city-footer">
-          <span style="font-size:0.75rem; color:var(--text-secondary);">المدينة المعتمدة:</span>
+          <div class="prayer-city-label-group">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ios-gold)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>المدينة المعتمدة:</span>
+          </div>
           <select id="mainCityPicker" class="city-picker-select" onchange="updateSelectedCity(this.value)">
             <option value="riyadh">الرياض</option>
             <option value="makkah">مكة المكرمة</option>
@@ -2472,8 +2783,8 @@
       <!-- Segmented Filter -->
       <div class="ios-segmented-control">
         <button class="segment-btn active" id="segAll" onclick="setScheduleFilter('all')">الكل (13)</button>
-        <button class="segment-btn" id="segPending" onclick="setScheduleFilter('pending')">المتبقية</button>
-        <button class="segment-btn" id="segDone" onclick="setScheduleFilter('done')">المكتملة</button>
+        <button class="segment-btn" id="segPending" onclick="setScheduleFilter('pending')">المتبقية (<span id="countPending">13</span>)</button>
+        <button class="segment-btn" id="segDone" onclick="setScheduleFilter('done')">المكتملة (<span id="countDone">0</span>)</button>
       </div>
 
       <!-- Schedule Timeline Stream -->
@@ -2703,13 +3014,20 @@
          ==================================================================== -->
     <section id="tab-knowledge" class="tab-content-panel">
 
-      <!-- 432 Hz Binaural Zen Player -->
+      <!-- 432 Hz Binaural Zen Player (Apple Music / Mindfulness Style) -->
       <div class="focus-player-card">
-        <div style="font-size:0.72rem; color:var(--ios-purple); font-weight:700; margin-bottom:4px;">موجات العزل والتركيز العميق</div>
+        <div class="focus-player-header">
+          <span class="focus-tag-pill">
+            <span class="pulse-dot-green" id="zenPulseDot" style="display:none;"></span>
+            <span id="zenStateBadge">تردد السكينة • 432 Hz</span>
+          </span>
+          <span style="font-size:0.72rem; color:var(--text-tertiary); font-variant-numeric:tabular-nums;" id="zenDurationText">موجات ذهنية نقية</span>
+        </div>
+
         <div class="player-controls-row">
           <div>
-            <div style="font-size:0.95rem; font-weight:800; color:#fff;">نغمة 432 Hz الذهنية</div>
-            <div style="font-size:0.72rem; color:var(--text-secondary);">عزل الضجيج وزيادة الانتباه</div>
+            <div style="font-size:1.02rem; font-weight:800; color:#fff; line-height:1.25;">جلسة التركيز وعزل التشتت</div>
+            <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:3px;">نغمة جيبية نقية لزيادة الانتباه والتدفق</div>
           </div>
           <div style="display:flex; align-items:center; gap:12px;">
             <div class="audio-wave-bars">
@@ -2717,6 +3035,10 @@
               <span class="audio-bar" id="aBar2"></span>
               <span class="audio-bar" id="aBar3"></span>
               <span class="audio-bar" id="aBar4"></span>
+              <span class="audio-bar" id="aBar5"></span>
+              <span class="audio-bar" id="aBar6"></span>
+              <span class="audio-bar" id="aBar7"></span>
+              <span class="audio-bar" id="aBar8"></span>
             </div>
             <button class="btn-audio-play" id="btnToggleZenSound" onclick="toggleZenFocusSound()">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -2724,11 +3046,24 @@
             </button>
           </div>
         </div>
+
+        <div class="zen-volume-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          <input type="range" class="zen-volume-slider" id="zenVolumeSlider" min="0" max="0.3" step="0.01" value="0.08" oninput="updateZenVolume(this.value)">
+          <span style="font-size:0.68rem; color:var(--text-tertiary); min-width:32px;">شدة الصوت</span>
+        </div>
+      </div>
+
+      <!-- Daily Wisdom Quote Card (Apple Editorial) -->
+      <div class="ios-card wisdom-quote-card">
+        <div class="wisdom-quote-mark">“</div>
+        <p class="wisdom-quote-text">أَحَبُّ الْأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ</p>
+        <div class="wisdom-quote-author">حديث نبوي شريف • سر البناء التراكمي والعادات اليومية المستدامة</div>
       </div>
 
       <!-- Masterclass Story 1 -->
       <div class="editorial-video-card">
-        <span class="editorial-badge">سر التفوق الجامعي</span>
+        <span class="editorial-badge">سر التفوق الجامعي • دراسة ذكية</span>
         <h3 class="editorial-headline">تقنية "Active Recall": كيف تدرس بذكاء وتتفوق بنصف الوقت؟</h3>
         <p class="editorial-prose">
           أغلب الطلاب يضيعون مئات الساعات في قراءة الكتب وتظليلها، وهو ما يثبت علمياً أنه يمنح الدماغ وهماً زائفاً بالمعرفة. الطلاب المتميزون يتبعون أسلوب الاستدعاء النشط: قراءة الفكرة لمرة واحدة، ثم إغلاق المرجع وشرحها بكلماتك على ورقة فارغة.
@@ -2747,7 +3082,7 @@
 
       <!-- Masterclass Story 2 -->
       <div class="editorial-video-card">
-        <span class="editorial-badge">طلاقة الإنجليزية في 90 يوماً</span>
+        <span class="editorial-badge">طلاقة الإنجليزية • تطبيق عملي</span>
         <h3 class="editorial-headline">طريقة الـ "Shadowing": كسر حاجز التأتأة والترجمة العقلية</h3>
         <p class="editorial-prose">
           المشكلة الحقيقية في التحدث بالإنجليزية ليست قلة القواعد، بل تأخر الترجمة في دماغك وضعف مرونة عضلات الفم على النطق السريع. في تقنية Shadowing، تستمع لمتحدث أصلي وتكرر كلامه وراءه مباشرة بفارق نصف ثانية فقط.
@@ -2770,6 +3105,20 @@
          ==================================================================== -->
     <section id="tab-settings" class="tab-content-panel">
 
+      <!-- App Version & Offline Status Card -->
+      <div class="ios-card" style="margin-bottom:14px; background:linear-gradient(145deg, rgba(255,214,10,0.06), rgba(20,20,25,0.85)); border:0.5px solid rgba(255,214,10,0.22);">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <img src="icons/icon.svg" alt="مَدَار" style="width:38px; height:38px; border-radius:10px; border:0.5px solid rgba(255,214,10,0.4);">
+            <div>
+              <div style="font-size:0.95rem; font-weight:800; color:#fff;">مَدَار • MADAR</div>
+              <div style="font-size:0.70rem; color:var(--ios-gold); font-weight:700;">الإصدار 4.0 • خصوصية محلية كاملة</div>
+            </div>
+          </div>
+          <span class="ios-tag-pill green">Offline PWA</span>
+        </div>
+      </div>
+
       <!-- Section: App Tour & Onboarding -->
       <div class="ios-section-header">التعريف بالتطبيق</div>
       <div class="ios-settings-group">
@@ -2783,7 +3132,7 @@
               <div class="setting-label-sub">عرض واجهة الترحيب ومميزات التطبيق الرئيسية</div>
             </div>
           </div>
-          <span style="color:var(--text-tertiary); font-size:1.1rem;">‹</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-tertiary);"><polyline points="15 18 9 12 15 6"/></svg>
         </div>
       </div>
 
@@ -2843,7 +3192,10 @@
               <div class="setting-label-sub">السعرات المستهدفة يومياً (كالوري)</div>
             </div>
           </div>
-          <input type="number" inputmode="numeric" id="cfgCalGoalInp" class="ios-input-number" value="2200" onchange="updateCalGoal(this.value)">
+          <div class="ios-number-field-wrap">
+            <input type="number" inputmode="numeric" id="cfgCalGoalInp" class="ios-input-number" value="2200" onchange="updateCalGoal(this.value)">
+            <span class="ios-input-unit">ك.س</span>
+          </div>
         </div>
 
         <div class="ios-setting-cell">
@@ -2856,7 +3208,10 @@
               <div class="setting-label-sub">الكمية اليومية المستهدفة</div>
             </div>
           </div>
-          <input type="number" inputmode="numeric" id="cfgWaterGoalInp" class="ios-input-number" value="3000" onchange="updateWaterGoal(this.value)">
+          <div class="ios-number-field-wrap">
+            <input type="number" inputmode="numeric" id="cfgWaterGoalInp" class="ios-input-number" value="3000" onchange="updateWaterGoal(this.value)">
+            <span class="ios-input-unit">مل</span>
+          </div>
         </div>
 
         <div class="ios-setting-cell">
@@ -2982,19 +3337,19 @@
 
     /* Daily Schedule Architecture (Strict 12h Arabic) */
     const SCHEDULE_DATA = [
-      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", start: "05:00", end: "06:00", time12: "5:00 ص – 6:00 ص", note: "البكور وبركة انطلاقة اليوم" },
-      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", start: "06:00", end: "06:45", time12: "6:00 ص – 6:45 ص", note: "استماع وبودكاست وتقنية Shadowing" },
-      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", start: "06:45", end: "07:30", time12: "6:45 ص – 7:30 ص", note: "منصات Coursera ومواد التخصص" },
-      { id: 3, title: "فطور صحي متوازن وقهوة الصباح", start: "07:30", end: "08:30", time12: "7:30 ص – 8:30 ص", note: "تهيئة بيئة العمل والمهام" },
-      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", start: "08:30", end: "12:00", time12: "8:30 ص – 12:00 م", note: "إنجاز مهام المشروع بدون مشتتات" },
-      { id: 5, title: "صلاة الظهر في المسجد", start: "12:00", end: "13:00", time12: "12:00 م – 1:00 م", note: "فصل العقل عن الشاشات والسكينة" },
-      { id: 6, title: "وجبة الغداء + قيلولة 20 دقيقة", start: "13:00", end: "14:00", time12: "1:00 م – 2:00 م", note: "وجبة متوازنة وشحن النشاط" },
-      { id: 7, title: "متابعات العمل والاجتماعات والمكالمات", start: "14:00", end: "15:30", time12: "2:00 م – 3:30 م", note: "إنهاء المراسلات والأمور الخفيفة" },
-      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", start: "15:30", end: "16:30", time12: "3:30 م – 4:30 م", note: "طاقة ما قبل النادي" },
-      { id: 9, title: "التمرين الرياضي في النادي (حديد / لياقة)", start: "16:30", end: "18:00", time12: "4:30 م – 6:00 م", note: "بناء القوة وتفريغ ضغوط اليوم" },
-      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", start: "18:00", end: "19:00", time12: "6:00 م – 7:00 م", note: "استرخاء وهدوء المساء" },
-      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", start: "19:00", end: "21:30", time12: "7:00 م – 9:30 م", note: "وقت عائلي وقراءة هادئة" },
-      { id: 12, title: "إغلاق الشاشات ونوم باكر هانئ", start: "21:30", end: "22:30", time12: "9:30 م – 10:30 م", note: "تهيئة الجسم لنوم عميق مريح" }
+      { id: 0, title: "صلاة الفجر في المسجد + أذكار الصباح", category: "عبادة", catColor: "gold", start: "05:00", end: "06:00", duration: "60 دقيقة", time12: "5:00 ص – 6:00 ص", note: "البكور وبركة انطلاقة اليوم" },
+      { id: 1, title: "تطوير اللغة الإنجليزية (45 دقيقة)", category: "تطوير", catColor: "purple", start: "06:00", end: "06:45", duration: "45 دقيقة", time12: "6:00 ص – 6:45 ص", note: "استماع وبودكاست وتقنية Shadowing" },
+      { id: 2, title: "دورات تحضير الجامعة وشهادات الخبرة", category: "تطوير", catColor: "purple", start: "06:45", end: "07:30", duration: "45 دقيقة", time12: "6:45 ص – 7:30 ص", note: "منصات Coursera ومواد التخصص" },
+      { id: 3, title: "فطور صحي متوازن وقهوة الصباح", category: "صحة", catColor: "green", start: "07:30", end: "08:30", duration: "60 دقيقة", time12: "7:30 ص – 8:30 ص", note: "تهيئة بيئة العمل والمهام" },
+      { id: 4, title: "العمل الخاص (تركيز عميق 3.5 ساعات)", category: "إنجاز", catColor: "blue", start: "08:30", end: "12:00", duration: "3.5 ساعات", time12: "8:30 ص – 12:00 م", note: "إنجاز مهام المشروع بدون مشتتات" },
+      { id: 5, title: "صلاة الظهر في المسجد", category: "عبادة", catColor: "gold", start: "12:00", end: "13:00", duration: "60 دقيقة", time12: "12:00 م – 1:00 م", note: "فصل العقل عن الشاشات والسكينة" },
+      { id: 6, title: "وجبة الغداء + قيلولة 20 دقيقة", category: "صحة", catColor: "green", start: "13:00", end: "14:00", duration: "60 دقيقة", time12: "1:00 م – 2:00 م", note: "وجبة متوازنة وشحن النشاط" },
+      { id: 7, title: "متابعات العمل والاجتماعات والمكالمات", category: "إنجاز", catColor: "blue", start: "14:00", end: "15:30", duration: "90 دقيقة", time12: "2:00 م – 3:30 م", note: "إنهاء المراسلات والأمور الخفيفة" },
+      { id: 8, title: "صلاة العصر في المسجد وسناك التمرين", category: "عبادة", catColor: "gold", start: "15:30", end: "16:30", duration: "60 دقيقة", time12: "3:30 م – 4:30 م", note: "طاقة ما قبل النادي" },
+      { id: 9, title: "التمرين الرياضي في النادي (حديد / لياقة)", category: "لياقة", catColor: "orange", start: "16:30", end: "18:00", duration: "90 دقيقة", time12: "4:30 م – 6:00 م", note: "بناء القوة وتفريغ ضغوط اليوم" },
+      { id: 10, title: "صلاة المغرب في المسجد وحمام منعش", category: "عبادة", catColor: "gold", start: "18:00", end: "19:00", duration: "60 دقيقة", time12: "6:00 م – 7:00 م", note: "استرخاء وهدوء المساء" },
+      { id: 11, title: "وجبة العشاء وصلاة العشاء في المسجد", category: "سكينة", catColor: "cyan", start: "19:00", end: "21:30", duration: "2.5 ساعة", time12: "7:00 م – 9:30 م", note: "وقت عائلي وقراءة هادئة" },
+      { id: 12, title: "إغلاق الشاشات ونوم باكر هانئ", category: "سكينة", catColor: "indigo", start: "21:30", end: "22:30", duration: "60 دقيقة", time12: "9:30 م – 10:30 م", note: "تهيئة الجسم لنوم عميق مريح" }
     ];
 
     /* Accurate Prayer Timings by City */
@@ -3123,11 +3478,28 @@
       } catch (e) {}
     }
 
+    let zenVolume = 0.08;
+    function updateZenVolume(val) {
+      zenVolume = parseFloat(val);
+      if (zenGainNode && isZenPlaying) {
+        try {
+          const ctx = getAudioContext();
+          zenGainNode.gain.setValueAtTime(zenVolume, ctx.currentTime);
+        } catch (e) {}
+      }
+    }
+
     /* 432 Hz Binaural Zen Generator */
     function toggleZenFocusSound() {
       playTactileFeedback('click');
       const btnTxt = document.getElementById('zenPlayBtnTxt');
-      const bars = [document.getElementById('aBar1'), document.getElementById('aBar2'), document.getElementById('aBar3'), document.getElementById('aBar4')];
+      const pulseDot = document.getElementById('zenPulseDot');
+      const stateBadge = document.getElementById('zenStateBadge');
+      const bars = [];
+      for (let i = 1; i <= 8; i++) {
+        const b = document.getElementById('aBar' + i);
+        if (b) bars.push(b);
+      }
 
       if (isZenPlaying) {
         if (zenOscillator) {
@@ -3135,8 +3507,10 @@
           zenOscillator = null;
         }
         isZenPlaying = false;
-        btnTxt.innerText = "تشغيل";
-        bars.forEach(b => b && b.classList.remove('pulsing'));
+        if (btnTxt) btnTxt.innerText = "تشغيل";
+        if (pulseDot) pulseDot.style.display = 'none';
+        if (stateBadge) stateBadge.innerText = "تردد السكينة • 432 Hz";
+        bars.forEach(b => b.classList.remove('pulsing'));
         showInAppToast("تم إيقاف صوت التركيز");
       } else {
         try {
@@ -3148,15 +3522,17 @@
           zenOscillator.frequency.setValueAtTime(432, ctx.currentTime);
 
           zenGainNode.gain.setValueAtTime(0.001, ctx.currentTime);
-          zenGainNode.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 1.2);
+          zenGainNode.gain.exponentialRampToValueAtTime(zenVolume, ctx.currentTime + 1.2);
 
           zenOscillator.connect(zenGainNode);
           zenGainNode.connect(ctx.destination);
 
           zenOscillator.start();
           isZenPlaying = true;
-          btnTxt.innerText = "إيقاف";
-          bars.forEach(b => b && b.classList.add('pulsing'));
+          if (btnTxt) btnTxt.innerText = "إيقاف";
+          if (pulseDot) pulseDot.style.display = 'inline-block';
+          if (stateBadge) stateBadge.innerText = "جلسة نشطة الآن • 432 Hz";
+          bars.forEach(b => b.classList.add('pulsing'));
           showInAppToast("تم تشغيل موجات التركيز 432Hz");
         } catch (e) {
           showInAppToast("انقر على الشاشة أولاً لتفعيل الصوت");
@@ -3191,26 +3567,31 @@
        REAL NOTIFICATIONS & PUSH ENGINE
        ========================================================================== */
     function checkNotificationStatus() {
+      const topBtn = document.getElementById('topNotifyBtn');
+      const topTxt = document.getElementById('topNotifyTxt');
+      const toggleSwitch = document.getElementById('toggleNotifySwitch');
+      const banner = document.getElementById('notificationPermissionBanner');
+
       if (!("Notification" in window)) {
-        document.getElementById('topNotifyTxt').innerText = "غير مدعوم";
+        if (topTxt) topTxt.innerText = "غير مدعوم";
         return;
       }
 
       if (Notification.permission === 'granted') {
         appState.notificationsEnabled = true;
-        document.getElementById('topNotifyBtn').classList.add('active');
-        document.getElementById('topNotifyTxt').innerText = "التنبيهات نشطة";
-        document.getElementById('toggleNotifySwitch').classList.add('on');
-        document.getElementById('notificationPermissionBanner').style.display = 'none';
+        if (topBtn) topBtn.classList.add('active');
+        if (topTxt) topTxt.innerText = "التنبيهات نشطة";
+        if (toggleSwitch) toggleSwitch.classList.add('on');
+        if (banner) banner.style.display = 'none';
       } else {
         appState.notificationsEnabled = false;
-        document.getElementById('topNotifyBtn').classList.remove('active');
-        document.getElementById('topNotifyTxt').innerText = "تفعيل التنبيهات";
-        document.getElementById('toggleNotifySwitch').classList.remove('on');
+        if (topBtn) topBtn.classList.remove('active');
+        if (topTxt) topTxt.innerText = "تفعيل التنبيهات";
+        if (toggleSwitch) toggleSwitch.classList.remove('on');
         
-        const dismissed = sessionStorage.getItem('madar_notify_dismissed');
-        if (!dismissed) {
-          document.getElementById('notificationPermissionBanner').style.display = 'flex';
+        const dismissed = localStorage.getItem('madar_notify_dismissed');
+        if (!dismissed && banner) {
+          banner.style.display = 'flex';
         }
       }
       saveAppState();
@@ -3218,8 +3599,9 @@
 
     function dismissNotificationBanner() {
       playTactileFeedback('click');
-      document.getElementById('notificationPermissionBanner').style.display = 'none';
-      sessionStorage.setItem('madar_notify_dismissed', 'true');
+      const banner = document.getElementById('notificationPermissionBanner');
+      if (banner) banner.style.display = 'none';
+      localStorage.setItem('madar_notify_dismissed', 'true');
     }
 
     async function requestNotificationAccess() {
@@ -3443,10 +3825,22 @@
       }
 
       // Highlight active node in schedule timeline
-      document.querySelectorAll('.timeline-node-card').forEach((el, idx) => {
-        if (idx === currentIdx) el.classList.add('active-now');
+      document.querySelectorAll('.timeline-node-card').forEach((el) => {
+        const sid = parseInt(el.getAttribute('data-id'), 10);
+        if (sid === currentIdx) el.classList.add('active-now');
         else el.classList.remove('active-now');
       });
+    }
+
+    function updateAppleLiveDate() {
+      const now = new Date();
+      const weekdays = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+      const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+      
+      const weekdayEl = document.getElementById('appleDateWeekday');
+      const detailsEl = document.getElementById('appleDateDetails');
+      if (weekdayEl) weekdayEl.innerText = weekdays[now.getDay()];
+      if (detailsEl) detailsEl.innerText = `${now.getDate()} ${months[now.getMonth()]}`;
     }
 
     function completeCurrentStationFromIsland() {
@@ -3553,26 +3947,63 @@
       updateActivityRings();
     }
 
+    function getCurrentStationIndex() {
+      const now = new Date();
+      const curMins = now.getHours() * 60 + now.getMinutes();
+      for (let i = 0; i < SCHEDULE_DATA.length; i++) {
+        const item = SCHEDULE_DATA[i];
+        const [sh, sm] = item.start.split(':').map(Number);
+        const [eh, em] = item.end.split(':').map(Number);
+        if (curMins >= sh * 60 + sm && curMins < eh * 60 + em) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
     function renderScheduleTimeline() {
       const container = document.getElementById('scheduleTimelineStream');
       const highlightsContainer = document.getElementById('todayHighlightsList');
       if (!container) return;
+
+      const activeIdx = getCurrentStationIndex();
+      const totalCount = SCHEDULE_DATA.length;
+      const completedCount = Object.keys(appState.completedTasks).length;
+      const pendingCount = Math.max(0, totalCount - completedCount);
+      const countPendingEl = document.getElementById('countPending');
+      const countDoneEl = document.getElementById('countDone');
+      if (countPendingEl) countPendingEl.innerText = pendingCount;
+      if (countDoneEl) countDoneEl.innerText = completedCount;
 
       let html = '';
       let highlightHtml = '';
 
       SCHEDULE_DATA.forEach((item) => {
         const isDone = !!appState.completedTasks[item.id];
+        const isActive = (item.id === activeIdx);
 
         // Filter check for Schedule Tab
         if (currentScheduleFilter === 'pending' && isDone) return;
         if (currentScheduleFilter === 'done' && !isDone) return;
 
         html += `
-          <div class="timeline-node-card ${isDone ? 'completed' : ''}" data-id="${item.id}">
+          <div class="timeline-node-card ${isDone ? 'completed' : ''} ${isActive ? 'active-now' : ''}" data-id="${item.id}">
+            <div class="station-meta-row">
+              <div class="station-meta-tags">
+                <span class="station-cat-pill ${item.catColor}">${item.category}</span>
+                <span class="station-duration-pill">${item.duration}</span>
+              </div>
+              ${isActive ? `
+                <div class="station-live-badge">
+                  <span class="pulse-dot-green"></span>
+                  <span>جارية الآن</span>
+                </div>
+              ` : ''}
+            </div>
+
             <div class="timeline-row-content">
               <div class="ios-circular-checkbox" onclick="toggleTaskCompletion(${item.id})">
-                ${isDone ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+                ${isDone ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3.2"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
               </div>
               <div class="timeline-text-body" onclick="toggleTaskCompletion(${item.id})">
                 <div class="station-time-pill">${item.time12}</div>
@@ -3580,16 +4011,29 @@
                 <div class="station-sub-note">${item.note}</div>
               </div>
             </div>
+
+            ${isActive && !isDone ? `
+              <div class="station-active-action-bar">
+                <button class="btn-quick-complete" onclick="toggleTaskCompletion(${item.id})">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>تسجيل إنجاز المحطة الحالية</span>
+                </button>
+              </div>
+            ` : ''}
           </div>
         `;
 
         // Render top 4 key highlights on Today tab
         if ([0, 4, 8, 9].includes(item.id)) {
           highlightHtml += `
-            <div class="timeline-node-card ${isDone ? 'completed' : ''}" style="margin-bottom:6px;">
+            <div class="timeline-node-card ${isDone ? 'completed' : ''} ${isActive ? 'active-now' : ''}" style="margin-bottom:6px;">
+              <div class="station-meta-row" style="margin-bottom:6px;">
+                <span class="station-cat-pill ${item.catColor}">${item.category}</span>
+                ${isActive ? '<span class="station-live-badge"><span class="pulse-dot-green"></span> جارية الآن</span>' : ''}
+              </div>
               <div class="timeline-row-content">
                 <div class="ios-circular-checkbox" onclick="toggleTaskCompletion(${item.id})">
-                  ${isDone ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+                  ${isDone ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3.2"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
                 </div>
                 <div class="timeline-text-body" onclick="toggleTaskCompletion(${item.id})">
                   <div class="station-time-pill">${item.time12}</div>
@@ -3856,6 +4300,7 @@
     /* Initialize App */
     window.addEventListener('DOMContentLoaded', () => {
       loadAppState();
+      updateAppleLiveDate();
       checkOnboardingDisplay();
       checkNotificationStatus();
       updateMosquePrayers();
@@ -3875,6 +4320,7 @@
 
       // Timers & Daemons
       setInterval(updateLiveIslandEngine, 1000);
+      setInterval(updateAppleLiveDate, 60000);
       setInterval(updateMosquePrayers, 60000);
       setInterval(checkRoutineNotificationsDaemon, 20000);
 
@@ -3903,7 +4349,7 @@
       if ('caches' in window) {
         caches.keys().then(keys => {
           keys.forEach(k => {
-            if (k !== 'madar-cache-v1') caches.delete(k);
+            if (k !== 'madar-cache-v4') caches.delete(k);
           });
         });
       }
