@@ -1202,97 +1202,267 @@
     /* ==========================================================================
        HEALTH & VITALS TAB (Apple Health Aesthetic)
        ========================================================================== */
-    .cal-split-display {
+    .health-card-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 12px;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .health-card-badge.red {
+      background: rgba(255, 36, 66, 0.15);
+      color: #FF2442;
+      box-shadow: 0 0 10px rgba(255, 36, 66, 0.25);
+    }
+    .health-card-badge.blue {
+      background: rgba(10, 132, 255, 0.15);
+      color: #0A84FF;
+      box-shadow: 0 0 10px rgba(10, 132, 255, 0.25);
+    }
+    .health-card-badge.gold {
+      background: rgba(255, 214, 10, 0.15);
+      color: var(--ios-gold);
+      box-shadow: 0 0 10px rgba(255, 214, 10, 0.25);
     }
 
-    .cal-left-stat {
+    /* CARD 1: 3-Column Calories Vitals */
+    .cal-vitals-cluster {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr 1fr;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .cal-vital-cell {
+      background: rgba(255, 255, 255, 0.03);
+      border: 0.5px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-md);
+      padding: 10px 6px;
+      text-align: center;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      transition: all 0.2s var(--spring-smooth);
     }
 
-    .cal-big-number {
-      font-size: 2.2rem;
+    .cal-vital-cell.hero-remaining {
+      background: linear-gradient(180deg, rgba(255, 36, 66, 0.12) 0%, rgba(255, 159, 10, 0.06) 100%);
+      border: 1px solid rgba(255, 36, 66, 0.28);
+      box-shadow: 0 4px 18px rgba(255, 36, 66, 0.10);
+      padding: 12px 6px;
+    }
+
+    .cal-vital-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .cal-vital-val {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      font-size: 1.05rem;
       font-weight: 800;
-      letter-spacing: -1px;
       color: #ffffff;
-      line-height: 1;
       font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
     }
 
-    .cal-big-number small {
-      font-size: 0.9rem;
-      color: var(--ios-red);
+    .cal-vital-val small {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.45);
+      font-weight: 600;
+    }
+
+    .cal-vital-hero-val {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      font-size: 1.60rem;
+      font-weight: 800;
+      color: #ffffff;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+    }
+
+    .cal-vital-hero-val small {
+      font-size: 0.72rem;
+      color: #FF2442;
       font-weight: 700;
+    }
+
+    .cal-vital-status-pill {
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: #30D158;
+      background: rgba(48, 209, 88, 0.12);
+      border: 0.5px solid rgba(48, 209, 88, 0.25);
+      padding: 2px 7px;
+      border-radius: 999px;
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
+    .cal-progress-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
     }
 
     .cal-progress-track {
       height: 8px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 10px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
     }
 
     .cal-progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #ff9f0a, var(--ios-red));
-      border-radius: var(--radius-pill);
+      border-radius: 999px;
+      background: linear-gradient(90deg, #FF9F0A, #FF2442);
+      box-shadow: 0 0 10px rgba(255, 36, 66, 0.6);
       width: 0%;
-      transition: width 0.4s var(--spring-smooth);
+      transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    /* Water Vessel */
-    .water-vessel-widget {
+    .cal-progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.40);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* CARD 2: Hydration Display & Wave Radial */
+    .water-hero-display {
       display: flex;
       align-items: center;
       gap: 16px;
       margin-bottom: 14px;
     }
 
-    .water-cylinder-art {
-      width: 44px;
-      height: 84px;
-      border-radius: 14px;
-      border: 1.5px solid rgba(10, 132, 255, 0.4);
-      background: rgba(10, 132, 255, 0.08);
+    .water-radial-meter {
       position: relative;
-      overflow: hidden;
-      box-shadow: inset 0 0 10px rgba(10, 132, 255, 0.2);
+      width: 90px;
+      height: 90px;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .water-fluid-level {
+    .water-radial-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      filter: drop-shadow(0 4px 10px rgba(10, 132, 255, 0.3));
+    }
+
+    .water-radial-bg {
+      fill: none;
+      stroke: rgba(10, 132, 255, 0.16);
+      stroke-width: 8;
+    }
+
+    .water-radial-track {
+      fill: none;
+      stroke: url(#waterGradBlue);
+      stroke-width: 8;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .water-radial-center {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(180deg, #5ac8fa, #0a84ff);
-      transition: height 0.5s var(--spring-smooth);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #0A84FF;
+    }
+
+    .water-drop-glow {
+      filter: drop-shadow(0 0 6px rgba(10, 132, 255, 0.8));
+    }
+
+    .water-radial-pct {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .water-info-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .water-volume-display {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .water-cur-vol {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      font-size: 1.50rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .water-goal-sub {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.50);
+    }
+
+    .water-cups-status {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.45);
+      font-weight: 500;
+      margin-bottom: 6px;
     }
 
     .water-cups-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 6px;
-      margin-top: 6px;
+      gap: 5px;
     }
 
     .cup-indicator-glass {
       height: 16px;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 0.5px solid rgba(255, 255, 255, 0.15);
-      transition: all 0.3s var(--spring-smooth);
+      background: rgba(255, 255, 255, 0.08);
+      border: 0.5px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .cup-indicator-glass.filled {
-      background: var(--ios-blue);
-      box-shadow: 0 0 6px var(--ios-blue-glow);
+      background: linear-gradient(180deg, #5AC8FA, #0A84FF);
+      border-color: rgba(90, 200, 250, 0.6);
+      box-shadow: 0 0 8px rgba(10, 132, 255, 0.6);
+      transform: scale(1.04);
     }
 
     .water-step-buttons {
@@ -1300,35 +1470,59 @@
       gap: 8px;
     }
 
-    .btn-water-action {
+    .btn-water-pill {
       flex: 1;
-      padding: 10px;
+      padding: 10px 8px;
       border-radius: var(--radius-md);
-      background: rgba(10, 132, 255, 0.15);
-      border: 0.5px solid rgba(10, 132, 255, 0.35);
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 0.85rem;
+      border: 0.5px solid rgba(255, 255, 255, 0.1);
       cursor: pointer;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 2px;
-      transition: all 0.15s;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.3, 1);
     }
 
-    .btn-water-action.sub {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.15);
-      color: var(--text-secondary);
-      flex: 0.6;
+    .btn-water-pill.primary {
+      background: rgba(10, 132, 255, 0.14);
+      border-color: rgba(10, 132, 255, 0.30);
+      color: #0A84FF;
     }
-
-    .btn-water-action:active {
+    .btn-water-pill.primary:hover {
+      background: rgba(10, 132, 255, 0.22);
+      border-color: rgba(10, 132, 255, 0.50);
+    }
+    .btn-water-pill.secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.6);
+      flex: 0.7;
+    }
+    .btn-water-pill:active {
       transform: scale(0.96);
     }
 
-    /* Food Logger (iOS Inset Group) */
+    .btn-water-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: start;
+      line-height: 1.15;
+    }
+
+    .btn-water-amt {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .btn-water-sub {
+      font-size: 0.62rem;
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    /* CARD 3: Food Logger & Form */
     .quick-food-chips-scroll {
       display: flex;
       gap: 7px;
@@ -1337,16 +1531,15 @@
       margin-bottom: 12px;
       scrollbar-width: none;
     }
-
     .quick-food-chips-scroll::-webkit-scrollbar {
       display: none;
     }
 
     .food-chip-tag {
-      background: rgba(255, 255, 255, 0.08);
-      border: 0.5px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      border: 0.5px solid rgba(255, 255, 255, 0.10);
       border-radius: var(--radius-pill);
-      padding: 5px 12px;
+      padding: 6px 12px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -1357,97 +1550,151 @@
       color: #ffffff;
       transition: all 0.15s;
     }
-
+    .food-chip-tag:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.20);
+    }
     .food-chip-tag:active {
-      transform: scale(0.94);
-      background: rgba(255, 255, 255, 0.18);
+      transform: scale(0.95);
     }
 
     .food-cal-badge {
-      background: rgba(255, 45, 85, 0.25);
-      color: var(--ios-red);
-      padding: 1px 6px;
+      background: rgba(255, 45, 85, 0.20);
+      color: #FF375F;
+      padding: 2px 7px;
       border-radius: var(--radius-pill);
-      font-size: 0.70rem;
+      font-size: 0.68rem;
       font-weight: 700;
     }
 
-    .ios-input-group {
-      background: rgba(0, 0, 0, 0.35);
-      border: 0.5px solid rgba(255, 255, 255, 0.12);
+    .ios-form-group {
+      background: rgba(255, 255, 255, 0.035);
+      border: 0.5px solid rgba(255, 255, 255, 0.09);
       border-radius: var(--radius-md);
       overflow: hidden;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .ios-input-row {
+    .ios-form-row {
       display: flex;
-      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+      align-items: center;
+      padding: 10px 12px;
+      gap: 10px;
     }
 
-    .ios-input-row:last-child {
-      border-bottom: none;
+    .ios-form-divider {
+      height: 0.5px;
+      background: rgba(255, 255, 255, 0.08);
+      margin-inline-start: 36px;
     }
 
-    .ios-text-input {
-      width: 100%;
+    .ios-form-label-icon {
+      color: rgba(255, 255, 255, 0.4);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .ios-form-input {
+      flex: 1;
       background: transparent;
       border: none;
-      padding: 12px 14px;
-      color: #ffffff;
-      font-size: 0.88rem;
       outline: none;
-    }
-
-    .ios-text-input::placeholder {
-      color: var(--text-tertiary);
-    }
-
-    .btn-ios-submit {
-      width: 100%;
-      background: var(--ios-blue);
       color: #ffffff;
-      border: none;
+      font-size: 0.84rem;
+      font-family: inherit;
+      font-weight: 600;
+    }
+    .ios-form-input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .ios-form-suffix {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 600;
+    }
+
+    .btn-ios-submit-food {
+      width: 100%;
       padding: 12px;
       border-radius: var(--radius-md);
-      font-size: 0.90rem;
+      background: linear-gradient(180deg, #0A84FF 0%, #0066CC 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
       font-weight: 700;
+      font-size: 0.86rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      transition: transform 0.15s;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(10, 132, 255, 0.3);
+      transition: all 0.2s var(--spring-smooth);
+    }
+    .btn-ios-submit-food:active {
+      transform: scale(0.98);
     }
 
-    .btn-ios-submit:active {
-      transform: scale(0.97);
+    .meal-history-section {
+      margin-top: 14px;
     }
 
-    /* Food History List */
-    .meal-history-list {
-      margin-top: 10px;
+    .meal-history-header {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 8px;
+    }
+
+    .meal-history-count {
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 7px;
+      border-radius: 999px;
     }
 
     .meal-log-item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 0.5px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      margin-bottom: 6px;
+      transition: all 0.15s;
+    }
+    .meal-log-item:hover {
       background: rgba(255, 255, 255, 0.05);
-      border-radius: var(--radius-sm);
-      padding: 8px 12px;
-      font-size: 0.82rem;
     }
 
     .meal-delete-cross {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255, 59, 48, 0.12);
       color: var(--ios-red);
-      cursor: pointer;
-      padding: 4px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .meal-delete-cross:active {
+      transform: scale(0.9);
+      background: rgba(255, 59, 48, 0.25);
+    }
+
+    .meal-empty-hint {
+      font-size: 0.76rem;
+      color: rgba(255, 255, 255, 0.35);
+      text-align: center;
+      padding: 10px 0;
     }
 
     /* ==========================================================================
@@ -2240,50 +2487,105 @@
          ==================================================================== -->
     <section id="tab-health" class="tab-content-panel">
 
-      <!-- Calorie Balance Card -->
-      <div class="ios-card">
+      <!-- Calorie Balance Card (Apple Health Vitals) -->
+      <div class="ios-card cal-vitals-card">
         <div class="ios-card-header">
           <div class="ios-card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ios-red)" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            <div class="health-card-badge red">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 17c1.38 0 2.5-1.12 2.5-2.5 0-1.63-1.87-3.67-2.5-4.32-.63.65-2.5 2.69-2.5 4.32z"/>
+                <path d="M12 2c-4 4.5-6.5 8-6.5 12a6.5 6.5 0 0 0 13 0c0-4-2.5-7.5-6.5-12z"/>
+              </svg>
+            </div>
             <span>ميزان السعرات اليومي</span>
           </div>
-          <span class="ios-tag-pill" id="calBurnRatioTag">0%</span>
+          <span class="ios-tag-pill red" id="calBurnRatioTag">0% مستهلك</span>
         </div>
 
-        <div class="cal-split-display">
-          <div class="cal-left-stat">
-            <span style="font-size:0.75rem; color:var(--text-secondary);">المتبقي لليوم</span>
-            <div class="cal-big-number" id="calRemainingNum">2200 <small>سعرة</small></div>
+        <!-- 3-Column Vitals Stat Cluster -->
+        <div class="cal-vitals-cluster">
+          <!-- Col 1: Consumed -->
+          <div class="cal-vital-cell">
+            <span class="cal-vital-label">المستهلك</span>
+            <div class="cal-vital-val" id="calConsumedDisplay">
+              <span id="calConsumedNum">0</span>
+              <small>ك.س</small>
+            </div>
           </div>
-          <div style="text-align:left; font-size:0.80rem; color:var(--text-secondary); line-height:1.4;">
-            <div>المستهلك: <strong id="calConsumedNum" style="color:#fff;">0</strong></div>
-            <div>الهدف: <strong id="calGoalNum" style="color:#fff;">2200</strong></div>
+
+          <!-- Col 2: Remaining (Hero Pillar) -->
+          <div class="cal-vital-cell hero-remaining">
+            <span class="cal-vital-label">المتبقي لليوم</span>
+            <div class="cal-vital-hero-val" id="calRemainingNum">
+              2200 <small>سعرة</small>
+            </div>
+            <span class="cal-vital-status-pill" id="calStatusPill">ضمن النطاق المستهدف</span>
+          </div>
+
+          <!-- Col 3: Target Goal -->
+          <div class="cal-vital-cell">
+            <span class="cal-vital-label">الهدف</span>
+            <div class="cal-vital-val" id="calGoalDisplay">
+              <span id="calGoalNum">2200</span>
+              <small>ك.س</small>
+            </div>
           </div>
         </div>
 
-        <div class="cal-progress-track">
-          <div class="cal-progress-bar" id="calProgressBar"></div>
+        <!-- Luxury Progress Bar with Milestones -->
+        <div class="cal-progress-wrapper">
+          <div class="cal-progress-track">
+            <div class="cal-progress-bar" id="calProgressBar"></div>
+          </div>
+          <div class="cal-progress-labels">
+            <span>0 ك.س</span>
+            <span id="calProgressMidpoint">1100 (50%)</span>
+            <span id="calProgressMaxLabel">2200 ك.س</span>
+          </div>
         </div>
       </div>
 
-      <!-- Hydration Card -->
-      <div class="ios-card">
+      <!-- Hydration Card (Apple Health Vitals) -->
+      <div class="ios-card water-vitals-card">
         <div class="ios-card-header">
           <div class="ios-card-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ios-blue)" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            <div class="health-card-badge blue">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              </svg>
+            </div>
             <span>الترطيب وشرب الماء</span>
           </div>
-          <span class="ios-tag-pill blue" id="waterGoalBadge">0 / 3000 مل</span>
+          <span class="ios-tag-pill blue" id="waterGoalBadge">0% مكتمل</span>
         </div>
 
-        <div class="water-vessel-widget">
-          <div class="water-cylinder-art">
-            <div class="water-fluid-level" id="waterFluidLevel" style="height:0%;"></div>
+        <!-- Hydration Display Grid -->
+        <div class="water-hero-display">
+          <!-- Radial Wave Meter -->
+          <div class="water-radial-meter">
+            <svg class="water-radial-svg" viewBox="0 0 100 100">
+              <defs>
+                <linearGradient id="waterGradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0A84FF"/>
+                  <stop offset="100%" stop-color="#00D2FF"/>
+                </linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r="42" class="water-radial-bg"></circle>
+              <circle id="waterRadialFill" cx="50" cy="50" r="42" class="water-radial-track" stroke-dasharray="263.89" stroke-dashoffset="263.89"></circle>
+            </svg>
+            <div class="water-radial-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="water-drop-glow"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              <span class="water-radial-pct" id="waterRadialPct">0%</span>
+            </div>
           </div>
 
-          <div style="flex:1;">
-            <div style="font-size:1.15rem; font-weight:800; color:#fff;" id="waterAmountText">0 <small style="font-size:0.75rem; color:var(--ios-blue);">مل</small></div>
-            <div style="font-size:0.72rem; color:var(--text-secondary);" id="waterCupsCountText">0 من 12 كوب يومياً</div>
+          <!-- Detailed Metrics & 12 Cups Droplets -->
+          <div class="water-info-panel">
+            <div class="water-volume-display">
+              <span class="water-cur-vol" id="waterAmountText">0</span>
+              <span class="water-goal-sub">من <span id="waterGoalText">3000</span> مل</span>
+            </div>
+            <div class="water-cups-status" id="waterCupsCountText">0 من 12 كوب يومياً</div>
 
             <!-- 12 Cups Visualizer -->
             <div class="water-cups-grid" id="waterCupsGrid">
@@ -2292,69 +2594,106 @@
           </div>
         </div>
 
+        <!-- Quick Action Buttons -->
         <div class="water-step-buttons">
-          <button class="btn-water-action" onclick="addWaterIntake(250)">
-            <span>+ 250 مل</span>
-            <small style="font-size:0.68rem; opacity:0.8;">كوب ماء</small>
+          <button class="btn-water-pill primary" onclick="addWaterIntake(250)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 4h14l-2 15a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 4z"/><line x1="4" y1="4" x2="20" y2="4"/>
+            </svg>
+            <div class="btn-water-text">
+              <span class="btn-water-amt">+ 250 مل</span>
+              <span class="btn-water-sub">كوب ماء</span>
+            </div>
           </button>
-          <button class="btn-water-action" onclick="addWaterIntake(500)">
-            <span>+ 500 مل</span>
-            <small style="font-size:0.68rem; opacity:0.8;">عبوة ماء</small>
+
+          <button class="btn-water-pill primary" onclick="addWaterIntake(500)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="7" y="7" width="10" height="14" rx="3"/><path d="M10 7V3h4v4"/>
+            </svg>
+            <div class="btn-water-text">
+              <span class="btn-water-amt">+ 500 مل</span>
+              <span class="btn-water-sub">عبوة ماء</span>
+            </div>
           </button>
-          <button class="btn-water-action sub" onclick="addWaterIntake(-250)">
-            <span>- 250</span>
-            <small style="font-size:0.68rem; opacity:0.8;">تراجع</small>
+
+          <button class="btn-water-pill secondary" onclick="addWaterIntake(-250)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+            </svg>
+            <div class="btn-water-text">
+              <span class="btn-water-amt">- 250</span>
+              <span class="btn-water-sub">تراجع</span>
+            </div>
           </button>
         </div>
       </div>
 
-      <!-- Meal & Food Logger Card -->
-      <div class="ios-card">
+      <!-- Meal & Food Logger Card (Apple Inset Group) -->
+      <div class="ios-card food-logger-card">
         <div class="ios-card-header">
           <div class="ios-card-title">
+            <div class="health-card-badge gold">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+              </svg>
+            </div>
             <span>تسجيل الوجبات والسناكات</span>
           </div>
-          <span class="ios-tag-pill">تسجيل فوري</span>
+          <span class="ios-tag-pill gold">تسجيل سريع</span>
         </div>
 
-        <!-- Quick Smart Chips -->
+        <!-- Quick Smart Chips Scroll -->
         <div class="quick-food-chips-scroll">
           <div class="food-chip-tag" onclick="quickLogFood('بيض وتوست', 280)">
-            <span>بيض وتوست</span>
-            <span class="food-cal-badge">280</span>
+            <span class="food-chip-name">بيض وتوست</span>
+            <span class="food-cal-badge">280 ك.س</span>
           </div>
           <div class="food-chip-tag" onclick="quickLogFood('دجاج وأرز', 550)">
-            <span>دجاج وأرز</span>
-            <span class="food-cal-badge">550</span>
+            <span class="food-chip-name">دجاج وأرز</span>
+            <span class="food-cal-badge">550 ك.س</span>
           </div>
           <div class="food-chip-tag" onclick="quickLogFood('بروتين شيك', 190)">
-            <span>بروتين شيك</span>
-            <span class="food-cal-badge">190</span>
+            <span class="food-chip-name">بروتين شيك</span>
+            <span class="food-cal-badge">190 ك.س</span>
           </div>
           <div class="food-chip-tag" onclick="quickLogFood('موز وتمر', 140)">
-            <span>موز وتمر</span>
-            <span class="food-cal-badge">140</span>
+            <span class="food-chip-name">موز وتمر</span>
+            <span class="food-cal-badge">140 ك.س</span>
           </div>
         </div>
 
-        <!-- Input Box -->
-        <div class="ios-input-group">
-          <div class="ios-input-row">
-            <input type="text" id="customFoodName" class="ios-text-input" placeholder="اسم الوجبة (مثال: سلطة تونة)">
+        <!-- iOS Inset Input Form -->
+        <div class="ios-form-group">
+          <div class="ios-form-row">
+            <div class="ios-form-label-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <input type="text" id="customFoodName" class="ios-form-input" placeholder="اسم الوجبة (مثال: سلطة تونة)">
           </div>
-          <div class="ios-input-row">
-            <input type="number" inputmode="numeric" id="customFoodCalories" class="ios-text-input" placeholder="السعرات الحرارية">
+          <div class="ios-form-divider"></div>
+          <div class="ios-form-row">
+            <div class="ios-form-label-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <input type="number" inputmode="numeric" id="customFoodCalories" class="ios-form-input" placeholder="السعرات الحرارية">
+            <span class="ios-form-suffix">سعرة</span>
           </div>
         </div>
 
-        <button class="btn-ios-submit" onclick="submitCustomFoodLog()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <button class="btn-ios-submit-food" onclick="submitCustomFoodLog()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           <span>إضافة الوجبة إلى سجل اليوم</span>
         </button>
 
-        <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:14px;">سجل وجبات اليوم:</div>
-        <div class="meal-history-list" id="mealHistoryList">
-          <div style="font-size:0.76rem; color:var(--text-tertiary); text-align:center; padding:10px 0;">لا توجد وجبات مسجلة بعد اليوم</div>
+        <!-- Meal History Header & List -->
+        <div class="meal-history-section">
+          <div class="meal-history-header">
+            <span>سجل وجبات اليوم</span>
+            <span class="meal-history-count" id="mealHistoryCount">0 وجبات</span>
+          </div>
+          <div class="meal-history-list" id="mealHistoryList">
+            <div class="meal-empty-hint">لا توجد وجبات مسجلة بعد اليوم</div>
+          </div>
         </div>
       </div>
     </section>
@@ -3288,10 +3627,12 @@
       if (calTileMiniBar) calTileMiniBar.style.width = calPct + '%';
 
       if (document.getElementById('calRemainingNum')) document.getElementById('calRemainingNum').innerHTML = `${remainingCal} <small>سعرة</small>`;
-      if (document.getElementById('calConsumedNum')) document.getElementById('calConsumedNum').innerText = `${consumedCal} سعرة`;
-      if (document.getElementById('calGoalNum')) document.getElementById('calGoalNum').innerText = `${calGoal} سعرة`;
+      if (document.getElementById('calConsumedNum')) document.getElementById('calConsumedNum').innerText = `${consumedCal}`;
+      if (document.getElementById('calGoalNum')) document.getElementById('calGoalNum').innerText = `${calGoal}`;
       if (document.getElementById('calProgressBar')) document.getElementById('calProgressBar').style.width = calPct + '%';
-      if (document.getElementById('calBurnRatioTag')) document.getElementById('calBurnRatioTag').innerText = calPct + '%';
+      if (document.getElementById('calBurnRatioTag')) document.getElementById('calBurnRatioTag').innerText = calPct + '% مستهلك';
+      if (document.getElementById('calProgressMidpoint')) document.getElementById('calProgressMidpoint').innerText = `${Math.round(calGoal / 2)} (50%)`;
+      if (document.getElementById('calProgressMaxLabel')) document.getElementById('calProgressMaxLabel').innerText = `${calGoal} ك.س`;
 
       // 2. Stations Ring (Green)
       const totalStations = SCHEDULE_DATA.length;
@@ -3324,9 +3665,13 @@
       if (waterTileMiniBar) waterTileMiniBar.style.width = waterPct + '%';
 
       // Hydration Card Display in Health Tab
-      if (document.getElementById('waterFluidLevel')) document.getElementById('waterFluidLevel').style.height = waterPct + '%';
-      if (document.getElementById('waterAmountText')) document.getElementById('waterAmountText').innerHTML = `${curWater} <small style="font-size:0.75rem; color:var(--ios-blue);">/ ${waterGoal} مل</small>`;
-      if (document.getElementById('waterGoalBadge')) document.getElementById('waterGoalBadge').innerText = waterPct + '%';
+      const waterRadialCircumference = 263.89; // 2 * PI * 42
+      const waterRadialOffset = waterRadialCircumference - (waterRadialCircumference * Math.min(1, curWater / waterGoal));
+      if (document.getElementById('waterRadialFill')) document.getElementById('waterRadialFill').style.strokeDashoffset = waterRadialOffset;
+      if (document.getElementById('waterRadialPct')) document.getElementById('waterRadialPct').innerText = waterPct + '%';
+      if (document.getElementById('waterAmountText')) document.getElementById('waterAmountText').innerText = `${curWater}`;
+      if (document.getElementById('waterGoalText')) document.getElementById('waterGoalText').innerText = `${waterGoal}`;
+      if (document.getElementById('waterGoalBadge')) document.getElementById('waterGoalBadge').innerText = waterPct + '% مكتمل';
 
       const cupsCount = Math.min(12, Math.floor(curWater / 250));
       if (document.getElementById('waterCupsCountText')) document.getElementById('waterCupsCountText').innerText = `${cupsCount} من 12 كوب يومياً`;
@@ -3397,10 +3742,14 @@
 
     function renderMealHistory() {
       const list = document.getElementById('mealHistoryList');
+      const countBadge = document.getElementById('mealHistoryCount');
+      if (countBadge) {
+        countBadge.innerText = `${(appState.meals && appState.meals.length) || 0} وجبات`;
+      }
       if (!list) return;
 
       if (!appState.meals || appState.meals.length === 0) {
-        list.innerHTML = `<div style="font-size:0.76rem; color:var(--text-tertiary); text-align:center; padding:10px 0;">لا توجد وجبات مسجلة بعد اليوم</div>`;
+        list.innerHTML = `<div class="meal-empty-hint">لا توجد وجبات مسجلة بعد اليوم</div>`;
         return;
       }
 
@@ -3410,7 +3759,7 @@
           <div class="meal-log-item">
             <div>
               <strong style="color:#fff;">${m.name}</strong>
-              <span style="font-size:0.72rem; color:var(--ios-red); margin-inline-start:6px; font-weight:700;">${m.cal} سعرة</span>
+              <span style="font-size:0.72rem; color:var(--ios-red); margin-inline-start:6px; font-weight:700;">${m.cal} ك.س</span>
             </div>
             <span class="meal-delete-cross" onclick="deleteMealLog(${m.id})">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
