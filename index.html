@@ -2953,9 +2953,28 @@
         switchTab(hash);
       }
 
-      // Register Service Worker for Offline PWA and Background Push
+      // Auto-update Service Worker & Purge Old Cache on Mobile
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=3').then(reg => {
+          reg.update();
+          reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                window.location.reload();
+              }
+            });
+          });
+        }).catch(() => {});
+      }
+
+      // Purge legacy caches
+      if ('caches' in window) {
+        caches.keys().then(keys => {
+          keys.forEach(k => {
+            if (k !== 'samt-cache-v3') caches.delete(k);
+          });
+        });
       }
     });
   </script>
